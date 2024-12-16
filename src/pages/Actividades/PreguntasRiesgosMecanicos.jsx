@@ -38,7 +38,7 @@ function PreguntasRiesgosMecanicos() {
                 { text: "Golpes.", correct: false },
                 { text: "Cortes.", correct: false }
             ],
-            correctFeedback: "Es importante que Andy revise el estado de las herramientas y aplique el procedimiento de mantenimiento preventivo para garantizar la seguridad en el trabajo.",
+            correctFeedback: "¡Muy bien ! Estas aprendiendo mucho para cuidar tus manos.",
             incorrectFeedback: "¡Inténtalo de nuevo! La opción seleccionada no es la correcta."
         },
         {
@@ -50,7 +50,7 @@ function PreguntasRiesgosMecanicos() {
             ],
             multipleCorrect: false,
             correctCount: 1,
-            correctFeedback: "Revisar las herramientas es crucial para prevenir accidentes a los compañeros y daños en los equipos. Esto contribuye a un ambiente de trabajo más seguro y eficiente.",
+            correctFeedback: "¡Muy bien ! Estas aprendiendo mucho para cuidar tus manos.",
             incorrectFeedback: "¡Inténtalo de nuevo! La opción seleccionada no es la correcta."
         }
     ];

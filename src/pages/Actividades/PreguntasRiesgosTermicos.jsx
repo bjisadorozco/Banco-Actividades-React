@@ -1,5 +1,4 @@
-// import img1 from "../../assets/img/slides/carga_sld9.png";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Title from "../components/Title";
 import Subtitle from "../components/Subtitle";
 import Paragraph from "../components/Paragraph";
@@ -9,21 +8,18 @@ import ModalDialog from '../components/ModalDialog';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck, faRepeat, faCircleQuestion } from "@fortawesome/free-solid-svg-icons";
 import useStore from "../../store";
-// import audio1 from "../../assets/audio/slide6Parenteral.mp3";
 import '../Actividades/styles/PreguntasRiesgosTermicos.css';
 import { useMediaQuery } from "react-responsive";
-// import imgSabiasQue from "../../assets/img/botones/no-olvides-color.png";
 
 const initialOptions = [
     { value: "1", label: "vehículos" },
-    { value: "2", label: "térmico" },
-    { value: "3", label: "exposición" },
-    { value: "4", label: "gasolina" },
-    { value: "5", label: "tóxicas" },
+    { value: "2", label: "gasolina" },
+    { value: "3", label: "térmico" },
+    { value: "4", label: "tóxicas" },
+    { value: "5", label: "exposición" },
 ];
 
 const correctAnswers = ["1", "3", "5", "2", "4"];
-
 
 function PreguntasRiesgosTermicos() {
     const [dropdowns, setDropdowns] = useState(Array(5).fill("0"));
@@ -65,11 +61,18 @@ function PreguntasRiesgosTermicos() {
         const correct = dropdowns.filter((value, index) => value === correctAnswers[index]).length;
         setCorrectCount(correct);
         setIsValidated(true);
+
+        // Set feedback based on correctness
+        if (correct === correctAnswers.length) {
+            setFeedback('¡Muy bien! Estas aprendiendo mucho para cuidar tus manos.');
+        } else {
+            setFeedback('¡Piénsalo bien! Imagina que le dice Tatiana sobre el riesgo químico.');
+        }
     };
 
     const resetDropdowns = () => {
-        setDropdowns(Array(8).fill("0"));
-        setBorderColors(Array(8).fill("border-slate-900"));
+        setDropdowns(Array(5).fill("0"));
+        setBorderColors(Array(5).fill("border-slate-900"));
         setIsValidated(false);
         setCorrectCount(0);
         setFeedback('');
@@ -107,9 +110,18 @@ function PreguntasRiesgosTermicos() {
                                 <h3 className={`text-md mt-0 font-bold ${correctCount === correctAnswers.length ? 'text-paragraph-light-color' : 'text-paragraph-light-color'}`}>
                                     {correctCount} de {correctAnswers.length} respuestas correctas
                                 </h3>
-                                <p className={`mt-2 ${correctCount === correctAnswers.length ? 'text-paragraph-light-color' : 'text-paragraph-light-color'}`}>
-                                    {feedback}
-                                </p>
+                                <div className="feedback-container my-4">
+                                    <Paragraph theme="light" justify={isMobile ? "justify" : "justify"}>
+                                        <strong
+                                            style={{
+                                                color: correctCount === correctAnswers.length ? "#4CAF50" : "#F44336",
+                                            }}
+                                        >
+                                            {correctCount === correctAnswers.length ? "Correcto: " : "Incorrecto: "}
+                                        </strong>
+                                        {feedback}
+                                    </Paragraph>
+                                </div>
                             </div>
                         )}
                         <div className="flex flex-col items-center justify-center mb-2">
@@ -162,3 +174,4 @@ function Select({ index, value, onChange, borderColor, options, className }) {
 }
 
 export default PreguntasRiesgosTermicos;
+
