@@ -1,0 +1,19 @@
+.flx-responsive {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.flx-responsive-mobile {
+    justify-content: start;
+    align-items: start;
+}
+
+@media (max-width: 640px) {
+    .flx-responsive {
+        justify-content: start;
+        align-items: start;
+    }
+}
+
+  

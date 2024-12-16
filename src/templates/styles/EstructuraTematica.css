@@ -1,0 +1,206 @@
+ 
+  .card_new {
+    display: grid;
+    place-items: center;
+    width: 90%;
+    max-width: 500px;
+    height: 100%;
+    overflow: hidden;
+    border-radius: 0.625rem;
+    box-shadow: 0.25rem 0.25rem 0.5rem rgba(0, 0, 0, 0.25);
+  }
+  
+  .card_new > * {
+    grid-column: 1 / 2;
+    grid-row: 1 / 2;
+  }
+  
+  .card_new__background {
+    /* object-fit: cover; */
+    max-width: 100%;
+    height: 110%;
+    filter: grayscale(100%); /* Aplica escala de grises */
+    transition: filter 0.3s ease-in; /* Transición suave para el filtro */
+  }
+
+  /* Imagen en color al pasar el mouse */
+.card_new:hover .card_new__background {
+  filter: grayscale(0%); /* Quita la escala de grises */
+}
+  
+  .card_new__content {
+    --flow-space: 0.9375rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-self: flex-end;
+    height: 50%;
+    padding: 5% 1.25rem 1.875rem;
+    background: linear-gradient(180deg, 
+    #7946dfa4 0%,
+    #6030c0 10%,
+     #6030c088 500%) 100%
+  }
+  .card-perso{
+    height: 55% !important;
+  }
+  .card_new__content--container {
+    --flow-space: 1.25rem;
+  }
+  
+  .card_new__title {
+    position: relative;
+    width: fit-content;
+    width: -moz-fit-content; /* Prefijo necesario para Firefox  */
+    text-align: center;
+  }
+  
+  .card_new__title::after {
+    content: "";
+    position: absolute;
+    height: 0.3125rem;
+    width: 100vw;
+    bottom: calc((1.25rem - 0.5rem) * -1);
+    left: -3.25rem;
+    background-color: #233845;
+  }
+  
+  .card_new__button {
+    padding: 0.75em 1.6em;
+    width: fit-content;
+    width: -moz-fit-content; /* Prefijo necesario para Firefox  */
+    font-variant: small-caps;
+    font-weight: bold;
+    border-radius: 0.45em;
+    border: none;
+    background-color: var(--grey);
+    /* font-family: var(--font-title); */
+    font-size: 1.125rem;
+    color: var(--black);
+  }
+  
+  .card_new__button:focus {
+    outline: 2px solid black;
+    outline-offset: -5px;
+  }
+  
+  @media (any-hover: hover) and (any-pointer: fine) {
+    .card_new__content {
+      transform: translateY(30%);
+      transition: transform 500ms ease-out;
+      transition-delay: 500ms;
+    }
+  
+    .card_new__title::after {
+      opacity: 0;
+      transform: scaleX(0);
+      transition: opacity 1000ms ease-in, transform 500ms ease-out;
+      transition-delay: 500ms;
+      transform-origin: right;
+    }
+  
+    .card_new__background {
+      transition: transform 500ms ease-in;
+    }
+  
+    .card_new__content--container > :not(.card_new__title),
+    .card_new__button {
+      opacity: 0;
+      transition: transform 500ms ease-out, opacity 500ms ease-out;
+    }
+  
+    .card_new:hover,
+    .card_new:focus-within {
+      transform: scale(1.05);
+      transition: transform 500ms ease-in;
+    }
+  
+    .card_new:hover .card_new__content,
+    .card_new:focus-within .card_new__content {
+      transform: translateY(0);
+      transition: transform 500ms ease-in;
+    }
+  
+    .card_new:focus-within .card_new__content {
+      transition-duration: 0ms;
+    }
+  
+    .card_new:hover .card_new__background,
+    .card_new:focus-within .card_new__background {
+      transform: scale(1.3);
+    }
+  
+    .card_new:hover .card_new__content--container > :not(.card_new__title),
+    .card_new:hover .card_new__button,
+    .card_new:focus-within .card_new__content--container > :not(.card_new__title),
+    .card_new:focus-within .card_new__button {
+      opacity: 1;
+      transition: opacity 500ms ease-in;
+      transition-delay: 1000ms;
+    }
+  
+    .card_new:hover .card_new__title::after,
+    .card_new:focus-within .card_new__title::after {
+      opacity: 1;
+      transform: scaleX(1);
+      transform-origin: left;
+      transition: opacity 500ms ease-in, transform 500ms ease-in;
+      transition-delay: 500ms;
+    }
+  }
+
+  .contenido-central {
+    margin-right: 0px;
+    margin-left: 0px;
+    max-width: 85%;
+    padding: 0%;
+    text-align: center;
+    margin: 0 auto;
+}
+
+.pcslide-flex_sld3{
+    display: flex;
+    justify-content: center;
+}
+
+@media (max-width: 991px) {
+    .pcslide-flex_sld3 {
+      flex-direction: column;
+      align-items: center;
+    }
+    
+    .col-lg-3, .col-md-6, .col-sm-12 {
+      width: 100%;
+      margin-bottom: 1em;
+    }
+  
+    .card_new {
+      width: 100%;
+      max-width: 100%;
+      height: auto;
+    }
+  }
+
+  .cardh2{
+    margin: 0 auto;
+    color: white;
+    letter-spacing: 0.05em;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.section-tours {
+    background-color: #fff;
+    font-size: 62.5% !important;
+}
+
+@media (min-width: 1280px) {
+    .container {
+        max-width: 100%;
+    }
+}
+
+.card_new__description{
+    color: white;
+    font-size: 14px;
+}
