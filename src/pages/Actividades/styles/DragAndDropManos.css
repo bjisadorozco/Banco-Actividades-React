@@ -1,0 +1,135 @@
+/* Contenedor principal */
+.activity-container-sld5 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+}
+
+/* Grupo de imágenes */
+.image-group-sld5 {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.draggable-sld5 {
+  width: 110px;
+  height: 110px;
+  cursor: grab;
+  border: 2px solid #6e3cd2; /* Borde morado */
+  padding: 0; /* Elimina padding */
+  box-sizing: border-box; /* Asegura que el borde no aumente el tamaño total */
+  object-fit: contain; /* Hace que la imagen se ajuste al contenedor */
+  display: block; /* Evita el espacio extra por inline */
+  margin-bottom: 0%
+}
+
+
+/* Grupo de dropboxes */
+.drop-group-sld5 {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/* Ajustar las cajas de drop */
+.dropbox-sld5 {
+  width: 110px;  /* Ajusta el tamaño del contenedor */
+  height: 110px; /* Ajusta el tamaño del contenedor */
+  border: 2px dashed #ccc;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  overflow: hidden; /* Evita que las imágenes se desborden */
+  background-color: #f9f9f9;
+}
+
+.dropbox-sld5 img {
+  max-width: 100%; /* Ajusta la imagen al tamaño del contenedor */
+  max-height: 100%; /* Ajusta la imagen al tamaño del contenedor */
+  object-fit: contain; /* Mantiene la proporción de la imagen */
+}
+
+/* Botones de opción */
+.button-group-sld5 {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.option-sld5 {
+  width: 120px;
+  height: 50px;
+  background-color: #C0185D; /* FUCSIA */
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* Botones de validar y reiniciar */
+.flex-container {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.btn {
+  width: 150px;
+  height: 50px;
+  background-color: #7c3aed; /* Morado */
+  color: white;
+  font-size: 1rem;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.btn:hover {
+  background: #6d28d9 !important;
+}
+
+.btn i {
+  margin-right: 8px;
+}
+
+/* Nuevo estilo para el botón + Info */
+.info-button {
+  background-color: #4CAF50; /* Verde */
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  margin-top: 5px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.info-button:hover {
+  background-color: #45a049;
+}
+
+/* Estilo para el mensaje de error */
+.error-message {
+  color: red;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.dropped-image {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+}
+
+.error-message-sld5 {
+  color: red;
+  font-size: 16px;
+  text-align: center;
+  margin-top: 10px;
+}
