@@ -1,6 +1,6 @@
 /* Contenedor principal */
 .ordenar-pasos-container {
-    font-family: Arial, sans-serif;
+    font-family: 'Montserrat', sans-serif;
     max-width: 800px;
     margin: 0 auto;
     padding: 20px;
@@ -26,8 +26,8 @@
   
   /* Tarjeta de paso */
   .tarjeta-paso {
-    background: #0f172a;
-    color: #ffffff;
+    background: #ffffff;
+    color: #212529;
     padding: 12px;
     border-radius: 5px;
     cursor: grab;
@@ -119,6 +119,16 @@
   
   .contador-texto {
     color: #8f8f8f; /* Cambié el color aquí */
+  }
+
+  .boton-validar.inactivo {
+    background-color: #d3d3d3; /* Color más claro */
+    cursor: not-allowed;
+  }
+  
+  .boton-validar.activo {
+    background-color: #4caf50; /* Color original */
+    cursor: pointer;
   }
   
   

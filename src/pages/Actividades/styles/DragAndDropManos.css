@@ -2,7 +2,7 @@
 .activity-container-sld5 {
   display: flex;
   justify-content: center;
-  align-items: center;
+  flex-direction: row;
   gap: 2rem;
 }
 
@@ -11,6 +11,7 @@
   display: flex;
   flex-direction: column;
   gap: 2rem;
+  
 }
 
 .draggable-sld5 {
@@ -30,46 +31,74 @@
 .drop-group-sld5 {
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 2rem; /* Espaciado entre los contenedores */
 }
 
-/* Ajustar las cajas de drop */
+.drop-item-sld5 {
+  display: flex;
+  flex-direction: row; /* Alineación vertical */
+  align-items: center; /* Centrar los elementos horizontalmente */
+  border: none;
+  border-radius: 8px;
+  height: 110px; /* Aumentar la altura según sea necesario */
+}
+
 .dropbox-sld5 {
-  width: 110px;  /* Ajusta el tamaño del contenedor */
-  height: 110px; /* Ajusta el tamaño del contenedor */
-  border: 2px dashed #ccc;
+  width: 110px;
+  height: 110px;
+  background-color: #f9f9f9;
   display: flex;
   justify-content: center;
   align-items: center;
-  position: relative;
-  overflow: hidden; /* Evita que las imágenes se desborden */
-  background-color: #f9f9f9;
+  border: 2px dashed #aaa;
 }
-
 .dropbox-sld5 img {
   max-width: 100%; /* Ajusta la imagen al tamaño del contenedor */
   max-height: 100%; /* Ajusta la imagen al tamaño del contenedor */
   object-fit: contain; /* Mantiene la proporción de la imagen */
+  margin-bottom: 0px;
 }
 
 /* Botones de opción */
 .button-group-sld5 {
   display: flex;
+  justify-content: flex-start;
   flex-direction: column;
-  gap: 2rem;
+  gap: 6rem;
+  justify-content: center;
+}
+.option-sld5 {
+  padding: 8px 16px;
+  border: none;
+  background-color: #c0185d;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 150px; /* Ajusta el ancho que desees */
+  height: 110px; /* Ajusta la altura que desees */
+  text-align: center; /* Centra el texto dentro del botón */
 }
 
-.option-sld5 {
-  width: 120px;
-  height: 50px;
-  background-color: #C0185D; /* FUCSIA */
+/* Estilo para los botones correctos */
+.option-sld5.correct {
+  background-color: #4CAF50; /* Verde */
+  border-color: #4CAF50;
   color: white;
-  border: none;
-  border-radius: 8px;
-  font-size: 1rem;
-  font-weight: bold;
-  cursor: pointer;
 }
+
+/* Estilo para los botones incorrectos */
+.option-sld5.incorrect {
+  background-color: #F44336; /* Rojo */
+  border-color: #F44336;
+  color: white;
+}
+
+.option-sld5:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+
 
 /* Botones de validar y reiniciar */
 .flex-container {
@@ -116,11 +145,17 @@
 
 /* Estilo para el mensaje de error */
 .error-message {
-  color: red;
+  color: #F44336;
   font-weight: bold;
   margin-top: 10px;
 }
 
+/* Estilo para el mensaje de error */
+.success-message {
+  color: #4CAF50;
+  font-weight: bold;
+  margin-top: 10px;
+}
 .dropped-image {
   width: 100px;
   height: 100px;
@@ -128,8 +163,62 @@
 }
 
 .error-message-sld5 {
-  color: red;
+  color: #F44336;
   font-size: 16px;
   text-align: center;
   margin-top: 10px;
+}
+
+.success-message-sld5 {
+  color: #45a049;
+  font-size: 16px;
+  text-align: center;
+  margin-top: 10px;
+}
+
+/* Grupo de audios */
+.audio-group-sld5 {
+  display: flex;
+  flex-direction: column;
+  gap: 6rem;
+  align-items: center; /* Asegura que los audios estén centrados en la columna o flex-start*/
+  justify-content: center;
+}
+
+/*audio container s1d5*/
+
+.audio-container-sld5 {
+  display: flex;
+  justify-content: center; /* Centra los íconos horizontalmente */
+  align-items: center;     /* Centra los íconos verticalmente */
+  gap: 10px;               /* Agrega un espacio entre los elementos, puedes ajustar este valor */
+}
+
+.status-icon-sld5 {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+}
+
+.status-icon-sld51 {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+}
+
+.status-icon-sld52 {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+}
+.correct {
+  background-color: #4CAF50; /* Verde */
+}
+
+.incorrect {
+  background-color: #F44336; /* Rojo */
+}
+
+.drop-item-sld5 {
+  transition: background-color 0.3s ease; /* Agrega transición para un cambio suave */
 }

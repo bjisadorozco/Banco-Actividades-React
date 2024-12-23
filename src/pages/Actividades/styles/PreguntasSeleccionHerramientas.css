@@ -43,6 +43,7 @@
   }
   
   .preguntas_01 .ctItem-7 {
+    font-family: 'Montserrat', sans-serif;
     background: #fcfcfc;
     min-width: 736px;
     padding: 15px;  
@@ -118,6 +119,7 @@
     margin-top: 20px;
     width: 100%;
     max-width: 736px;
+    font-family: 'Montserrat', sans-serif;
   }
   
   .resultado-container p {

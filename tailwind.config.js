@@ -7,7 +7,7 @@ export default {
       fontFamily: {
         main: ["Montserrat"],
         alata: ["Montserrat"],
-        arial: ["Arial"],
+        //arial: ["Arial"],
         sans: ["Arial", "Inter", "sans-serif"],
       },
       // Here we can configure the colors of the project. We can use this in the className of each component.

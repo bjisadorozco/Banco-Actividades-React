@@ -34,19 +34,19 @@ function PreguntasSeleccionHerramientas() {
         {
             question: "¿Cuál es la función principal de los guantes en el trabajo con herramientas manuales?",
             options: [
-                { text: "Aumentar la velocidad de trabajo.", correct: true },
-                { text: "Proteger las manos de cortes, abrasiones y quemaduras.", correct: false },
+                { text: "Aumentar la velocidad de trabajo.", correct: false },
+                { text: "Proteger las manos de cortes, abrasiones y quemaduras.", correct: true },
                 { text: "Reducir el cansancio en las manos.", correct: false }
             ],
             correctFeedback: "¡Muy bien ! Estas aprendiendo mucho para cuidar tus manos.",
             incorrectFeedback: "¡Inténtalo de nuevo! La opción seleccionada no es la correcta."
         },
         {
-            question: "¿Cuál es la función principal de los guantes en el trabajo con herramientas manuales?",
+            question: "¿En qué situación NO es recomendable usar guantes durante el trabajo?",
             options: [
-                { text: "Aumentar la velocidad de trabajo.", correct: false },
-                { text: "Proteger las manos de cortes, abrasiones y quemaduras.", correct: true },
-                { text: "Reducir el cansancio en las manos.", correct: false }
+                { text: "Al manipular herramientas rotativas como sierras o taladros.", correct: false },
+                { text: "Al trabajar con soldadoras que generan calor.", correct: true },
+                { text: "Al manejar herramientas que puedan causar cortes.", correct: false }
             ],
             multipleCorrect: false,
             correctCount: 1,

@@ -1,11 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import mano1 from "../../assets/img/mano1.png";
 import mano2 from "../../assets/img/mano2.png";
 import mano3 from "../../assets/img/mano3.png";
+import checkIcon from "../../assets/img/checkAct.png";
+import xmarkIcon from "../../assets/img/xmarkAct.png";
 import audioFisicas from "../../assets/audio/FISICAS-Morelco.mp3";
 import audioEconomicas from "../../assets/audio/ECONOMICAS-Morelco.mp3";
 import audioLaborales from "../../assets/audio/LABORALES-Morelco.mp3";
 import "./styles/DragAndDropManos.css"; // Asegúrate de incluir los estilos
+import Paragraph from "../components/Paragraph";
+import { faCheck, faRepeat, faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import Button from '../components/Button';
 
 const DragAndDropManos = () => {
   const [droppedItems, setDroppedItems] = useState({
@@ -13,6 +18,12 @@ const DragAndDropManos = () => {
     drop2: null,
     drop3: null,
   });
+  const [validationStatus, setValidationStatus] = useState({
+    drop1: null, // Valores: "correcto", "incorrecto" o null
+    drop2: null,
+    drop3: null,
+  });
+  
   const [draggedItems, setDraggedItems] = useState({
     img1: true,
     img2: true,
@@ -24,67 +35,110 @@ const DragAndDropManos = () => {
     img3: false,
   });
   const [errorMessage, setErrorMessage] = useState(""); // Nuevo estado para manejar el mensaje de error
+  const [successMessage, setSuccessMessage] = useState(""); // Nuevo estado para el mensaje de éxito
+  const [audioElement, setAudioElement] = useState(null); // Estado para manejar el audio visual
+  const [currentAudio, setCurrentAudio] = useState(null); // Estado para almacenar la referencia del audio actual
 
-  // Función para reproducir el audio correspondiente a cada imagen
-  const playAudio = (imageId) => {
-    let audio = new Audio();
-    switch (imageId) {
-      case "img1-sld5": // mano1.png
-        audio.src = audioFisicas;
-        break;
-      case "img2-sld5": // mano2.png
-        audio.src = audioEconomicas;
-        break;
-      case "img3-sld5": // mano3.png
-        audio.src = audioLaborales;
-        break;
-      default:
-        return;
+  // Referencias a los audios
+  const audioRef1 = useRef(new Audio(audioFisicas));
+  const audioRef2 = useRef(new Audio(audioEconomicas));
+  const audioRef3 = useRef(new Audio(audioLaborales));
+
+  // Función para reproducir el audio
+  const playAudio = (audioSource) => {
+    if (currentAudio) {
+      currentAudio.pause();
+      currentAudio.currentTime = 0;
     }
-    audio.play();
+
+    let newAudio = null;
+    if (audioSource === "audioFisicas") {
+      newAudio = audioRef1.current;
+    } else if (audioSource === "audioEconomicas") {
+      newAudio = audioRef2.current;
+    } else if (audioSource === "audioLaborales") {
+      newAudio = audioRef3.current;
+    }
+
+    setCurrentAudio(newAudio); // Guardar el audio actual en el estado
+    setAudioElement(audioSource); // Mostrar el ícono de audio cuando se reproduce
+    newAudio.play();
   };
 
   const handleDrop = (e, dropId) => {
     e.preventDefault();
     const draggedElementId = e.dataTransfer.getData("text");
 
-    // Verificamos si la imagen ya está en un contenedor
+    // Verifica si ya se ha dejado una imagen en el contenedor
     if (droppedItems[dropId]) {
       if (droppedItems[dropId] === draggedElementId) {
-        return; // Si es la misma imagen, no hacemos nada
+        return;
+      } else {
+        setErrorMessage("¡Ya hay una imagen en este lugar! Arrastra a otro lugar.");
+        setTimeout(() => setErrorMessage(""), 2000); // El mensaje desaparece después de 2 segundos
+        return;
       }
     }
 
-    // Verificar si la imagen es la correcta para el contenedor
-    if ((dropId === "drop1" && draggedElementId === "img1-sld5") ||
-        (dropId === "drop2" && draggedElementId === "img2-sld5") ||
-        (dropId === "drop3" && draggedElementId === "img3-sld5")) {
-      // Asignamos la imagen al contenedor correspondiente
+    // Verifica si la imagen es correcta para el contenedor
+    if (
+      (dropId === "drop1" && draggedElementId === "img1-sld5") ||
+      (dropId === "drop2" && draggedElementId === "img2-sld5") ||
+      (dropId === "drop3" && draggedElementId === "img3-sld5")
+    ) {
       setDroppedItems((prevState) => ({
         ...prevState,
         [dropId]: draggedElementId,
       }));
 
-      // Eliminar la imagen de su origen
       setDraggedItems((prevState) => ({
         ...prevState,
         [draggedElementId]: false,
       }));
 
-      // Reproducir el audio si no se ha reproducido antes
-      if (!playedAudio[draggedElementId]) {
-        playAudio(draggedElementId);
-        setPlayedAudio((prevState) => ({
-          ...prevState,
-          [draggedElementId]: true,
-        }));
+      // Si la imagen es correcta
+      setValidationStatus((prevState) => ({
+        ...prevState,
+        [dropId]: "correcto",
+      }));
+       // Mostrar el mensaje de éxito
+      setSuccessMessage("¡Correcto! Ahora, escucha el siguiente audio que complementa esta información");
+
+      // Actualizar el estado para mostrar el ícono correspondiente
+      // Actualizar el estado para mostrar el ícono correspondiente y reproducir el audio desde el <audio>
+      let audioSource = null;
+
+      switch (draggedElementId) {
+        case "img1-sld5":
+          audioSource = "audioFisicas";
+          break;
+        case "img2-sld5":
+          audioSource = "audioEconomicas";
+          break;
+        case "img3-sld5":
+          audioSource = "audioLaborales";
+          break;
+        default:
+          break;
       }
 
-      // Limpiar el mensaje de error en caso de éxito
-      setErrorMessage("");
+      if (audioSource) {
+        // Mostrar el ícono de audio correspondiente
+        setAudioElement(audioSource);      
+      }
+
+      setErrorMessage(""); // Resetea el mensaje de error si la imagen se coloca correctamente
     } else {
-      // Mostrar el mensaje de error y evitar que se reproduzca el audio
+      setDroppedItems((prevState) => ({
+        ...prevState,
+        [dropId]: draggedElementId, // Esto coloca la imagen original también en el contenedor incorrecto
+      }));
+      setValidationStatus((prevState) => ({
+        ...prevState,
+        [dropId]: "incorrecto",
+      }));
       setErrorMessage("Oops, esta imagen solo puede soltarse en el contenedor correcto.");
+      setSuccessMessage(""); // Limpiar el mensaje de éxito si es incorrecto
     }
   };
 
@@ -97,6 +151,11 @@ const DragAndDropManos = () => {
   };
 
   const handleReset = () => {
+     // Detener el audio si hay un audio en reproducción
+    if (currentAudio) {
+      currentAudio.pause();
+      currentAudio.currentTime = 0; // Reinicia el tiempo del audio
+    }
     setDroppedItems({
       drop1: null,
       drop2: null,
@@ -112,18 +171,26 @@ const DragAndDropManos = () => {
       img2: false,
       img3: false,
     });
-    setErrorMessage(""); // Limpiar mensaje de error al reiniciar
+    setValidationStatus({
+      drop1: null,
+      drop2: null,
+      drop3: null,
+    });
+    
+    setCurrentAudio(null);
+    setAudioElement(null); // Reiniciar el ícono de audio visual
+    setErrorMessage(""); // Limpiar mensaje
+    setSuccessMessage(""); // Limpiar mensaje de éxito
   };
 
   return (
     <div className="col-lg-6 col-md-12">
       <br />
       <div className="activity-container-sld5">
-        {/* Imágenes importadas */}
         <div className="image-group-sld5">
           {draggedItems.img1 && (
             <img
-              src={mano1} // Usamos la variable importada
+              src={mano1}
               className="draggable-sld5"
               id="img1-sld5"
               draggable="true"
@@ -132,7 +199,7 @@ const DragAndDropManos = () => {
           )}
           {draggedItems.img2 && (
             <img
-              src={mano2} // Usamos la variable importada
+              src={mano2}
               className="draggable-sld5"
               id="img2-sld5"
               draggable="true"
@@ -141,7 +208,7 @@ const DragAndDropManos = () => {
           )}
           {draggedItems.img3 && (
             <img
-              src={mano3} // Usamos la variable importada
+              src={mano3}
               className="draggable-sld5"
               id="img3-sld5"
               draggable="true"
@@ -150,8 +217,9 @@ const DragAndDropManos = () => {
           )}
         </div>
 
-        {/* Cuadros donde se puede soltar */}
         <div className="drop-group-sld5">
+        {/* Contenedor 1: Físicas */}
+        <div className={`drop-item-sld5 ${validationStatus.drop1 === "correcto" ? "correct" : validationStatus.drop1 === "incorrecto" ? "incorrect" : ""}`}>
           <div
             className="dropbox-sld5"
             id="drop1-sld5"
@@ -159,7 +227,26 @@ const DragAndDropManos = () => {
             onDragOver={handleDragOver}
           >
             {droppedItems.drop1 && <img src={mano1} alt="Físicas" />}
+            {validationStatus.drop1 === "correcto" && (
+              <img src={checkIcon} className="status-icon-sld5" alt="Correcto" />
+            )}
+            {validationStatus.drop1 === "incorrecto" && (
+              <img src={xmarkIcon} className="status-icon-sld5" alt="Incorrecto" />
+            )}
           </div>
+          <button
+            className={`option-sld5 ${validationStatus.drop1 === "correcto" ? "correct" : validationStatus.drop1 === "incorrecto" ? "incorrect" : ""}`}
+            id="btn1-sld5"
+            draggable="false"
+            onDragStart={(e) => handleDragStart(e, "img1-sld5")}
+            disabled={!draggedItems.img1}
+          >
+            Físicas
+          </button>
+        </div>
+
+        {/* Contenedor 2: Económicas */}
+        <div className={`drop-item-sld5 ${validationStatus.drop2 === "correcto" ? "correct" : validationStatus.drop2 === "incorrecto" ? "incorrect" : ""}`}>
           <div
             className="dropbox-sld5"
             id="drop2-sld5"
@@ -167,7 +254,26 @@ const DragAndDropManos = () => {
             onDragOver={handleDragOver}
           >
             {droppedItems.drop2 && <img src={mano2} alt="Económicas" />}
+            {validationStatus.drop2 === "correcto" && (
+              <img src={checkIcon} className="status-icon-sld51" alt="Correcto" />
+            )}
+            {validationStatus.drop2 === "incorrecto" && (
+              <img src={xmarkIcon} className="status-icon-sld51" alt="Incorrecto" />
+            )}
           </div>
+          <button
+            className={`option-sld5 ${validationStatus.drop2 === "correcto" ? "correct" : validationStatus.drop2 === "incorrecto" ? "incorrect" : ""}`}
+            id="btn2-sld5"
+            draggable="false"
+            onDragStart={(e) => handleDragStart(e, "img2-sld5")}
+            disabled={!draggedItems.img2}
+          >
+            Económicas
+          </button>
+        </div>
+
+        {/* Contenedor 3: Laborales */}
+        <div className={`drop-item-sld5 ${validationStatus.drop3 === "correcto" ? "correct" : validationStatus.drop3 === "incorrecto" ? "incorrect" : ""}`}>
           <div
             className="dropbox-sld5"
             id="drop3-sld5"
@@ -175,36 +281,17 @@ const DragAndDropManos = () => {
             onDragOver={handleDragOver}
           >
             {droppedItems.drop3 && <img src={mano3} alt="Laborales" />}
+            {validationStatus.drop3 === "correcto" && (
+              <img src={checkIcon} className="status-icon-sld52" alt="Correcto" />
+            )}
+            {validationStatus.drop3 === "incorrecto" && (
+              <img src={xmarkIcon} className="status-icon-sld52" alt="Incorrecto" />
+            )}
           </div>
-        </div>
-
-        {/* Mensaje de error */}
-        {errorMessage && <div className="error-message-sld5">{errorMessage}</div>}
-
-        {/* Botones de opción */}
-        <div className="button-group-sld5">
           <button
-            className="option-sld5"
-            id="btn1-sld5"
-            draggable="true"
-            onDragStart={(e) => handleDragStart(e, "img1-sld5")}
-            disabled={!draggedItems.img1}
-          >
-            Físicas
-          </button>
-          <button
-            className="option-sld5"
-            id="btn2-sld5"
-            draggable="true"
-            onDragStart={(e) => handleDragStart(e, "img2-sld5")}
-            disabled={!draggedItems.img2}
-          >
-            Económicas
-          </button>
-          <button
-            className="option-sld5"
+            className={`option-sld5 ${validationStatus.drop3 === "correcto" ? "correct" : validationStatus.drop3 === "incorrecto" ? "incorrect" : ""}`}
             id="btn3-sld5"
-            draggable="true"
+            draggable="false"
             onDragStart={(e) => handleDragStart(e, "img3-sld5")}
             disabled={!draggedItems.img3}
           >
@@ -213,11 +300,49 @@ const DragAndDropManos = () => {
         </div>
       </div>
 
-      {/* Botones para reiniciar */}
+      </div>
+      <br />
+      {/* Aquí es donde colocamos los íconos de audio al lado de la imagen */}
+      <div className="audio-container-sld5">
+        {droppedItems.drop1 && audioElement === "audioFisicas" && (
+          <div className="audio-player-sld5">
+            <audio data-audio="audioFisicas" controls autoPlay>
+              <source src={audioFisicas} type="audio/mp3" />
+              Tu navegador no soporta el elemento de audio.
+            </audio>
+          </div>
+        )}
+        {droppedItems.drop2 && audioElement === "audioEconomicas" && (
+          <div className="audio-player-sld5">
+            <audio data-audio="audioEconomicas" controls autoPlay>
+              <source src={audioEconomicas} type="audio/mp3" />
+              Tu navegador no soporta el elemento de audio.
+            </audio>
+          </div>
+        )}
+        {droppedItems.drop3 && audioElement === "audioLaborales" && (
+          <div className="audio-player-sld5">
+            <audio data-audio="audioLaborales" controls autoPlay>
+              <source src={audioLaborales} type="audio/mp3" />
+              Tu navegador no soporta el elemento de audio.
+            </audio>
+          </div>
+        )}
+      </div>
+
+
+      {errorMessage && <div className="error-message-sld5">{errorMessage}</div>}
+      {successMessage && ( <div className="success-message-sld5"> <p>{successMessage}</p> </div>)}
+
       <div className="flex-container">
-        <button className="btn" onClick={handleReset}>
-          <i className="fas fa-question-circle"></i> Reiniciar
-        </button>
+      <Button
+                bold={false}
+                icon={faRepeat}
+                roundedFull={true}
+                onClick={handleReset}
+                >
+                Reiniciar
+            </Button>
       </div>
     </div>
   );
