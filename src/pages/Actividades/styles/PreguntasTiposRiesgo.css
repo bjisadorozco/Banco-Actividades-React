@@ -5,6 +5,7 @@
   justify-content: center;
   align-items: flex-start;
   padding: 1rem;
+  font-family: 'Montserrat', sans-serif;
 }
 
 .activity-container {
@@ -126,6 +127,20 @@
   padding: 0.5rem;
 }
 
+.form-select.correct {
+  border-color: #65f38a;
+  /* background-color: #65f38a; */
+  box-shadow: 0 4px 15px rgba(101, 243, 138, 0.2);
+  color: #000000;
+}
+
+.form-select.incorrect {
+  border-color: #f36572;
+  /* background-color: #f36572; */
+  box-shadow: 0 4px 15px rgba(243, 101, 114, 0.2);
+  color: #000000;
+}
+
 .validate-button {
   background: #7c3aed !important;
   color: white;
@@ -157,6 +172,7 @@
 
 .text-success {
   background-color: #65f38a;
+  border-color: #65f38a;
   color: white;
   padding: 1rem 1.5rem;
   border-radius: 10px;
@@ -166,6 +182,7 @@
 
 .text-error {
   background-color: #f36572;
+  border-color: #f36572;
   color: white;
   padding: 1rem 1.5rem;
   border-radius: 10px;
