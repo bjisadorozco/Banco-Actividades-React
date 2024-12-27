@@ -66,7 +66,7 @@ function PreguntasRiesgosTermicos() {
         if (correct === correctAnswers.length) {
             setFeedback('¡Muy bien! Estas aprendiendo mucho para cuidar tus manos.');
         } else {
-            setFeedback('¡Piénsalo bien! Imagina que le dice Tatiana sobre el riesgo químico.');
+            setFeedback('¡Piénsalo bien!');
         }
     };
 

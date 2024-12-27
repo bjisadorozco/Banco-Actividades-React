@@ -1,0 +1,149 @@
+.main-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding: 20px;
+  }
+  
+.drag-and-drop-container {
+    display: flex;
+    flex-direction: column; /* Cambiado a columna para alinear verticalmente */
+    align-items: center; /* Centrar horizontalmente */
+    justify-content: center; /* Centrar verticalmente */
+    gap: 20px;
+    min-height: 60vh; /* Para ocupar toda la altura de la pantalla */
+    position: relative;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  
+  .card-container {
+    display: flex;
+    gap: 20px;
+  }
+  
+  .card {
+    border: 1px solid #ddd;
+    padding: 20px;
+    width: 200px;
+    background: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .card p {
+    font-size: 14px;
+    margin-bottom: 10px;
+  }
+  
+  .drop-zone {
+    border: 2px dashed #ddd;
+    padding: 10px;
+    text-align: center;
+    min-height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f9f9f9;
+    font-size: 14px;
+    color: #555;
+    font-family: 'Montserrat';
+  }
+  
+  .drop-zone span {
+    color: #aaa;
+  }
+  
+  .drag-items {
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+  }
+  
+  .drag-button {
+    background: #c0185d;
+    font-family: 'Montserrat', sans-serif;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: grab;
+  }
+  
+  .drag-button:active {
+    cursor: grabbing;
+  }
+  
+  /* Ajustar el botón de reinicio */
+  .reset-button {
+    background: inherit;
+    display: block;
+    background: #6e3cd2;
+    color: #fff;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    border: 1px solid #6e3cd2;
+    box-shadow: rgba(46, 46, 46, 0.5) 4px 4px 10px;
+    border-radius: 30px;
+    cursor: pointer;
+    margin: 1px auto;
+    position: absolute; /* Posicionamiento absoluto */
+    left: 55%; /* Centrar horizontalmente */
+    transform: translateX(-50%); /* Corregir el centrado */
+
+  }
+  
+  .reset-button:hover {
+    background: #fff;
+    border: 1px solid #6e3cd2;
+  }
+
+  .action-container {
+    display: flex;
+    flex-direction: column; /* Apila los botones y el mensaje verticalmente */
+    align-items: center; /* Centra todo horizontalmente */
+    gap: 15px; /* Espacio entre los botones y el mensaje */
+    margin-top: 20px; /* Separación del resto del contenido */
+  }
+  
+  .action-buttons {
+    display: flex;
+    gap: 20px; /* Espacio entre los botones */
+  }
+  
+  .validation-message {
+    font-size: 16px;
+    color: #333;
+    text-align: center;
+    font-family: 'Montserrat', sans-serif;
+    width: 100%; /* Asegura que ocupe todo el ancho del contenedor */
+    margin: 0; /* Elimina márgenes para evitar desplazamientos inesperados */
+    position: static; /* Asegura que siempre esté en el flujo normal del diseño */
+  }
+  
+  
+  .validate-button {
+    background: inherit;
+    display: block;
+    background: #6e3cd2;
+    color: #fff;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    border: 1px solid #6e3cd2;
+    box-shadow: rgba(46, 46, 46, 0.5) 4px 4px 10px;
+    border-radius: 30px;
+    cursor: pointer;
+    margin: 1px auto;
+    position: absolute; /* Posicionamiento absoluto */
+    left: 45%; /* Centrar horizontalmente */
+    transform: translateX(-50%); /* Corregir el centrado */
+  }
+  .validate-button:hover {
+    background: #4CAF50;
+  }
+  
+  
