@@ -10,6 +10,7 @@ import Button from "../components/Button";
 import imgTrue from "../../../src/assets/img/checkAct.png";
 import imgFalse from "../../../src/assets/img/xmarkAct.png";
 import imgPeligro from "../../assets/img/avatar-hombre-morado-blanco.webp";
+import "./styles/PreguntasVorF.css"
 
 const questions = [
   {
@@ -19,7 +20,7 @@ const questions = [
       "Siempre se debe envolver el hielo en un paño para evitar quemaduras en la piel.",
   },
   {
-    text: "El método de análisis de accidentes que se centra en indagar en las causas raíz de un incidente haciendo repetidamente (5 veces) la pregunta ¿por qué? hasta llegar a la causa raíz, se llama METODO DE 5 PORQUES ",
+    text: `El método de análisis de accidentes que se centra en indagar en las causas raíz de un incidente haciendo repetidamente (5 veces) la pregunta "¿Por qué?" hasta llegar a la causa raíz, se llama método de los 5 porqués `,
     correct: true,
     feedback:
       "Siempre se debe envolver el hielo en un paño para evitar quemaduras en la piel.",
@@ -110,9 +111,9 @@ function PreguntasVorF() {
                 <span className="inc">{currentQuestion + 1}</span>/
                 <span className="tol">{questions.length}</span>
               </div>
-              <div className="itemQ view p-6" style={{ minHeight: "440px" }}>
+              <div className="itemQ view p-6">
                 <div className="mb-3" style={{ minHeight: "50px" }}>
-                  <p className="text-gray-800" style={{ minHeight: "120px" }}>
+                  <p className="text-gray-800">
                     {questions[currentQuestion].text}
                   </p>
                 </div>
@@ -135,7 +136,7 @@ function PreguntasVorF() {
                     )}
                   </div>
                 </div>
-                <div className="text-center mt-4" style={{ minHeight: "30px" }}>
+                <div className="text-center mt-4">
                   <p
                     className={`text-lg font-bold ${
                       answerSelected === null
@@ -149,7 +150,8 @@ function PreguntasVorF() {
                       ? " "
                       : answerSelected
                         ? "Correcto ¡Bien hecho!"
-                        : "Incorrecto ¡Piénsalo bien!"}
+                        : "¡Incorrecto!  No te preocupes, puedes mejorar."
+                    }
                   </p>
                 </div>
                 <hr

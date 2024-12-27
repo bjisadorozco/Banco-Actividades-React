@@ -39,9 +39,9 @@ function ActividadListaDesplegable() {
   ]);
 
   const [availableOptions] = useState([
+    { value: "3", label: "Método Espina de pescado​" },
     { value: "1", label: "Método de los 5 porqués​" },
     { value: "2", label: "Método Árbol de fallas" },
-    { value: "3", label: "Método Espina de pescado​" },
   ]);
 
   const handleSelect = (index, value) => {
@@ -143,7 +143,7 @@ function ActividadListaDesplegable() {
       {errorMessage && <p className="text-secondary-color text-center text-md font-bold mt-2">{errorMessage}</p>}
         {isVerified && (
           <p
-            className={`text-md mt-2 font-bold ${correctCount === 3 ? 'text-[#4CAF50]' : 'text-paragraph-light-color'}`}
+            className={`text-md mt-2 font-bold text-paragraph-light-color`}
           >
             {correctCount} de {items.length} respuestas correctas
           </p>
@@ -151,11 +151,19 @@ function ActividadListaDesplegable() {
         <div className="button-container">
           <Button
             bold={false}
-            icon={!isVerified ? faCheck : faRepeat}
+            icon={faCheck}
             roundedFull={true}
-            onClick={!isVerified ? handleValidate : handleReset}
+            onClick={handleValidate}
           >
-            {!isVerified ? "Validar" : "Reiniciar"}
+            {"Validar"}
+          </Button>
+          <Button
+            bold={false}
+            icon={faRepeat}
+            roundedFull={true}
+            onClick={handleReset}
+          >
+            {"Reiniciar"}
           </Button>
         </div>
       </div>

@@ -4,6 +4,8 @@ import Audio2 from "../../assets/audio/sld8_uso_repetitivo.mp3";
 import Audio3 from "../../assets/audio/sld8_riesgo_ergonomico.mp3";
 import { faCheck, faRepeat } from "@fortawesome/free-solid-svg-icons";
 import Button from "../components/Button";
+import correctIcon from "../../assets/img/checkAct.png";
+import incorrectIcon from "../../assets/img/xmarkAct.png";
 import "./styles/PreguntasTiposRiesgo.css";
 
 const OPTIONS = [
@@ -108,6 +110,13 @@ export default function PreguntasTiposRiesgo() {
     );
   };
 
+  const getContainerClassName = (selectId) => {
+    if (Object.keys(validationStatus).length === 0) return "ctItem";
+    return `ctItem ${
+      validationStatus[selectId] ? "correct-container" : "incorrect-container"
+    }`;
+  };
+
   const getSelectClassName = (selectId) => {
     if (Object.keys(validationStatus).length === 0) return "form-select";
     return `form-select ${validationStatus[selectId] ? "correct" : "incorrect"}`;
@@ -119,7 +128,7 @@ export default function PreguntasTiposRiesgo() {
         <div className="questions-grid">
           <div className="col-md-6 mb-4">
             <div className="preguntas_01">
-              <div className="ctItem">
+              <div className={getContainerClassName("select1")}>
                 <div className="audio-container mb-3">
                   <audio
                     controls
@@ -137,20 +146,34 @@ export default function PreguntasTiposRiesgo() {
                     handleSelectChange("select1", e.target.value)
                   }
                 >
-                  <option value="">Seleccione...</option>
+                  <option value="">Seleccione... </option>
                   {getAvailableOptions("select1").map((option) => (
                     <option key={option.value} value={option.value}>
                       {option.label}
                     </option>
                   ))}
                 </select>
+                {Object.keys(validationStatus).length > 0 && (
+                  <>
+                    <img
+                      src={
+                        validationStatus.select1 ? correctIcon : incorrectIcon
+                      }
+                      alt={validationStatus.select1 ? "Correcto" : "Incorrecto"}
+                      className="feedback-icon"
+                    />
+                    <p className="feedback-text">
+                      {validationStatus.select1 ? "¡Correcto!" : "¡Incorrecto!"}
+                    </p>
+                  </>
+                )}
               </div>
             </div>
           </div>
 
           <div className="col-md-6 mb-4">
             <div className="preguntas_01">
-              <div className="ctItem">
+              <div className={getContainerClassName("select2")}>
                 <div className="audio-container mb-3">
                   <audio
                     controls
@@ -175,13 +198,27 @@ export default function PreguntasTiposRiesgo() {
                     </option>
                   ))}
                 </select>
+                {Object.keys(validationStatus).length > 0 && (
+                  <>
+                    <img
+                      src={
+                        validationStatus.select2 ? correctIcon : incorrectIcon
+                      }
+                      alt={validationStatus.select2 ? "Correcto" : "Incorrecto"}
+                      className="feedback-icon"
+                    />
+                    <p className="feedback-text">
+                      {validationStatus.select2 ? "¡Correcto!" : "¡Incorrecto!"}
+                    </p>
+                  </>
+                )}
               </div>
             </div>
           </div>
 
           <div className="bottom-question">
             <div className="preguntas_01">
-              <div className="ctItem">
+              <div className={getContainerClassName("select3")}>
                 <div className="audio-container mb-3">
                   <audio
                     controls
@@ -206,6 +243,20 @@ export default function PreguntasTiposRiesgo() {
                     </option>
                   ))}
                 </select>
+                {Object.keys(validationStatus).length > 0 && (
+                  <>
+                    <img
+                      src={
+                        validationStatus.select3 ? correctIcon : incorrectIcon
+                      }
+                      alt={validationStatus.select3 ? "Correcto" : "Incorrecto"}
+                      className="feedback-icon"
+                    />
+                    <p className="feedback-text">
+                      {validationStatus.select3 ? "¡Correcto!" : "¡Incorrecto!"}
+                    </p>
+                  </>
+                )}
               </div>
             </div>
           </div>
@@ -235,7 +286,7 @@ export default function PreguntasTiposRiesgo() {
           </div>
         </div>
         <div
-          className="d-flex justify-content-center gap-3 mt-4"
+          className="d-flex justify-content-center gap-3"
           style={{
             flexDirection: "row",
             display: "flex",
