@@ -110,44 +110,34 @@ function PreguntasRiesgosTermicos() {
                                 <h3 className={`text-md mt-0 font-bold ${correctCount === correctAnswers.length ? 'text-paragraph-light-color' : 'text-paragraph-light-color'}`}>
                                     {correctCount} de {correctAnswers.length} respuestas correctas
                                 </h3>
-                                <div className="feedback-container my-4">
-                                    <Paragraph theme="light" justify={isMobile ? "justify" : "justify"}>
-                                        <strong
-                                            style={{
-                                                color: correctCount === correctAnswers.length ? "#4CAF50" : "#F44336",
-                                            }}
-                                        >
-                                            {correctCount === correctAnswers.length ? "Correcto: " : "Incorrecto: "}
-                                        </strong>
-                                        {feedback}
-                                    </Paragraph>
-                                </div>
+                                
                             </div>
                         )}
-                        <div className="flex flex-col items-center justify-center mb-2">
+                        <div className="flex flex-col items-center justify-center">
                             {/* Mostrar error si existe */}
                             {errorMessage && (
-                                <p className="text-secondary-color text-center font-bold mt-1 mb-2">
+                                <p className="text-secondary-color text-center font-bold mt-1">
                                     {errorMessage}
                                 </p>
                             )}
-                            <button
-                                className="bg-main-color px-4 py-2 rounded-full shadow-md shadow-main-color/40 text-white track-element"
-                                onClick={isValidated ? resetDropdowns : validateDropdowns}
-                                data-bs-target="#sl06md01"
-                            >
-                                {isValidated ? (
-                                    <>
-                                        <FontAwesomeIcon icon={faRepeat} className="mr-2" />
-                                        Reiniciar
-                                    </>
-                                ) : (
-                                    <>
-                                        <FontAwesomeIcon icon={faCheck} className="mr-2" />
-                                        Validar
-                                    </>
-                                )}
-                            </button>
+                            <div className="botones-container">
+                            <Button
+                                bold={false}
+                                icon={faCheck}
+                                roundedFull={true}
+                                onClick={validateDropdowns}
+                                >
+                                Validar
+                            </Button>
+                            <Button
+                                bold={false}
+                                icon={faRepeat}
+                                roundedFull={true}
+                                onClick={resetDropdowns}
+                                >
+                                Reiniciar
+                            </Button>
+                            </div>
                         </div>
                     </div>
                 </div>

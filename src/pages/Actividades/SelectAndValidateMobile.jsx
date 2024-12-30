@@ -86,7 +86,8 @@ const SelectAndValidateMobile = () => {
 
   return (
     <div className="mobile-container">
-      <br />
+      {errorMessage && <div className="error-message-mobile">{errorMessage}</div>}
+      {successMessage && <div className="success-message-mobile">{successMessage}</div>}
       <div className="activity-container-mobile">
         {/* Cuadro 1 */}
         <div
@@ -112,7 +113,7 @@ const SelectAndValidateMobile = () => {
             }
             className="select-box-mobile"
           >
-            <option value="">Selecciona una</option>
+            <option value="">Selecciona...</option>
             {getFilteredOptions("select1").map((option) => (
               <option key={option} value={option}>
                 {option}
@@ -145,7 +146,7 @@ const SelectAndValidateMobile = () => {
             }
             className="select-box-mobile"
           >
-            <option value="">Selecciona una</option>
+            <option value="">Selecciona...</option>
             {getFilteredOptions("select2").map((option) => (
               <option key={option} value={option}>
                 {option}
@@ -178,7 +179,7 @@ const SelectAndValidateMobile = () => {
             }
             className="select-box-mobile"
           >
-            <option value="">Selecciona una</option>
+            <option value="">Selecciona...</option>
             {getFilteredOptions("select3").map((option) => (
               <option key={option} value={option}>
                 {option}
@@ -198,8 +199,7 @@ const SelectAndValidateMobile = () => {
         </div>
       )}
 
-      {errorMessage && <div className="error-message-mobile">{errorMessage}</div>}
-      {successMessage && <div className="success-message-mobile">{successMessage}</div>}
+      
 
       <div className="flex-container-mobile">
         <Button bold={false} icon={faRepeat} roundedFull={true} onClick={handleReset}>

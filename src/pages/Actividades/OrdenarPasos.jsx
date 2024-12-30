@@ -118,21 +118,21 @@ const OrdenarPasos = () => {
       {/* Botones de Validar y Reiniciar */}
       <div className="botones-container">
       <Button
-                bold={false}
-                icon={faCheck}
-                roundedFull={true}
-                onClick={validarOrden}
-                >
-                Validar
-            </Button>
-            <Button
-                bold={false}
-                icon={faRepeat}
-                roundedFull={true}
-                onClick={desordenarPasos}
-                >
-                Reiniciar
-            </Button>
+        bold={false}
+        icon={faCheck}
+        roundedFull={true}
+        onClick={validarOrden}
+        >
+        Validar
+      </Button>
+      <Button
+        bold={false}
+        icon={faRepeat}
+        roundedFull={true}
+        onClick={desordenarPasos}
+        >
+        Reiniciar
+      </Button>
       </div>
     </div>
   );
