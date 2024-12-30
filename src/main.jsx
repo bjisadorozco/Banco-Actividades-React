@@ -10,10 +10,15 @@ import PreguntasSeleccionHerramientas from "./pages/Actividades/PreguntasSelecci
 import OrdenarPasos from "./pages/Actividades/OrdenarPasos.jsx";
 import DragAndDrop from "./pages/Actividades/DragAndDrop.jsx";
 import OrdenarPasosPalmaManos from "./pages/Actividades/OrdenarPasosPalmaManos.jsx";
+import Pregunta1alturas from "./pages/Actividades/Actividades_Trabajo_seguro_alturas/Pregunta1alturas.jsx";
+import Pregunta2alturas from "./pages/Actividades/Actividades_Trabajo_seguro_alturas/Pregunta2alturas.jsx";
+import SeleccionImagenesAlturas from "./pages/Actividades/Actividades_Trabajo_seguro_alturas/SeleccionImagenesAlturas.jsx";
+import DragAndDropAlturas1 from "./pages/Actividades/Actividades_Trabajo_seguro_alturas/DragAndDropAlturas1.jsx";
+import CardsInfoAlturas from "./pages/Actividades/Actividades_Trabajo_seguro_alturas/CardsInfoAlturas.jsx";
 import "./main.css";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <DragAndDropManos />
+    <CardsInfoAlturas />
   </React.StrictMode>
 );

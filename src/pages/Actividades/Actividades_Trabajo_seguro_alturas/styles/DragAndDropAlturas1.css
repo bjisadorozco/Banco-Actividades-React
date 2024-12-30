@@ -1,0 +1,88 @@
+.dark-display {
+  height: 100vh;
+}
+.display-mobile {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-left: 24px;
+  padding-right: 24px;
+  height: 100vh;
+}
+
+/* Media queries for responsive design */
+@media (max-width: 768px) {
+  .display-mobile {
+    height: auto;
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+  .dark-display {
+    padding: 0;
+    margin: 0;
+    height: auto;
+  }
+  .ligth-display {
+    height: auto;
+  }
+
+  audio {
+    width: 100%;
+    height: 40px;
+    margin: 8px 0;
+  }
+
+  audio::-webkit-media-controls-panel {
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 4px;
+  }
+
+  audio::-webkit-media-controls-play-button,
+  audio::-webkit-media-controls-mute-button {
+    background-color: white;
+    border-radius: 50%;
+  }
+
+  .audio-container {
+    width: 100%;
+    padding: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+  }
+}
+
+/* Additional styles for better responsiveness */
+@media (max-width: 640px) {
+  .flex-row {
+    flex-direction: row !important;
+  }
+
+  .flex-col {
+    flex-direction: column !important;
+  }
+
+  /* Adjust the width of drop areas and draggable options for mobile */
+  .flex-row > div {
+    width: 50%;
+  }
+
+  /* Ensure the drop areas and draggable options take full width in their columns */
+  .flex-col > div {
+    width: 100%;
+  }
+
+  /* Add some spacing between the columns */
+  .flex-row > div:first-child {
+    margin-right: 10px;
+  }
+}
+
+.audio-container {
+  transition:
+    opacity 0.5s ease,
+    transform 0.5s ease;
+}
+
+.h-6 {
+  min-height: 54px; /* 1.5rem = altura del texto */
+}

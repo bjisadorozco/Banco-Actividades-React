@@ -1,0 +1,93 @@
+.grid-container {
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    grid-template-columns: repeat(3, 1fr);
+    width: 95%;
+    gap: 10px;
+}
+.itemAct {
+    position: relative; /* Posiciona el contenedor de cada imagen */
+  }
+  
+  .itemAct img {
+    width: auto; /* Asegura que la imagen principal se mantenga al 100% */
+  }
+  
+  .resAct {
+    position: absolute;
+    top: 50%;  /* Centrar verticalmente */
+    left: 50%; /* Centrar horizontalmente */
+    transform: translate(-50%, -50%); /* Ajusta para centrar correctamente */
+    width: 50px; /* Ajusta el tamaño de las imágenes de verificación */
+    height: 50px;
+    pointer-events: none; /* Previene que las imágenes de resultado interfieran con los clics */
+  }
+
+  .sabias-que-btn {
+    position: fixed;
+    bottom: 10px;
+    right: 20px;
+    border-radius: 10%;
+    border: 2px solid gray;
+    width: 80px;
+    height: 80px;
+    display: flex;
+    flex-direction: column; /* Alinea imagen y texto verticalmente */
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    z-index: 1;
+    background-color: transparent;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Agrega sombra */
+  }
+  
+  .sabias-que-btn img {
+    width: 60px; /* Ajusta el tamaño de la imagen */
+    height: auto;
+    margin: 0;
+  }
+  
+  .sabias-que-btn p {
+    font-size: 10px; /* Ajusta el tamaño del texto */
+    color: black;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 5px;
+  }
+  
+  .sabias-que-info {
+    position: fixed;
+    bottom: 100px; /* Ajusta la posición de acuerdo al tamaño del botón */
+    right: 20px; /* Alinea con el botón */
+    width: 250px;
+    margin-bottom: 6px;
+    background-color: gray;
+    color: white;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+  
+  /* Flecha que apunta hacia el .sabias-que-btn */
+  .sabias-que-info::before {
+    content: "";
+    position: absolute;
+    bottom: -10px; /* Posiciona la flecha sobre el botón */
+    right: 30px; /* Ajusta según el ancho de la caja */
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-top: 10px solid gray; /* Color de la flecha, debe coincidir con el fondo de .sabias-que-info */
+  }
+
+/* dispositivos moviles */
+
+  @media screen and (max-width: 600px) {
+    .grid-container {
+      width: 100%;
+    }
+  }
