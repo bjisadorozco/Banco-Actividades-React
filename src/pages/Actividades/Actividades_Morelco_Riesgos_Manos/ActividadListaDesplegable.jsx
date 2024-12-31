@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck, faRepeat } from "@fortawesome/free-solid-svg-icons";
-import Button from "../components/Button";
-import imgPeligro from "../../assets/img/avatar-hombre-morado-blanco.webp";
-import correctIcon from "../../assets/img/checkAct.png"
-import incorrectIcon from "../../assets/img/xmarkAct.png"
+import Button from "../../components/Button";
+import imgPeligro from "../../../assets/img/avatar-hombre-morado-blanco.webp";
+import correctIcon from "../../../assets/img/checkAct.png"
+import incorrectIcon from "../../../assets/img/xmarkAct.png"
 import "./styles/ActividadListaDesplegable.css";
 
 function ActividadListaDesplegable() {

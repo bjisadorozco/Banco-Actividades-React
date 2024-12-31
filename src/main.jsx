@@ -15,15 +15,15 @@ import Pregunta2alturas from "./pages/Actividades/Actividades_Trabajo_seguro_alt
 import SeleccionImagenesAlturas from "./pages/Actividades/Actividades_Trabajo_seguro_alturas/SeleccionImagenesAlturas.jsx";
 import DragAndDropAlturas1 from "./pages/Actividades/Actividades_Trabajo_seguro_alturas/DragAndDropAlturas1.jsx";
 import CardsInfoAlturas from "./pages/Actividades/Actividades_Trabajo_seguro_alturas/CardsInfoAlturas.jsx";
-import DragAndDrop from "./pages/Actividades/DragAndDrop.jsx";
-import PreguntasTiposRiesgo from "./pages/Actividades/PreguntasTiposRiesgo.jsx";
-import PreguntasVorF from "./pages/Actividades/PreguntasVorF.jsx";
-import ActividadListaDesplegable from "./pages/Actividades/ActividadListaDesplegable.jsx";
+import DragAndDrop from "./pages/Actividades/Actividades_Morelco_Riesgos_Manos/DragAndDrop.jsx";
+import PreguntasTiposRiesgo from "./pages/Actividades/Actividades_Morelco_Riesgos_Manos/PreguntasTiposRiesgo.jsx";
+import PreguntasVorF from "./pages/Actividades/Actividades_Morelco_Riesgos_Manos/PreguntasVorF.jsx";
+import ActividadListaDesplegable from "./pages/Actividades/Actividades_Morelco_Riesgos_Manos/ActividadListaDesplegable.jsx";
 import "./main.css";
 
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <ActividadListaDesplegable />
+    <DragAndDrop />
   </React.StrictMode>
 );

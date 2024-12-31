@@ -6,10 +6,10 @@ import {
   faArrowRight,
   faRepeat,
 } from "@fortawesome/free-solid-svg-icons";
-import Button from "../components/Button";
-import imgTrue from "../../../src/assets/img/checkAct.png";
-import imgFalse from "../../../src/assets/img/xmarkAct.png";
-import imgPeligro from "../../assets/img/avatar-hombre-morado-blanco.webp";
+import Button from "../../components/Button";
+import imgTrue from "../../../assets/img/checkAct.png";
+import imgFalse from "../../../assets/img/xmarkAct.png";
+import imgPeligro from "../../../assets/img/avatar-hombre-morado-blanco.webp";
 import "./styles/PreguntasVorF.css"
 
 const questions = [

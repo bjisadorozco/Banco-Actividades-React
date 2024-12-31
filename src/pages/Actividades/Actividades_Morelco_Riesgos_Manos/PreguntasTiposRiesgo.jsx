@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useRef } from "react";
-import Audio1 from "../../assets/audio/sld8_fatiga.mp3";
-import Audio2 from "../../assets/audio/sld8_uso_repetitivo.mp3";
-import Audio3 from "../../assets/audio/sld8_riesgo_ergonomico.mp3";
+import Audio1 from "../../../assets/audio/sld8_fatiga.mp3";
+import Audio2 from "../../../assets/audio/sld8_uso_repetitivo.mp3";
+import Audio3 from "../../../assets/audio/sld8_riesgo_ergonomico.mp3";
 import { faCheck, faRepeat } from "@fortawesome/free-solid-svg-icons";
-import Button from "../components/Button";
-import correctIcon from "../../assets/img/checkAct.png";
-import incorrectIcon from "../../assets/img/xmarkAct.png";
+import Button from "../../components/Button";
+import correctIcon from "../../../assets/img/checkAct.png";
+import incorrectIcon from "../../../assets/img/xmarkAct.png";
 import "./styles/PreguntasTiposRiesgo.css";
 
 const OPTIONS = [
