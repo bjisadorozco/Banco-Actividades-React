@@ -66,6 +66,11 @@
   
 }
 
+.resultado-mensaje {
+  font-family: 'Montserrat', sans-serif;
+  color: #8f8f8f;
+}
+
 .respuestas-separadas {
   display: flex;
   justify-content: center; /* Centra horizontalmente */

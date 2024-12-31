@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./styles/OrdenarPasosMobile.css";
-import Button from "../components/Button";
+import Button from "../../components/Button";
 import { faCheck, faRepeat } from "@fortawesome/free-solid-svg-icons";
 
 const OrdenarPasos = () => {
@@ -14,7 +14,9 @@ const OrdenarPasos = () => {
 
   const [respuestas, setRespuestas] = useState(Array(5).fill(""));
   const [colores, setColores] = useState(Array(5).fill(""));
+  const [correctCount, setCorrectCount] = useState(0);
   const [habilitarValidar, setHabilitarValidar] = useState(false);
+  const [mostrarResultado, setMostrarResultado] = useState(false);
 
   const numerosDesordenados = [5, 4, 3, 2, 1].sort(() => Math.random() - 0.5);
 
@@ -23,6 +25,7 @@ const OrdenarPasos = () => {
     newRespuestas[index] = e.target.value;
     setRespuestas(newRespuestas);
     setHabilitarValidar(newRespuestas.every((respuesta) => respuesta !== ""));
+    setMostrarResultado(false); // Oculta el mensaje al cambiar las respuestas
   };
 
   const validarRespuestas = () => {
@@ -30,12 +33,18 @@ const OrdenarPasos = () => {
       parseInt(respuesta) === index + 1 ? "correcto" : "incorrecto"
     );
     setColores(nuevosColores);
+
+    const correctas = nuevosColores.filter((color) => color === "correcto").length;
+    setCorrectCount(correctas);
+    setMostrarResultado(true); // Muestra el mensaje al validar
   };
 
   const reiniciarRespuestas = () => {
     setRespuestas(Array(5).fill(""));
     setColores(Array(5).fill(""));
+    setCorrectCount(0);
     setHabilitarValidar(false);
+    setMostrarResultado(false); // Oculta el mensaje al reiniciar
   };
 
   const opcionesDisponibles = (index) => {
@@ -51,29 +60,33 @@ const OrdenarPasos = () => {
     <div className="ordenar-pasos-container">
       <div className="contenedor-pasos">
         {pasosCorrectos.map((paso, index) => (
-          <div
-            key={index}
-            className={`tarjeta-paso ${colores[index]}`} // Aplicamos el color a las tarjetas
-          >
+          <div key={index} className={`tarjeta-paso ${colores[index]}`}>
             <p>{paso}</p>
-            <div className="respuesta-item">
-              <select
-                id={`respuesta-${index}`}
-                value={respuestas[index]}
-                onChange={(e) => handleSelectChange(e, index)}
-                className={`respuesta-select ${colores[index]}`}
-              >
-                <option value="">Seleccione...</option>
-                {opcionesDisponibles(index).map((numero) => (
-                  <option key={numero} value={numero}>
-                    {numero}
-                  </option>
-                ))}
-              </select>
-            </div>
+            <select
+              id={`respuesta-${index}`}
+              value={respuestas[index]}
+              onChange={(e) => handleSelectChange(e, index)}
+              className={`respuesta-select ${colores[index]}`}
+            >
+              <option value="">Seleccione...</option>
+              {opcionesDisponibles(index).map((numero) => (
+                <option key={numero} value={numero}>
+                  {numero}
+                </option>
+              ))}
+            </select>
           </div>
         ))}
       </div>
+
+      {/* Mensaje de resultado, visible solo después de validar */}
+      {mostrarResultado && (
+        <div className="contador-correctas">
+          <p className="text-md mt-0 font-bold text-center resultado-mensaje">
+            {correctCount} de {pasosCorrectos.length} respuestas correctas
+          </p>
+        </div>
+      )}
 
       <div className="botones-container">
         <Button

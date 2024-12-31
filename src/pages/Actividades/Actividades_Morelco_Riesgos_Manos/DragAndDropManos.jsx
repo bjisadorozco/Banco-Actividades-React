@@ -1,16 +1,16 @@
 import React, { useState, useRef } from "react";
-import mano1 from "../../assets/img/fisicas_sld5.webp";
-import mano2 from "../../assets/img/economicas_sld5.webp";
-import mano3 from "../../assets/img/laborales_sld5.webp";
-import checkIcon from "../../assets/img/checkAct.png";
-import xmarkIcon from "../../assets/img/xmarkAct.png";
-import audioFisicas from "../../assets/audio/FISICAS-Morelco.mp3";
-import audioEconomicas from "../../assets/audio/ECONOMICAS-Morelco.mp3";
-import audioLaborales from "../../assets/audio/LABORALES-Morelco.mp3";
+import mano1 from "../../../assets/img/fisicas_sld5.webp";
+import mano2 from "../../../assets/img/economicas_sld5.webp";
+import mano3 from "../../../assets/img/laborales_sld5.webp";
+import checkIcon from "../../../assets/img/checkAct.png";
+import xmarkIcon from "../../../assets/img/xmarkAct.png";
+import audioFisicas from "../../../assets/audio/FISICAS-Morelco.mp3";
+import audioEconomicas from "../../../assets/audio/ECONOMICAS-Morelco.mp3";
+import audioLaborales from "../../../assets/audio/LABORALES-Morelco.mp3";
 import "./styles/DragAndDropManos.css"; // Asegúrate de incluir los estilos
-import Paragraph from "../components/Paragraph";
+import Paragraph from "../../components/Paragraph";
 import { faCheck, faRepeat, faArrowRight } from "@fortawesome/free-solid-svg-icons";
-import Button from '../components/Button';
+import Button from '../../components/Button';
 
 const DragAndDropManos = () => {
   const [droppedItems, setDroppedItems] = useState({

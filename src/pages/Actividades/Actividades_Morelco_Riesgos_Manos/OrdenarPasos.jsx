@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import "./styles/OrdenarPasos.css";
 import { faCheck, faRepeat } from "@fortawesome/free-solid-svg-icons";
-import Button from "../components/Button";
-import checkIcon from "../../assets/img/checkAct.png";
-import xmarkIcon from "../../assets/img/xmarkAct.png";
+import Button from "../../components/Button";
+import checkIcon from "../../../assets/img/checkAct.png";
+import xmarkIcon from "../../../assets/img/xmarkAct.png";
 
 const OrdenarPasos = () => {
   const pasosCorrectos = [

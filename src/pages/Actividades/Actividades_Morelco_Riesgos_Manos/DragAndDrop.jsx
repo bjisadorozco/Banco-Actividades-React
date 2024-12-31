@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import "./styles/DragAndDrop.css";
-import Paragraph from "../components/Paragraph";
+import Paragraph from "../../components/Paragraph";
 import { faCheck, faRepeat, faArrowRight } from "@fortawesome/free-solid-svg-icons";
-import Button from '../components/Button';
+import Button from '../../components/Button';
 
 const DragAndDrop = () => {
   const [droppedItem1, setDroppedItem1] = useState(null);

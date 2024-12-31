@@ -1,14 +1,14 @@
 import React, { useState, useRef, useEffect } from 'react';
 import '@fortawesome/fontawesome-free/css/all.min.css';
-import Title from "../components/Title";
-import Subtitle from "../components/Subtitle";
-import Instruction from "../components/Instruction";
-import Button from '../components/Button';
-import Paragraph from "../components/Paragraph";
-import useStore from "../../store";
+import Title from "../../components/Title";
+import Subtitle from "../../components/Subtitle";
+import Instruction from "../../components/Instruction";
+import Button from '../../components/Button';
+import Paragraph from "../../components/Paragraph";
+import useStore from "../../../store";
 import { faCheck, faRepeat, faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { useMediaQuery } from "react-responsive";
-import '../Actividades/styles/PreguntasRiesgosMecanicos.css';
+import './styles/PreguntasProteccion3.css';
 
 /*************  ✨ Codeium Command ⭐  *************/
 /**
@@ -16,7 +16,7 @@ import '../Actividades/styles/PreguntasRiesgosMecanicos.css';
  * 
 
 /******  50ecd974-6254-49ce-bc67-51e28db66bad  *******/
-function PreguntasRiesgosMecanicos() {
+function PreguntasProteccion3() {
     const setIsOnDivisor = useStore((state) => state.setIsOnDivisor);
     const isMobile = useMediaQuery({ maxWidth: 640 });
     const videoRef = useRef(null);
@@ -32,12 +32,24 @@ function PreguntasRiesgosMecanicos() {
 
     const questions = [
         {
-            question: "¿Qué es lo primero que debe hacer la organización una vez que se han identificado los peligros en el lugar de trabajo?",
+            question: "¿Cuál es la función principal de los guantes en el trabajo con herramientas manuales?",
             options: [
-                { text: "Aplastamientos.", correct: true },
-                { text: "Golpes.", correct: false },
-                { text: "Cortes.", correct: false }
+                { text: "Aumentar la velocidad de trabajo.", correct: false },
+                { text: "Proteger las manos de cortes, abrasiones y quemaduras.", correct: true },
+                { text: "Reducir el cansancio en las manos.", correct: false }
             ],
+            correctFeedback: "¡Muy bien ! Estas aprendiendo mucho para cuidar tus manos.",
+            incorrectFeedback: "¡Inténtalo de nuevo! La opción seleccionada no es la correcta."
+        },
+        {
+            question: "¿En qué situación NO es recomendable usar guantes durante el trabajo?",
+            options: [
+                { text: "Al manipular herramientas rotativas como sierras o taladros.", correct: true },
+                { text: "Al trabajar con soldadoras que generan calor.", correct: false },
+                { text: "Al manejar herramientas que puedan causar cortes.", correct: false }
+            ],
+            multipleCorrect: false,
+            correctCount: 1,
             correctFeedback: "¡Muy bien ! Estas aprendiendo mucho para cuidar tus manos.",
             incorrectFeedback: "¡Inténtalo de nuevo! La opción seleccionada no es la correcta."
         },
@@ -231,7 +243,7 @@ function PreguntasRiesgosMecanicos() {
                                 roundedFull={true}
                                 onClick={handleReset}
                             >
-                                Reiniciar
+                                Reiniciar Actividad
                             </Button>
                         </div>
                     )}
@@ -241,5 +253,5 @@ function PreguntasRiesgosMecanicos() {
     );
 }
 
-export default PreguntasRiesgosMecanicos;
+export default PreguntasProteccion3;
 

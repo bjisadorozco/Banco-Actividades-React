@@ -1,16 +1,16 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.jsx";
-import PreguntasProteccion3 from "./pages/Actividades/PreguntasProteccion3.jsx";
-import PreguntasRiesgosMecanicos from "./pages/Actividades/PreguntasRiesgosMecanicos.jsx";
-import PreguntasRiesgosTermicos from "./pages/Actividades/PreguntasRiesgosTermicos.jsx";
-import DragAndDropManos from "./pages/Actividades/DragAndDropManos.jsx"
-import SelectAndValidateMobile from "./pages/Actividades/SelectAndValidateMobile.jsx";
-import PreguntasSeleccionHerramientas from "./pages/Actividades/PreguntasSeleccionHerramientas.jsx";
-import OrdenarPasos from "./pages/Actividades/OrdenarPasos.jsx";
-import DragAndDrop from "./pages/Actividades/DragAndDrop.jsx";
-import OrdenarPasosPalmaManos from "./pages/Actividades/OrdenarPasosPalmaManos.jsx";
-import OrdenarPasosMobile from "./pages/Actividades/OrdenarPasosMobile.jsx";
+import PreguntasProteccion3 from "./pages/Actividades/Actividades_Morelco_Riesgos_Manos/PreguntasProteccion3.jsx";
+import PreguntasRiesgosMecanicos from "./pages/Actividades/Actividades_Morelco_Riesgos_Manos/PreguntasRiesgosMecanicos.jsx";
+import PreguntasRiesgosTermicos from "./pages/Actividades/Actividades_Morelco_Riesgos_Manos/PreguntasRiesgosTermicos.jsx";
+import DragAndDropManos from "./pages/Actividades/Actividades_Morelco_Riesgos_Manos/DragAndDropManos.jsx"
+import SelectAndValidateMobile from "./pages/Actividades/Actividades_Morelco_Riesgos_Manos/SelectAndValidateMobile.jsx";
+import PreguntasSeleccionHerramientas from "./pages/Actividades/Actividades_Morelco_Riesgos_Manos/PreguntasSeleccionHerramientas.jsx";
+import OrdenarPasos from "./pages/Actividades/Actividades_Morelco_Riesgos_Manos/OrdenarPasos.jsx";
+import DragAndDrop from "./pages/Actividades/Actividades_Morelco_Riesgos_Manos/DragAndDrop.jsx";
+import OrdenarPasosPalmaManos from "./pages/Actividades/Actividades_Morelco_Riesgos_Manos/OrdenarPasosPalmaManos.jsx";
+import OrdenarPasosMobile from "./pages/Actividades/Actividades_Morelco_Riesgos_Manos/OrdenarPasosMobile.jsx";
 import Pregunta1alturas from "./pages/Actividades/Actividades_Trabajo_seguro_alturas/Pregunta1alturas.jsx";
 import Pregunta2alturas from "./pages/Actividades/Actividades_Trabajo_seguro_alturas/Pregunta2alturas.jsx";
 import SeleccionImagenesAlturas from "./pages/Actividades/Actividades_Trabajo_seguro_alturas/SeleccionImagenesAlturas.jsx";
@@ -20,6 +20,6 @@ import "./main.css";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <CardsInfoAlturas />
+    <DragAndDropManos />
   </React.StrictMode>
 );

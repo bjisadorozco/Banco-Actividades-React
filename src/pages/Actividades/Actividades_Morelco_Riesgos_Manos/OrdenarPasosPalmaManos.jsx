@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import "./styles/OrdenarPasosPalmaManos.css"; // Asegúrate de incluir los estilos
-import Paragraph from "../components/Paragraph";
+import Paragraph from "../../components/Paragraph";
 import { faCheck, faRepeat } from "@fortawesome/free-solid-svg-icons";
-import Button from "../components/Button";
+import Button from "../../components/Button";
 
 const OrdenarPasosPalmaManos = () => {
   const pasosCorrectos = [

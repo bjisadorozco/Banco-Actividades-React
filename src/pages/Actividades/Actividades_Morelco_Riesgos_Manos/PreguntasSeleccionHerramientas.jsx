@@ -1,14 +1,14 @@
 import React, { useState, useRef, useEffect } from 'react';
 import '@fortawesome/fontawesome-free/css/all.min.css';
-import Title from "../components/Title";
-import Subtitle from "../components/Subtitle";
-import Instruction from "../components/Instruction";
-import Button from '../components/Button';
-import Paragraph from "../components/Paragraph";
-import useStore from "../../store";
+import Title from "../../components/Title";
+import Subtitle from "../../components/Subtitle";
+import Instruction from "../../components/Instruction";
+import Button from '../../components/Button';
+import Paragraph from "../../components/Paragraph";
+import useStore from "../../../store";
 import { faCheck, faRepeat, faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { useMediaQuery } from "react-responsive";
-import '../Actividades/styles/PreguntasSeleccionHerramientas.css';
+import './styles/PreguntasSeleccionHerramientas.css';
 
 /*************  ✨ Codeium Command ⭐  *************/
 /**

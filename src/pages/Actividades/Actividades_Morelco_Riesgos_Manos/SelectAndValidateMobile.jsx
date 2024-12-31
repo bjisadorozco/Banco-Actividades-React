@@ -1,16 +1,16 @@
 import React, { useState } from "react";
-import mano1 from "../../assets/img/mano1.png";
-import mano2 from "../../assets/img/mano2.png";
-import mano3 from "../../assets/img/mano3.png";
-import checkIcon from "../../assets/img/checkAct.png";
-import xmarkIcon from "../../assets/img/xmarkAct.png";
-import audioFisicas from "../../assets/audio/FISICAS-Morelco.mp3"; // Ruta del audio Físicas
-import audioEconomicas from "../../assets/audio/ECONOMICAS-Morelco.mp3"; // Ruta del audio Económicas
-import audioLaborales from "../../assets/audio/LABORALES-Morelco.mp3"; // Ruta del audio Laborales
+import mano1 from "../../../assets/img/mano1.png";
+import mano2 from "../../../assets/img/mano2.png";
+import mano3 from "../../../assets/img/mano3.png";
+import checkIcon from "../../../assets/img/checkAct.png";
+import xmarkIcon from "../../../assets/img/xmarkAct.png";
+import audioFisicas from "../../../assets/audio/FISICAS-Morelco.mp3"; // Ruta del audio Físicas
+import audioEconomicas from "../../../assets/audio/ECONOMICAS-Morelco.mp3"; // Ruta del audio Económicas
+import audioLaborales from "../../../assets/audio/LABORALES-Morelco.mp3"; // Ruta del audio Laborales
 import "./styles/SelectAndValidateMobile.css"; // Asegúrate de incluir los estilos específicos para móviles
-import Paragraph from "../components/Paragraph";
+import Paragraph from "../../components/Paragraph";
 import { faCheck, faRepeat } from "@fortawesome/free-solid-svg-icons";
-import Button from "../components/Button";
+import Button from "../../components/Button";
 
 const SelectAndValidateMobile = () => {
   const [selectedOptions, setSelectedOptions] = useState({

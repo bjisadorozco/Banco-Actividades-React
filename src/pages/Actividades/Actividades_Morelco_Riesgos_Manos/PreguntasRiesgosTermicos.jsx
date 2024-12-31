@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
-import Title from "../components/Title";
-import Subtitle from "../components/Subtitle";
-import Paragraph from "../components/Paragraph";
-import Instruction from "../components/InstructionList";
-import Button from "../components/Button";
-import ModalDialog from '../components/ModalDialog';
+import Title from "../../components/Title";
+import Subtitle from "../../components/Subtitle";
+import Paragraph from "../../components/Paragraph";
+import Instruction from "../../components/InstructionList";
+import Button from "../../components/Button";
+import ModalDialog from '../../components/ModalDialog';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck, faRepeat, faCircleQuestion } from "@fortawesome/free-solid-svg-icons";
-import useStore from "../../store";
-import '../Actividades/styles/PreguntasRiesgosTermicos.css';
+import useStore from "../../../store";
+import './styles/PreguntasRiesgosTermicos.css';
 import { useMediaQuery } from "react-responsive";
 
 const initialOptions = [
