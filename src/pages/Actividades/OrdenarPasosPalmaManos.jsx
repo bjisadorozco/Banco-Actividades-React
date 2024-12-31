@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "./styles/OrdenarPasosPalmaManos.css"; // Asegúrate de incluir los estilos
 import Paragraph from "../components/Paragraph";
-import { faCheck, faRepeat, faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import { faCheck, faRepeat } from "@fortawesome/free-solid-svg-icons";
 import Button from "../components/Button";
 
 const OrdenarPasosPalmaManos = () => {
@@ -11,31 +11,27 @@ const OrdenarPasosPalmaManos = () => {
     "Rehabilitación y reinserción laboral.",
   ];
 
-  const [pasos, setPasos] = useState([]);
+  const pasosInicialesDesordenados = [
+    { numero: 3, texto: "Rehabilitación y reinserción laboral." },
+    { numero: 1, texto: "Primeros auxilios y atencion médica." },
+    { numero: 2, texto: "Reporte e investigación de accidentes." },
+  ];
+
+  const [pasos, setPasos] = useState(pasosInicialesDesordenados);
   const [resultado, setResultado] = useState("");
   const [correctCount, setCorrectCount] = useState(0);
   const [isButtonActive, setIsButtonActive] = useState(false);
 
-  const desordenarPasos = () => {
-    const pasosConNumeros = pasosCorrectos.map((paso, index) => ({
-      numero: index + 1,
-      texto: paso,
-    }));
-
-    const pasosDesordenados = pasosConNumeros.sort(() => Math.random() - 0.5);
-    setPasos(pasosDesordenados);
+  const reiniciarPasos = () => {
+    setPasos([...pasosInicialesDesordenados]);
     setResultado("");
     setCorrectCount(0);
-    setIsButtonActive(false); // Desactiva el botón al reiniciar
+    setIsButtonActive(false); // Deshabilitar el botón al reiniciar
   };
-
-  useEffect(() => {
-    desordenarPasos();
-  }, []);
 
   const handleDragStart = (e, index) => {
     e.dataTransfer.setData("index", index);
-    setIsButtonActive(true); // Activa el botón cuando el usuario empieza a mover
+    setIsButtonActive(true); // Habilitar el botón al iniciar un arrastre
   };
 
   const handleDrop = (e, targetIndex) => {
@@ -92,30 +88,16 @@ const OrdenarPasosPalmaManos = () => {
         </div>
       )}
 
-      {resultado && (
-        <div className={`resultado ${resultado}`}>
-          <div className="feedback-container">
-            <div className="feedback-message">
-              <p>
-                {resultado === "correcto"
-                  ? "Respuesta correcta: ¡Muy bien! Estás aprendiendo mucho para cuidar tus manos."
-                  : "Respuesta incorrecta: ¡Piénsalo bien! Piensa en el orden correcto y vuelve a intentarlo."}
-              </p>
-            </div>
-          </div>
-        </div>
-      )}
-
       <div className="botones-container">
         <Button
           bold={false}
           icon={faCheck}
           roundedFull={true}
           onClick={isButtonActive ? validarOrden : null}
-          disabled={!isButtonActive} // Botón desactivado si no está activo
+          disabled={!isButtonActive} // Botón inicialmente deshabilitado
           className={`boton-validar ${
             isButtonActive ? "activo" : "inactivo"
-          }`} 
+          }`}
         >
           Validar
         </Button>
@@ -123,11 +105,24 @@ const OrdenarPasosPalmaManos = () => {
           bold={false}
           icon={faRepeat}
           roundedFull={true}
-          onClick={desordenarPasos}
+          onClick={reiniciarPasos}
         >
           Reiniciar
         </Button>
       </div>
+      {resultado && (
+        <div className={`resultado ${resultado}`}>
+          <div className="feedback-container">
+            <div className="feedback-message">
+              <p>
+                {resultado === "correcto"
+                  ? "Respuesta correcta: ¡Muy bien! Estás aprendiendo mucho para cuidar tus manos."
+                  : "Respuesta incorrecta: ¡Piénsalo bien!."}
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

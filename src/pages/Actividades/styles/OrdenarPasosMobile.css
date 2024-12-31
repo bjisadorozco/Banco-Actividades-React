@@ -1,0 +1,116 @@
+.ordenar-pasos-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.contenedor-pasos {
+  display: flex;
+  flex-direction: column; /* Alinea los pasos en una sola columna */
+  gap: 20px;
+  width: 100%;
+  max-width: 800px;
+}
+
+.numero-cuadro {
+  margin-top: 10px;
+  font-size: 16px;
+  color: #8f8f8f;
+  text-align: center;
+  transition: color 0.3s ease; /* Transición suave para el cambio de color */
+}
+
+.tarjeta-paso {
+  padding: 15px;
+  background: #ffffff;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  text-align: justify;
+  font-size: 16px;
+  color: #8f8f8f;
+  display: flex;
+  flex-direction: column; /* Organiza el contenido verticalmente */
+  gap: 10px; /* Espacio entre el texto y el selector */
+}
+
+.tarjeta-paso:hover {
+  background-color: transparent; /* El fondo no cambia cuando se pasa el ratón */
+  cursor: default; /* El cursor no cambia */
+}
+
+/* Estilos adicionales para colores dinámicos */
+.tarjeta-paso.correcto {
+  background-color: #4caf50;
+  color: #fff;
+}
+
+.tarjeta-paso.incorrecto {
+  background-color: #f44336;
+  color: #fff;
+}
+
+.tarjeta-paso.correcto .numero-cuadro {
+  color: #fff; /* Cambia a blanco cuando la tarjeta es correcta */
+}
+
+.tarjeta-paso.incorrecto .numero-cuadro {
+  color: #fff; /* Cambia a blanco cuando la tarjeta es incorrecta */
+}
+
+.respuestas-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* Tres columnas */
+  gap: 15px;
+  margin-top: 20px;
+  max-width: 800px;
+  
+}
+
+.respuestas-separadas {
+  display: flex;
+  justify-content: center; /* Centra horizontalmente */
+  gap: 20px; /* Espaciado entre los dos elementos */
+  margin-top: 20px; /* Espaciado superior para separación */
+}
+
+.respuesta-item {
+  text-align: center;
+}
+
+.respuesta-select {
+  width: 320px;
+  padding: 8px;
+  font-size: 16px;
+  text-align: center;
+  border-radius: 12px;
+  border: 1px solid #ccc;
+}
+
+.botones-container {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20px;
+  width: 100%;
+  max-width: 400px;
+}
+
+.resultado {
+  margin-top: 20px;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.respuesta-select.correcto {
+  background-color: #4caf50;
+  color: #fff;
+}
+
+.respuesta-select.incorrecto {
+  background-color: #f44336;
+  color: #fff;
+}
+
+
+
+
+

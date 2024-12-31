@@ -29,7 +29,7 @@ const SelectAndValidateMobile = () => {
   const [errorMessage, setErrorMessage] = useState(""); // Estado para manejar el mensaje de error
   const [successMessage, setSuccessMessage] = useState(""); // Estado para el mensaje de éxito
 
-  const options = ["Físicas", "Económicas", "Laborales"]; // Opciones iniciales
+  const options = ["Económicas", "Laborales", "Físicas"]; // Opciones iniciales
 
   const handleSelectChange = (e, selectId, correctAnswer, audio) => {
     const selectedValue = e.target.value;
@@ -86,8 +86,6 @@ const SelectAndValidateMobile = () => {
 
   return (
     <div className="mobile-container">
-      {errorMessage && <div className="error-message-mobile">{errorMessage}</div>}
-      {successMessage && <div className="success-message-mobile">{successMessage}</div>}
       <div className="activity-container-mobile">
         {/* Cuadro 1 */}
         <div
@@ -188,7 +186,8 @@ const SelectAndValidateMobile = () => {
           </select>
         </div>
       </div>
-
+      {errorMessage && <div className="error-message-mobile">{errorMessage}</div>}
+      {successMessage && <div className="success-message-mobile">{successMessage}</div>}
       {/* Mostrar el audio si se ha seleccionado una respuesta correcta */}
       {audioSource && (
         <div className="audio-container-mobile">

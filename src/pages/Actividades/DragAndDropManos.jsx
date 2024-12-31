@@ -1,7 +1,7 @@
 import React, { useState, useRef } from "react";
-import mano1 from "../../assets/img/mano1.png";
-import mano2 from "../../assets/img/mano2.png";
-import mano3 from "../../assets/img/mano3.png";
+import mano1 from "../../assets/img/fisicas_sld5.webp";
+import mano2 from "../../assets/img/economicas_sld5.webp";
+import mano3 from "../../assets/img/laborales_sld5.webp";
 import checkIcon from "../../assets/img/checkAct.png";
 import xmarkIcon from "../../assets/img/xmarkAct.png";
 import audioFisicas from "../../assets/audio/FISICAS-Morelco.mp3";
@@ -188,7 +188,7 @@ const DragAndDropManos = () => {
       <br />
       <div className="activity-container-sld5">
         <div className="image-group-sld5">
-          {draggedItems.img1 && (
+          {draggedItems.img1 && !droppedItems.drop1 && (
             <img
               src={mano1}
               className="draggable-sld5"
@@ -197,7 +197,7 @@ const DragAndDropManos = () => {
               onDragStart={(e) => handleDragStart(e, "img1-sld5")}
             />
           )}
-          {draggedItems.img2 && (
+          {draggedItems.img2 && !droppedItems.drop2 && (
             <img
               src={mano2}
               className="draggable-sld5"
@@ -206,7 +206,7 @@ const DragAndDropManos = () => {
               onDragStart={(e) => handleDragStart(e, "img2-sld5")}
             />
           )}
-          {draggedItems.img3 && (
+          {draggedItems.img3 && !droppedItems.drop3 && (
             <img
               src={mano3}
               className="draggable-sld5"
@@ -216,6 +216,7 @@ const DragAndDropManos = () => {
             />
           )}
         </div>
+
 
         <div className="drop-group-sld5">
         {/* Contenedor 1: Físicas */}

@@ -1,7 +1,7 @@
 /* styles/SelectAndValidateMobile.css */
 .mobile-container {
   padding: 1rem;
-  background-color: #f9f9f9;
+  background-color: #ffffff;
 }
 
 .activity-container-mobile {
@@ -9,6 +9,7 @@
   flex-direction: column;
   gap: 1.5rem;
   align-items: center;
+  background-color: #ffffff;
 }
 
 .select-item {
@@ -16,16 +17,18 @@
   flex-direction: column;
   align-items: center;
   position: relative;
+  width: 260px;  /* Adjust as needed */
+  height: 240px;
 }
 
 .select-image-mobile {
-  width: 100px;
+  width: 150px;
   height: auto;
   margin-bottom: 0.5rem;
 }
 
 .select-box-mobile {
-  width: 150px;
+  width: 240px;
   padding: 0.5rem;
   font-size: 1rem;
   border-radius: 5px;

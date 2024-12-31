@@ -231,7 +231,7 @@ function PreguntasSeleccionHerramientas() {
                                 roundedFull={true}
                                 onClick={handleReset}
                             >
-                                Reiniciar Actividad
+                                Reiniciar
                             </Button>
                         </div>
                     )}
