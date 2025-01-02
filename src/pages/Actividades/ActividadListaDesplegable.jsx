@@ -3,6 +3,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck, faRepeat } from "@fortawesome/free-solid-svg-icons";
 import Button from "../components/Button";
 import imgPeligro from "../../assets/img/avatar-hombre-morado-blanco.webp";
+import imgMetodoArbol from "../../assets/img/metodo_arbol_fallas_sldM3.webp";
+import imgMetodoEspina from "../../assets/img/metodo_espina_pescado_sldm3.webp";
+import imgMetodo5Porques from "../../assets/img/metodo_5_porque_sldM3.webp";
 import correctIcon from "../../assets/img/checkAct.png"
 import incorrectIcon from "../../assets/img/xmarkAct.png"
 import "./styles/ActividadListaDesplegable.css";
@@ -13,7 +16,7 @@ function ActividadListaDesplegable() {
   const [correctCount, setCorrectCount] = useState(0);
   const [items, setItems] = useState([
     {
-      image: imgPeligro,
+      image:  imgMetodo5Porques,
       description:
         `Este método se centra en indagar en las causas raíz de un incidente haciendo repetidamente (5 veces) la pregunta "¿por qué?" hasta llegar a la causa raíz.​`,
       correctAnswer: "1",
@@ -21,7 +24,7 @@ function ActividadListaDesplegable() {
       isCorrect: false,
     },
     {
-      image: imgPeligro,
+      image: imgMetodoArbol ,
       description:
         "Mediante diagramas gráficos tipo árbol, este método visualiza las relaciones causa-efecto en incidentes complejos​",
       correctAnswer: "2",
@@ -29,7 +32,7 @@ function ActividadListaDesplegable() {
       isCorrect: false,
     },
     {
-      image: imgPeligro,
+      image: imgMetodoEspina,
       description:
         "Este diagrama clasifica las causas de un problema en categorías como personas, máquinas, materiales, métodos, medio ambiente y medición​",
       correctAnswer: "3",

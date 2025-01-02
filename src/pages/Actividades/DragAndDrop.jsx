@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./styles/DragAndDrop.css";
 import Paragraph from "../components/Paragraph";
 import { faCheck, faRepeat } from "@fortawesome/free-solid-svg-icons";
-import Button from '../components/Button';
+import Button from "../components/Button";
 
 function DragAndDrop() {
   const [droppedItem1, setDroppedItem1] = useState(null);
@@ -11,8 +11,12 @@ function DragAndDrop() {
     "Riesgos eléctricos",
     "Descargas eléctricas",
   ]);
-  const [validationMessage, setValidationMessage] = useState("");
+  const [dropZoneClasses, setDropZoneClasses] = useState({
+    1: "drop-zone",
+    2: "drop-zone",
+  });
   const [isMobile, setIsMobile] = useState(false);
+  const [validationMessage, setValidationMessage] = useState("");
 
   useEffect(() => {
     const checkIfMobile = () => {
@@ -20,29 +24,37 @@ function DragAndDrop() {
     };
 
     checkIfMobile();
-    window.addEventListener('resize', checkIfMobile);
+    window.addEventListener("resize", checkIfMobile);
 
-    return () => window.removeEventListener('resize', checkIfMobile);
+    return () => window.removeEventListener("resize", checkIfMobile);
   }, []);
 
   const handleDragStart = (e, item) => {
     e.dataTransfer.setData("text/plain", item);
   };
 
-  const handleDrop = (e, setDroppedItem) => {
+  const handleDrop = (e, setDroppedItem, dropZoneKey) => {
     const item = e.dataTransfer.getData("text/plain");
     setDroppedItem(item);
     setAvailableItems((prevItems) => prevItems.filter((i) => i !== item));
+    setDropZoneClasses((prev) => ({
+      ...prev,
+      [dropZoneKey]: "drop-zone filled",
+    }));
   };
 
   const handleDragOver = (e) => {
     e.preventDefault();
   };
 
-  const handleSelectChange = (value, setDroppedItem) => {
+  const handleSelectChange = (value, setDroppedItem, dropZoneKey) => {
     if (value) {
       setDroppedItem(value);
       setAvailableItems((prevItems) => prevItems.filter((i) => i !== value));
+      setDropZoneClasses((prev) => ({
+        ...prev,
+        [dropZoneKey]: "drop-zone filled",
+      }));
     }
   };
 
@@ -54,6 +66,10 @@ function DragAndDrop() {
     setDroppedItem1(null);
     setDroppedItem2(null);
     setAvailableItems(["Riesgos eléctricos", "Descargas eléctricas"]);
+    setDropZoneClasses({
+      1: "drop-zone",
+      2: "drop-zone",
+    });
     setValidationMessage("");
   };
 
@@ -63,13 +79,21 @@ function DragAndDrop() {
       2: "Descargas eléctricas",
     };
 
-    const isCorrect = droppedItem1 === correctAnswers[1] && droppedItem2 === correctAnswers[2];
+    const isCorrect1 = droppedItem1 === correctAnswers[1];
+    const isCorrect2 = droppedItem2 === correctAnswers[2];
 
-    setValidationMessage(
-      isCorrect
-        ? "¡Muy bien! Estás aprendiendo mucho para cuidar tus manos."
-        : "¡Piénsalo bien! Revisa muy bien los conceptos y vuelve a intentarlo."
-    );
+    setDropZoneClasses({
+      1: `drop-zone ${isCorrect1 ? "success" : "error"}`,
+      2: `drop-zone ${isCorrect2 ? "success" : "error"}`,
+    });
+
+    if (isCorrect1 && isCorrect2) {
+      setValidationMessage("¡Muy bien! Todas las respuestas son correctas.");
+    } else {
+      setValidationMessage(
+        "Algunas respuestas son incorrectas. Intenta de nuevo."
+      );
+    }
   };
 
   return (
@@ -91,10 +115,12 @@ function DragAndDrop() {
                     : ""
                 }`}
                 value={droppedItem1 || ""}
-                onChange={(e) => handleSelectChange(e.target.value, setDroppedItem1)}
+                onChange={(e) =>
+                  handleSelectChange(e.target.value, setDroppedItem1, 1)
+                }
                 disabled={!!validationMessage}
               >
-                <option value="">Seleccione una opción...</option>
+                <option value="">Seleccione</option>
                 {getAvailableOptions(droppedItem1).map((item) => (
                   <option key={item} value={item}>
                     {item}
@@ -103,9 +129,9 @@ function DragAndDrop() {
               </select>
             ) : (
               <div
-                className={`drop-zone ${droppedItem1 ? "filled" : ""}`}
+                className={dropZoneClasses[1]}
                 onDragOver={handleDragOver}
-                onDrop={(e) => handleDrop(e, setDroppedItem1)}
+                onDrop={(e) => handleDrop(e, setDroppedItem1, 1)}
               >
                 {droppedItem1 || "Arrastre aquí"}
               </div>
@@ -120,18 +146,20 @@ function DragAndDrop() {
             </Paragraph>
             {isMobile ? (
               <select
-                className={`mobile-select ${
-                  validationMessage
-                    ? droppedItem2 === "Descargas eléctricas"
-                      ? "correct"
-                      : "incorrect"
-                    : ""
-                }`}
+              className={`mobile-select ${
+                validationMessage
+                  ? droppedItem2 === "Descargas eléctricas"
+                    ? "correct"
+                    : "incorrect"
+                  : ""
+              }`}
                 value={droppedItem2 || ""}
-                onChange={(e) => handleSelectChange(e.target.value, setDroppedItem2)}
+                onChange={(e) =>
+                  handleSelectChange(e.target.value, setDroppedItem2, 2)
+                }
                 disabled={!!validationMessage}
               >
-                <option value="">Seleccione una opción...</option>
+                <option value="">Seleccione</option>
                 {getAvailableOptions(droppedItem2).map((item) => (
                   <option key={item} value={item}>
                     {item}
@@ -140,9 +168,9 @@ function DragAndDrop() {
               </select>
             ) : (
               <div
-                className={`drop-zone ${droppedItem2 ? "filled" : ""}`}
+                className={dropZoneClasses[2]}
                 onDragOver={handleDragOver}
-                onDrop={(e) => handleDrop(e, setDroppedItem2)}
+                onDrop={(e) => handleDrop(e, setDroppedItem2, 2)}
               >
                 {droppedItem2 || "Arrastre aquí"}
               </div>
@@ -167,12 +195,14 @@ function DragAndDrop() {
       </div>
 
       {validationMessage && (
-          <div className="feedback-container">
-            <p className={`validation-message ${validationMessage.includes("¡Muy bien!") ? "success" : "error"}`}>
-              {validationMessage}
-            </p>
-          </div>
-        )}
+        <div className="feedback-container">
+          <p
+            className={`validation-message ${validationMessage.includes("¡Muy bien!") ? "success" : "error"}`}
+          >
+            {validationMessage}
+          </p>
+        </div>
+      )}
 
       <div className="action-container">
         <div className="action-buttons">
@@ -190,16 +220,13 @@ function DragAndDrop() {
             icon={faRepeat}
             roundedFull={true}
             onClick={handleReset}
-            disabled={!droppedItem1 && !droppedItem2 && !validationMessage}
           >
             Reiniciar
           </Button>
         </div>
-        
       </div>
     </div>
   );
 }
 
 export default DragAndDrop;
-

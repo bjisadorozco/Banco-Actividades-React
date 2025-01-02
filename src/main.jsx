@@ -20,6 +20,6 @@ import "./main.css";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <ActividadListaDesplegable />
+    <DragAndDrop />
   </React.StrictMode>
 );
