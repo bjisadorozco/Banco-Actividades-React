@@ -120,7 +120,7 @@ function DragAndDrop() {
                 }
                 disabled={!!validationMessage}
               >
-                <option value="">Seleccione</option>
+                <option value="">Seleccione...</option>
                 {getAvailableOptions(droppedItem1).map((item) => (
                   <option key={item} value={item}>
                     {item}
@@ -159,7 +159,7 @@ function DragAndDrop() {
                 }
                 disabled={!!validationMessage}
               >
-                <option value="">Seleccione</option>
+                <option value="">Seleccione...</option>
                 {getAvailableOptions(droppedItem2).map((item) => (
                   <option key={item} value={item}>
                     {item}

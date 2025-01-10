@@ -93,7 +93,7 @@
 }
 
 .audio-container audio {
-  height: 40px;
+  height: 30px;
 }
 
 .form-select {
@@ -251,7 +251,7 @@
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 632px) {
   .main-container {
     padding: 0.5rem;
   }

@@ -173,7 +173,7 @@ function PreguntasVorF() {
                         Verdadero
                       </button>
                       <button
-                        className="flex justify-center items-center group bg-main-color rounded-full px-4 py-2 shadow-main-color text-white"
+                        className="flex justify-center items-center group bg-main-color rounded-full px-4 py-2 shadow-main-color text-white m-0"
                         onClick={() => handleAnswer(false)}
                         disabled={answerSelected !== null}
                       >

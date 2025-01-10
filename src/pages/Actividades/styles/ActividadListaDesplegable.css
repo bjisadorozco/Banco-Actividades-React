@@ -1,6 +1,6 @@
 .quiz-container {
   width: 100%;
-  max-width: 1200px;
+  /* max-width: 1200px; */
   margin: 0 auto;
   padding: 2rem;
   display: flex;
@@ -235,7 +235,7 @@
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 632px) {
   .quiz-container {
     padding: 1rem;
   }

@@ -132,7 +132,7 @@ export default function PreguntasTiposRiesgo() {
                 <div className="audio-container mb-3">
                   <audio
                     controls
-                    className="w-100"
+                    // className="w-100"
                     ref={(el) => (audioRefs.current[0] = el)}
                     onPlay={() => handleAudioPlay(0)}
                   >
@@ -177,7 +177,7 @@ export default function PreguntasTiposRiesgo() {
                 <div className="audio-container mb-3">
                   <audio
                     controls
-                    className="w-100"
+                    // className="w-100"
                     ref={(el) => (audioRefs.current[1] = el)}
                     onPlay={() => handleAudioPlay(1)}
                   >
@@ -222,7 +222,7 @@ export default function PreguntasTiposRiesgo() {
                 <div className="audio-container mb-3">
                   <audio
                     controls
-                    className="w-100"
+                    // className="w-100"
                     ref={(el) => (audioRefs.current[2] = el)}
                     onPlay={() => handleAudioPlay(2)}
                   >

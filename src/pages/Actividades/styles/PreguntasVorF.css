@@ -94,10 +94,14 @@ button:disabled {
   }
 }
 
-@media (max-width: 640px) {
+@media (max-width: 632px) {
   .check {
     flex-direction: column;
     gap: 1rem;
+  }
+
+  button {
+    margin-left: 0 !important;
   }
   
   .check button {
