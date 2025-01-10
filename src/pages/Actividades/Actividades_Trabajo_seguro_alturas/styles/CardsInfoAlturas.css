@@ -1,6 +1,6 @@
 .quiz-container-ee {
-    width: 100%;
-    min-height: 100vh;
+    width: 100vw;
+    min-height: 20vh;
     display: flex;
     flex-direction: column;
   }
@@ -32,7 +32,7 @@
   
   .quiz-card-ee {
     perspective: 1500px;
-    height: 370px; /* Ajustado para mantener la proporción */
+    height: 320px; /* Ajustado para mantener la proporción */
     cursor: pointer;
     min-width: 235px; /* Asegura un ancho mínimo para la legibilidad */
   }

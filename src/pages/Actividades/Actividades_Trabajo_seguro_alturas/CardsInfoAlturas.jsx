@@ -76,7 +76,7 @@ function CardsInfoAlturas() {
   ];
 
   return (
-    <div className="quiz-container-ee mb-36 md:mb-0 overflow-auto">
+    <div className="quiz-container-ee">
       
 
       <div className="cards-container-ee">

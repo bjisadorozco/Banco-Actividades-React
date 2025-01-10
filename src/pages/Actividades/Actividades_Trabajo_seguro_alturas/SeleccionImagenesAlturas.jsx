@@ -26,15 +26,15 @@ function SeleccionImagenesAlturas() {
   const [explanation, setExplanation] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const isMobile = useMediaQuery({ maxWidth: 640 });
-  const correctImages = [martillo, cintaMetrica, destornillador];
+  const correctImages = [martillo, cintaMetrica, destornillador,taladro];
 
   const explanationsMap = {
-    [martillo]: 'Muy bien! Este tipo de herramienta SOLO usa energía manual, y hace parte de las HERRAMIENTAS DE GOLPEO.',
-    [cintaMetrica]: 'Este tipo de herramienta SOLO usa energía manual, y hace parte de las HERRAMIENTAS DE MEDICIÓN.',
-    [destornillador]: 'Este tipo de herramienta SOLO usa energía manual, y hace parte de las HERRAMIENTAS DE SUJECIÓN.',
-    [taladro]: 'Piénsalo bien! Este tipo de herramienta NO es manual ya que usa energía eléctrica, y hace parte de las HERRAMIENTAS DE PERFORACIÓN.',
-    [sierraElectrica]: 'Revisa bien! Este tipo de herramienta NO es manual ya que usa energía eléctrica para su funcionamiento, hace parte de las HERRAMIENTAS DE CORTE.',
-    [mezcladoraCemento]: 'Revisa bien! Este tipo de herramienta NO es manual, ya que cuenta con otros mecanismos además de la fuerza humana para su operación.',
+    [martillo]: 'TRABAJOS DE MONTAJES DE ESTRUCTURAS:   Bien!  Estos normalmente se hacen a más de 2 mts de altura.',
+    [cintaMetrica]: 'TRABAJOS EN TECHOS Y CUBIERTAS:   Bien!  Estos siempre se hacen a más de 2 mts de altura',
+    [destornillador]: 'TRABAJOS EN PAREDES Y FACHADAS:   Bien !  Estos normalmente se hacen a más de 2 mts de altura',
+    [taladro]: 'TRABAJOS EN ANDAMIOS:   Bien !  Estos normalmente permiten acceder a alturas superiores a 2 mts',
+    [sierraElectrica]: 'INSTALACION ELECTRICA DE PISO:   Piénsalo bien!  Este tipo de tareas normalmente NO se hacen a más de 2 metros de altura.',
+    [mezcladoraCemento]: 'INSTALACION DE PISOS:   Piénsalo bien!  Este tipo de tareas normalmente NO se hacen a más de 2 metros de altura.',
   };
 
   const actSelectImg = (image) => {
@@ -75,12 +75,12 @@ function SeleccionImagenesAlturas() {
 
   return (
     <>
-      <div className="flex flex-col md:flex-row mb-36 md:mb-0">
+      <div className="flex flex-col justify-center">
        
 
         {/* Columna derecha */}
-        <div className="flex flex-col md:flex-row overflow-x-hidden mb-36 md:mb-0">
-            <div className="md:flex-2 bg-white md:w-full w-full px-2 md:pl-20 flex justify-center items-center pb-2">
+        <div className="flex flex-col md:flex-row ">
+            <div className="md:flex-2  md:w-full w-full px-2 flex justify-center items-center pb-2">
                 <div className="w-full flex flex-col justify-center items-center">
 
             {/* Image Container */}
@@ -108,8 +108,8 @@ function SeleccionImagenesAlturas() {
                 {explanation && (
                   <Paragraph>
                   <div
-                    style={{ fontSize: '16px', textAlign: 'left', marginBottom: '10px' }}
-                    className={`p-2 md:w-[95%] w-[100%] text-white ${explanation.isCorrect ? 'bg-[#4CAF50]' : 'bg-[#F44336]'} rounded`}
+                    style={{ fontSize: '16px', textAlign: 'center', marginBottom: '10px' }}
+                    className={`p-2 md:w-[100%] w-[100%] text-white ${explanation.isCorrect ? 'bg-[#4CAF50]' : 'bg-[#F44336]'} rounded`}
                   >
                     {explanationsMap[explanation.image]}
                   </div>
@@ -121,7 +121,7 @@ function SeleccionImagenesAlturas() {
                     onClick={resetActivity}
                     roundedFull={true}
                     icon={faRepeat}
-                    className="flex justify-center items-center group bg-main-color rounded-full px-4 py-2 shadow-main-color text-white"
+                 
                   >
                     Reiniciar
                   </Button>
@@ -139,7 +139,7 @@ function SeleccionImagenesAlturas() {
         handleClose={handleCloseModal}
         title="Resultados"
       >
-        <Paragraph theme="light" className='text-center font-bold'>Has seleccionado las 4 imágenes permitidas</Paragraph>
+        <Paragraph theme="light" className='text-center font-bold'>Has seleccionado 4 imagenes correctas</Paragraph>
         <h2 className='text-center text-secondary-color font-bold mt-1 mb-1'>Imágenes seleccionadas:</h2>
         <div className="flex flex-wrap justify-center">
           {selectedImages.map((imgSrc, index) => (

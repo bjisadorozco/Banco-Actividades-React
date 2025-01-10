@@ -56,9 +56,9 @@ function Pregunta2alturas() {
 
     
         return (
-            <div className="flex flex-col md:flex-row overflow-x-hidden mb-36 md:mb-0">
+            <div className="flex flex-col ">
                 <div className="flex flex-col md:flex-row w-full">
-                    <div className="md:flex-2 bg-white md:w-2/3 w-full px-2 md:pr-20 flex justify-center items-center pb-2">
+                    <div className="md:flex-2 md:w-2/3 w-full px-2  flex justify-center items-center pb-2">
                         <div className="w-full flex flex-col justify-center items-center">
                             <div className="preguntas_01">
                                 <div className="ctItem-7">
@@ -115,7 +115,7 @@ function Pregunta2alturas() {
                                 </div>
                             </div>
                             {showFeedback && (
-                        <div className="feedback-container ctItem mt-4">
+                        <div className="feedback-container ctItem ">
                             <Paragraph theme="light" justify="justify">
                                 <strong
                                     style={{
