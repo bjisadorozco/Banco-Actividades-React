@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import mano1 from "../../../assets/img/mano1.png";
-import mano2 from "../../../assets/img/mano2.png";
-import mano3 from "../../../assets/img/mano3.png";
+import mano1 from "../../../assets/img/fisicas_sld5.webp";
+import mano2 from "../../../assets/img/economicas_sld5.webp";
+import mano3 from "../../../assets/img/laborales_sld5.webp";
 import checkIcon from "../../../assets/img/checkAct.png";
 import xmarkIcon from "../../../assets/img/xmarkAct.png";
 import audioFisicas from "../../../assets/audio/FISICAS-Morelco.mp3"; // Ruta del audio Físicas

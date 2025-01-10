@@ -32,11 +32,11 @@ function PreguntasRiesgosMecanicos() {
 
     const questions = [
         {
-            question: "¿Qué es lo primero que debe hacer la organización una vez que se han identificado los peligros en el lugar de trabajo?",
+            question: "¿Qué tipo de riesgo mecánico puede causar cortes profundos o amputación en las manos al usar una sierra circular?",
             options: [
-                { text: "Aplastamientos.", correct: true },
+                { text: "Aplastamientos.", correct: false },
                 { text: "Golpes.", correct: false },
-                { text: "Cortes.", correct: false }
+                { text: "Cortes.", correct: true }
             ],
             correctFeedback: "¡Muy bien ! Estas aprendiendo mucho para cuidar tus manos.",
             incorrectFeedback: "¡Inténtalo de nuevo! La opción seleccionada no es la correcta."

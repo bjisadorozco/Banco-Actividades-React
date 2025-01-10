@@ -24,6 +24,6 @@ import "./main.css";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <DragAndDrop />
+    <DragAndDropAlturas1 />
   </React.StrictMode>
 );

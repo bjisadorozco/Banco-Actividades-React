@@ -12,7 +12,11 @@
         width: 100%;
     }
 }
-
+.flex {
+    display: flex
+;
+    justify-content: center;
+}
 
 .ctActivityDragDrop > div:nth-child(1) {
     display: grid;

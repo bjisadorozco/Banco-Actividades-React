@@ -10,6 +10,7 @@
   gap: 20px;
   width: 100%;
   max-width: 800px;
+  background: #ffffff;
 }
 
 .numero-cuadro {
@@ -83,13 +84,15 @@
 }
 
 .respuesta-select {
-  width: 320px;
+  width: 100%; /* Asegura que el select ocupe todo el ancho del contenedor */
   padding: 8px;
   font-size: 16px;
   text-align: center;
   border-radius: 12px;
   border: 1px solid #ccc;
+  box-sizing: border-box; /* Incluye el padding y el borde en el ancho total */
 }
+
 
 .botones-container {
   display: flex;

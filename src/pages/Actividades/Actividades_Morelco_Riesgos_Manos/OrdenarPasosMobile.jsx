@@ -18,7 +18,8 @@ const OrdenarPasos = () => {
   const [habilitarValidar, setHabilitarValidar] = useState(false);
   const [mostrarResultado, setMostrarResultado] = useState(false);
 
-  const numerosDesordenados = [5, 4, 3, 2, 1].sort(() => Math.random() - 0.5);
+  const opciones = ["Paso 1", "Paso 2", "Paso 3", "Paso 4", "Paso 5"];
+  const numerosDesordenados = opciones.sort(() => Math.random() - 0.5);
 
   const handleSelectChange = (e, index) => {
     const newRespuestas = [...respuestas];
@@ -30,7 +31,7 @@ const OrdenarPasos = () => {
 
   const validarRespuestas = () => {
     const nuevosColores = respuestas.map((respuesta, index) =>
-      parseInt(respuesta) === index + 1 ? "correcto" : "incorrecto"
+      respuesta === `Paso ${index + 1}` ? "correcto" : "incorrecto"
     );
     setColores(nuevosColores);
 
@@ -50,9 +51,8 @@ const OrdenarPasos = () => {
   const opcionesDisponibles = (index) => {
     const seleccionadas = respuestas.filter((r) => r !== "");
     return numerosDesordenados.filter(
-      (numero) =>
-        !seleccionadas.includes(numero.toString()) ||
-        respuestas[index] === numero.toString()
+      (opcion) =>
+        !seleccionadas.includes(opcion) || respuestas[index] === opcion
     );
   };
 
@@ -69,9 +69,9 @@ const OrdenarPasos = () => {
               className={`respuesta-select ${colores[index]}`}
             >
               <option value="">Seleccione...</option>
-              {opcionesDisponibles(index).map((numero) => (
-                <option key={numero} value={numero}>
-                  {numero}
+              {opcionesDisponibles(index).map((opcion) => (
+                <option key={opcion} value={opcion}>
+                  {opcion}
                 </option>
               ))}
             </select>
@@ -79,7 +79,6 @@ const OrdenarPasos = () => {
         ))}
       </div>
 
-      {/* Mensaje de resultado, visible solo después de validar */}
       {mostrarResultado && (
         <div className="contador-correctas">
           <p className="text-md mt-0 font-bold text-center resultado-mensaje">

@@ -83,7 +83,7 @@
   position: relative;
 }
 
-.audio-container {
+.audio-container1 {
   background: #f8f9fa;
   padding: 8px;
   border-radius: 10px;
@@ -92,7 +92,7 @@
   transition: all 0.2s ease;
 }
 
-.audio-container audio {
+.audio-container1 audio {
   height: 40px;
 }
 

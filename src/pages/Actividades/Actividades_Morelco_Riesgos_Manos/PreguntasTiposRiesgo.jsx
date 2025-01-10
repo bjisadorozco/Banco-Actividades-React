@@ -129,7 +129,7 @@ export default function PreguntasTiposRiesgo() {
           <div className="col-md-6 mb-4">
             <div className="preguntas_01">
               <div className={getContainerClassName("select1")}>
-                <div className="audio-container mb-3">
+                <div className="audio-container1 mb-3">
                   <audio
                     controls
                     className="w-100"
@@ -174,7 +174,7 @@ export default function PreguntasTiposRiesgo() {
           <div className="col-md-6 mb-4">
             <div className="preguntas_01">
               <div className={getContainerClassName("select2")}>
-                <div className="audio-container mb-3">
+                <div className="audio-container1 mb-3">
                   <audio
                     controls
                     className="w-100"
@@ -219,7 +219,7 @@ export default function PreguntasTiposRiesgo() {
           <div className="bottom-question">
             <div className="preguntas_01">
               <div className={getContainerClassName("select3")}>
-                <div className="audio-container mb-3">
+                <div className="audio-container1 mb-3">
                   <audio
                     controls
                     className="w-100"
