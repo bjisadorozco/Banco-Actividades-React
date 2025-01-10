@@ -1,0 +1,144 @@
+.quiz-container-ee {
+    width: 100vw;
+    min-height: 20vh;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .quiz-header-ee {
+    background-color: #0f172a;
+    padding: 2.5rem 1.5rem;
+    text-align: center;
+  }
+  
+  .quiz-subtitle-ee {
+    color: white;
+    margin: 0 auto;
+    line-height: 1.6;
+    margin-top: 0.50rem;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .cards-container-ee {
+    display: grid;
+    /* Cambiado para mostrar siempre 5 columnas en desktop */
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1rem; /* Reducido el gap para que las cards quepan mejor */
+    max-width: 100%; /* Aumentado para usar más espacio disponible */
+    margin: 1rem auto;
+    padding: 0 1rem;
+  }
+  
+  .quiz-card-ee {
+    perspective: 1500px;
+    height: 320px; /* Ajustado para mantener la proporción */
+    cursor: pointer;
+    min-width: 235px; /* Asegura un ancho mínimo para la legibilidad */
+  }
+  
+  .card-inner-ee {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    transition: transform 0.8s;
+  }
+  
+  .quiz-card-ee:hover .card-inner-ee {
+    transform: rotateY(180deg);
+  }
+  
+  .card-front-ee,
+  .card-back-ee {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 1rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  }
+  
+  .card-front-ee {
+    background-color: white;
+    border: 1px solid #e5e7eb;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .card-back-ee {
+    background-color: #0f172a;
+    transform: rotateY(180deg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem; /* Reducido el padding */
+    color: white;
+    text-align: center;
+  }
+  
+  .card-image-ee {
+    height: 65%; /* Ajustado para mejor proporción */
+    background-position: center;
+    background-size: cover;
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
+  }
+  
+  .card-content-ee {
+    padding: 1rem; /* Reducido el padding */
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .card-title-ee {
+    font-family: montserrat;
+    font-size: 1rem; /* Reducido ligeramente */
+    font-weight: 600;
+    color: #0f172a;
+    text-align: center;
+  }
+  
+  .result-message-ee {
+    font-size: 0.9rem; /* Reducido ligeramente */
+    line-height: 1.5;
+  }
+  .text-parag {
+    color: #FBFBFB; /* o el color que desees */
+  }
+  
+  /* Breakpoints ajustados */
+  @media (max-width: 1400px) {
+    .cards-container-ee {
+      grid-template-columns: repeat(5, 1fr);
+      max-width: 95%;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .cards-container-ee {
+      grid-template-columns: repeat(2, 1fr);
+      max-width: 90%;
+    }
+  }
+  
+  @media (max-width: 640px) {
+    .cards-container-ee {
+      grid-template-columns: 1fr;
+      /* padding: 1rem; */
+      padding-left: 0;
+      padding-right: 0;
+      width: 80%;
+    }
+    
+    .quiz-card-ee {
+      height: 350px;
+    }
+    
+    .quiz-header-ee {
+      padding: 2rem 1rem;
+    }
+  }

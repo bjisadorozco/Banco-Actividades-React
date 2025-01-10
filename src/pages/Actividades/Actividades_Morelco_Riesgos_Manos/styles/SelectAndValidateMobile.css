@@ -1,0 +1,110 @@
+/* styles/SelectAndValidateMobile.css */
+.mobile-container {
+  padding: 1rem;
+  background-color: #ffffff;
+}
+
+.activity-container-mobile {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  align-items: center;
+  background-color: #ffffff;
+}
+
+.select-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  width: 260px;  /* Adjust as needed */
+  height: 240px;
+}
+
+.select-image-mobile {
+  width: 150px;
+  height: auto;
+  margin-bottom: 0.5rem;
+}
+
+.select-box-mobile {
+  width: 240px;
+  padding: 0.5rem;
+  font-size: 1rem;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.status-icon-mobile {
+  position: absolute;
+  top: 40px;
+  width: 50px;
+  height: 50px;
+}
+
+.correct .select-box-mobile {
+  border-color: #4caf50;
+  background-color: #e8f5e9;
+}
+
+.incorrect .select-box-mobile {
+  border-color: #f44336;
+  background-color: #ffebee;
+}
+
+.error-message-mobile,
+.success-message-mobile {
+  font-size: 1rem;
+  text-align: center;
+  margin: 0.5rem 0;
+  padding: 0.5rem;
+  border-radius: 5px;
+  width: 100%;
+}
+
+.error-message-mobile {
+  color: #f44336;
+}
+
+.success-message-mobile {
+  color: #4caf50;
+}
+
+.flex-container-mobile {
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+.btn-mobile {
+  background-color: #007bff;
+  color: white;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.btn-mobile:hover {
+  background-color: #0056b3;
+}
+
+.audio-container-mobile {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+
+}
+
+.audio-container-mobile audio {
+  width: 100%;
+  max-width: 300px;
+}
+
+

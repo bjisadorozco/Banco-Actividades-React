@@ -1,0 +1,153 @@
+/* Contenedor principal */
+.ordenar-pasos-container {
+  width: 100%; /* Asegura que ocupe el 100% del ancho disponible */
+  max-width: 800px; /* Mantiene un máximo de 800px */
+  margin: 0 auto;
+  padding: 20px;
+  background: #fcfcfc;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Título */
+.titulo {
+  text-align: center;
+  font-size: 1.2rem; /* Aumento el tamaño para mejorar la legibilidad */
+  margin-bottom: 20px;
+  color: #333;
+}
+
+/* Contenedor de pasos */
+.contenedor-pasos {
+  display: flex;
+  flex-direction: column;
+  gap: 12px; /* Aumento el espacio entre los pasos */
+}
+
+/* Tarjeta de paso */
+.tarjeta-paso1 {
+  position: relative;
+  background: #0f172a;
+  color: #ffffff;
+  padding: 14px; /* Aumento el padding para que el contenido no se vea apretado */
+  border-radius: 5px;
+  cursor: grab;
+  transition: background 0.3s ease;
+  border: 1px solid #ddd;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Estado correcto e incorrecto */
+.tarjeta-paso1.correcto {
+  background: #4caf50;
+  color: white;
+  border-color: #4caf50;
+}
+
+.tarjeta-paso1.incorrecto {
+  background: #f44336;
+  color: white;
+  border-color: #f44336;
+  justify-content: center;
+  gap: 10px;
+}
+
+/* Contenedor de botones */
+.botones-container {
+  display: flex;
+  justify-content: center;
+  gap: 12px; /* Aumento el espacio entre los botones */
+  margin-top: 20px;
+}
+
+/* Botón de validar */
+.btn-validar,
+.btn-reiniciar {
+  padding: 12px 24px; /* Aumento el padding para botones más grandes */
+  font-size: 1.2rem; /* Aumento el tamaño de la fuente de los botones */
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  color: white;
+}
+
+.btn-validar {
+  background: #7c3aed;
+}
+
+.btn-validar:hover {
+  background: #6d28d9;
+}
+
+.btn-reiniciar {
+  background: #f44336;
+}
+
+.btn-reiniciar:hover {
+  background: #d32f2f;
+}
+
+/* Resultado */
+.resultado {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 1.2rem; /* Aumento el tamaño de la fuente del resultado */
+  font-weight: bold;
+}
+
+.resultado.correcto {
+  color: #4caf50;
+}
+
+.resultado.incorrecto {
+  color: #f44336;
+}
+
+.feedback-container {
+  background-color: #f4f4f4;
+  border-radius: 8px;
+  padding: 16px; /* Aumento el padding para el contenedor de feedback */
+  margin-top: 20px;
+}
+
+.feedback-message {
+  padding: 12px; /* Aumento el padding para el mensaje de feedback */
+  margin-top: 12px;
+  border-radius: 4px;
+}
+
+.contador-texto {
+  color: #8f8f8f;
+}
+
+/* Ícono de resultado */
+.icono-resultado {
+  width: 24px; /* Aumento el tamaño del ícono */
+  height: 24px;
+  margin: 0;
+}
+
+.feedback-tarjeta {
+  position: absolute;
+  top: -12px;
+  right: -24px;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.texto-resultado {
+  text-align: center;
+  font-size: 1rem; /* Aumento el tamaño de la fuente del texto del resultado */
+  font-weight: bold;
+}
+
+.contenido-tarjeta {
+  flex: 1;
+  text-align: left;
+}

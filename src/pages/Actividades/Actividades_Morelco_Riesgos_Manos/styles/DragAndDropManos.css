@@ -1,0 +1,233 @@
+/* Contenedor principal */
+.activity-container-sld5 {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  gap: 2rem;
+}
+
+/* Grupo de imágenes */
+.image-group-sld5 {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  
+}
+
+.draggable-sld5 {
+  width: 90px;
+  height: 90px;
+  cursor: grab;
+  border: 2px solid #6e3cd2; /* Borde morado */
+  padding: 0; /* Elimina padding */
+  box-sizing: border-box; /* Asegura que el borde no aumente el tamaño total */
+  object-fit: contain; /* Hace que la imagen se ajuste al contenedor */
+  display: block; /* Evita el espacio extra por inline */
+  margin-bottom: 0%
+}
+
+
+/* Grupo de dropboxes */
+.drop-group-sld5 {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem; /* Espaciado entre los contenedores */
+}
+
+.drop-item-sld5 {
+  display: flex;
+  flex-direction: row; /* Alineación vertical */
+  align-items: center; /* Centrar los elementos horizontalmente */
+  border: none;
+  border-radius: 8px;
+  height: 90px; /* Aumentar la altura según sea necesario */
+}
+
+.dropbox-sld5 {
+  width: 90px;
+  height: 90px;
+  background-color: #f9f9f9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px dashed #aaa;
+}
+.dropbox-sld5 img {
+  max-width: 100%; /* Ajusta la imagen al tamaño del contenedor */
+  max-height: 100%; /* Ajusta la imagen al tamaño del contenedor */
+  object-fit: contain; /* Mantiene la proporción de la imagen */
+  margin-bottom: 0px;
+}
+
+/* Botones de opción */
+.button-group-sld5 {
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  gap: 6rem;
+  justify-content: center;
+}
+.option-sld5 {
+  padding: 8px 16px;
+  border: none;
+  background-color: #c0185d; /* Color estático de fondo */
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 150px; /* Ajusta el ancho que desees */
+  height: 90px; /* Ajusta la altura que desees */
+  text-align: center; /* Centra el texto dentro del botón */
+  transition: none; /* Elimina cualquier transición */
+}
+
+/* Quitar cualquier efecto hover */
+.option-sld5:hover {
+  background-color: #c0185d; /* Mantiene el color original al pasar el mouse */
+  cursor: pointer; /* Mantiene el cursor como pointer */
+  filter: none;
+}
+
+
+
+/* Estilo para los botones correctos */
+.option-sld5.correct {
+  background-color: #4CAF50; /* Verde */
+  border-color: #4CAF50;
+  color: white;
+}
+
+/* Estilo para los botones incorrectos */
+.option-sld5.incorrect {
+  background-color: #F44336; /* Rojo */
+  border-color: #F44336;
+  color: white;
+}
+
+.option-sld5:disabled {
+  cursor: not-allowed;
+}
+
+
+
+/* Botones de validar y reiniciar */
+.flex-container {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.btn {
+  width: 150px;
+  height: 50px;
+  background-color: #7c3aed; /* Morado */
+  color: white;
+  font-size: 1rem;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.btn:hover {
+  background: #6d28d9 !important;
+}
+
+.btn i {
+  margin-right: 8px;
+}
+
+/* Nuevo estilo para el botón + Info */
+.info-button {
+  background-color: #4CAF50; /* Verde */
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  margin-top: 5px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.info-button:hover {
+  background-color: #45a049;
+}
+
+/* Estilo para el mensaje de error */
+.error-message {
+  color: #F44336;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+/* Estilo para el mensaje de error */
+.success-message {
+  color: #4CAF50;
+  font-weight: bold;
+  margin-top: 10px;
+}
+.dropped-image {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+}
+
+.error-message-sld5 {
+  color: #F44336;
+  font-size: 16px;
+  text-align: center;
+  margin-top: 10px;
+}
+
+.success-message-sld5 {
+  color: #45a049;
+  font-size: 16px;
+  text-align: center;
+  margin-top: 10px;
+}
+
+/* Grupo de audios */
+.audio-group-sld5 {
+  display: flex;
+  flex-direction: column;
+  gap: 6rem;
+  align-items: center; /* Asegura que los audios estén centrados en la columna o flex-start*/
+  justify-content: center;
+}
+
+/*audio container s1d5*/
+
+.audio-container-sld5 {
+  display: flex;
+  justify-content: center; /* Centra los íconos horizontalmente */
+  align-items: center;     /* Centra los íconos verticalmente */
+  gap: 10px;               /* Agrega un espacio entre los elementos, puedes ajustar este valor */
+}
+
+.status-icon-sld5 {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+}
+
+.status-icon-sld51 {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+}
+
+.status-icon-sld52 {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+}
+.correct {
+  background-color: #4CAF50; /* Verde */
+}
+
+.incorrect {
+  background-color: #F44336; /* Rojo */
+}
+
+.drop-item-sld5 {
+  transition: background-color 0.3s ease; /* Agrega transición para un cambio suave */
+}
