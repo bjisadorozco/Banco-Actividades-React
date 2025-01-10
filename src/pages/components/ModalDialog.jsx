@@ -16,10 +16,14 @@ const ModalDialog = ({ open, handleClose, title, children }) => {
           top: '50%',
           left: '50%',
           transform: 'translate(-50%, -50%)',
-          width: 400,
+          width: {
+            xs: 350,  // Ancho cuando el max-width es 600px o menos (pantallas pequeñas)
+            sm: 400   // Ancho estándar (pantallas más grandes)
+          },
           bgcolor: 'background.paper',
           boxShadow: 24,
           borderRadius: 2,
+          fontFamily: "'Montserrat', sans-serif",
         }}
       >
         <Box

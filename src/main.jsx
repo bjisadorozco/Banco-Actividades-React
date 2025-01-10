@@ -14,11 +14,15 @@ import Pregunta1alturas from "./pages/Actividades/Actividades_Trabajo_seguro_alt
 import Pregunta2alturas from "./pages/Actividades/Actividades_Trabajo_seguro_alturas/Pregunta2alturas.jsx";
 import SeleccionImagenesAlturas from "./pages/Actividades/Actividades_Trabajo_seguro_alturas/SeleccionImagenesAlturas.jsx";
 import DragAndDropAlturas1 from "./pages/Actividades/Actividades_Trabajo_seguro_alturas/DragAndDropAlturas1.jsx";
+import DragAndDropAlturas1Movil from "./pages/Actividades/Actividades_Trabajo_seguro_alturas/DragAndDropAlturas1Movil.jsx";
 import CardsInfoAlturas from "./pages/Actividades/Actividades_Trabajo_seguro_alturas/CardsInfoAlturas.jsx";
+import PreguntasAlturas1 from "./pages/Actividades/Actividades_Trabajo_seguro_alturas/PreguntasAlturas1.jsx";
+import DragAndDropAlturas2 from "./pages/Actividades/Actividades_Trabajo_seguro_alturas/DragAndDropAlturas2.jsx";
+import DragAndDropAlturas2Movil from "./pages/Actividades/Actividades_Trabajo_seguro_alturas/DragAndDropAlturas2Movil.jsx";
 import "./main.css";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <CardsInfoAlturas />
+    <PreguntasAlturas1 />
   </React.StrictMode>
 );
