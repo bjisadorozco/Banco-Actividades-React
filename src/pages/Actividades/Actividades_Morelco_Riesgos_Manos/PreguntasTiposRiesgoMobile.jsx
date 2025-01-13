@@ -6,7 +6,7 @@ import { faCheck, faRepeat } from "@fortawesome/free-solid-svg-icons";
 import Button from "../../components/Button";
 import correctIcon from "../../../assets/img/checkAct.png";
 import incorrectIcon from "../../../assets/img/xmarkAct.png";
-import "./styles/PreguntasTiposRiesgo.css";
+import "./styles/PreguntasTiposRiesgoMobile.css";
 
 const OPTIONS = [
   { value: "Uso repetitivo", label: "Uso repetitivo" },
@@ -111,25 +111,25 @@ export default function PreguntasTiposRiesgo() {
   };
 
   const getContainerClassName = (selectId) => {
-    if (Object.keys(validationStatus).length === 0) return "ctItem1";
-    return `ctItem1 ${
+    if (Object.keys(validationStatus).length === 0) return "ctItem2";
+    return `ctItem2 ${
       validationStatus[selectId] ? "correct-container" : "incorrect-container"
     }`;
   };
 
   const getSelectClassName = (selectId) => {
-    if (Object.keys(validationStatus).length === 0) return "form-select1";
-    return `form-select1 ${validationStatus[selectId] ? "correct" : "incorrect"}`;
+    if (Object.keys(validationStatus).length === 0) return "form-select2";
+    return `form-select2 ${validationStatus[selectId] ? "correct" : "incorrect"}`;
   };
 
   return (
-    <div className="main-container1">
-      <div className="activity-container1">
-        <div className="questions-grid1">
+    <div className="main-container">
+      <div className="activity-container2">
+        <div className="questions-grid2 ">
           <div className="col-md-6">
             <div className="preguntas_01">
               <div className={getContainerClassName("select1")}>
-                <div className="audio-container1 mb-0">
+                <div className="audio-container2 mb-0">
                   <audio
                     controls
                     // className="w-100"
@@ -174,7 +174,7 @@ export default function PreguntasTiposRiesgo() {
           <div className="col-md-6">
             <div className="preguntas_01">
               <div className={getContainerClassName("select2")}>
-                <div className="audio-container1 mb-0">
+                <div className="audio-container2 mb-0">
                   <audio
                     controls
                     // className="w-100"
@@ -216,10 +216,10 @@ export default function PreguntasTiposRiesgo() {
             </div>
           </div>
 
-          <div className="bottom-question">
-            <div className="preguntas_01">
+          <div className="col-md-6">
+          <div className="preguntas_01">
               <div className={getContainerClassName("select3")}>
-                <div className="audio-container1 mb-0">
+                <div className="audio-container2 mb-0">
                   <audio
                     controls
                     // className="w-100"
