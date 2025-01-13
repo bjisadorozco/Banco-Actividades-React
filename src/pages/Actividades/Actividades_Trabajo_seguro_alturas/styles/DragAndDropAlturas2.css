@@ -1,6 +1,8 @@
+/* Core Layout */
 .dark-display {
   height: 100vh;
 }
+
 .display-mobile {
   display: flex;
   justify-content: center;
@@ -10,7 +12,7 @@
   height: 100vh;
 }
 
-/* Media queries for responsive design */
+/* Responsive Design */
 @media (max-width: 768px) {
   .display-mobile {
     height: auto;
@@ -25,33 +27,57 @@
   .ligth-display {
     height: auto;
   }
-
-  audio {
-    width: 100%;
-    height: 40px;
-    margin: 8px 0;
-  }
-
-  audio::-webkit-media-controls-panel {
-    background-color: rgba(255, 255, 255, 0.9);
-    border-radius: 4px;
-  }
-
-  audio::-webkit-media-controls-play-button,
-  audio::-webkit-media-controls-mute-button {
-    background-color: white;
-    border-radius: 50%;
-  }
-
-  .audio-container {
-    width: 100%;
-    padding: 8px;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 8px;
-  }
 }
 
-/* Additional styles for better responsiveness */
+/* Drag and Drop Elements */
+.drop-area {
+  background-color: #e6e6e6;
+  width: 100%;
+  height: 60px;
+  border: 2px dashed gray;
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 12px;
+}
+
+.drop-area.correct {
+  background-color: #ecfdf5; /* Green for correct */
+}
+
+.drop-area.incorrect {
+  background-color: #fef2f2; /* Red for incorrect */
+}
+
+.draggable-option {
+  width: 190px; /* Adjusted width */
+  height: 60px;
+  background-color: #c0185d;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+
+/* Additional Styles */
+.flex-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 4px;
+}
+
+.flex-col {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Adjustments for mobile view */
 @media (max-width: 640px) {
   .flex-row {
     flex-direction: row !important;
@@ -61,28 +87,15 @@
     flex-direction: column !important;
   }
 
-  /* Adjust the width of drop areas and draggable options for mobile */
   .flex-row > div {
     width: 50%;
   }
 
-  /* Ensure the drop areas and draggable options take full width in their columns */
   .flex-col > div {
     width: 100%;
   }
 
-  /* Add some spacing between the columns */
   .flex-row > div:first-child {
     margin-right: 10px;
   }
-}
-
-.audio-container {
-  transition:
-    opacity 0.5s ease,
-    transform 0.5s ease;
-}
-
-.h-6 {
-  min-height: 54px; /* 1.5rem = altura del texto */
 }

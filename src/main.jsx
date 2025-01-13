@@ -24,10 +24,12 @@ import PreguntasAlturas1 from "./pages/Actividades/Actividades_Trabajo_seguro_al
 import DragAndDropAlturas2 from "./pages/Actividades/Actividades_Trabajo_seguro_alturas/DragAndDropAlturas2.jsx";
 import DragAndDropAlturas2Movil from "./pages/Actividades/Actividades_Trabajo_seguro_alturas/DragAndDropAlturas2Movil.jsx";
 import "./main.css";
+import DragAndDropSlide9 from "./pages/Actividades/Actividades_Trabajo_seguro_alturas/DragnAndDropSlide9.jsx";
+import { OrderAudio } from "./pages/Actividades/Actividades_Trabajo_seguro_alturas/OrderAudios.jsx";
 
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <PreguntasAlturas1 />
+    <OrderAudio />
   </React.StrictMode>
 );

@@ -27,8 +27,8 @@ function DraggableOption({ id, label, isDropped }) {
       ref={setNodeRef}
       style={{
         ...style,
-        width: "170px", // Incrementado el ancho en 20px
-        height: "50px",
+        width: "190px", // Incrementado el ancho en 20px
+        height: "60px",
         backgroundColor: "#C0185D",
         color: "white",
         display: "flex",
@@ -36,6 +36,7 @@ function DraggableOption({ id, label, isDropped }) {
         alignItems: "center",
         borderRadius: "8px",
         fontWeight: "bold",
+        textAlign: "center",
       }}
       {...listeners}
       {...attributes}
@@ -84,37 +85,39 @@ function DropArea({ id, children, verificationImage }) {
   );
 }
 
-export default function DragAndDropAlturas2() {
+export default function DragAndDropSlide9() {
   const [verificationImages, setVerificationImages] = useState({});
   const [items, setItems] = useState({
     drop1: null,
     drop2: null,
     drop3: null,
+    drop4: null,
   });
   const [correctAnswersCount, setCorrectAnswersCount] = useState(0);
   const setIsOnDivisor = useStore((state) => state.setIsOnDivisor);
-  const [isResetDisabled, setIsResetDisabled] = useState(true);
-  const [validationMessages, setValidationMessages] = useState({
-    drop1: { text: "", class: "" },
-    drop2: { text: "", class: "" },
-    drop3: { text: "", class: "" },
-  });
+  const [isResetDisabled, setIsResetDisabled] = useState(true);  
+  const [validationMessage, setValidationMessage] = useState("");
 
   const options = [
     {
-      id: "option3",
-      text: "-Uso de arneses con líneas de vida. -Implementar áreas de exclusión debajo de la zona de trabajo. -Uso de redes de protección para caída de herramientas o materiales.",
-      label: "Caso 3",
-    },
-    {
       id: "option1",
-      text: "-Inspección previa y periódica de los equipos de sujeción. -Capacitación sobre el uso correcto de arneses y sistemas de sujeción. -uso obligatorio de líneas de vida certificadas. -Sistema de doble anclaje.",
-      label: "Caso 1",
+      text: "Golpes con la estructura durante el movimiento vertical​",
+      label: "Labores en fachadas y paredes​",
     },
     {
       id: "option2",
-      text: "-Verificación de estabilidad de la plataforma antes de usarla. -Certificación del equipo. -Uso de líneas de vida adicionales para seguridad.",
-      label: "Caso 2",
+      text: "Colapso del andamio por mal montaje o sobrecarga.​",
+      label: "Trabajos en andamios​",
+    },
+    {
+      id: "option3",
+      text: "Caídas por pérdida de estabilidad en superficies inclinadas.​",
+      label: "Trabajos en techos y cubiertas​",
+    },
+    {
+      id: "option4",
+      text: "Desplazamiento de herramientas o materiales desde alturas que impacten a trabajadores en niveles inferiores​​",
+      label: "Trabajos en andamios​​",
     },
   ];
 
@@ -136,17 +139,13 @@ export default function DragAndDropAlturas2() {
       drop1: null,
       drop2: null,
       drop3: null,
+      drop4: null,
     });
     setFeedback("");
     setVerificationImages({});
     setCorrectAnswersCount(0);
-    setIsResetDisabled(true); // Deshabilitar el botón al reiniciar
-    // Crear un nuevo objeto para forzar la re-renderización
-    setValidationMessages({
-      drop1: { text: "", class: "" },
-      drop2: { text: "", class: "" },
-      drop3: { text: "", class: "" },
-    });
+    setIsResetDisabled(true); // Deshabilitar el botón al reiniciar    
+    setValidationMessage("");
   };
 
   const handleDragEnd = (event) => {
@@ -163,20 +162,28 @@ export default function DragAndDropAlturas2() {
       const isCorrect =
         (over.id === "drop1" && active.id === "option1") ||
         (over.id === "drop2" && active.id === "option2") ||
-        (over.id === "drop3" && active.id === "option3");
+        (over.id === "drop3" && active.id === "option3") ||
+        (over.id === "drop4" && active.id === "option4")
 
       setVerificationImages((prev) => ({
         ...prev,
         [over.id]: isCorrect ? "correct" : "incorrect",
       }));
 
-      setValidationMessages((prevMessages) => ({
-        ...prevMessages,
-        [over.id]: {
-          text: isCorrect ? "¡Muy bien! " : "¡Piénsalo bien!",
-          class: isCorrect ? "success" : "error",
-        },
-      }));
+      // setValidationMessages((prevMessages) => ({
+      //   ...prevMessages,
+      //   [over.id]: {
+      //     text: isCorrect ? "Respuesta correcta: ¡Muy bien ! ¡Este es un riesgo de la actividad seleccionada !​" 
+      //     : "Respuesta Incorrecta: ¡Piénsalo bien! Este riesgo no se relaciona con la actividad seleccionada​",
+      //     class: isCorrect ? "success" : "error",
+      //   },
+      // }));
+
+      setValidationMessage(
+        isCorrect
+          ? "Respuesta correcta: ¡Muy bien ! ¡Este es un riesgo de la actividad seleccionada !"
+          : "Respuesta Incorrecta: ¡Piénsalo bien! Este riesgo no se relaciona con la actividad seleccionada"
+      );
 
       if (isCorrect) {
         setCorrectAnswersCount((prev) => prev + 1);
@@ -201,7 +208,7 @@ export default function DragAndDropAlturas2() {
               <Paragraph theme="light" justify="center">
                 {option.text}
               </Paragraph>
-
+              
               <div style={{ width: "100%" }}>
                 <DropArea
                   id={`drop${index + 1}`}
@@ -211,22 +218,8 @@ export default function DragAndDropAlturas2() {
                     options.find((opt) => opt.id === items[`drop${index + 1}`])
                       ?.label}
                 </DropArea>
-                {/* Feedback message */}
-                {validationMessages[`drop${index + 1}`]?.text && (
-                  <p
-                    className={`validation-message ${
-                      validationMessages[`drop${index + 1}`]?.class
-                    }`}
-                    style={{
-                      marginTop: "8px",
-                      textAlign: "center",
-                      width: "90%",
-                    }}
-                  >
-                    {validationMessages[`drop${index + 1}`]?.text}
-                  </p>
-                )}
               </div>
+                
             </div>
           ))}
         </div>
@@ -242,6 +235,13 @@ export default function DragAndDropAlturas2() {
           ))}
         </div>
       </DndContext>
+      {validationMessage && (
+          <div className="feedback-container">
+            <p className={`validation-message ${validationMessage.includes("¡Muy bien!") ? "success" : "error"}`}>
+              {validationMessage}
+            </p>
+          </div>
+        )}
 
       <div className="flex justify-center mt-4">
         <Button

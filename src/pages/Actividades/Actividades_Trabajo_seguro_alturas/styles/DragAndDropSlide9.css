@@ -1,0 +1,23 @@
+.feedback-container {
+  width: 80% !important;
+  margin-top: 0 !important;
+}
+
+.validation-message {
+  text-align: center;
+  padding: 1rem 1.5rem;
+  border-radius: 10px;
+  font-weight: 500;
+  width: 100%;
+  animation: fadeIn 0.3s ease-out;
+}
+
+.validation-message.success {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.validation-message.error {
+  background-color: #F44336;
+  color: white;
+}
