@@ -26,12 +26,12 @@ const DraggableItem = ({ id, children }) => {
   );
 };
 
-const DroppableZone = ({ id, children, isOver }) => {
+const DroppableZone = ({ id, children, isOver, validationState }) => {
   const { setNodeRef } = useDroppable({ id });
   return (
     <div
       ref={setNodeRef}
-      className={`drop-zone ${children ? "filled" : ""} ${isOver ? "drop-zone-active" : ""}`}
+      className={`drop-zone ${children ? "filled" : ""} ${isOver ? "drop-zone-active" : ""} ${validationState || ""}`}
     >
       {children || "Arrastre aquí"}
     </div>
@@ -141,8 +141,8 @@ function DragAndDrop() {
 
   return (
     <div className="main-container">
-      <DndContext 
-        sensors={sensors} 
+      <DndContext
+        sensors={sensors}
         onDragStart={handleDragStart}
         onDragOver={handleDragOver}
         onDragEnd={handleDragEnd}
@@ -156,13 +156,12 @@ function DragAndDrop() {
               </Paragraph>
               {isMobile ? (
                 <select
-                  className={`mobile-select ${
-                    validationMessage
-                      ? items.dropZone1 === "Riesgos eléctricos"
-                        ? "correct"
-                        : "incorrect"
-                      : ""
-                  }`}
+                  className={`mobile-select ${validationMessage
+                    ? items.dropZone1 === "Riesgos eléctricos"
+                      ? "correct"
+                      : "incorrect"
+                    : ""
+                    }`}
                   value={items.dropZone1 || ""}
                   onChange={(e) => handleSelectChange(e.target.value, 'dropZone1')}
                   disabled={!!validationMessage}
@@ -175,7 +174,17 @@ function DragAndDrop() {
                   ))}
                 </select>
               ) : (
-                <DroppableZone id="dropZone1" isOver={overZone === "dropZone1"}>
+                <DroppableZone
+                  id="dropZone1"
+                  isOver={overZone === "dropZone1"}
+                  validationState={
+                    validationMessage
+                      ? items.dropZone1 === "Riesgos eléctricos"
+                        ? "validation-success"
+                        : "validation-error"
+                      : ""
+                  }
+                >
                   {items.dropZone1}
                 </DroppableZone>
               )}
@@ -189,13 +198,12 @@ function DragAndDrop() {
               </Paragraph>
               {isMobile ? (
                 <select
-                  className={`mobile-select ${
-                    validationMessage
-                      ? items.dropZone2 === "Descargas eléctricas"
-                        ? "correct"
-                        : "incorrect"
-                      : ""
-                  }`}
+                  className={`mobile-select ${validationMessage
+                    ? items.dropZone2 === "Descargas eléctricas"
+                      ? "correct"
+                      : "incorrect"
+                    : ""
+                    }`}
                   value={items.dropZone2 || ""}
                   onChange={(e) => handleSelectChange(e.target.value, 'dropZone2')}
                   disabled={!!validationMessage}
@@ -208,7 +216,17 @@ function DragAndDrop() {
                   ))}
                 </select>
               ) : (
-                <DroppableZone id="dropZone2" isOver={overZone === "dropZone2"}>
+                <DroppableZone
+                  id="dropZone2"
+                  isOver={overZone === "dropZone2"}
+                  validationState={
+                    validationMessage
+                      ? items.dropZone2 === "Descargas eléctricas"
+                        ? "validation-success"
+                        : "validation-error"
+                      : ""
+                  }
+                >
                   {items.dropZone2}
                 </DroppableZone>
               )}
@@ -226,11 +244,6 @@ function DragAndDrop() {
           )}
         </div>
 
-        <DragOverlay>
-          {activeDragId ? (
-            <div className="drag-button dragging">{activeDragId}</div>
-          ) : null}
-        </DragOverlay>
       </DndContext>
 
       {validationMessage && (
