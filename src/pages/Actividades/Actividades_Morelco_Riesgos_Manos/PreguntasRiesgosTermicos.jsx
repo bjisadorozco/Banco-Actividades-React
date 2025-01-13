@@ -26,21 +26,16 @@ function PreguntasRiesgosTermicos() {
     const [borderColors, setBorderColors] = useState(Array(5).fill("border-slate-900"));
     const [isValidated, setIsValidated] = useState(false);
     const setIsOnDivisor = useStore((state) => state.setIsOnDivisor);
-    const [isModalOpen, setIsModalOpen] = useState(false);
     const [correctCount, setCorrectCount] = useState(0);
     const [feedback, setFeedback] = useState('');
+    const [percentage, setPercentage] = useState(0); // Nuevo estado para el porcentaje
     const isMobile = useMediaQuery({ maxWidth: 640 });
     const [errorMessage, setErrorMessage] = useState('');
 
-    const handleOpenModal = () => {
-        setIsModalOpen(true);
-    };
-    const handleCloseModal = () => {
-        setIsModalOpen(false);
-    };
     useEffect(() => {
         setIsOnDivisor(false);
     }, []);
+
     const handleDropdownChange = (index, value) => {
         const newDropdowns = [...dropdowns];
         newDropdowns[index] = value;
@@ -62,6 +57,10 @@ function PreguntasRiesgosTermicos() {
         setCorrectCount(correct);
         setIsValidated(true);
 
+        // Calcular porcentaje
+        const calculatedPercentage = Math.round((correct / correctAnswers.length) * 100);
+        setPercentage(calculatedPercentage);
+
         // Set feedback based on correctness
         if (correct === correctAnswers.length) {
             setFeedback('¡Muy bien! Estas aprendiendo mucho para cuidar tus manos.');
@@ -76,7 +75,8 @@ function PreguntasRiesgosTermicos() {
         setIsValidated(false);
         setCorrectCount(0);
         setFeedback('');
-        setErrorMessage('')
+        setPercentage(0); // Reinicia el porcentaje
+        setErrorMessage('');
     };
 
     const getAvailableOptions = (index) => {
@@ -86,10 +86,11 @@ function PreguntasRiesgosTermicos() {
 
     return (
         <div className="flex flex-col md:flex-row mb-36 md:mb-0">
-            <div className="md:w-3/5 bg-white flex flex-col justify-center" style={{ position: isMobile ? 'static' : 'relative', top: isMobile ? '0' : '0px' }} >
-                <div className="flex flex-col items-start">
-                    <div className="ctActivityDragDrop px-2 justify-start display-mobile mb-3">
+            <div className="md:w-[100%] bg-white flex flex-col justify-center" style={{ position: isMobile ? 'static' : 'relative', top: isMobile ? '0' : '0px' }}>
+                <div className="flex flex-col items-center">
+                    <div className="ctActivityDragDrop px-2 justify-start display-mobile mb-3 h-auto">
                         <div className="listOpcDrop">
+                        <div className={`caja-container p-4 border rounded-md shadow-md ${isMobile ? 'm-2' : 'm-2'}`}>
                             <Paragraph theme='ligth' justify={isMobile ? 'justify' : 'justify'}>
                                 Estimado Antonio, tu trabajo es muy importante para nuestra empresa, y al estar relacionado con
                                 <Select className="m-1" index={0} value={dropdowns[0]} onChange={handleDropdownChange} borderColor={borderColors[0]} options={getAvailableOptions(0)} />
@@ -104,41 +105,44 @@ function PreguntasRiesgosTermicos() {
                                 , por ejemplo con los productos de limpieza del vehículo y de los equipos que manipulas a diario.
                                 ¡Por favor ten mucho cuidado!
                             </Paragraph>
-                        </div>
-                        {isValidated && (
+                            {isValidated && (
                             <div className="text-center">
-                                <h3 className={`text-md mt-0 font-bold ${correctCount === correctAnswers.length ? 'text-paragraph-light-color' : 'text-paragraph-light-color'}`}>
+                                <h3 className={`text-md mt-0 font-bold text-paragraph-light-color`}>
                                     {correctCount} de {correctAnswers.length} respuestas correctas
                                 </h3>
-                                
+                                <p className="text-paragraph-light-color font-bold">
+                                    Su resultado porcentual es del {percentage}%
+                                </p>
                             </div>
                         )}
                         <div className="flex flex-col items-center justify-center">
-                            {/* Mostrar error si existe */}
                             {errorMessage && (
                                 <p className="text-secondary-color text-center font-bold mt-1">
                                     {errorMessage}
                                 </p>
                             )}
-                            <div className="botones-container">
-                            <Button
-                                bold={false}
-                                icon={faCheck}
-                                roundedFull={true}
-                                onClick={validateDropdowns}
+                            <div className="botones-container-RT">
+                                <Button
+                                    bold={false}
+                                    icon={faCheck}
+                                    roundedFull={true}
+                                    onClick={validateDropdowns}
                                 >
-                                Validar
-                            </Button>
-                            <Button
-                                bold={false}
-                                icon={faRepeat}
-                                roundedFull={true}
-                                onClick={resetDropdowns}
+                                    Validar
+                                </Button>
+                                <Button
+                                    bold={false}
+                                    icon={faRepeat}
+                                    roundedFull={true}
+                                    onClick={resetDropdowns}
                                 >
-                                Reiniciar
-                            </Button>
+                                    Reiniciar
+                                </Button>
                             </div>
                         </div>
+                            </div>
+                        </div>
+                        
                     </div>
                 </div>
             </div>
@@ -164,4 +168,3 @@ function Select({ index, value, onChange, borderColor, options, className }) {
 }
 
 export default PreguntasRiesgosTermicos;
-
