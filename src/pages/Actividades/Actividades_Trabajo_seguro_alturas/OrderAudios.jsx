@@ -36,7 +36,7 @@ function Step({ id, text }) {
         style={{
           width: "220px",
           height: "60px",
-          backgroundColor: "#4AA3DF",
+          backgroundColor: "#C0185D",
           color: "white",
           clipPath:
             "polygon(0 50%, 10% 0, 100% 0, 90% 50%, 100% 100%, 10% 100%)",
