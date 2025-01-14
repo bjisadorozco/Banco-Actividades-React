@@ -74,6 +74,8 @@ function DropArea({ id, children, verificationImage }) {
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
+    fontWeight: "bold",
+    color: "white",
     marginTop: "20px", // Espaciado entre texto y DropArea
   };
 
