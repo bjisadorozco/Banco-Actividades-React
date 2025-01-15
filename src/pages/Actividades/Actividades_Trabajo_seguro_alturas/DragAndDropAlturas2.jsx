@@ -54,20 +54,20 @@ function DropArea({ id, children, verificationImage }) {
     backgroundColor: isOver
       ? "#e6e6e6"
       : children
-        ? verificationImage === "correct"
-          ? "#4CAF50" // Verde
-          : "#F44336" // Rojo
-        : "#e6e6e6",
+      ? verificationImage === "correct"
+        ? "#4CAF50" // Verde
+        : "#F44336" // Rojo
+      : "#e6e6e6",
     width: "100%",
     height: "50px",
     border: `2px dashed ${
       isOver
         ? "gray"
         : children
-          ? verificationImage === "correct"
-            ? "#4CAF50"
-            : "#F44336"
-          : "gray"
+        ? verificationImage === "correct"
+          ? "#4CAF50"
+          : "#F44336"
+        : "gray"
     }`,
     borderRadius: "8px",
     display: "flex",
@@ -104,17 +104,30 @@ export default function DragAndDropAlturas2() {
   const options = [
     {
       id: "option3",
-      text: "-Uso de arneses con líneas de vida. -Implementar áreas de exclusión debajo de la zona de trabajo. -Uso de redes de protección para caída de herramientas o materiales.",
+      text: [
+        "Uso de arneses con líneas de vida.",
+        "Implementar áreas de exclusión debajo de la zona de trabajo.",
+        "Uso de redes de protección para caída de herramientas o materiales.",
+      ],
       label: "Caso 3",
     },
     {
       id: "option1",
-      text: "-Inspección previa y periódica de los equipos de sujeción. -Capacitación sobre el uso correcto de arneses y sistemas de sujeción. -uso obligatorio de líneas de vida certificadas. -Sistema de doble anclaje.",
+      text: [
+        "Inspección previa y periódica de los equipos de sujeción.",
+        "Capacitación sobre el uso correcto de arneses y sistemas de sujeción.",
+        "Uso obligatorio de líneas de vida certificadas.",
+        "Sistema de doble anclaje.",
+      ],
       label: "Caso 1",
     },
     {
       id: "option2",
-      text: "-Verificación de estabilidad de la plataforma antes de usarla. -Certificación del equipo. -Uso de líneas de vida adicionales para seguridad.",
+      text: [
+        "Verificación de estabilidad de la plataforma antes de usarla.",
+        "Certificación del equipo.",
+        "Uso de líneas de vida adicionales para seguridad.",
+      ],
       label: "Caso 2",
     },
   ];
@@ -183,15 +196,19 @@ export default function DragAndDropAlturas2() {
           {options.map((option, index) => (
             <div
               key={option.id}
-              className="p-6 mt-4 border rounded-lg bg-white shadow-md flex flex-col items-center"
+              className="p-6 mt-4 border rounded-lg bg-white shadow-md flex flex-col items-start"
               style={{
                 width: "350px",
                 justifyContent: "space-between",
                 textAlign: "left",
               }}
             >
-              <Paragraph theme="light" justify="center">
-                {option.text}
+              <Paragraph theme="light" justify="left">
+                <ul style={{ paddingLeft: "20px", listStyleType: "disc" }}>
+                  {option.text.map((item, idx) => (
+                    <li key={idx}>{item}</li>
+                  ))}
+                </ul>
               </Paragraph>
 
               <div style={{ width: "100%" }}>
