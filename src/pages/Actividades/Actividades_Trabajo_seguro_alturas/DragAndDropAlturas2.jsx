@@ -27,7 +27,7 @@ function DraggableOption({ id, label, isDropped }) {
       ref={setNodeRef}
       style={{
         ...style,
-        width: "170px", // Incrementado el ancho en 20px
+        width: "170px",
         height: "50px",
         backgroundColor: "#C0185D",
         color: "white",
@@ -36,10 +36,11 @@ function DraggableOption({ id, label, isDropped }) {
         alignItems: "center",
         borderRadius: "8px",
         fontWeight: "bold",
+        cursor: "pointer",
       }}
       {...listeners}
       {...attributes}
-      className="draggable-option cursor-pointer"
+      className="draggable-option"
     >
       {label}
     </div>
@@ -47,9 +48,7 @@ function DraggableOption({ id, label, isDropped }) {
 }
 
 function DropArea({ id, children, verificationImage }) {
-  const { isOver, setNodeRef } = useDroppable({
-    id,
-  });
+  const { isOver, setNodeRef } = useDroppable({ id });
 
   const style = {
     backgroundColor: isOver
@@ -59,15 +58,15 @@ function DropArea({ id, children, verificationImage }) {
           ? "#4CAF50" // Verde
           : "#F44336" // Rojo
         : "#e6e6e6",
-    width: "90%",
+    width: "100%",
     height: "50px",
     border: `2px dashed ${
       isOver
         ? "gray"
         : children
           ? verificationImage === "correct"
-            ? "#4CAF50" // Verde
-            : "#F44336" // Rojo
+            ? "#4CAF50"
+            : "#F44336"
           : "gray"
     }`,
     borderRadius: "8px",
@@ -76,7 +75,7 @@ function DropArea({ id, children, verificationImage }) {
     alignItems: "center",
     fontWeight: "bold",
     color: "white",
-    marginTop: "20px", // Espaciado entre texto y DropArea
+    marginTop: "20px",
   };
 
   return (
@@ -93,14 +92,14 @@ export default function DragAndDropAlturas2() {
     drop2: null,
     drop3: null,
   });
-  const [correctAnswersCount, setCorrectAnswersCount] = useState(0);
-  const setIsOnDivisor = useStore((state) => state.setIsOnDivisor);
-  const [isResetDisabled, setIsResetDisabled] = useState(true);
   const [validationMessages, setValidationMessages] = useState({
     drop1: { text: "", class: "" },
     drop2: { text: "", class: "" },
     drop3: { text: "", class: "" },
   });
+
+  const [isResetDisabled, setIsResetDisabled] = useState(true);
+  const setIsOnDivisor = useStore((state) => state.setIsOnDivisor);
 
   const options = [
     {
@@ -134,28 +133,21 @@ export default function DragAndDropAlturas2() {
   );
 
   const handleReset = () => {
-    setItems({
-      drop1: null,
-      drop2: null,
-      drop3: null,
-    });
-    setFeedback("");
+    setItems({ drop1: null, drop2: null, drop3: null });
     setVerificationImages({});
-    setCorrectAnswersCount(0);
-    setIsResetDisabled(true); // Deshabilitar el botón al reiniciar
-    // Crear un nuevo objeto para forzar la re-renderización
     setValidationMessages({
       drop1: { text: "", class: "" },
       drop2: { text: "", class: "" },
       drop3: { text: "", class: "" },
     });
+    setIsResetDisabled(true);
   };
 
   const handleDragEnd = (event) => {
     const { over, active } = event;
 
     if (over && over.id) {
-      if (items[over.id]) return; // Previene duplicados
+      if (items[over.id]) return;
 
       setItems((prevItems) => ({
         ...prevItems,
@@ -175,14 +167,12 @@ export default function DragAndDropAlturas2() {
       setValidationMessages((prevMessages) => ({
         ...prevMessages,
         [over.id]: {
-          text: isCorrect ? "¡Muy bien! " : "¡Piénsalo bien!",
+          text: isCorrect
+            ? "¡Muy bien! estas medidas de control te ayudarán a controlar estos riesgos.​"
+            : "¡Piénsalo bien! Estas medidas de control NO son las adecuadas para estos riesgos.",
           class: isCorrect ? "success" : "error",
         },
       }));
-
-      if (isCorrect) {
-        setCorrectAnswersCount((prev) => prev + 1);
-      }
     }
   };
 
@@ -213,7 +203,6 @@ export default function DragAndDropAlturas2() {
                     options.find((opt) => opt.id === items[`drop${index + 1}`])
                       ?.label}
                 </DropArea>
-                {/* Feedback message */}
                 {validationMessages[`drop${index + 1}`]?.text && (
                   <p
                     className={`validation-message ${
@@ -222,7 +211,9 @@ export default function DragAndDropAlturas2() {
                     style={{
                       marginTop: "8px",
                       textAlign: "center",
-                      width: "90%",
+                      width: "100%",
+                      color: "white",
+                      fontWeight: "bold",
                     }}
                   >
                     {validationMessages[`drop${index + 1}`]?.text}

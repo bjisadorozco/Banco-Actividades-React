@@ -1,11 +1,16 @@
 import { useState, useEffect } from "react";
 import { DndContext, useSensor, useSensors, MouseSensor } from "@dnd-kit/core";
 import { useDroppable, useDraggable } from "@dnd-kit/core";
-
 import Paragraph from "../../components/Paragraph";
 import Button from "../../components/Button";
-import { faRepeat } from "@fortawesome/free-solid-svg-icons";
+import { faRepeat, faCheck } from "@fortawesome/free-solid-svg-icons";
 import useStore from "../../../store";
+import "./styles/DragAndDropSlide9.css";
+import img from "../../../assets/img/caida_perdida_estabilidad_sldM2.webp";
+import img1 from "../../../assets/img/colapsio_andamio_sldM2.webp";
+import { Check, X } from 'lucide-react';
+import unchek from "../../../assets/img/xmarkAct.png";
+import check from "../../../assets/img/checkAct.png";
 
 function DraggableOption({ id, label, isDropped }) {
   const { attributes, listeners, setNodeRef, transform } = useDraggable({
@@ -27,7 +32,7 @@ function DraggableOption({ id, label, isDropped }) {
       ref={setNodeRef}
       style={{
         ...style,
-        width: "190px", // Incrementado el ancho en 20px
+        width: "190px",
         height: "60px",
         backgroundColor: "#C0185D",
         color: "white",
@@ -40,46 +45,50 @@ function DraggableOption({ id, label, isDropped }) {
       }}
       {...listeners}
       {...attributes}
-      className="draggable-option cursor-pointer"
     >
       {label}
     </div>
   );
 }
 
-function DropArea({ id, children, verificationImage }) {
+function DropArea({ id, children, isValidated, isCorrect }) {
   const { isOver, setNodeRef } = useDroppable({
     id,
   });
 
   const style = {
-    backgroundColor: isOver
-      ? "#e6e6e6"
-      : children
-        ? verificationImage === "correct"
-          ? "#4CAF50" // Verde
-          : "#F44336" // Rojo
-        : "#e6e6e6",
-    width: "90%",
+    backgroundColor: isValidated 
+      ? isCorrect 
+        ? "#90EE90" // Light green
+        : "#FFB6C1" // Light red
+      : children 
+        ? "#C0185D" 
+        : isOver 
+          ? "#e6e6e6" 
+          : "#f3f4f6",
+    width: "100%",
     height: "50px",
+    padding: "1.5rem",
     border: `2px dashed ${
-      isOver
-        ? "gray"
-        : children
-          ? verificationImage === "correct"
-            ? "#4CAF50" // Verde
-            : "#F44336" // Rojo
-          : "gray"
+      isValidated 
+        ? isCorrect 
+          ? "#90EE90" 
+          : "#FFB6C1"
+        : children 
+          ? "#C0185D" 
+          : "#e2e8f0"
     }`,
     borderRadius: "8px",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    marginTop: "20px", // Espaciado entre texto y DropArea
+    marginTop: "1rem",
+    color: isValidated || children ? "white" : "inherit",
+    fontWeight: "bold",
   };
 
   return (
-    <div ref={setNodeRef} style={style} className="drop-area">
+    <div ref={setNodeRef} style={style}>
       {children}
     </div>
   );
@@ -95,7 +104,7 @@ export default function DragAndDropSlide9() {
   });
   const [correctAnswersCount, setCorrectAnswersCount] = useState(0);
   const setIsOnDivisor = useStore((state) => state.setIsOnDivisor);
-  const [isResetDisabled, setIsResetDisabled] = useState(true);  
+  const [isResetDisabled, setIsResetDisabled] = useState(true);
   const [validationMessage, setValidationMessage] = useState("");
 
   const options = [
@@ -103,21 +112,25 @@ export default function DragAndDropSlide9() {
       id: "option1",
       text: "Golpes con la estructura durante el movimiento vertical​",
       label: "Labores en fachadas y paredes​",
+      image: img,
     },
     {
       id: "option2",
       text: "Colapso del andamio por mal montaje o sobrecarga.​",
       label: "Trabajos en andamios​",
+      image: img1,
     },
     {
       id: "option3",
       text: "Caídas por pérdida de estabilidad en superficies inclinadas.​",
       label: "Trabajos en techos y cubiertas​",
+      image: img,
     },
     {
       id: "option4",
       text: "Desplazamiento de herramientas o materiales desde alturas que impacten a trabajadores en niveles inferiores​​",
       label: "Trabajos en andamios​​",
+      image: img1,
     },
   ];
 
@@ -141,18 +154,31 @@ export default function DragAndDropSlide9() {
       drop3: null,
       drop4: null,
     });
-    setFeedback("");
     setVerificationImages({});
     setCorrectAnswersCount(0);
-    setIsResetDisabled(true); // Deshabilitar el botón al reiniciar    
+    setIsResetDisabled(true);
     setValidationMessage("");
+  };
+
+  const handleValidation = () => {
+    const totalCorrect = Object.values(verificationImages).filter(
+      (status) => status === "correct"
+    ).length;
+
+    if (totalCorrect === 4) {
+      setValidationMessage("¡Muy bien ! ¡Este es un riesgo de la actividad seleccionada !");
+    } else {
+      setValidationMessage(
+        "¡Piénsalo bien! Este riesgo no se relaciona con la actividad seleccionada"
+      );
+    }
   };
 
   const handleDragEnd = (event) => {
     const { over, active } = event;
 
     if (over && over.id) {
-      if (items[over.id]) return; // Previene duplicados
+      if (items[over.id]) return;
 
       setItems((prevItems) => ({
         ...prevItems,
@@ -163,31 +189,12 @@ export default function DragAndDropSlide9() {
         (over.id === "drop1" && active.id === "option1") ||
         (over.id === "drop2" && active.id === "option2") ||
         (over.id === "drop3" && active.id === "option3") ||
-        (over.id === "drop4" && active.id === "option4")
+        (over.id === "drop4" && active.id === "option4");
 
       setVerificationImages((prev) => ({
         ...prev,
         [over.id]: isCorrect ? "correct" : "incorrect",
       }));
-
-      // setValidationMessages((prevMessages) => ({
-      //   ...prevMessages,
-      //   [over.id]: {
-      //     text: isCorrect ? "Respuesta correcta: ¡Muy bien ! ¡Este es un riesgo de la actividad seleccionada !​" 
-      //     : "Respuesta Incorrecta: ¡Piénsalo bien! Este riesgo no se relaciona con la actividad seleccionada​",
-      //     class: isCorrect ? "success" : "error",
-      //   },
-      // }));
-
-      setValidationMessage(
-        isCorrect
-          ? "Respuesta correcta: ¡Muy bien ! ¡Este es un riesgo de la actividad seleccionada !"
-          : "Respuesta Incorrecta: ¡Piénsalo bien! Este riesgo no se relaciona con la actividad seleccionada"
-      );
-
-      if (isCorrect) {
-        setCorrectAnswersCount((prev) => prev + 1);
-      }
     }
   };
 
@@ -198,33 +205,80 @@ export default function DragAndDropSlide9() {
           {options.map((option, index) => (
             <div
               key={option.id}
-              className="p-6 mt-4 border rounded-lg bg-white shadow-md flex flex-col items-center"
+              className="p-6 mt-4 border rounded-lg shadow-md flex flex-col items-center relative"
               style={{
                 width: "350px",
                 justifyContent: "space-between",
-                textAlign: "left",
+                textAlign: "center",
+                backgroundColor: validationMessage
+                  ? verificationImages[`drop${index + 1}`] === "correct"
+                    ? "#4CAF50"
+                    : verificationImages[`drop${index + 1}`] === "incorrect"
+                    ? "#F44336"
+                    : "white"
+                  : "white",
               }}
             >
-              <Paragraph theme="light" justify="center">
+              {validationMessage && (
+                <div 
+                  style={{
+                    position: "absolute",
+                    top: "30%",
+                    left: "50%",
+                    transform: "translate(-50%, -50%)",
+                    zIndex: 10,
+                  }}
+                >
+                  <img 
+                    src={verificationImages[`drop${index + 1 || "/placeholder.svg"}`] === "correct" ? check : unchek}
+                    alt={verificationImages[`drop${index + 1}`] === "correct" ? "Correcto" : "Incorrecto"}
+                    style={{
+                      width: "64px",
+                      height: "64px",
+                    }}
+                  />
+                </div>
+              )}
+              <img 
+                src={option.image || "/placeholder.svg"} 
+                alt={option.text}
+                style={{
+                  width: "100%",
+                  height: "140px",
+                  objectFit: "cover",
+                  borderRadius: "8px",
+                  position: "relative"
+                }}
+              />
+              <Paragraph 
+                theme={validationMessage ? undefined : "light"}
+                justify="center" 
+              >
                 {option.text}
               </Paragraph>
-              
+
               <div style={{ width: "100%" }}>
-                <DropArea
+                <DropArea 
                   id={`drop${index + 1}`}
-                  verificationImage={verificationImages[`drop${index + 1}`]}
+                  isValidated={!!validationMessage}
+                  isCorrect={verificationImages[`drop${index + 1}`] === "correct"}
                 >
                   {items[`drop${index + 1}`] &&
                     options.find((opt) => opt.id === items[`drop${index + 1}`])
                       ?.label}
                 </DropArea>
               </div>
-                
             </div>
           ))}
         </div>
 
-        <div className="flex flex-row justify-center gap-4">
+        <div 
+          className="flex flex-row justify-center gap-4" 
+          style={{ 
+            display: options.some(option => !Object.values(items).includes(option.id)) ? 'flex' : 'none',
+            marginTop: "1rem" 
+          }}
+        >
           {options.map((option) => (
             <DraggableOption
               key={option.id}
@@ -235,15 +289,28 @@ export default function DragAndDropSlide9() {
           ))}
         </div>
       </DndContext>
-      {validationMessage && (
-          <div className="feedback-container">
-            <p className={`validation-message ${validationMessage.includes("¡Muy bien!") ? "success" : "error"}`}>
-              {validationMessage}
-            </p>
-          </div>
-        )}
 
-      <div className="flex justify-center mt-4">
+      {validationMessage && (
+        <div className="flex justify-center mt-4">
+          <p
+            className={`validation-message ${
+              validationMessage.includes("correcta") ? "error" : "success"
+            }`}
+          >
+            {validationMessage}
+          </p>
+        </div>
+      )}
+
+      <div className="flex justify-center mt-4 gap-4">
+        <Button
+          onClick={handleValidation}
+          icon={faCheck}
+          roundedFull={true}
+          disabled={isResetDisabled}
+        >
+          Validar
+        </Button>
         <Button
           onClick={handleReset}
           icon={faRepeat}
@@ -256,3 +323,4 @@ export default function DragAndDropSlide9() {
     </div>
   );
 }
+

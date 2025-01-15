@@ -30,6 +30,6 @@ import { OrderAudio } from "./pages/Actividades/Actividades_Trabajo_seguro_altur
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <OrderAudio />
+    <DragAndDropAlturas2 />
   </React.StrictMode>
 );
