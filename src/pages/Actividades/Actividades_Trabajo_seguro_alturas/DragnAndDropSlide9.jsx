@@ -112,7 +112,7 @@ export default function DragAndDropSlide9() {
     {
       id: "option1",
       text: "Golpes con la estructura durante el movimiento vertical​",
-      label: "Labores en fachadas y paredes​",
+      label: "Trabajos en estructuras​",
       image: img,
     },
     {
@@ -170,11 +170,11 @@ export default function DragAndDropSlide9() {
 
     if (totalCorrect === 4) {
       setValidationMessage(
-        `¡Muy bien! ¡Este es un riesgo de la actividad seleccionada!. Tus respuestas correctas son: ${totalCorrect} de 4 (${percentage}%)`
+        `¡Muy bien! ¡Este es un riesgo de la actividad seleccionada! \n Tus respuestas correctas son: ${totalCorrect} de 4 (${percentage}%)`
       );
     } else {
       setValidationMessage(
-        `Has asociado un riesgo de manera errónea. ¡Inténtalo de nuevo!.Tus respuestas correctas son: ${totalCorrect} de 4 (${percentage}%)`
+        `Has asociado un riesgo de manera errónea. ¡Inténtalo de nuevo! \nTus respuestas correctas son: ${totalCorrect} de 4 (${percentage}%)`
       );
     }
   };

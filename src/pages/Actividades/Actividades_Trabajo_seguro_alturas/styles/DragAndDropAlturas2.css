@@ -50,8 +50,13 @@
   background-color: #f44336 !important; /* Red for incorrect */
 }
 
+.validation-message.success {
+  background-color: #4caf50;
+}
+
 .validation-message.error {
-  background-color: #f44336 !important;
+  background-color: white;
+  color: #818181;
   font-weight: bold;
 }
 

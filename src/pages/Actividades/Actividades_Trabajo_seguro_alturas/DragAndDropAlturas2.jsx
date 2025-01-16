@@ -60,8 +60,8 @@ function DropArea({ id, children, verificationImage }) {
       ? "#e6e6e6"
       : children
         ? verificationImage === "correct"
-          ? "#90EE90" // Verde
-          : "#FFB6C1" // Rojo
+          ? "#90EE90"
+          : "#FFB6C1"
         : "#e6e6e6",
     width: "100%",
     height: "50px",
@@ -79,7 +79,6 @@ function DropArea({ id, children, verificationImage }) {
     justifyContent: "center",
     alignItems: "center",
     fontWeight: "bold",
-    color: "white",
     marginTop: "20px",
   };
 
@@ -104,6 +103,7 @@ export default function DragAndDropAlturas2() {
   });
 
   const [isResetDisabled, setIsResetDisabled] = useState(true);
+  const [validationMessage, setValidationMessage] = useState(null);
   const setIsOnDivisor = useStore((state) => state.setIsOnDivisor);
 
   const options = [
@@ -146,9 +146,36 @@ export default function DragAndDropAlturas2() {
     setIsResetDisabled(!hasDroppedItems);
   }, [items]);
 
+  useEffect(() => {
+    // Verifica si todos los elementos están llenos
+    if (Object.values(items).every(Boolean)) {
+      const totalCorrect = Object.values(verificationImages).filter(
+        (status) => status === "correct"
+      ).length;
+  
+      const percentage = Math.round((totalCorrect / options.length) * 100);
+  
+      setValidationMessage(
+        `Tus respuestas correctas son: ${totalCorrect} de 3 (${percentage}%)`
+      );
+    }
+  }, [verificationImages]); // Se ejecuta cada vez que cambia `verificationImages`
+  
   const sensors = useSensors(
     useSensor(MouseSensor, { activationConstraint: { distance: 10 } })
   );
+
+  const handleValidation = () => {
+    const totalCorrect = Object.values(verificationImages).filter(
+      (status) => status === "correct"
+    ).length;
+
+    const percentage = Math.round((totalCorrect / options.length) * 100);
+
+    setValidationMessage(
+      `Tus respuestas correctas son: ${totalCorrect} de 3 (${percentage}%)`
+    );
+  };
 
   const handleReset = () => {
     setItems({ drop1: null, drop2: null, drop3: null });
@@ -158,6 +185,7 @@ export default function DragAndDropAlturas2() {
       drop2: { text: "", class: "" },
       drop3: { text: "", class: "" },
     });
+    setValidationMessage(null);
     setIsResetDisabled(true);
   };
 
@@ -192,7 +220,15 @@ export default function DragAndDropAlturas2() {
         },
       }));
     }
+
+    if (Object.values({ ...items, [over.id]: active.id }).every(Boolean)) {
+      handleValidation();
+    }
   };
+
+  const remainingOptions = options.filter(
+    (option) => !Object.values(items).includes(option.id)
+  );
 
   return (
     <div className="flex flex-col overflow-x-hidden mb-36">
@@ -244,7 +280,7 @@ export default function DragAndDropAlturas2() {
                 justify="left"
                 style={
                   verificationImages[`drop${index + 1}`]
-                    ? { color: "white", fontWeight: "bold" }
+                    ? { fontWeight: "bold" }
                     : {}
                 }
               >
@@ -253,7 +289,7 @@ export default function DragAndDropAlturas2() {
                     border: "1px solid #ccc",
                     padding: "10px",
                     borderRadius: "8px",
-                    backgroundColor: "transparent"
+                    backgroundColor: "transparent",
                   }}
                 >
                   {option.text.map((item, i) => (
@@ -261,7 +297,12 @@ export default function DragAndDropAlturas2() {
                   ))}
                 </ul>
               </Paragraph>
-              <div style={{ width: "100%" }}>
+              <div
+                style={{
+                  width: "100%",
+                  color: verificationImages ? "#0F172A" : "red",
+                }}
+              >
                 <DropArea
                   id={`drop${index + 1}`}
                   verificationImage={verificationImages[`drop${index + 1}`]}
@@ -298,16 +339,32 @@ export default function DragAndDropAlturas2() {
           ))}
         </div>
 
-        <div className="flex flex-row justify-center gap-4 mt-4">
-          {options.map((option) => (
-            <DraggableOption
-              key={option.id}
-              id={option.id}
-              label={option.label}
-              isDropped={Object.values(items).includes(option.id)}
-            />
-          ))}
-        </div>
+        {remainingOptions.length > 0 && (
+          <div className="flex flex-row justify-center gap-4 mt-4">
+            {remainingOptions.map((option) => (
+              <DraggableOption
+                key={option.id}
+                id={option.id}
+                label={option.label}
+                isDropped={Object.values(items).includes(option.id)}
+              />
+            ))}
+          </div>
+        )}
+
+        {validationMessage && (
+          <div className="flex justify-center mt-4">
+            <p
+              className={`validation-message ${
+                validationMessage.includes("Tus respuestas correctas")
+                  ? "error"
+                  : "success"
+              }`}
+            >
+              {validationMessage}
+            </p>
+          </div>
+        )}
 
         <div className="flex justify-center mt-4 gap-4">
           <Button onClick={handleReset} icon={faRepeat} roundedFull={true}>
