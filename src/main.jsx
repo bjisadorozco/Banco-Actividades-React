@@ -28,9 +28,10 @@ import DragAndDropSlide9 from "./pages/Actividades/Actividades_Trabajo_seguro_al
 import { OrderAudio } from "./pages/Actividades/Actividades_Trabajo_seguro_alturas/OrderAudios.jsx";
 import DragAndDropAudios from "./pages/Actividades/Actividades_Trabajo_seguro_alturas/DragAndDropAudios.jsx";
 import DragAndDropAudiosMovil from "./pages/Actividades/Actividades_Trabajo_seguro_alturas/DragAndDropAudiosMovil.jsx";
+import DragAndDropSlide9Movil from "./pages/Actividades/Actividades_Trabajo_seguro_alturas/DragAndDropSlide9Movil.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <DragAndDropAudiosMovil />
+    <DragAndDropSlide9Movil />
   </React.StrictMode>
 );
