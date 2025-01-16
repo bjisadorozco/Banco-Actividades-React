@@ -7,6 +7,9 @@ import Button from "../../components/Button";
 import { faRepeat } from "@fortawesome/free-solid-svg-icons";
 import useStore from "../../../store";
 
+import uncheck from "../../../assets/img/xmarkAct.png";
+import check from "../../../assets/img/checkAct.png";
+
 function DraggableOption({ id, label, isDropped }) {
   const { attributes, listeners, setNodeRef, transform } = useDraggable({
     id,
@@ -27,7 +30,7 @@ function DraggableOption({ id, label, isDropped }) {
       ref={setNodeRef}
       style={{
         ...style,
-        width: "170px",
+        width: "190px",
         height: "50px",
         backgroundColor: "#C0185D",
         color: "white",
@@ -37,6 +40,8 @@ function DraggableOption({ id, label, isDropped }) {
         borderRadius: "8px",
         fontWeight: "bold",
         cursor: "pointer",
+        marginRight: "10px",
+        marginLeft: "10px",
       }}
       {...listeners}
       {...attributes}
@@ -54,20 +59,20 @@ function DropArea({ id, children, verificationImage }) {
     backgroundColor: isOver
       ? "#e6e6e6"
       : children
-      ? verificationImage === "correct"
-        ? "#4CAF50" // Verde
-        : "#F44336" // Rojo
-      : "#e6e6e6",
+        ? verificationImage === "correct"
+          ? "#90EE90" // Verde
+          : "#FFB6C1" // Rojo
+        : "#e6e6e6",
     width: "100%",
     height: "50px",
     border: `2px dashed ${
       isOver
         ? "gray"
         : children
-        ? verificationImage === "correct"
-          ? "#4CAF50"
-          : "#F44336"
-        : "gray"
+          ? verificationImage === "correct"
+            ? "#90EE90"
+            : "#FFB6C1"
+          : "gray"
     }`,
     borderRadius: "8px",
     display: "flex",
@@ -105,28 +110,28 @@ export default function DragAndDropAlturas2() {
     {
       id: "option3",
       text: [
-        "Uso de arneses con líneas de vida.",
-        "Implementar áreas de exclusión debajo de la zona de trabajo.",
-        "Uso de redes de protección para caída de herramientas o materiales.",
+        "Uso de arneses con líneas de vida",
+        "Implementar áreas de exclusión debajo de la zona de trabajo",
+        "Uso de redes de protección para caída de herramientas o materiales",
       ],
       label: "Caso 3",
     },
     {
       id: "option1",
       text: [
-        "Inspección previa y periódica de los equipos de sujeción.",
-        "Capacitación sobre el uso correcto de arneses y sistemas de sujeción.",
-        "Uso obligatorio de líneas de vida certificadas.",
-        "Sistema de doble anclaje.",
+        "Inspección previa y periódica de los equipos de sujeción",
+        "Capacitación sobre el uso correcto de arneses y sistemas de sujeción",
+        "Uso obligatorio de líneas de vida certificadas",
+        "Sistema de doble anclaje",
       ],
       label: "Caso 1",
     },
     {
       id: "option2",
       text: [
-        "Verificación de estabilidad de la plataforma antes de usarla.",
-        "Certificación del equipo.",
-        "Uso de líneas de vida adicionales para seguridad.",
+        "Verificación de estabilidad de la plataforma antes de usarla",
+        "Certificación del equipo",
+        "Uso de líneas de vida adicionales para seguridad",
       ],
       label: "Caso 2",
     },
@@ -196,21 +201,66 @@ export default function DragAndDropAlturas2() {
           {options.map((option, index) => (
             <div
               key={option.id}
-              className="p-6 mt-4 border rounded-lg bg-white shadow-md flex flex-col items-start"
+              className="p-6 mt-4 border rounded-lg shadow-md flex flex-col items-center relative"
               style={{
                 width: "350px",
                 justifyContent: "space-between",
                 textAlign: "left",
+                backgroundColor:
+                  verificationImages[`drop${index + 1}`] === "correct"
+                    ? "#4CAF50"
+                    : verificationImages[`drop${index + 1}`] === "incorrect"
+                      ? "#F44336"
+                      : "white",
               }}
             >
-              <Paragraph theme="light" justify="left">
-                <ul style={{ paddingLeft: "20px", listStyleType: "disc" }}>
-                  {option.text.map((item, idx) => (
-                    <li key={idx}>{item}</li>
+              {verificationImages[`drop${index + 1}`] && (
+                <img
+                  src={
+                    verificationImages[`drop${index + 1}`] === "correct"
+                      ? check
+                      : uncheck
+                  }
+                  alt={
+                    verificationImages[`drop${index + 1}`] === "correct"
+                      ? "Correcto"
+                      : "Incorrecto"
+                  }
+                  style={{
+                    position: "absolute",
+                    top: "23%",
+                    left: "50%",
+                    transform: "translate(-50%, -50%)",
+                    zIndex: 10,
+                    width: "64px",
+                    height: "64px",
+                  }}
+                />
+              )}
+              <Paragraph
+                theme={
+                  verificationImages[`drop${index + 1}`] ? undefined : "light"
+                }
+                justify="left"
+                style={
+                  verificationImages[`drop${index + 1}`]
+                    ? { color: "white", fontWeight: "bold" }
+                    : {}
+                }
+              >
+                <ul
+                  style={{
+                    border: "1px solid #ccc",
+                    padding: "10px",
+                    borderRadius: "8px",
+                    backgroundColor: "transparent"
+                  }}
+                >
+                  {option.text.map((item, i) => (
+                    <li key={i}>{item}</li>
                   ))}
                 </ul>
               </Paragraph>
-
               <div style={{ width: "100%" }}>
                 <DropArea
                   id={`drop${index + 1}`}
@@ -229,8 +279,15 @@ export default function DragAndDropAlturas2() {
                       marginTop: "8px",
                       textAlign: "center",
                       width: "100%",
+                      backgroundColor:
+                        validationMessages[`drop${index + 1}`]?.class ===
+                        "success"
+                          ? "#4CAF50"
+                          : "#F44336",
                       color: "white",
                       fontWeight: "bold",
+                      padding: "5px",
+                      borderRadius: "4px",
                     }}
                   >
                     {validationMessages[`drop${index + 1}`]?.text}
@@ -241,7 +298,7 @@ export default function DragAndDropAlturas2() {
           ))}
         </div>
 
-        <div className="flex flex-row justify-center gap-4">
+        <div className="flex flex-row justify-center gap-4 mt-4">
           {options.map((option) => (
             <DraggableOption
               key={option.id}
@@ -251,18 +308,13 @@ export default function DragAndDropAlturas2() {
             />
           ))}
         </div>
-      </DndContext>
 
-      <div className="flex justify-center mt-4">
-        <Button
-          onClick={handleReset}
-          icon={faRepeat}
-          roundedFull={true}
-          disabled={isResetDisabled}
-        >
-          Reiniciar
-        </Button>
-      </div>
+        <div className="flex justify-center mt-4 gap-4">
+          <Button onClick={handleReset} icon={faRepeat} roundedFull={true}>
+            Reiniciar
+          </Button>
+        </div>
+      </DndContext>
     </div>
   );
 }

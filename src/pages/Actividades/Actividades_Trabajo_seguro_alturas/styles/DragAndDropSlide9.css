@@ -62,12 +62,12 @@
 }
 
 .validation-message.success {
-  background-color: #4CAF50;
+  background-color: #4caf50;
   /* color: white; */
 }
 
 .validation-message.error {
-  background-color: #F44336;
+  background-color: #c4c4c4;
   /* color: white; */
 }
 
@@ -89,11 +89,13 @@
 }
 
 .validation-message.success {
-  background-color: #4CAF50;
+  background-color: #4caf50;
 }
 
 .validation-message.error {
-  background-color: #F44336;
+  background-color: #dbdbdb;
+  color: #C0185D;
+  font-weight: bold;
 }
 
 .gap-4 {
@@ -107,4 +109,3 @@
 .mb-4 {
   margin-bottom: 0.25rem;
 }
-

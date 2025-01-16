@@ -4,7 +4,7 @@ import App from "./App.jsx";
 import PreguntasProteccion3 from "./pages/Actividades/Actividades_Morelco_Riesgos_Manos/PreguntasProteccion3.jsx";
 import PreguntasRiesgosMecanicos from "./pages/Actividades/Actividades_Morelco_Riesgos_Manos/PreguntasRiesgosMecanicos.jsx";
 import PreguntasRiesgosTermicos from "./pages/Actividades/Actividades_Morelco_Riesgos_Manos/PreguntasRiesgosTermicos.jsx";
-import DragAndDropManos from "./pages/Actividades/Actividades_Morelco_Riesgos_Manos/DragAndDropManos.jsx"
+import DragAndDropManos from "./pages/Actividades/Actividades_Morelco_Riesgos_Manos/DragAndDropManos.jsx";
 import SelectAndValidateMobile from "./pages/Actividades/Actividades_Morelco_Riesgos_Manos/SelectAndValidateMobile.jsx";
 import PreguntasSeleccionHerramientas from "./pages/Actividades/Actividades_Morelco_Riesgos_Manos/PreguntasSeleccionHerramientas.jsx";
 import OrdenarPasos from "./pages/Actividades/Actividades_Morelco_Riesgos_Manos/OrdenarPasos.jsx";
@@ -26,10 +26,11 @@ import DragAndDropAlturas2Movil from "./pages/Actividades/Actividades_Trabajo_se
 import "./main.css";
 import DragAndDropSlide9 from "./pages/Actividades/Actividades_Trabajo_seguro_alturas/DragnAndDropSlide9.jsx";
 import { OrderAudio } from "./pages/Actividades/Actividades_Trabajo_seguro_alturas/OrderAudios.jsx";
-
+import DragAndDropAudios from "./pages/Actividades/Actividades_Trabajo_seguro_alturas/DragAndDropAudios.jsx";
+import DragAndDropAudiosMovil from "./pages/Actividades/Actividades_Trabajo_seguro_alturas/DragAndDropAudiosMovil.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <DragAndDropAlturas2 />
+    <DragAndDropAudiosMovil />
   </React.StrictMode>
 );

@@ -8,8 +8,9 @@ import useStore from "../../../store";
 import "./styles/DragAndDropSlide9.css";
 import img from "../../../assets/img/caida_perdida_estabilidad_sldM2.webp";
 import img1 from "../../../assets/img/colapsio_andamio_sldM2.webp";
-import { Check, X } from 'lucide-react';
-import unchek from "../../../assets/img/xmarkAct.png";
+import img2 from "../../../assets/img/desplazamiento_herramientas_sldM2.webp";
+import img3 from "../../../assets/img/golpe_estructura_sldM2.webp";
+import uncheck from "../../../assets/img/xmarkAct.png";
 import check from "../../../assets/img/checkAct.png";
 
 function DraggableOption({ id, label, isDropped }) {
@@ -57,25 +58,25 @@ function DropArea({ id, children, isValidated, isCorrect }) {
   });
 
   const style = {
-    backgroundColor: isValidated 
-      ? isCorrect 
+    backgroundColor: isValidated
+      ? isCorrect
         ? "#90EE90" // Light green
         : "#FFB6C1" // Light red
-      : children 
-        ? "#C0185D" 
-        : isOver 
-          ? "#e6e6e6" 
+      : children
+        ? "#C0185D"
+        : isOver
+          ? "#e6e6e6"
           : "#f3f4f6",
     width: "100%",
     height: "50px",
     padding: "1.5rem",
     border: `2px dashed ${
-      isValidated 
-        ? isCorrect 
-          ? "#90EE90" 
+      isValidated
+        ? isCorrect
+          ? "#90EE90"
           : "#FFB6C1"
-        : children 
-          ? "#C0185D" 
+        : children
+          ? "#C0185D"
           : "#e2e8f0"
     }`,
     borderRadius: "8px",
@@ -124,13 +125,13 @@ export default function DragAndDropSlide9() {
       id: "option3",
       text: "Caídas por pérdida de estabilidad en superficies inclinadas.​",
       label: "Trabajos en techos y cubiertas​",
-      image: img,
+      image: img2,
     },
     {
       id: "option4",
       text: "Desplazamiento de herramientas o materiales desde alturas que impacten a trabajadores en niveles inferiores​​",
       label: "Trabajos en andamios​​",
-      image: img1,
+      image: img3,
     },
   ];
 
@@ -165,11 +166,15 @@ export default function DragAndDropSlide9() {
       (status) => status === "correct"
     ).length;
 
+    const percentage = Math.round((totalCorrect / options.length) * 100);
+
     if (totalCorrect === 4) {
-      setValidationMessage("¡Muy bien ! ¡Este es un riesgo de la actividad seleccionada !");
+      setValidationMessage(
+        `¡Muy bien! ¡Este es un riesgo de la actividad seleccionada! Obtuviste un ${percentage}%.`
+      );
     } else {
       setValidationMessage(
-        "¡Piénsalo bien! Este riesgo no se relaciona con la actividad seleccionada"
+        `Has asociado un riesgo de manera errónea. ¡Inténtalo de nuevo! Obtuviste un ${percentage}%.`
       );
     }
   };
@@ -214,13 +219,13 @@ export default function DragAndDropSlide9() {
                   ? verificationImages[`drop${index + 1}`] === "correct"
                     ? "#4CAF50"
                     : verificationImages[`drop${index + 1}`] === "incorrect"
-                    ? "#F44336"
-                    : "white"
+                      ? "#F44336"
+                      : "white"
                   : "white",
               }}
             >
               {validationMessage && (
-                <div 
+                <div
                   style={{
                     position: "absolute",
                     top: "30%",
@@ -229,9 +234,19 @@ export default function DragAndDropSlide9() {
                     zIndex: 10,
                   }}
                 >
-                  <img 
-                    src={verificationImages[`drop${index + 1 || "/placeholder.svg"}`] === "correct" ? check : unchek}
-                    alt={verificationImages[`drop${index + 1}`] === "correct" ? "Correcto" : "Incorrecto"}
+                  <img
+                    src={
+                      verificationImages[
+                        `drop${index + 1 || "/placeholder.svg"}`
+                      ] === "correct"
+                        ? check
+                        : uncheck
+                    }
+                    alt={
+                      verificationImages[`drop${index + 1}`] === "correct"
+                        ? "Correcto"
+                        : "Incorrecto"
+                    }
                     style={{
                       width: "64px",
                       height: "64px",
@@ -239,29 +254,31 @@ export default function DragAndDropSlide9() {
                   />
                 </div>
               )}
-              <img 
-                src={option.image || "/placeholder.svg"} 
+              <img
+                src={option.image || "/placeholder.svg"}
                 alt={option.text}
                 style={{
                   width: "100%",
                   height: "140px",
                   objectFit: "cover",
                   borderRadius: "8px",
-                  position: "relative"
+                  position: "relative",
                 }}
               />
-              <Paragraph 
+              <Paragraph
                 theme={validationMessage ? undefined : "light"}
-                justify="center" 
+                justify="center"
               >
                 {option.text}
               </Paragraph>
 
               <div style={{ width: "100%" }}>
-                <DropArea 
+                <DropArea
                   id={`drop${index + 1}`}
                   isValidated={!!validationMessage}
-                  isCorrect={verificationImages[`drop${index + 1}`] === "correct"}
+                  isCorrect={
+                    verificationImages[`drop${index + 1}`] === "correct"
+                  }
                 >
                   {items[`drop${index + 1}`] &&
                     options.find((opt) => opt.id === items[`drop${index + 1}`])
@@ -272,11 +289,15 @@ export default function DragAndDropSlide9() {
           ))}
         </div>
 
-        <div 
-          className="flex flex-row justify-center gap-4" 
-          style={{ 
-            display: options.some(option => !Object.values(items).includes(option.id)) ? 'flex' : 'none',
-            marginTop: "1rem" 
+        <div
+          className="flex flex-row justify-center gap-4"
+          style={{
+            display: options.some(
+              (option) => !Object.values(items).includes(option.id)
+            )
+              ? "flex"
+              : "none",
+            marginTop: "1rem",
           }}
         >
           {options.map((option) => (
@@ -294,7 +315,7 @@ export default function DragAndDropSlide9() {
         <div className="flex justify-center mt-4">
           <p
             className={`validation-message ${
-              validationMessage.includes("correcta") ? "error" : "success"
+              validationMessage.includes("correcta") ? "success" : "error"
             }`}
           >
             {validationMessage}
@@ -323,4 +344,3 @@ export default function DragAndDropSlide9() {
     </div>
   );
 }
-

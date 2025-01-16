@@ -47,7 +47,12 @@
 }
 
 .drop-area.incorrect {
-  background-color: #fef2f2; /* Red for incorrect */
+  background-color: #f44336 !important; /* Red for incorrect */
+}
+
+.validation-message.error {
+  background-color: #f44336 !important;
+  font-weight: bold;
 }
 
 .draggable-option {
