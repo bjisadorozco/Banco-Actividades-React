@@ -130,7 +130,7 @@ export default function DragAndDropSlide9() {
     {
       id: "option4",
       text: "Desplazamiento de herramientas o materiales desde alturas que impacten a trabajadores en niveles inferiores​​",
-      label: "Trabajos en andamios​​",
+      label: "Trabajos en paredes",
       image: img3,
     },
   ];

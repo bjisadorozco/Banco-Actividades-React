@@ -26,7 +26,7 @@ export default function SelectActivity() {
     {
       id: "option1",
       text: "Golpes con la estructura durante el movimiento vertical​",
-      label: "Labores en fachadas y paredes​",
+      label: "Trabajo en estructuras​",
       image: img,
     },
     {
@@ -44,7 +44,7 @@ export default function SelectActivity() {
     {
       id: "option4",
       text: "Desplazamiento de herramientas o materiales desde alturas que impacten a trabajadores en niveles inferiores​​",
-      label: "Trabajos en andamios​​",
+      label: "Trabajos en paredes",
       image: img3,
     },
   ];
