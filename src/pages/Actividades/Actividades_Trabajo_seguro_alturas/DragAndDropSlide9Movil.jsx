@@ -85,11 +85,11 @@ export default function SelectActivity() {
 
     if (totalCorrect === 4) {
       setValidationMessage(
-        `¡Muy bien! ¡Este es un riesgo de la actividad seleccionada! Obtuviste un ${percentage}%.`
+        `¡Muy bien! ¡Este es un riesgo de la actividad seleccionada! \nTus respuestas correctas son: ${totalCorrect} de 4 (${percentage}%).`
       );
     } else {
       setValidationMessage(
-        `Has asociado un riesgo de manera errónea. ¡Inténtalo de nuevo! Obtuviste un ${percentage}%.`
+        `Has asociado un riesgo de manera errónea \n Tus respuestas correctas son: ${totalCorrect} de 4 (${percentage}%).`
       );
     }
   };
@@ -127,6 +127,8 @@ export default function SelectActivity() {
                   ? "#4CAF50"
                   : "#F44336"
                 : "white",
+              color: "white",
+              height: "auto",
             }}
           >
             {validationMessage && (
@@ -165,7 +167,12 @@ export default function SelectActivity() {
                 position: "relative",
               }}
             />
-            <Paragraph justify="center">{option.text}</Paragraph>
+            <Paragraph
+              justify="center"
+              theme={validationMessage ? undefined : "light"}
+            >
+              {option.text}
+            </Paragraph>
 
             <div style={{ width: "100%" }}>
               <select
@@ -173,9 +180,21 @@ export default function SelectActivity() {
                 onChange={(e) =>
                   handleSelectChange(`drop${index + 1}`, e.target.value)
                 }
-                style={{ width: "100%", height: "40px" }}
+                style={{
+                  width: "100%",
+                  height: "40px",
+                  color: validationMessage ? "#0F172A" : "gray",
+                  backgroundColor: validationMessage
+                    ? selectedOptions[`drop${index + 1}`] === option.id
+                      ? "#90EE90"
+                      : "#FFB6C1"
+                    : "white",
+                  borderRadius: "8px",
+                  fontWeight: validationMessage ? "bold" : "normal",
+                  marginTop: "20px"
+                }}
               >
-                <option value="">Selecciona una opción</option>
+                <option value="">Seleccione...</option>
                 {getFilteredOptions(`drop${index + 1}`).map((opt) => (
                   <option key={opt.id} value={opt.id}>
                     {opt.label}
@@ -191,7 +210,7 @@ export default function SelectActivity() {
         <div className="flex justify-center mt-4">
           <p
             className={`validation-message ${
-              validationMessage.includes("correcta") ? "success" : "error"
+              validationMessage.includes("Muy bien") ? "success" : "error"
             }`}
           >
             {validationMessage}

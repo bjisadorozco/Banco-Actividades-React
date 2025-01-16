@@ -1,3 +1,6 @@
+:root {
+  font-family: 'Montserrat', sans-serif;
+}
 .flex {
   display: flex;
   width: 100%;
@@ -61,15 +64,6 @@
   color: white;
 }
 
-.validation-message.success {
-  background-color: #4caf50;
-  /* color: white; */
-}
-
-.validation-message.error {
-  background-color: #c4c4c4;
-  /* color: white; */
-}
 
 @media (max-width: 768px) {
   .flex-row {
@@ -93,8 +87,8 @@
 }
 
 .validation-message.error {
-  background-color: #dbdbdb;
-  color: #C0185D;
+  background-color: white;
+  color: #818181;
   font-weight: bold;
 }
 

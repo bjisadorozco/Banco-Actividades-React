@@ -33,7 +33,7 @@ function DraggableOption({ id, label, isDropped }) {
       ref={setNodeRef}
       style={{
         ...style,
-        width: "190px",
+        width: "220px",
         height: "60px",
         backgroundColor: "#C0185D",
         color: "white",
@@ -68,7 +68,7 @@ function DropArea({ id, children, isValidated, isCorrect }) {
           ? "#e6e6e6"
           : "#f3f4f6",
     width: "100%",
-    height: "50px",
+    height: "60px",
     padding: "1.5rem",
     border: `2px dashed ${
       isValidated
@@ -84,7 +84,7 @@ function DropArea({ id, children, isValidated, isCorrect }) {
     justifyContent: "center",
     alignItems: "center",
     marginTop: "1rem",
-    color: isValidated || children ? "white" : "inherit",
+    color: isValidated ? "#0F172A" : "white",
     fontWeight: "bold",
   };
 
@@ -170,11 +170,11 @@ export default function DragAndDropSlide9() {
 
     if (totalCorrect === 4) {
       setValidationMessage(
-        `¡Muy bien! ¡Este es un riesgo de la actividad seleccionada! Obtuviste un ${percentage}%.`
+        `¡Muy bien! ¡Este es un riesgo de la actividad seleccionada!. Tus respuestas correctas son: ${totalCorrect} de 4 (${percentage}%)`
       );
     } else {
       setValidationMessage(
-        `Has asociado un riesgo de manera errónea. ¡Inténtalo de nuevo! Obtuviste un ${percentage}%.`
+        `Has asociado un riesgo de manera errónea. ¡Inténtalo de nuevo!.Tus respuestas correctas son: ${totalCorrect} de 4 (${percentage}%)`
       );
     }
   };
@@ -315,7 +315,7 @@ export default function DragAndDropSlide9() {
         <div className="flex justify-center mt-4">
           <p
             className={`validation-message ${
-              validationMessage.includes("correcta") ? "success" : "error"
+              validationMessage.includes("Muy bien") ? "success" : "error"
             }`}
           >
             {validationMessage}

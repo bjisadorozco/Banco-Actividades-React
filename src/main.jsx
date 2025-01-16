@@ -25,7 +25,7 @@ import DragAndDropAlturas2 from "./pages/Actividades/Actividades_Trabajo_seguro_
 import DragAndDropAlturas2Movil from "./pages/Actividades/Actividades_Trabajo_seguro_alturas/DragAndDropAlturas2Movil.jsx";
 import "./main.css";
 import DragAndDropSlide9 from "./pages/Actividades/Actividades_Trabajo_seguro_alturas/DragnAndDropSlide9.jsx";
-import { OrderAudio } from "./pages/Actividades/Actividades_Trabajo_seguro_alturas/OrderAudios.jsx";
+import OrderAudio from "./pages/Actividades/Actividades_Trabajo_seguro_alturas/OrderAudios.jsx";
 import DragAndDropAudios from "./pages/Actividades/Actividades_Trabajo_seguro_alturas/DragAndDropAudios.jsx";
 import DragAndDropAudiosMovil from "./pages/Actividades/Actividades_Trabajo_seguro_alturas/DragAndDropAudiosMovil.jsx";
 import DragAndDropSlide9Movil from "./pages/Actividades/Actividades_Trabajo_seguro_alturas/DragAndDropSlide9Movil.jsx";
