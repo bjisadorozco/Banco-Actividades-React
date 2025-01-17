@@ -32,6 +32,6 @@ import DragAndDropSlide9Movil from "./pages/Actividades/Actividades_Trabajo_segu
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <DragAndDropSlide9 />
+    <DragAndDropAlturas2 />
   </React.StrictMode>
 );

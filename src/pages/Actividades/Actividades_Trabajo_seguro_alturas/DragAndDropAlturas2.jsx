@@ -9,6 +9,7 @@ import useStore from "../../../store";
 
 import uncheck from "../../../assets/img/xmarkAct.png";
 import check from "../../../assets/img/checkAct.png";
+import "./styles/DragAndDropAlturas2.css";
 
 function DraggableOption({ id, label, isDropped }) {
   const { attributes, listeners, setNodeRef, transform } = useDraggable({
@@ -28,21 +29,7 @@ function DraggableOption({ id, label, isDropped }) {
   return (
     <div
       ref={setNodeRef}
-      style={{
-        ...style,
-        width: "190px",
-        height: "50px",
-        backgroundColor: "#C0185D",
-        color: "white",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        borderRadius: "8px",
-        fontWeight: "bold",
-        cursor: "pointer",
-        marginRight: "10px",
-        marginLeft: "10px",
-      }}
+      style={style}
       {...listeners}
       {...attributes}
       className="draggable-option"
@@ -55,35 +42,19 @@ function DraggableOption({ id, label, isDropped }) {
 function DropArea({ id, children, verificationImage }) {
   const { isOver, setNodeRef } = useDroppable({ id });
 
-  const style = {
-    backgroundColor: isOver
-      ? "#e6e6e6"
-      : children
-        ? verificationImage === "correct"
-          ? "#90EE90"
-          : "#FFB6C1"
-        : "#e6e6e6",
-    width: "100%",
-    height: "50px",
-    border: `2px dashed ${
-      isOver
-        ? "gray"
-        : children
-          ? verificationImage === "correct"
-            ? "#90EE90"
-            : "#FFB6C1"
-          : "gray"
-    }`,
-    borderRadius: "8px",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    fontWeight: "bold",
-    marginTop: "20px",
-  };
-
   return (
-    <div ref={setNodeRef} style={style} className="drop-area">
+    <div
+      ref={setNodeRef}
+      className={`drop-area ${
+        isOver
+          ? "drop-over"
+          : children
+            ? verificationImage === "correct"
+              ? "drop-correct"
+              : "drop-incorrect"
+            : "drop-over"
+      }`}
+    >
       {children}
     </div>
   );
@@ -147,20 +118,19 @@ export default function DragAndDropAlturas2() {
   }, [items]);
 
   useEffect(() => {
-    // Verifica si todos los elementos están llenos
     if (Object.values(items).every(Boolean)) {
       const totalCorrect = Object.values(verificationImages).filter(
         (status) => status === "correct"
       ).length;
-  
+
       const percentage = Math.round((totalCorrect / options.length) * 100);
-  
+
       setValidationMessage(
         `Tus respuestas correctas son: ${totalCorrect} de 3 (${percentage}%)`
       );
     }
-  }, [verificationImages]); // Se ejecuta cada vez que cambia `verificationImages`
-  
+  }, [verificationImages]);
+
   const sensors = useSensors(
     useSensor(MouseSensor, { activationConstraint: { distance: 10 } })
   );
@@ -214,8 +184,8 @@ export default function DragAndDropAlturas2() {
         ...prevMessages,
         [over.id]: {
           text: isCorrect
-            ? "¡Muy bien! estas medidas de control te ayudarán a controlar estos riesgos.​"
-            : "¡Piénsalo bien! Estas medidas de control NO son las adecuadas para estos riesgos.",
+            ? "¡Correcto!​"
+            : "¡Incorrecto",
           class: isCorrect ? "success" : "error",
         },
       }));
@@ -231,24 +201,15 @@ export default function DragAndDropAlturas2() {
   );
 
   return (
-    <div className="flex flex-col overflow-x-hidden mb-36">
+    <div className="activity-container">
       <DndContext sensors={sensors} onDragEnd={handleDragEnd}>
-        <div className="flex flex-row justify-center gap-4 mb-4">
+        <div className="drop-zones">
           {options.map((option, index) => (
             <div
               key={option.id}
-              className="p-6 mt-4 border rounded-lg shadow-md flex flex-col items-center relative"
-              style={{
-                width: "350px",
-                justifyContent: "space-between",
-                textAlign: "left",
-                backgroundColor:
-                  verificationImages[`drop${index + 1}`] === "correct"
-                    ? "#4CAF50"
-                    : verificationImages[`drop${index + 1}`] === "incorrect"
-                      ? "#F44336"
-                      : "white",
-              }}
+              className={`drop-zone ${
+                verificationImages[`drop${index + 1}`] || ""
+              }`}
             >
               {verificationImages[`drop${index + 1}`] && (
                 <img
@@ -257,52 +218,22 @@ export default function DragAndDropAlturas2() {
                       ? check
                       : uncheck
                   }
-                  alt={
-                    verificationImages[`drop${index + 1}`] === "correct"
-                      ? "Correcto"
-                      : "Incorrecto"
-                  }
-                  style={{
-                    position: "absolute",
-                    top: "23%",
-                    left: "50%",
-                    transform: "translate(-50%, -50%)",
-                    zIndex: 10,
-                    width: "64px",
-                    height: "64px",
-                  }}
+                  alt={verificationImages[`drop${index + 1}`]}
+                  className="verification-image"
                 />
               )}
               <Paragraph
                 theme={
                   verificationImages[`drop${index + 1}`] ? undefined : "light"
                 }
-                justify="left"
-                style={
-                  verificationImages[`drop${index + 1}`]
-                    ? { fontWeight: "bold" }
-                    : {}
-                }
               >
-                <ul
-                  style={{
-                    border: "1px solid #ccc",
-                    padding: "10px",
-                    borderRadius: "8px",
-                    backgroundColor: "transparent",
-                  }}
-                >
+                <ul className="option-text">
                   {option.text.map((item, i) => (
                     <li key={i}>{item}</li>
                   ))}
                 </ul>
               </Paragraph>
-              <div
-                style={{
-                  width: "100%",
-                  color: verificationImages ? "#0F172A" : "red",
-                }}
-              >
+              <div className="drop-area-wrapper">
                 <DropArea
                   id={`drop${index + 1}`}
                   verificationImage={verificationImages[`drop${index + 1}`]}
@@ -316,20 +247,6 @@ export default function DragAndDropAlturas2() {
                     className={`validation-message ${
                       validationMessages[`drop${index + 1}`]?.class
                     }`}
-                    style={{
-                      marginTop: "8px",
-                      textAlign: "center",
-                      width: "100%",
-                      backgroundColor:
-                        validationMessages[`drop${index + 1}`]?.class ===
-                        "success"
-                          ? "#4CAF50"
-                          : "#F44336",
-                      color: "white",
-                      fontWeight: "bold",
-                      padding: "5px",
-                      borderRadius: "4px",
-                    }}
                   >
                     {validationMessages[`drop${index + 1}`]?.text}
                   </p>
@@ -340,7 +257,7 @@ export default function DragAndDropAlturas2() {
         </div>
 
         {remainingOptions.length > 0 && (
-          <div className="flex flex-row justify-center gap-4 mt-4">
+          <div className="remaining-options">
             {remainingOptions.map((option) => (
               <DraggableOption
                 key={option.id}
@@ -353,20 +270,12 @@ export default function DragAndDropAlturas2() {
         )}
 
         {validationMessage && (
-          <div className="flex justify-center mt-4">
-            <p
-              className={`validation-message ${
-                validationMessage.includes("Tus respuestas correctas")
-                  ? "error"
-                  : "success"
-              }`}
-            >
-              {validationMessage}
-            </p>
+          <div className="validation-summary">
+            <p>{validationMessage}</p>
           </div>
         )}
 
-        <div className="flex justify-center mt-4 gap-4">
+        <div className="action-buttons">
           <Button onClick={handleReset} icon={faRepeat} roundedFull={true}>
             Reiniciar
           </Button>

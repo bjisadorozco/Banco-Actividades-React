@@ -86,11 +86,11 @@
   background-color: #4caf50;
 }
 
-.validation-message.error {
+/* .validation-message.error {
   background-color: white;
   color: #818181;
   font-weight: bold;
-}
+} */
 
 .gap-4 {
   gap: 0.25rem;

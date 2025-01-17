@@ -175,7 +175,7 @@ export default function SelectAlturas2() {
               }}
             >
               <option value="" disabled>
-                Selecciona una opción
+                Seleccione...
               </option>
               {options
                 .filter(
