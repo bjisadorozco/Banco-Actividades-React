@@ -1,105 +1,147 @@
 :root {
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
+  line-height: 1.1rem;
+
 }
+
 .flex {
   display: flex;
   width: 100%;
-  max-width: 1200px;
   margin: 0 auto;
-  padding: 1rem;
-}
-
-.flex-col {
-  flex-direction: column;
-}
-
-.flex-row {
-  flex-direction: row;
-}
-
-.justify-center {
-  justify-content: center;
-}
-
-.items-center {
-  align-items: center;
-}
-
-.gap-4 {
-  gap: 0.5rem;
-}
-
-.mt-4 {
-  margin-top: 0.5rem;
-}
-
-.mb-4 {
-  margin-bottom: 0.5rem;
-}
-
-.p-6 {
-  padding: 1rem;
+  padding: 10px;
 }
 
 .border {
   border: 1px solid #e2e8f0;
 }
 
-.rounded-lg {
-  border-radius: 0.5rem;
-}
-
-.shadow-md {
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.validation-message {
+.draggable-option {
+  width: 150px;
+  height: 60px;
+  background-color: #c0185d;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+  font-weight: bold;
   text-align: center;
-  padding: 0.4rem;
-  border-radius: 0.5rem;
-  font-weight: 500;
+  padding: 10px;
+}
+
+.card {
+  width: 350px;
+  min-height: 340px;
+  justify-content: space-evenly;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+}
+
+.card:hover {
+  transform: none;
+}
+
+.card-image {
   width: 100%;
-  max-width: 500px;
-  margin: 1rem auto;
+  height: 110px;
+  object-fit: cover;
+  border-radius: 8px;
+  position: relative;
+}
+
+.verification-icon {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  z-index: 10;
+  width: 64px;
+  height: 64px;
+}
+
+.drop-area {
+  width: 100%;
+  height: 60px;
+  padding: 1.5rem;
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1rem;
+  font-weight: bold;
+}
+
+.drop-area-default {
+  background-color: #f3f4f6;
+  border: 2px dashed #e2e8f0;
+}
+
+.drop-area-hover {
+  background-color: #e6e6e6;
+}
+
+.drop-area-filled {
+  background-color: #c0185d;
+  border: 2px dashed #c0185d;
   color: white;
 }
 
+.drop-area-correct {
+  background-color: #90ee90;
+  border: 2px dashed #90ee90;
+  color: #0f172a;
+}
 
-@media (max-width: 768px) {
-  .flex-row {
-    flex-direction: column;
-  }
+.drop-area-incorrect {
+  background-color: #ffb6c1;
+  border: 2px dashed #ffb6c1;
+  color: #0f172a;
+}
+
+.card-correct {
+  background-color: #4caf50;
+}
+
+.card-incorrect {
+  background-color: #f44336;
 }
 
 .validation-message {
   text-align: center;
-  padding: 0.5rem;
-  border-radius: 0.5rem;
-  font-weight: 500;
   width: 100%;
   max-width: 500px;
   margin: 0.5rem auto;
-  color: white;
+  font-size: 16px;
+  color: #717171;
+  font-weight: bold;
 }
 
 .validation-message.success {
   background-color: #4caf50;
 }
 
-/* .validation-message.error {
-  background-color: white;
-  color: #818181;
-  font-weight: bold;
-} */
-
-.gap-4 {
-  gap: 0.25rem;
+.validation-message.error {
+  background-color: #f44336;
 }
 
-.mt-4 {
-  margin-top: 0.25rem;
+.verification-icon {
+  position: absolute;
+  top: 23%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+  width: 64px;
+  height: 64px;
 }
 
-.mb-4 {
-  margin-bottom: 0.25rem;
+.overflow-x-hidden {
+  overflow-x: hidden;
+}
+
+.paragraph {
+  color: #8b8b8a;
+}
+
+.paragraph.succes {
+  color: white;
 }

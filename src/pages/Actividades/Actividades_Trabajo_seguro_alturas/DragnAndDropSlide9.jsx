@@ -5,13 +5,13 @@ import Paragraph from "../../components/Paragraph";
 import Button from "../../components/Button";
 import { faRepeat, faCheck } from "@fortawesome/free-solid-svg-icons";
 import useStore from "../../../store";
-import "./styles/DragAndDropSlide9.css";
+import check from "../../../assets/img/checkAct.png";
+import unchek from "../../../assets/img/xmarkAct.png";
 import img from "../../../assets/img/caida_perdida_estabilidad_sldM2.webp";
 import img1 from "../../../assets/img/colapsio_andamio_sldM2.webp";
 import img2 from "../../../assets/img/desplazamiento_herramientas_sldM2.webp";
 import img3 from "../../../assets/img/golpe_estructura_sldM2.webp";
-import uncheck from "../../../assets/img/xmarkAct.png";
-import check from "../../../assets/img/checkAct.png";
+import "./styles/DragAndDropSlide9.css";
 
 function DraggableOption({ id, label, isDropped }) {
   const { attributes, listeners, setNodeRef, transform } = useDraggable({
@@ -31,19 +31,8 @@ function DraggableOption({ id, label, isDropped }) {
   return (
     <div
       ref={setNodeRef}
-      style={{
-        ...style,
-        width: "220px",
-        height: "60px",
-        backgroundColor: "#C0185D",
-        color: "white",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        borderRadius: "8px",
-        fontWeight: "bold",
-        textAlign: "center",
-      }}
+      className="draggable-option"
+      style={style}
       {...listeners}
       {...attributes}
     >
@@ -57,39 +46,18 @@ function DropArea({ id, children, isValidated, isCorrect }) {
     id,
   });
 
-  const style = {
-    backgroundColor: isValidated
-      ? isCorrect
-        ? "#90EE90" // Light green
-        : "#FFB6C1" // Light red
-      : children
-        ? "#C0185D"
-        : isOver
-          ? "#e6e6e6"
-          : "#f3f4f6",
-    width: "100%",
-    height: "60px",
-    padding: "1.5rem",
-    border: `2px dashed ${
-      isValidated
-        ? isCorrect
-          ? "#90EE90"
-          : "#FFB6C1"
-        : children
-          ? "#C0185D"
-          : "#e2e8f0"
-    }`,
-    borderRadius: "8px",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    marginTop: "1rem",
-    color: isValidated ? "#0F172A" : "white",
-    fontWeight: "bold",
-  };
+  const dropAreaClass = isValidated
+    ? isCorrect
+      ? "drop-area drop-area-correct"
+      : "drop-area drop-area-incorrect"
+    : children
+      ? "drop-area drop-area-filled"
+      : isOver
+        ? "drop-area drop-area-hover"
+        : "drop-area drop-area-default";
 
   return (
-    <div ref={setNodeRef} style={style}>
+    <div ref={setNodeRef} className={dropAreaClass}>
       {children}
     </div>
   );
@@ -106,13 +74,15 @@ export default function DragAndDropSlide9() {
   const [correctAnswersCount, setCorrectAnswersCount] = useState(0);
   const setIsOnDivisor = useStore((state) => state.setIsOnDivisor);
   const [isResetDisabled, setIsResetDisabled] = useState(true);
+  const [isValidateDisabled, setValidateDisabled] = useState(true);
   const [validationMessage, setValidationMessage] = useState("");
+  const [shuffledOptions, setShuffledOptions] = useState([]);
 
   const options = [
     {
       id: "option1",
       text: "Golpes con la estructura durante el movimiento vertical​",
-      label: "Trabajos en estructuras​",
+      label: "Trabajo en estructuras​",
       image: img,
     },
     {
@@ -129,7 +99,7 @@ export default function DragAndDropSlide9() {
     },
     {
       id: "option4",
-      text: "Desplazamiento de herramientas o materiales desde alturas que impacten a trabajadores en niveles inferiores​​",
+      text: "Desplazamiento de materiales desde alturas que impacten a trabajadores en niveles inferiores​​",
       label: "Trabajos en paredes",
       image: img3,
     },
@@ -137,12 +107,20 @@ export default function DragAndDropSlide9() {
 
   useEffect(() => {
     setIsOnDivisor(false);
+    const shuffled = [...options].sort(() => Math.random() - 0.5);
+    setShuffledOptions(shuffled);
   }, []);
 
   useEffect(() => {
     const hasDroppedItems = Object.values(items).some((item) => item !== null);
     setIsResetDisabled(!hasDroppedItems);
   }, [items]);
+
+  useEffect(() => {
+    const areAllDropsFilled = Object.values(items).every((item) => item !== null);
+    setValidateDisabled(!areAllDropsFilled);
+  }, [items]);
+  
 
   const sensors = useSensors(
     useSensor(MouseSensor, { activationConstraint: { distance: 10 } })
@@ -159,6 +137,9 @@ export default function DragAndDropSlide9() {
     setCorrectAnswersCount(0);
     setIsResetDisabled(true);
     setValidationMessage("");
+    // Rebarajar las opciones al reiniciar
+    const shuffled = [...options].sort(() => Math.random() - 0.5);
+    setShuffledOptions(shuffled);
   };
 
   const handleValidation = () => {
@@ -170,11 +151,16 @@ export default function DragAndDropSlide9() {
 
     if (totalCorrect === 4) {
       setValidationMessage(
-        `¡Muy bien! ¡Este es un riesgo de la actividad seleccionada! \n Tus respuestas correctas son: ${totalCorrect} de 4 (${percentage}%)`
+        `¡Muy bien ! ¡Este es un riesgo de la actividad seleccionada! 
+        \nTus respuestas correctas son: ${totalCorrect} de 4 (${percentage}%)`
       );
+      // setValidationMessage(
+      //   "¡Muy bien ! ¡Este es un riesgo de la actividad seleccionada !"
+      // );
     } else {
       setValidationMessage(
-        `Has asociado un riesgo de manera errónea. ¡Inténtalo de nuevo! \nTus respuestas correctas son: ${totalCorrect} de 4 (${percentage}%)`
+        `¡Piénsalo bien! Este riesgo no se relaciona con la actividad seleccionada
+        \nTus respuestas correctas son: ${totalCorrect} de 4 (${percentage}%)`
       );
     }
   };
@@ -207,84 +193,58 @@ export default function DragAndDropSlide9() {
     <div className="flex flex-col overflow-x-hidden mb-36">
       <DndContext sensors={sensors} onDragEnd={handleDragEnd}>
         <div className="flex flex-row justify-center gap-4 mb-4">
-          {options.map((option, index) => (
+          {shuffledOptions.map((option, index) => (
             <div
               key={option.id}
-              className="p-6 mt-4 border rounded-lg shadow-md flex flex-col items-center relative"
-              style={{
-                width: "350px",
-                justifyContent: "space-between",
-                textAlign: "center",
-                backgroundColor: validationMessage
+              className={`p-6 mt-4 border rounded-lg shadow-md flex flex-col items-center relative card ${
+                validationMessage
                   ? verificationImages[`drop${index + 1}`] === "correct"
-                    ? "#4CAF50"
+                    ? "card-correct"
                     : verificationImages[`drop${index + 1}`] === "incorrect"
-                      ? "#F44336"
-                      : "white"
-                  : "white",
-              }}
+                      ? "card-incorrect"
+                      : ""
+                  : ""
+              }`}
             >
               {validationMessage && (
-                <div
-                  style={{
-                    position: "absolute",
-                    top: "30%",
-                    left: "50%",
-                    transform: "translate(-50%, -50%)",
-                    zIndex: 10,
-                  }}
-                >
-                  <img
-                    src={
-                      verificationImages[
-                        `drop${index + 1 || "/placeholder.svg"}`
-                      ] === "correct"
-                        ? check
-                        : uncheck
-                    }
-                    alt={
-                      verificationImages[`drop${index + 1}`] === "correct"
-                        ? "Correcto"
-                        : "Incorrecto"
-                    }
-                    style={{
-                      width: "64px",
-                      height: "64px",
-                    }}
-                  />
-                </div>
+                <img
+                  className="verification-icon"
+                  src={
+                    verificationImages[`drop${index + 1}`] === "correct"
+                      ? check
+                      : unchek
+                  }
+                  alt={
+                    verificationImages[`drop${index + 1}`] === "correct"
+                      ? "Correcto"
+                      : "Incorrecto"
+                  }
+                />
               )}
               <img
-                src={option.image || "/placeholder.svg"}
+                className="card-image"
+                src={option.image}
                 alt={option.text}
-                style={{
-                  width: "100%",
-                  height: "140px",
-                  objectFit: "cover",
-                  borderRadius: "8px",
-                  position: "relative",
-                }}
               />
               <Paragraph
-                theme={validationMessage ? undefined : "light"}
-                justify="center"
+                theme={
+                  !validationMessage
+                    ? "light" // Si no está validado, usa el tema "light"
+                    : "dark"
+                }
               >
                 {option.text}
               </Paragraph>
 
-              <div style={{ width: "100%" }}>
-                <DropArea
-                  id={`drop${index + 1}`}
-                  isValidated={!!validationMessage}
-                  isCorrect={
-                    verificationImages[`drop${index + 1}`] === "correct"
-                  }
-                >
-                  {items[`drop${index + 1}`] &&
-                    options.find((opt) => opt.id === items[`drop${index + 1}`])
-                      ?.label}
-                </DropArea>
-              </div>
+              <DropArea
+                id={`drop${index + 1}`}
+                isValidated={!!validationMessage}
+                isCorrect={verificationImages[`drop${index + 1}`] === "correct"}
+              >
+                {items[`drop${index + 1}`] &&
+                  options.find((opt) => opt.id === items[`drop${index + 1}`])
+                    ?.label}
+              </DropArea>
             </div>
           ))}
         </div>
@@ -297,7 +257,6 @@ export default function DragAndDropSlide9() {
             )
               ? "flex"
               : "none",
-            marginTop: "1rem",
           }}
         >
           {options.map((option) => (
@@ -312,10 +271,10 @@ export default function DragAndDropSlide9() {
       </DndContext>
 
       {validationMessage && (
-        <div className="flex justify-center mt-4">
+        <div className="justify-center mt-4">
           <p
             className={`validation-message ${
-              validationMessage.includes("Muy bien") ? "success" : "error"
+              validationMessage.includes("correcta") ? "successs" : "errors"
             }`}
           >
             {validationMessage}
@@ -328,7 +287,7 @@ export default function DragAndDropSlide9() {
           onClick={handleValidation}
           icon={faCheck}
           roundedFull={true}
-          disabled={isResetDisabled}
+          disabled={isValidateDisabled}
         >
           Validar
         </Button>

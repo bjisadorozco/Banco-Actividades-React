@@ -184,8 +184,8 @@ export default function DragAndDropAlturas2() {
         ...prevMessages,
         [over.id]: {
           text: isCorrect
-            ? "¡Correcto! Tus respuestas son correctas​"
-            : "¡Incorrecto! Por favor, intenta de nuevo.",
+            ? "¡Correcto!​"
+            : "¡Incorrecto!",
           class: isCorrect ? "success" : "error",
         },
       }));
