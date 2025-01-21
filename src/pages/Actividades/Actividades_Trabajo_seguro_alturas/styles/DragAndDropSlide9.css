@@ -1,7 +1,6 @@
 :root {
   font-family: "Montserrat", sans-serif;
   line-height: 1.1rem;
-
 }
 
 .flex {
@@ -31,6 +30,7 @@
 
 .card {
   width: 350px;
+  height: 55vh;
   min-height: 340px;
   justify-content: space-evenly;
   text-align: center;
@@ -107,21 +107,11 @@
 }
 
 .validation-message {
-  text-align: center;
-  width: 100%;
-  max-width: 500px;
-  margin: 0.5rem auto;
-  font-size: 16px;
-  color: #717171;
+  background-color: white;
+  color: #818181;
   font-weight: bold;
-}
-
-.validation-message.success {
-  background-color: #4caf50;
-}
-
-.validation-message.error {
-  background-color: #f44336;
+  padding: 10px;
+  white-space: pre-line; 
 }
 
 .verification-icon {

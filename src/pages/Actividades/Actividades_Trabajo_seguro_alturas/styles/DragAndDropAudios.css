@@ -1,0 +1,139 @@
+.drag-and-drop-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  width: 50%;
+  margin: 0 auto;
+}
+
+.drag-and-drop-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  width: 100%;
+}
+
+.drag-and-drop-items {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.draggable-option {
+  width: 160px;
+  min-width: 160px;
+  height: 60px;
+  background-color: #c0185d;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+  font-weight: bold;
+  text-align: center;
+  cursor: grab;
+  position: absolute;
+}
+
+.drop-area {
+  width: 160px !important;
+  height: 60px;
+  border: 2px dashed #e2e8f0;
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 0 !important;
+  transition: background-color 0.3s, border-color 0.3s;
+  position: absolute;
+  left: 40%;
+  z-index: -1;
+}
+
+.drop-area-over {
+  background-color: #e6e6e6;
+}
+
+.drop-area-filled {
+  background-color: #c0185d;
+  border-color: #c0185d;
+}
+
+.drop-area-correct {
+  background-color: #28a745 !important;
+  border-color: #28a745 !important;
+  min-width: 160px;
+}
+
+.drop-area-incorrect {
+  background-color: #dc3545 !important;
+  border-color: #dc3545 !important;
+  min-width: 160px;
+}
+
+.drop-area-content {
+  color: white;
+  font-weight: bold;
+}
+
+.audio-card {
+  width: 270px;
+  height: 60px;
+  background-color: #f3f4f6;
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background-color 0.3s, border-color 0.3s;
+  border: 2px solid transparent;
+}
+
+.audio-control {
+  width: 90%;
+  height: 40px;
+}
+
+.audio-card.drop-area-correct {
+  background-color: #28a745;
+  border-color: #28a745;
+}
+
+.audio-card.drop-area-incorrect {
+  background-color: #dc3545;
+  border-color: #dc3545;
+}
+
+.button-group {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+}
+
+.message {
+  padding: 10px;
+  color: white;
+  border-radius: 5px;
+  font-weight: bold;
+  text-align: center;
+  width: 100%;
+}
+
+.message-success {
+  background-color: #28a745;
+}
+
+.message-error {
+  background-color: #dc3545;
+}
+
+.verification-image {
+  width: 54px;
+  height: 54px;
+  position: absolute;
+  top: 50%;
+  right: -30px;
+  transition: opacity 0.3s ease-in-out;
+}
+
