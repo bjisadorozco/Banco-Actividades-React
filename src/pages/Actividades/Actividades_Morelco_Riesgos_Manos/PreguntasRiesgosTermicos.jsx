@@ -108,11 +108,8 @@ function PreguntasRiesgosTermicos() {
                             {isValidated && (
                             <div className="text-center">
                                 <h3 className={`text-md mt-0 font-bold text-paragraph-light-color`}>
-                                    {correctCount} de {correctAnswers.length} respuestas correctas
+                                {`${correctCount} de ${correctAnswers.length} respuestas correctas (${percentage}%)`}
                                 </h3>
-                                <p className="text-paragraph-light-color font-bold">
-                                    Su resultado porcentual es del {percentage}%
-                                </p>
                             </div>
                         )}
                         <div className="flex flex-col items-center justify-center">

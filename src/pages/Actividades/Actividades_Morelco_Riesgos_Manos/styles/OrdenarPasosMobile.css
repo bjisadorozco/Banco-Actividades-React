@@ -118,6 +118,19 @@
   color: #fff;
 }
 
+/* Mensaje de porcentaje correcto/incorrecto */
+.porcentaje-mensaje {
+  margin-top: 10px;
+  font-size: 16px;
+}
+
+.porcentaje-mensaje.correcto {
+  color: #8f8f8f; /* Verde para 100% */
+}
+
+.porcentaje-mensaje.incorrecto {
+  color: #8f8f8f; /* Rojo para menos del 100% */
+}
 
 
 

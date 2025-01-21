@@ -17,6 +17,7 @@ const OrdenarPasos = () => {
   const [correctCount, setCorrectCount] = useState(0);
   const [habilitarValidar, setHabilitarValidar] = useState(false);
   const [mostrarResultado, setMostrarResultado] = useState(false);
+  const [porcentaje, setPorcentaje] = useState(0);
 
   const opciones = ["Paso 1", "Paso 2", "Paso 3", "Paso 4", "Paso 5"];
   const numerosDesordenados = opciones.sort(() => Math.random() - 0.5);
@@ -37,6 +38,7 @@ const OrdenarPasos = () => {
 
     const correctas = nuevosColores.filter((color) => color === "correcto").length;
     setCorrectCount(correctas);
+    setPorcentaje((correctas / pasosCorrectos.length) * 100);
     setMostrarResultado(true); // Muestra el mensaje al validar
   };
 
@@ -44,6 +46,7 @@ const OrdenarPasos = () => {
     setRespuestas(Array(5).fill(""));
     setColores(Array(5).fill(""));
     setCorrectCount(0);
+    setPorcentaje(0);
     setHabilitarValidar(false);
     setMostrarResultado(false); // Oculta el mensaje al reiniciar
   };
@@ -82,7 +85,14 @@ const OrdenarPasos = () => {
       {mostrarResultado && (
         <div className="contador-correctas">
           <p className="text-md mt-0 font-bold text-center resultado-mensaje">
-            {correctCount} de {pasosCorrectos.length} respuestas correctas
+            Respuestas correctas: {correctCount} de {pasosCorrectos.length}
+          </p>
+          <p
+            className={`text-lg font-bold text-center porcentaje-mensaje ${
+              porcentaje === 100 ? "correcto" : "incorrecto"
+            }`}
+          >
+            Su resultado porcentual es del {porcentaje.toFixed(2)}%.
           </p>
         </div>
       )}
