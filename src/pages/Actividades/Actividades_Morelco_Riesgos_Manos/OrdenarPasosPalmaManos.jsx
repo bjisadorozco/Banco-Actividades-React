@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./styles/OrdenarPasosPalmaManos.css"; // Asegúrate de incluir los estilos
+import "./styles/OrdenarPasosPalmaManos.css";
 import Paragraph from "../../components/Paragraph";
 import { faCheck, faRepeat } from "@fortawesome/free-solid-svg-icons";
 import Button from "../../components/Button";
@@ -26,12 +26,12 @@ const OrdenarPasosPalmaManos = () => {
     setPasos([...pasosInicialesDesordenados]);
     setResultado("");
     setCorrectCount(0);
-    setIsButtonActive(false); // Deshabilitar el botón al reiniciar
+    setIsButtonActive(false);
   };
 
   const handleDragStart = (e, index) => {
     e.dataTransfer.setData("index", index);
-    setIsButtonActive(true); // Habilitar el botón al iniciar un arrastre
+    setIsButtonActive(true);
   };
 
   const handleDrop = (e, targetIndex) => {
@@ -48,79 +48,78 @@ const OrdenarPasosPalmaManos = () => {
   };
 
   const validarOrden = () => {
-    const isCorrect = pasos.every(
+    const correctCount = pasos.filter(
       (paso, index) => paso.texto === pasosCorrectos[index]
-    );
+    ).length;
+    const isCorrect = correctCount === pasosCorrectos.length;
     setResultado(isCorrect ? "correcto" : "incorrecto");
-    setCorrectCount(
-      pasos.filter((paso, index) => paso.texto === pasosCorrectos[index]).length
-    );
+    setCorrectCount(correctCount);
   };
 
   return (
-    <div className="ordenar-pasos-container">
-      <div className="contenedor-pasos">
-        {pasos.map((paso, index) => (
-          <div
-            key={index}
-            className={`tarjeta-paso ${
-              resultado &&
-              (paso.texto === pasosCorrectos[index] ? "correcto" : "incorrecto")
-            }`}
-            draggable
-            onDragStart={(e) => handleDragStart(e, index)}
-            onDragOver={handleDragOver}
-            onDrop={(e) => handleDrop(e, index)}
-          >
-            {paso.numero}. {paso.texto}
-          </div>
-        ))}
-      </div>
-
-      {resultado && (
-        <div className="contador-correctas">
-          <br />
-          <p className="text-md mt-0 font-bold text-center">
-            <span className="contador-texto">
-              {correctCount} de {pasosCorrectos.length} respuestas correctas
-            </span>
-          </p>
-        </div>
-      )}
-
-      <div className="botones-container">
-        <Button
-          bold={false}
-          icon={faCheck}
-          roundedFull={true}
-          onClick={isButtonActive ? validarOrden : null}
-          disabled={!isButtonActive} // Botón inicialmente deshabilitado
-          className={`boton-validar ${
-            isButtonActive ? "activo" : "inactivo"
-          }`}
-        >
-          Validar
-        </Button>
-        <Button
-          bold={false}
-          icon={faRepeat}
-          roundedFull={true}
-          onClick={reiniciarPasos}
-        >
-          Reiniciar
-        </Button>
-      </div>
-      {resultado && (
-        <div className={`resultado ${resultado}`}>
-          <div className="feedback-container">
-            <div className="feedback-message">
-              <p>
-                {resultado === "correcto"
-                  ? "Respuesta correcta: ¡Muy bien! Estás aprendiendo mucho para cuidar tus manos."
-                  : "Respuesta incorrecta: ¡Piénsalo bien!."}
-              </p>
+    <div className="ordenar-pasos-wrapper">
+      <div className="ordenar-pasos-containerOPM">
+        <div className="contenedor-pasos">
+          {pasos.map((paso, index) => (
+            <div
+              key={index}
+              className={`tarjeta-paso ${
+                resultado &&
+                (paso.texto === pasosCorrectos[index] ? "correcto" : "incorrecto")
+              }`}
+              draggable
+              onDragStart={(e) => handleDragStart(e, index)}
+              onDragOver={handleDragOver}
+              onDrop={(e) => handleDrop(e, index)}
+            >
+              {paso.numero}. {paso.texto}
             </div>
-          </div>
+          ))}
+        </div>
+
+        <div className="botones-containerOPM">
+          <Button
+            bold={false}
+            icon={faCheck}
+            roundedFull={true}
+            onClick={isButtonActive ? validarOrden : null}
+            disabled={!isButtonActive}
+            className={`boton-validar ${
+              isButtonActive ? "activo" : "inactivo"
+            }`}
+          >
+            Validar
+          </Button>
+          <Button
+            bold={false}
+            icon={faRepeat}
+            roundedFull={true}
+            onClick={reiniciarPasos}
+          >
+            Reiniciar
+          </Button>
+        </div>
+      </div>
+
+      {resultado && (
+        <div className="feedback-containerOPM">
+          <p className="text-md mt-0 font-bold text-center">
+            {resultado === "correcto" ? (
+              <span>
+                <span style={{ color: '#4caf50' }}>¡Correcto!</span>{' '}
+                <span style={{ color: '#8F8F8F' }}>
+                  Todas las respuestas son correctas. ({Math.round((correctCount / pasosCorrectos.length) * 100)}%)
+                </span>
+              </span>
+            ) : (
+              <span>
+                <span style={{ color: '#f44336' }}>¡Incorrecto!</span>{' '}
+                <span style={{ color: '#8F8F8F' }}>
+                  Tienes {correctCount} de {pasosCorrectos.length} respuestas correctas. Intenta de nuevo. ({Math.round((correctCount / pasosCorrectos.length) * 100)}%)
+                </span>
+              </span>
+            )}
+          </p>
         </div>
       )}
     </div>
@@ -128,3 +127,4 @@ const OrdenarPasosPalmaManos = () => {
 };
 
 export default OrdenarPasosPalmaManos;
+

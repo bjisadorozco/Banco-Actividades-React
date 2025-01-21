@@ -95,6 +95,14 @@
   background-size: 16px;
 }
 
+.text-errorPTRM {
+  background-color: #ffffff;
+  padding: 0.5rem 1.5rem;
+  border-radius: 10px;
+  font-weight: bold;
+  margin: 10px;
+}
+
 @media (max-width: 768px) {
   .main-container2 {
     padding: 0.5rem;

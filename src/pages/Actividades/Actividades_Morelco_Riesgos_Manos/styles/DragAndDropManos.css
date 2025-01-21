@@ -79,7 +79,16 @@
   text-align: center; /* Centra el texto dentro del botón */
   transition: none; /* Elimina cualquier transición */
 }
-
+.drop-text {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 16px;
+  font-style: italic;
+  color: #888;
+  text-align: center;
+}
+.dropbox-over {
+  background-color: #d3c4f1;
+}
 /* Quitar cualquier efecto hover */
 .option-sld5:hover {
   background-color: #c0185d; /* Mantiene el color original al pasar el mouse */

@@ -1,7 +1,9 @@
 import React, { useState, useRef } from "react";
-import mano1 from "../../../assets/img/fisicas_sld5.webp";
-import mano2 from "../../../assets/img/economicas_sld5.webp";
-import mano3 from "../../../assets/img/laborales_sld5.webp";
+import { DndContext, useSensor, useSensors, MouseSensor, TouchSensor } from '@dnd-kit/core';
+import { useDroppable, useDraggable } from '@dnd-kit/core';
+import mano1 from "../../../assets/img/fisicas_con_fondo_sld5.webp";
+import mano2 from "../../../assets/img/economicas_con_fondo_sld5.webp";
+import mano3 from "../../../assets/img/laborales_con_fondo_sld5.webp";
 import checkIcon from "../../../assets/img/checkAct.png";
 import xmarkIcon from "../../../assets/img/xmarkAct.png";
 import audioFisicas from "../../../assets/audio/FISICAS-Morelco.mp3";
@@ -11,6 +13,33 @@ import "./styles/DragAndDropManos.css";
 import Paragraph from "../../components/Paragraph";
 import { faCheck, faRepeat, faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import Button from '../../components/Button';
+
+function DraggableItem({ id, children }) {
+  const { attributes, listeners, setNodeRef, transform } = useDraggable({
+    id: id,
+  });
+  const style = transform ? {
+    transform: `translate3d(${transform.x}px, ${transform.y}px, 0)`,
+  } : undefined;
+
+  return (
+    <div ref={setNodeRef} style={style} {...listeners} {...attributes}>
+      {children}
+    </div>
+  );
+}
+
+function DroppableArea({ id, children }) {
+  const { isOver, setNodeRef } = useDroppable({
+    id: id,
+  });
+  
+  return (
+    <div ref={setNodeRef} className={isOver ? "dropbox-over" : ""}>
+      {children}
+    </div>
+  );
+}
 
 const DragAndDropManos = () => {
   const [droppedItems, setDroppedItems] = useState({
@@ -37,6 +66,11 @@ const DragAndDropManos = () => {
   const audioRef2 = useRef(new Audio(audioEconomicas));
   const audioRef3 = useRef(new Audio(audioLaborales));
 
+  const sensors = useSensors(
+    useSensor(MouseSensor),
+    useSensor(TouchSensor)
+  );
+
   const playAudio = (audioSource) => {
     if (currentAudio) {
       currentAudio.pause();
@@ -57,80 +91,76 @@ const DragAndDropManos = () => {
     newAudio.play();
   };
 
-  const handleDrop = (e, dropId) => {
-    e.preventDefault();
-    const draggedElementId = e.dataTransfer.getData("text");
+  const handleDragEnd = (event) => {
+    const { over, active } = event;
   
-    if (droppedItems[dropId]) {
-      if (droppedItems[dropId] === draggedElementId) {
-        return;
+    if (over && over.id) {
+      const dropId = over.id;
+      const draggedElementId = active.id;
+  
+      if (droppedItems[dropId]) {
+        if (droppedItems[dropId] === draggedElementId) {
+          return;
+        } else {
+          setErrorMessage("¡Ya hay una imagen en este lugar! Arrastra a otro lugar.");
+          setTimeout(() => setErrorMessage(""), 2000);
+          return;
+        }
+      }
+  
+      const isCorrect =
+        (dropId === "drop1" && draggedElementId === "img1-sld5") ||
+        (dropId === "drop2" && draggedElementId === "img2-sld5") ||
+        (dropId === "drop3" && draggedElementId === "img3-sld5");
+  
+      setDroppedItems((prevState) => ({
+        ...prevState,
+        [dropId]: draggedElementId,
+      }));
+  
+      // Ocultar la imagen arrastrada, sea correcta o incorrecta
+      setDraggedItems((prevState) => ({
+        ...prevState,
+        [draggedElementId.split('-')[0]]: false,
+      }));
+  
+      if (isCorrect) {
+        setValidationStatus((prevState) => ({
+          ...prevState,
+          [dropId]: "correcto",
+        }));
+        setSuccessMessage("¡Correcto! Ahora, escucha el siguiente audio que complementa esta información");
+  
+        let audioSource = null;
+        switch (draggedElementId) {
+          case "img1-sld5":
+            audioSource = "audioFisicas";
+            break;
+          case "img2-sld5":
+            audioSource = "audioEconomicas";
+            break;
+          case "img3-sld5":
+            audioSource = "audioLaborales";
+            break;
+          default:
+            break;
+        }
+  
+        if (audioSource) {
+          setAudioElement(audioSource);
+        }
       } else {
-        setErrorMessage("¡Ya hay una imagen en este lugar! Arrastra a otro lugar.");
+        setValidationStatus((prevState) => ({
+          ...prevState,
+          [dropId]: "incorrecto",
+        }));
+        setErrorMessage("Oops, esta imagen solo puede soltarse en el contenedor correcto.");
         setTimeout(() => setErrorMessage(""), 2000);
-        return;
+        setSuccessMessage("");
+        setCurrentAudio(null);
+        setAudioElement(null);
       }
     }
-  
-    const isCorrect =
-      (dropId === "drop1" && draggedElementId === "img1-sld5") ||
-      (dropId === "drop2" && draggedElementId === "img2-sld5") ||
-      (dropId === "drop3" && draggedElementId === "img3-sld5");
-  
-    setDroppedItems((prevState) => ({
-      ...prevState,
-      [dropId]: draggedElementId,
-    }));
-  
-    // Ocultar la imagen arrastrada, sea correcta o incorrecta
-    setDraggedItems((prevState) => ({
-      ...prevState,
-      [draggedElementId.split('-')[0]]: false,
-    }));
-  
-    if (isCorrect) {
-      setValidationStatus((prevState) => ({
-        ...prevState,
-        [dropId]: "correcto",
-      }));
-      setSuccessMessage("¡Correcto! Ahora, escucha el siguiente audio que complementa esta información");
-  
-      let audioSource = null;
-      switch (draggedElementId) {
-        case "img1-sld5":
-          audioSource = "audioFisicas";
-          break;
-        case "img2-sld5":
-          audioSource = "audioEconomicas";
-          break;
-        case "img3-sld5":
-          audioSource = "audioLaborales";
-          break;
-        default:
-          break;
-      }
-  
-      if (audioSource) {
-        setAudioElement(audioSource);
-      }
-    } else {
-      setValidationStatus((prevState) => ({
-        ...prevState,
-        [dropId]: "incorrecto",
-      }));
-      setErrorMessage("Oops, esta imagen solo puede soltarse en el contenedor correcto.");
-      setTimeout(() => setErrorMessage(""), 2000);
-      setSuccessMessage("");
-      setCurrentAudio(null);
-      setAudioElement(null);
-    }
-  };
-
-  const handleDragOver = (e) => {
-    e.preventDefault();
-  };
-
-  const handleDragStart = (e, item) => {
-    e.dataTransfer.setData("text", item);
   };
 
   const handleReset = () => {
@@ -161,114 +191,128 @@ const DragAndDropManos = () => {
 
   return (
     <div className="col-lg-6 col-md-12">
-      <div className="activity-container-sld5">
-        <div className="image-group-sld5">
-          {draggedItems.img1 && (
-            <img
-              src={mano1}
-              className="draggable-sld5"
-              id="img1-sld5"
-              draggable="true"
-              onDragStart={(e) => handleDragStart(e, "img1-sld5")}
-            />
-          )}
-          {draggedItems.img2 && (
-            <img
-              src={mano2}
-              className="draggable-sld5"
-              id="img2-sld5"
-              draggable="true"
-              onDragStart={(e) => handleDragStart(e, "img2-sld5")}
-            />
-          )}
-          {draggedItems.img3 && (
-            <img
-              src={mano3}
-              className="draggable-sld5"
-              id="img3-sld5"
-              draggable="true"
-              onDragStart={(e) => handleDragStart(e, "img3-sld5")}
-            />
-          )}
+      <DndContext sensors={sensors} onDragEnd={handleDragEnd}>
+        <div className="activity-container-sld5">
+          <div className="image-group-sld5">
+            {draggedItems.img1 && (
+              <DraggableItem id="img1-sld5">
+                <img
+                  src={mano1}
+                  className="draggable-sld5"
+                  id="img1-sld5"
+                  alt="Físicas"
+                />
+              </DraggableItem>
+            )}
+            {draggedItems.img2 && (
+              <DraggableItem id="img2-sld5">
+                <img
+                  src={mano2}
+                  className="draggable-sld5"
+                  id="img2-sld5"
+                  alt="Económicas"
+                />
+              </DraggableItem>
+            )}
+            {draggedItems.img3 && (
+              <DraggableItem id="img3-sld5">
+                <img
+                  src={mano3}
+                  className="draggable-sld5"
+                  id="img3-sld5"
+                  alt="Laborales"
+                />
+              </DraggableItem>
+            )}
+          </div>
+
+          <div className="drop-group-sld5">
+            <DroppableArea id="drop1">
+              <div className={`drop-item-sld5 ${validationStatus.drop1 === "correcto" ? "correct" : validationStatus.drop1 === "incorrecto" ? "incorrect" : ""}`}>
+                <div
+                  className="dropbox-sld5"
+                  id="drop1-sld5"
+                >
+                  {droppedItems.drop1 ? (
+                    <img src={droppedItems.drop1 === "img1-sld5" ? mano1 : droppedItems.drop1 === "img2-sld5" ? mano2 : mano3} alt="Físicas" />
+                  ) : (
+                    <span className="drop-text">Arrastre aquí</span>
+                  )}
+                  {validationStatus.drop1 === "correcto" && (
+                    <img src={checkIcon} className="status-icon-sld5" alt="Correcto" />
+                  )}
+                  {validationStatus.drop1 === "incorrecto" && (
+                    <img src={xmarkIcon} className="status-icon-sld5" alt="Incorrecto" />
+                  )}
+                </div>
+                <button
+                  className={`option-sld5 ${validationStatus.drop1 === "correcto" ? "correct" : validationStatus.drop1 === "incorrecto" ? "incorrect" : ""}`}
+                  id="btn1-sld5"
+                  draggable="false"
+                >
+                  Físicas
+                </button>
+              </div>
+            </DroppableArea>
+
+            <DroppableArea id="drop2">
+              <div className={`drop-item-sld5 ${validationStatus.drop2 === "correcto" ? "correct" : validationStatus.drop2 === "incorrecto" ? "incorrect" : ""}`}>
+                <div
+                  className="dropbox-sld5"
+                  id="drop2-sld5"
+                >
+                  {droppedItems.drop2 ? (
+                    <img src={droppedItems.drop2 === "img1-sld5" ? mano1 : droppedItems.drop2 === "img2-sld5" ? mano2 : mano3} alt="Físicas" />
+                  ) : (
+                    <span className="drop-text">Arrastre aquí</span>
+                  )}
+                  {validationStatus.drop2 === "correcto" && (
+                    <img src={checkIcon} className="status-icon-sld51" alt="Correcto" />
+                  )}
+                  {validationStatus.drop2 === "incorrecto" && (
+                    <img src={xmarkIcon} className="status-icon-sld51" alt="Incorrecto" />
+                  )}
+                </div>
+                <button
+                  className={`option-sld5 ${validationStatus.drop2 === "correcto" ? "correct" : validationStatus.drop2 === "incorrecto" ? "incorrect" : ""}`}
+                  id="btn2-sld5"
+                  draggable="false"
+                >
+                  Económicas
+                </button>
+              </div>
+            </DroppableArea>
+
+            <DroppableArea id="drop3">
+              <div className={`drop-item-sld5 ${validationStatus.drop3 === "correcto" ? "correct" : validationStatus.drop3 === "incorrecto" ? "incorrect" : ""}`}>
+                <div
+                  className="dropbox-sld5"
+                  id="drop3-sld5"
+                >
+                  {droppedItems.drop3 ? (
+                    <img src={droppedItems.drop3 === "img1-sld5" ? mano1 : droppedItems.drop3 === "img2-sld5" ? mano2 : mano3} alt="Laborales" />
+                  ) : (
+                    <span className="drop-text">Arrastre aquí</span>
+                  )}
+                  {validationStatus.drop3 === "correcto" && (
+                    <img src={checkIcon} className="status-icon-sld52" alt="Correcto" />
+                  )}
+                  {validationStatus.drop3 === "incorrecto" && (
+                    <img src={xmarkIcon} className="status-icon-sld52" alt="Incorrecto" />
+                  )}
+                </div>
+                <button
+                  className={`option-sld5 ${validationStatus.drop3 === "correcto" ? "correct" : validationStatus.drop3 === "incorrecto" ? "incorrect" : ""}`}
+                  id="btn3-sld5"
+                  draggable="false"
+                >
+                  Laborales
+                </button>
+              </div>
+            </DroppableArea>
+          </div>
         </div>
-
-        <div className="drop-group-sld5">
-          {/* Contenedor 1: Físicas */}
-          <div className={`drop-item-sld5 ${validationStatus.drop1 === "correcto" ? "correct" : validationStatus.drop1 === "incorrecto" ? "incorrect" : ""}`}>
-            <div
-              className="dropbox-sld5"
-              id="drop1-sld5"
-              onDrop={(e) => handleDrop(e, "drop1")}
-              onDragOver={handleDragOver}
-            >
-              {droppedItems.drop1 && <img src={droppedItems.drop1 === "img1-sld5" ? mano1 : droppedItems.drop1 === "img2-sld5" ? mano2 : mano3} alt="Físicas" />}
-              {validationStatus.drop1 === "correcto" && (
-                <img src={checkIcon} className="status-icon-sld5" alt="Correcto" />
-              )}
-              {validationStatus.drop1 === "incorrecto" && (
-                <img src={xmarkIcon} className="status-icon-sld5" alt="Incorrecto" />
-              )}
-            </div>
-            <button
-              className={`option-sld5 ${validationStatus.drop1 === "correcto" ? "correct" : validationStatus.drop1 === "incorrecto" ? "incorrect" : ""}`}
-              id="btn1-sld5"
-              draggable="false"
-            >
-              Físicas
-            </button>
-          </div>
-
-          {/* Contenedor 2: Económicas */}
-          <div className={`drop-item-sld5 ${validationStatus.drop2 === "correcto" ? "correct" : validationStatus.drop2 === "incorrecto" ? "incorrect" : ""}`}>
-            <div
-              className="dropbox-sld5"
-              id="drop2-sld5"
-              onDrop={(e) => handleDrop(e, "drop2")}
-              onDragOver={handleDragOver}
-            >
-              {droppedItems.drop2 && <img src={droppedItems.drop2 === "img1-sld5" ? mano1 : droppedItems.drop2 === "img2-sld5" ? mano2 : mano3} alt="Económicas" />}
-              {validationStatus.drop2 === "correcto" && (
-                <img src={checkIcon} className="status-icon-sld51" alt="Correcto" />
-              )}
-              {validationStatus.drop2 === "incorrecto" && (
-                <img src={xmarkIcon} className="status-icon-sld51" alt="Incorrecto" />
-              )}
-            </div>
-            <button
-              className={`option-sld5 ${validationStatus.drop2 === "correcto" ? "correct" : validationStatus.drop2 === "incorrecto" ? "incorrect" : ""}`}
-              id="btn2-sld5"
-              draggable="false"
-            >
-              Económicas
-            </button>
-          </div>
-
-          {/* Contenedor 3: Laborales */}
-          <div className={`drop-item-sld5 ${validationStatus.drop3 === "correcto" ? "correct" : validationStatus.drop3 === "incorrecto" ? "incorrect" : ""}`}>
-            <div
-              className="dropbox-sld5"
-              id="drop3-sld5"
-              onDrop={(e) => handleDrop(e, "drop3")}
-              onDragOver={handleDragOver}
-            >
-              {droppedItems.drop3 && <img src={droppedItems.drop3 === "img1-sld5" ? mano1 : droppedItems.drop3 === "img2-sld5" ? mano2 : mano3} alt="Laborales" />}
-              {validationStatus.drop3 === "correcto" && (
-                <img src={checkIcon} className="status-icon-sld52" alt="Correcto" />
-              )}
-              {validationStatus.drop3 === "incorrecto" && (
-                <img src={xmarkIcon} className="status-icon-sld52" alt="Incorrecto" />
-              )}
-            </div>
-            <button
-              className={`option-sld5 ${validationStatus.drop3 === "correcto" ? "correct" : validationStatus.drop3 === "incorrecto" ? "incorrect" : ""}`}
-              id="btn3-sld5"
-              draggable="false"
-            >
-              Laborales
-            </button>
-          </div>
-        </div>
-      </div>
+      </DndContext>
       <div className="audio-container-sld5">
         {droppedItems.drop1 && audioElement === "audioFisicas" && (
           <div className="audio-player-sld5">
