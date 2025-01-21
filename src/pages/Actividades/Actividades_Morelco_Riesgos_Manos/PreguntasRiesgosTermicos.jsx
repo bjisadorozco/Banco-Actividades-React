@@ -62,7 +62,9 @@ function PreguntasRiesgosTermicos() {
   // Valida las respuestas seleccionadas por el usuario
   const validateDropdowns = () => {
     if (dropdowns.includes("0")) {
-      setErrorMessage("Debe seleccionar todas las opciones antes de validar.");
+      setErrorMessage( <div className="text-incorrect-feedback w-full">
+       Debe seleccionar todas las opciones antes de validar.
+      </div> );
       return;
     }
     setErrorMessage("");
@@ -91,13 +93,13 @@ function PreguntasRiesgosTermicos() {
     // Muestra feedback según el resultado
     if (correct === correctAnswers.length) {
       setFeedback(
-        <div className="bg-correct-feedback text-white p-4 rounded-md w-[80%]">
+        <div className="bg-correct-feedback text-white py-1 px-2 my-2 rounded-md w-[80%]">
           ¡Muy bien! Estás aprendiendo mucho para cuidar tus manos.
         </div>
       );
     } else {
       setFeedback(
-        <div className="bg-incorrect-feedback text-white p-4 rounded-md w-[80%]">
+        <div className="bg-incorrect-feedback text-white py-1 my-2 rounded-md w-[80%]">
           ¡Piénsalo bien e intenta de nuevo!
         </div>
       );
@@ -130,15 +132,15 @@ function PreguntasRiesgosTermicos() {
   return (
     <div className="flex flex-col md:flex-row mb-36 md:mb-0">
       <div className="md:w-full bg-white flex flex-col justify-center md:static relative md:top-0 top-0">
-        <div className="flex flex-col items-center">
-          <div className="grid grid-cols-1 gap-2.5 px-2 justify-start md:w-[90%] md:flex md:flex-col mb-3 h-auto">
+        <div className="flex flex-col items-center justify-center">
+          <div className="grid grid-cols-1 gap-2 justify-start md:flex md:flex-col mb-3 h-auto w-full">
             <div className="leading-loose">
-              <div className="bg-white text-justify text-[#afafaf] border-[#e0e0e0] md:rounded-lg md:shadow-md mb-[1px] md:m-2 p-4 border rounded-md shadow-md m-2 sm:m-4">
+              <div className="bg-white text-[#afafaf] border-[#e0e0e0] md:rounded-lg md:shadow-md mb-[1px] md:m-4 p-4 border rounded-md shadow-md m-6">
                 <Paragraph theme="light" className="w-full">
                   Estimado Antonio, tu trabajo es muy importante para nuestra
                   empresa, y al estar relacionado con
                   <Select
-                    className="m-1 border-[#afafaf] border-2  text-[#afafaf] w-64"
+                    className="m-1 border-[#afafaf] border-2  text-[#afafaf] w-64 "
                     index={0}
                     value={dropdowns[0]}
                     onChange={handleDropdownChange}
@@ -205,13 +207,13 @@ function PreguntasRiesgosTermicos() {
                     </p>
                   </div>
                 )}
-                <div className="flex flex-col items-center justify-center my-8">
+                <div className="flex flex-col items-center justify-center">
                   {errorMessage && (
-                    <p className="text-secondary-color text-center font-bold mt-0">
+                    <p className="text-secondary-color text-center font-bold my-2">
                       {errorMessage}
                     </p>
                   )}
-                  <div className="flex justify-around items-center h-0 w-full max-w-[400px] my-8">
+                  <div className="flex justify-around h-full items-center w-full max-w-[400px] my-1">
                     <Button
                       bold={false}
                       icon={faCheck}
