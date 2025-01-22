@@ -9,48 +9,72 @@ import {
 import Button from "../../components/Button";
 import imgTrue from "../../../assets/img/checkAct.png";
 import imgFalse from "../../../assets/img/xmarkAct.png";
-import imgPeligro from "../../../assets/img/avatar-hombre-morado-blanco.webp";
 
 const questions = [
   {
-    text: "Es recomendable aplicar hielo directamente sobre la piel en una lesión por aplastamiento para reducir la hinchazón.",
+    text: "El Plan para Respuestas a Emergencias (PRE) solo se centra en garantizar que el equipo de rescate esté capacitado y no necesita identificar los escenarios de riesgo.",
     correct: false,
-    feedback:
-      "Siempre se debe envolver el hielo en un paño para evitar quemaduras en la piel.",
+    feedBackCorrect: (
+      <>
+        <div className="text-green-600">¡Bien hecho! <span className="text-gray-500"> El procedimiento de rescate debe detallar cada paso.{" "}
+          </span>
+        </div>
+      </>
+    ),
+    feedBackIncorrect: (
+      <>
+        <div className="text-red-600">¡Piénsalo bien! <span className="text-gray-500"> Lee correctamente e inténtalo nuevamente.
+          </span>
+        </div>
+      </>
+    ),
   },
   {
-    text: `El método de análisis de accidentes que se centra en indagar en las causas raíz de un incidente haciendo repetidamente (5 veces) la pregunta "¿Por qué?" hasta llegar a la causa raíz, se llama método de los 5 porqués `,
+    text: `El Procedimiento de Rescate debe incluir instrucciones claras sobre el montaje y los puntos de anclaje del equipo de rescate. `,
     correct: true,
-    feedback:
-      "Siempre se debe envolver el hielo en un paño para evitar quemaduras en la piel.",
+    feedBackCorrect: (
+      <>
+        <div className="text-green-600"> ¡Correcto! <span className="text-gray-500"> El procedimiento de rescate debe detallar cada paso.
+          </span>
+        </div>
+      </>
+    ),
+    feedBackIncorrect: (
+      <>
+        <div className="text-red-600">¡Piénsalo bien! <span className="text-gray-500"> Lee correctamente e inténtalo nuevamente.
+          </span>
+        </div>
+      </>
+    ),
   },
   {
-    text: "Si una lesión por aplastamiento parece leve, no es necesario buscar atención médica ni seguir un plan de evaluación continua.​",
+    text: "Los Procedimientos de Evacuación no necesitan describir las circunstancias especificas que requieren su activación.​",
     correct: false,
-    feedback:
-      "Aunque la lesión parezca leve, es importante seguir las recomendaciones médicas y evaluar su evolución.",
-  },
-  {
-    text: "La rehabilitación y reincorporación laboral son una etapa importante del proceso de gestión de accidentes por lesiones en las manos.​",
-    correct: true,
-    feedback: "",
-  },
-  {
-    text: "El reporte del accidente y la investigación de sus causas deben realizarse solo si la lesión es grave.​​",
-    correct: false,
-    feedback:
-      "Todo accidente, independientemente de su gravedad, debe ser reportado e investigado para prevenir futuros incidentes.",
+    feedBackCorrect: (
+      <>
+        <div className="text-green-600">¡Perfecto! <span className="text-gray-500"> Es fundamental que los procedimientos de evacuación incluyan las
+            condiciones exactas que justificarían su activación, como cambios en
+            la atmósfera o condiciones estructurales inseguras.
+          </span>
+        </div>
+      </>
+    ),
+    feedBackIncorrect: (
+      <>
+        <div className="text-red-600">¡Piénsalo bien! <span className="text-gray-500"> Lee correctamente e inténtalo nuevamente.
+          </span>
+        </div>
+      </>
+    ),
   },
 ];
 
-// Asume que questions será proporcionado como prop
-function PreguntasVorF() {
+function Actividad_Falso_Verdadero() {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [score, setScore] = useState(0);
   const [showScore, setShowScore] = useState(false);
   const [showFeedback, setShowFeedback] = useState(false);
   const [answerSelected, setAnswerSelected] = useState(null);
-
   const handleAnswer = (userAnswer) => {
     const isCorrect = userAnswer === questions[currentQuestion].correct;
     setAnswerSelected(isCorrect);
@@ -80,17 +104,15 @@ function PreguntasVorF() {
     setAnswerSelected(null);
   };
 
+  const percentage = Math.floor((score / questions.length) * 100);
   return (
     <div className="container">
       <div className="w-full flex justify-center items-center p-4">
-        <div
-          className="max-w-md w-full bg-gray-100 border-2 border-gray-300 rounded-lg overflow-hidden"
-          style={{ margin: "0 auto", minWidth: "35vw" }}
-        >
+        <div className="max-w-md w-full bg-gray-100 border-2 border-gray-300 rounded-lg overflow-hidden mx-auto min-w-[35vw]">
           {showScore ? (
             <div className="text-center p-6">
-              <p className="my-2 text-secondary-color font-bold">
-                Respuestas correctas
+              <p className="my-2 text-gray-500 font-semibold">
+                Respuestas correctas ({percentage}%)
               </p>
               <p className="text-lg">
                 {score} de {questions.length}
@@ -110,19 +132,14 @@ function PreguntasVorF() {
                 <span className="inc">{currentQuestion + 1}</span>/
                 <span className="tol">{questions.length}</span>
               </div>
-              <div className="itemQ view p-6">
+              <div className=" view p-6">
                 <div className="mb-3" style={{ minHeight: "50px" }}>
-                  <p className="text-gray-800">
+                  <p className="text-gray-800 text-justify">
                     {questions[currentQuestion].text}
                   </p>
                 </div>
                 <div className="relative flex justify-center mb-4">
-                  <div className="w-32 h-32 relative">
-                    <img
-                      src={imgPeligro}
-                      alt="Pregunta"
-                      className="w-full h-full object-contain"
-                    />
+                  <div className="w-32 relative">
                     {answerSelected !== null && (
                       <div className="absolute inset-0 flex items-center justify-center">
                         <img
@@ -135,22 +152,21 @@ function PreguntasVorF() {
                     )}
                   </div>
                 </div>
-                <div className="text-center mt-4">
+                <div className="text-justify mt-4">
                   <p
-                    className={`text-lg font-bold ${
+                    className={`text-[16px] font-regular leading-tight ${
                       answerSelected === null
                         ? "opacity-0"
                         : answerSelected
-                          ? "text-green-600 opacity-100"
-                          : "text-red-600 opacity-100"
+                          ? "opacity-100"
+                          : "opacity-100"
                     }`}
                   >
                     {answerSelected === null
                       ? " "
                       : answerSelected
-                        ? "Correcto ¡Bien hecho!"
-                        : "¡Incorrecto!  No te preocupes, puedes mejorar."
-                    }
+                        ? questions[currentQuestion].feedBackCorrect
+                        : questions[currentQuestion].feedBackIncorrect}
                   </p>
                 </div>
                 <hr
@@ -206,4 +222,4 @@ function PreguntasVorF() {
   );
 }
 
-export default PreguntasVorF;
+export default Actividad_Falso_Verdadero;

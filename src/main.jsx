@@ -24,11 +24,12 @@ import PreguntasAlturas1 from "./pages/Actividades/Actividades_Trabajo_seguro_al
 import DragAndDropAlturas2 from "./pages/Actividades/Actividades_Trabajo_seguro_alturas/DragAndDropAlturas2.jsx";
 import DragAndDropAlturas2Movil from "./pages/Actividades/Actividades_Trabajo_seguro_alturas/DragAndDropAlturas2Movil.jsx";
 import PreguntasTiposRiesgoMobile from "./pages/Actividades/Actividades_Morelco_Riesgos_Manos/PreguntasTiposRiesgoMobile.jsx";
+import ActividadFalsoVerdadero from "./pages/Actividades/Actividades_Espacios_Confinados/Actividad_Falso_Verdadero.jsx"
 import "./main.css";
 
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <PreguntasRiesgosTermicos />
+    <ActividadFalsoVerdadero />
   </React.StrictMode>
 );

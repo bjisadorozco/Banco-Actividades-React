@@ -140,7 +140,7 @@ function PreguntasRiesgosTermicos() {
                   Estimado Antonio, tu trabajo es muy importante para nuestra
                   empresa, y al estar relacionado con
                   <Select
-                    className="m-1 border-[#afafaf] border-2  text-[#afafaf] w-64 "
+                    className="m-1 border-[rgb(175,175,175)] border-2  text-[#afafaf] w-64 "
                     index={0}
                     value={dropdowns[0]}
                     onChange={handleDropdownChange}
