@@ -1,4 +1,3 @@
-
 // Imortación de módulos y componentes necesarios
 import React, { useState, useEffect } from "react";
 import Paragraph from "../../components/Paragraph";
@@ -18,33 +17,28 @@ const initialOptions = [
 // Respuestas para validar las selecciones
 const correctAnswers = ["1", "3", "5", "2", "4"];
 
-
 // Componente principal que representa la actividad de preguntas relacionadas con riesgos térmicos
 function PreguntasRiesgosTermicos() {
-
   // Estados para manejar las opciones seleccionadas, estilos y feedback
   const [dropdowns, setDropdowns] = useState(Array(5).fill("0")); //Estado para los valores seleccionados de los dropdowns
   const [borderColors, setBorderColors] = useState(
     Array(5).fill("border-[#afafaf]") //Colores de los bordes de los dropdowns
   );
   const [isValidated, setIsValidated] = useState(false); //Estado para validar si las respuestas han sido validadas
-  const [isResetEnabled] = useState(false); //Habilitación del botón de reinicio
   const [buttonColors, setButtonColors] = useState(Array(5).fill("bg-white")); //Colores de fondo de los botones
   const setIsOnDivisor = useStore((state) => state.setIsOnDivisor); //Manejo del estado global
   const [correctCount, setCorrectCount] = useState(0); //Número de respuestas correctas
-  const [setFeedback] = useState(""); //Mensaje de retroalimentación
-  const [percentage, setPercentage] = useState(0); //Porcentaje de respuestas correctas
-  const [errorMessage, setErrorMessage] = useState(""); //Mensaje de error
+  const [feedback, setFeedback] = useState(""); //Mensaje de retroalimentación
+  const [percentage, setPercentage] = useState(0); // Nuevo estado para el porcentaje
+  const [errorMessage, setErrorMessage] = useState(""); //Porcentaje de respuestas correctas
   const [isValid, setIsValid] = useState(false); //Estado para habilitar el estado de validación
-
 
   // Configuración inicial del estado global
   useEffect(() => {
     setIsOnDivisor(false);
   }, []);
 
-  
-// Valida si todas las opciones hansido seleccionadas
+  // Valida si todas las opciones hansido seleccionadas
   useEffect(() => {
     const allSelected = !dropdowns.includes("0");
     setIsValid(allSelected);
@@ -57,23 +51,25 @@ function PreguntasRiesgosTermicos() {
     setDropdowns(newDropdowns);
 
     // Cambia los colores de los botones según las selecciones
+    const newButtonColors = [...buttonColors];
+    newButtonColors[index] =
+      value !== "0"
+        ? "bg-[#b232fc] border-none shadow-md text-white"
+        : "bg-white text-black";
+    setButtonColors(newButtonColors);
+  };
 
-  const newButtonColors = [...buttonColors];
-  newButtonColors[index] =
-    value !== "0"
-      ? "bg-[#b232fc] border-none shadow-md text-white"
-      : "bg-white text-black";
-  setButtonColors(newButtonColors);
-};
-
-// Valida las respuestas seleccionadas por el usuario
+  // Valida las respuestas seleccionadas por el usuario
   const validateDropdowns = () => {
     if (dropdowns.includes("0")) {
-      setErrorMessage("Debe seleccionar todas las opciones antes de validar.");
+      setErrorMessage( <div className="text-incorrect-feedback w-full">
+       Debe seleccionar todas las opciones antes de validar.
+      </div> );
       return;
     }
     setErrorMessage("");
-// Cambia los colores de borde según las respuestas, si son correctas o incorrectas
+
+    // Cambia los colores de borde según las respuestas, si son correctas o incorrectas
     const newBorderColors = dropdowns.map((value, index) =>
       value === correctAnswers[index]
         ? "bg-correct-feedback text-white border-[#afafaf]"
@@ -94,20 +90,23 @@ function PreguntasRiesgosTermicos() {
     );
     setPercentage(calculatedPercentage);
 
-    // Set feedback based on correctness
+    // Muestra feedback según el resultado
     if (correct === correctAnswers.length) {
-        setFeedback("¡Muy bien! Estas aprendiendo mucho para cuidar tus manos.");
-        setBorderColors(dropdowns.map(() => "bg-correct-feedback text-white border-[#afafaf]"));
-      } else {
-        setFeedback("¡Piénsalo bien!");
-        setBorderColors(dropdowns.map((value, index) =>
-          value === correctAnswers[index]
-            ? "bg-correct-feedback text-white border-[#afafaf]"
-            : "bg-incorrect-feedback text-white border-[#afafaf]"
-        ));
-      }
-    };
+      setFeedback(
+        <div className="bg-correct-feedback text-white py-1 px-2 my-2 rounded-md w-[80%]">
+          ¡Muy bien! Estás aprendiendo mucho para cuidar tus manos.
+        </div>
+      );
+    } else {
+      setFeedback(
+        <div className="bg-incorrect-feedback text-white py-1 my-2 rounded-md w-[80%]">
+          ¡Piénsalo bien e intenta de nuevo!
+        </div>
+      );
+    }
+  };
 
+//   Reinicia todos los estados al valor inicial
   const resetDropdowns = () => {
     setDropdowns(Array(5).fill("0"));
     setBorderColors(Array(5).fill("border-[#afafaf]"));
@@ -120,6 +119,7 @@ function PreguntasRiesgosTermicos() {
     setIsValid(false);
   };
 
+//   Filtra las opciones disponibles para cada dropdownisValid
   const getAvailableOptions = (index) => {
     const selectedOptions = dropdowns.filter(
       (value, i) => i !== index && value !== "0"
@@ -132,15 +132,15 @@ function PreguntasRiesgosTermicos() {
   return (
     <div className="flex flex-col md:flex-row mb-36 md:mb-0">
       <div className="md:w-full bg-white flex flex-col justify-center md:static relative md:top-0 top-0">
-        <div className="flex flex-col items-center">
-          <div className="grid grid-cols-1 gap-2.5 px-2 justify-start md:w-[90%] md:flex md:flex-col mb-3 h-auto">
+        <div className="flex flex-col items-center justify-center">
+          <div className="grid grid-cols-1 gap-2 justify-start md:flex md:flex-col mb-3 h-auto w-full">
             <div className="leading-loose">
-              <div className="bg-white text-justify text-[#afafaf] border-[#e0e0e0] md:rounded-lg md:shadow-md mb-[1px] md:m-2 p-4 border rounded-md shadow-md m-2 sm:m-4">
-                <Paragraph theme="light" className="text-justify w-full">
+              <div className="bg-white text-[#afafaf] border-[#e0e0e0] md:rounded-lg md:shadow-md mb-[1px] md:m-4 p-4 border rounded-md shadow-md m-6">
+                <Paragraph theme="light" className="w-full">
                   Estimado Antonio, tu trabajo es muy importante para nuestra
                   empresa, y al estar relacionado con
                   <Select
-                    className="m-1 border-[#afafaf] border-2  text-[#afafaf] w-64"
+                    className="m-1 border-[#afafaf] border-2  text-[#afafaf] w-64 "
                     index={0}
                     value={dropdowns[0]}
                     onChange={handleDropdownChange}
@@ -196,8 +196,9 @@ function PreguntasRiesgosTermicos() {
                   cuidado!
                 </Paragraph>
                 {isValidated && (
-                  <div className="text-center">
-                   <h3 className="text-md mt-0 font-bold text-paragraph-light-color">
+                  <div className="text-center w-full items-center justify-center flex flex-col">
+                    {feedback}
+                    <h3 className="text-md mt-0 font-bold text-paragraph-light-color ">
                       {correctCount} de {correctAnswers.length} respuestas
                       correctas
                     </h3>
@@ -206,19 +207,18 @@ function PreguntasRiesgosTermicos() {
                     </p>
                   </div>
                 )}
-                <div className="flex flex-col items-center justify-center my-8">
+                <div className="flex flex-col items-center justify-center">
                   {errorMessage && (
-                    <p className="text-secondary-color text-center font-bold mt-0">
+                    <p className="text-secondary-color text-center font-bold my-2">
                       {errorMessage}
                     </p>
                   )}
-                  <div className="flex justify-around items-center h-0 w-full max-w-[400px] my-8">
+                  <div className="flex justify-around h-full items-center w-full max-w-[400px] my-1">
                     <Button
                       bold={false}
                       icon={faCheck}
                       roundedFull={true}
                       onClick={validateDropdowns}
-                      disabled={!isValid}
                     >
                       Validar
                     </Button>
@@ -227,7 +227,7 @@ function PreguntasRiesgosTermicos() {
                       icon={faRepeat}
                       roundedFull={true}
                       onClick={resetDropdowns}
-                      disabled={!isResetEnabled}
+                      disabled={!isValidated}
                     >
                       Reiniciar
                     </Button>
@@ -242,7 +242,16 @@ function PreguntasRiesgosTermicos() {
   );
 }
 
-function Select({ index, value, onChange, borderColor, buttonColor, options, className }) {
+// Componente reutilizable para un dropdown
+function Select({
+  index,
+  value,
+  onChange,
+  borderColor,
+  buttonColor,
+  options,
+  className,
+}) {
   return (
     <select
       className={`relative inline-block w-full max-w-[120px] appearance-auto rounded-[4px] py-[2px] px-[1px] text-[14px] font-montserrat cursor-pointer outline-none transition-colors duration-300 ${borderColor} ${buttonColor} ${className}`}
@@ -251,8 +260,11 @@ function Select({ index, value, onChange, borderColor, buttonColor, options, cla
     >
       <option value="0">Seleccione...</option>
       {options.map((option) => (
-         <option
-         className="bg-white hover:bg-[#dcaff7] text-[#3a3a3a] hover:text-[#b232fc]" key={option.value} value={option.value}>
+        <option
+          className="bg-white text-[#3a3a3a] hover:bg-[#dcaff7] hover:text-[#b232fc] focus:bg-[#dcaff7] focus:text-[#b232fc] transition-colors duration-300"
+          key={option.value}
+          value={option.value}
+        >
           {option.label}
         </option>
       ))}
