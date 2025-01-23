@@ -14,7 +14,7 @@
   display: flex;
   align-items: center;
   flex-direction: column;
-  padding: 1rem; /* Reducido */
+  padding: 0.1rem; /* Reducido */
   width: 100%;
   max-width: 20vh; /* Reducido */
   margin: 0 auto;
@@ -88,7 +88,7 @@
 }
 
 .audio-container1 audio {
-  height: 25px;
+  height: 37px;
 }
 
 .form-select1 {
@@ -124,30 +124,28 @@
   padding: 0.5rem;
 }
 
-.correct-container {
-  background-color: #65f38a; /* Verde claro */
-  border: 2px solid #65f38a;
+.correcto-container {
+  background-color: #4caf50; /* Verde claro */
+  border: 2px solid #4caf50;
   box-shadow: 0 4px 15px rgba(101, 243, 138, 0.2);
   transition: all 0.3s ease;
 }
 
-.incorrect-container {
-  background-color: #f36572; /* Rojo claro */
-  border: 2px solid #f36572;
+.incorrecto-container {
+  background-color: #f44336; /* Rojo claro */
+  border: 2px solid #f44336;
   box-shadow: 0 4px 15px rgba(243, 101, 114, 0.2);
   transition: all 0.3s ease;
 }
 
-.form-select.correct {
-  border-color: #65f38a;
-  /* background-color: #65f38a; */
+.form-select1.correct {
+  border-color: #4caf50;
   box-shadow: 0 4px 15px rgba(101, 243, 138, 0.2);
   color: #000000;
 }
 
-.form-select.incorrect {
-  border-color: #f36572;
-  /* background-color: #f36572; */
+.form-select1.incorrect {
+  border-color: #f44336;
   box-shadow: 0 4px 15px rgba(243, 101, 114, 0.2);
   color: #000000;
 }
@@ -183,7 +181,7 @@
 
 .text-success {
   background-color: #dbdbdb;
-  border-color: #65f38a;
+  border-color: #4caf50;
   color: #c0185d;
   padding: 1rem 1.5rem;
   border-radius: 10px;
@@ -191,9 +189,9 @@
   box-shadow: 0 4px 15px rgba(101, 243, 138, 0.2);
 }
 
-.text-error {
-  background-color: #e7e7e7;
-  border-color: #f36572;
+.text-errorPTR {
+  background-color: #ffffff;
+  border-color: #f44336;
   color: #c0185d;
   padding: 0.5rem 1.5rem;
   border-radius: 10px;
@@ -213,14 +211,13 @@
 }
 
 
-.feedback-icon {
+.feedback-icon-TR {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   width: 64px;
   height: 64px;
-  animation: popIn 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
 
 

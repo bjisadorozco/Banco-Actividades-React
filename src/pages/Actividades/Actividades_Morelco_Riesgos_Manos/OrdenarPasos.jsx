@@ -25,7 +25,8 @@ const OrdenarPasos = () => {
   const [pasos, setPasos] = useState([]);
   const [resultado, setResultado] = useState("");
   const [correctCount, setCorrectCount] = useState(0);
-  const [ordenando, setOrdenando] = useState(false); // Nuevo estado para controlar si se ha comenzado a ordenar
+  const [ordenando, setOrdenando] = useState(false);
+  const [porcentaje, setPorcentaje] = useState(0);
 
   useEffect(() => {
     setPasos(pasosDesordenadosIniciales);
@@ -33,7 +34,7 @@ const OrdenarPasos = () => {
 
   const handleDragStart = (e, index) => {
     e.dataTransfer.setData("index", index);
-    setOrdenando(true); // Activar el estado de ordenando al iniciar un arrastre
+    setOrdenando(true);
   };
 
   const handleDrop = (e, targetIndex) => {
@@ -50,74 +51,72 @@ const OrdenarPasos = () => {
   };
 
   const validarOrden = () => {
-    const isCorrect = pasos.every(
+    const correctAnswers = pasos.filter(
       (paso, index) => paso.texto === pasosCorrectos[index]
     );
-    setResultado(isCorrect ? "correcto" : "incorrecto");
-    setCorrectCount(
-      pasos.filter((paso, index) => paso.texto === pasosCorrectos[index]).length
-    );
+    const correctCount = correctAnswers.length;
+    const totalCount = pasosCorrectos.length;
+    const porcentajeCorrecto = Math.round((correctCount / totalCount) * 100);
+
+    setCorrectCount(correctCount);
+    setPorcentaje(porcentajeCorrecto);
+    setResultado(correctCount === totalCount ? "correcto" : "incorrecto");
   };
 
   const reiniciarPasos = () => {
     setPasos([...pasosDesordenadosIniciales]);
     setResultado("");
     setCorrectCount(0);
-    setOrdenando(false); // Volver a deshabilitar el botón "Validar"
+    setPorcentaje(0);
+    setOrdenando(false);
   };
 
   return (
     <div className="ordenar-pasos-container">
-      <div className="contenedor-pasos">
-      {pasos.map((paso, index) => {
-  const esCorrecto = resultado && paso.texto === pasosCorrectos[index];
-  return (
-    <div
-      key={index}
-      className={`tarjeta-paso1 ${
-        resultado ? (esCorrecto ? "correcto" : "incorrecto") : ""
-      }`}
-      draggable
-      onDragStart={(e) => handleDragStart(e, index)}
-      onDragOver={handleDragOver}
-      onDrop={(e) => handleDrop(e, index)}
-    >
-      <div className="contenido-tarjeta">
-        <span>
-          {paso.numero}. {paso.texto}
-        </span>
-        {resultado && (
-          <div className="feedback-tarjeta">
-            <img
-              src={esCorrecto ? checkIcon : xmarkIcon}
-              alt={esCorrecto ? "Correcto" : "Incorrecto"}
-              className="icono-resultado"
-            />
-          </div>
-        )}
-      </div>
-    </div>
-  );
-})}
-
+      <div className="contenedor-pasosWEB">
+        {pasos.map((paso, index) => {
+          const esCorrecto = resultado && paso.texto === pasosCorrectos[index];
+          return (
+            <div
+              key={index}
+              className={`tarjeta-paso1 ${
+                resultado ? (esCorrecto ? "correcto" : "incorrecto") : ""
+              }`}
+              draggable
+              onDragStart={(e) => handleDragStart(e, index)}
+              onDragOver={handleDragOver}
+              onDrop={(e) => handleDrop(e, index)}
+            >
+              <div className="contenido-tarjeta">
+                <span>
+                  {paso.numero}. {paso.texto}
+                </span>
+                {resultado && (
+                  <div className="feedback-tarjeta">
+                    <img
+                      src={esCorrecto ? checkIcon : xmarkIcon}
+                      alt={esCorrecto ? "Correcto" : "Incorrecto"}
+                      className="icono-resultado"
+                    />
+                  </div>
+                )}
+              </div>
+            </div>
+          );
+        })}
       </div>
 
       {resultado && (
-        <div className="contador-correctas">
+        <div className="resultado-contenedor">
           <p className="text-md mt-0 font-bold text-center">
-            <span className="contador-texto">
-              {correctCount} de {pasosCorrectos.length} respuestas correctas
-            </span>
+            {correctCount} de {pasosCorrectos.length} respuestas correctas {porcentaje}%
           </p>
-        </div>
-      )}
-
-      {resultado && (
-        <div className={`resultado ${resultado}`}>
-          <p>
+          <p className={`resultado ${resultado}`}>
             {resultado === "correcto"
-              ? "¡Muy bien! Estás aprendiendo mucho para cuidar tus manos."
-              : "Respuesta incorrecta: ¡Piénsalo bien!"}
+              ? "¡Excelente trabajo! Has ordenado todo correctamente."
+              : porcentaje > 50
+              ? "Buen intento, pero hay espacio para mejorar."
+              : "Sigue practicando, ¡puedes hacerlo mejor!"}
           </p>
         </div>
       )}
@@ -128,7 +127,7 @@ const OrdenarPasos = () => {
           icon={faCheck}
           roundedFull={true}
           onClick={validarOrden}
-          disabled={!ordenando} // Inicialmente deshabilitado, habilitado al ordenar
+          disabled={!ordenando}
         >
           Validar
         </Button>
