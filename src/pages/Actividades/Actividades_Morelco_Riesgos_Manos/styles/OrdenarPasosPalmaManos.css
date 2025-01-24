@@ -1,5 +1,5 @@
 /* Contenedor principal */
-.ordenar-pasos-container {
+.ordenar-pasos-containerOPM {
     font-family: 'Montserrat', sans-serif;
     max-width: 800px;
     margin: 0 auto;
@@ -53,7 +53,7 @@
   }
   
   /* Contenedor de botones */
-  .botones-container {
+  .botones-containerOPM {
     display: flex;
     justify-content: center;
     gap: 10px;
@@ -104,11 +104,15 @@
     color: #f44336;
   }
   
-  .feedback-container {
-    background-color: #f4f4f4;
+  .feedback-containerOPM {
+    background-color: #ffffff;
+    max-width: 800px;
     border-radius: 8px;
     padding: 14px;
     margin-top: 16px;
+    margin: 0 auto;
+    margin-top: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   }
   
   .feedback-message {

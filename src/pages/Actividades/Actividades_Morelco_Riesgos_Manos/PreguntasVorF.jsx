@@ -10,7 +10,6 @@ import Button from "../../components/Button";
 import imgTrue from "../../../assets/img/checkAct.png";
 import imgFalse from "../../../assets/img/xmarkAct.png";
 import imgPeligro from "../../../assets/img/avatar-hombre-morado-blanco.webp";
-import "./styles/PreguntasVorF.css"
 
 const questions = [
   {

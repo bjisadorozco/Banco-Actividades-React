@@ -18,20 +18,18 @@ import DragAndDropAlturas1Movil from "./pages/Actividades/Actividades_Trabajo_se
 import CardsInfoAlturas from "./pages/Actividades/Actividades_Trabajo_seguro_alturas/CardsInfoAlturas.jsx";
 import DragAndDrop from "./pages/Actividades/Actividades_Morelco_Riesgos_Manos/DragAndDrop.jsx";
 import PreguntasTiposRiesgo from "./pages/Actividades/Actividades_Morelco_Riesgos_Manos/PreguntasTiposRiesgo.jsx";
+import PreguntasTiposRiesgoMobile from "./pages/Actividades/Actividades_Morelco_Riesgos_Manos/PreguntasTiposRiesgoMobile.jsx";
 import PreguntasVorF from "./pages/Actividades/Actividades_Morelco_Riesgos_Manos/PreguntasVorF.jsx";
 import ActividadListaDesplegable from "./pages/Actividades/Actividades_Morelco_Riesgos_Manos/ActividadListaDesplegable.jsx";
 import PreguntasAlturas1 from "./pages/Actividades/Actividades_Trabajo_seguro_alturas/PreguntasAlturas1.jsx";
 import DragAndDropAlturas2 from "./pages/Actividades/Actividades_Trabajo_seguro_alturas/DragAndDropAlturas2.jsx";
 import DragAndDropAlturas2Movil from "./pages/Actividades/Actividades_Trabajo_seguro_alturas/DragAndDropAlturas2Movil.jsx";
+import PreguntasTiposRiesgoMobile from "./pages/Actividades/Actividades_Morelco_Riesgos_Manos/PreguntasTiposRiesgoMobile.jsx";
+import ActividadFalsoVerdadero from "./pages/Actividades/Actividades_Espacios_Confinados/Actividad_Falso_Verdadero.jsx"
 import "./main.css";
-import OrderAudio from "./pages/Actividades/Actividades_Trabajo_seguro_alturas/OrderAudios.jsx";
-import DragAndDropAudios from "./pages/Actividades/Actividades_Trabajo_seguro_alturas/DragAndDropAudios.jsx";
-import DragAndDropAudiosMovil from "./pages/Actividades/Actividades_Trabajo_seguro_alturas/DragAndDropAudiosMovil.jsx";
-import DragAndDropSlide9 from "./pages/Actividades/Actividades_Trabajo_seguro_alturas/DragnAndDropSlide9.jsx";
-import DragAndDropSlide9Movil from "./pages/Actividades/Actividades_Trabajo_seguro_alturas/DragAndDropSlide9Movil.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <PreguntasRiesgosTermicos />
+<ActividadFalsoVerdadero />
   </React.StrictMode>
 );

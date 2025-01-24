@@ -1,4 +1,4 @@
-const Paragraph = ({ children, theme = 'dark', justify = 'center' }) => {
+const Paragraph = ({ children, theme = 'dark', justify = 'justify' }) => {
   const themeClass = theme === 'dark' ? 'text-paragraph-color' : 'text-paragraph-light-color';
   return (
     <p

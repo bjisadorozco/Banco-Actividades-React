@@ -6,7 +6,7 @@ import { faCheck, faRepeat } from "@fortawesome/free-solid-svg-icons";
 import Button from "../../components/Button";
 import correctIcon from "../../../assets/img/checkAct.png";
 import incorrectIcon from "../../../assets/img/xmarkAct.png";
-import "./styles/PreguntasTiposRiesgo.css";
+import "./styles/PreguntasTiposRiesgoMobile.css";
 
 const OPTIONS = [
   { value: "Seguridad", label: "Seguridad" },
@@ -32,7 +32,6 @@ export default function PreguntasTiposRiesgo() {
   const [validationStatus, setValidationStatus] = useState({});
   const [showValidateError, setShowValidateError] = useState(false);
   const [percentage, setPercentage] = useState(0);
-  const [correctCount, setCorrectCount] = useState(0); // Added state for correct count
 
   useEffect(() => {
     const hasAnySelection = Object.values(selections).some(
@@ -105,36 +104,35 @@ export default function PreguntasTiposRiesgo() {
     setValidationStatus(results);
 
     const correctCount = Object.values(results).filter(Boolean).length;
-    setCorrectCount(correctCount); // Update correctCount state
-    const percentage = Math.round((correctCount / 3) * 100);
-    setPercentage(percentage);
+    const calculatedPercentage = Math.round((correctCount / 3) * 100);
+    setPercentage(calculatedPercentage);
     setFeedback(
       correctCount === 3
-        ? `¡Correcto! Todas las respuestas son correctas. (${percentage}%)`
-        : `Tienes ${correctCount} de 3 respuestas correctas (${percentage}%). Intenta de nuevo.`
+        ? `¡Correcto! Todas las respuestas son correctas. (${calculatedPercentage}%)`
+        : `Tienes ${correctCount} de 3 respuestas correctas. Intenta de nuevo. (${calculatedPercentage}%)`
     );
   };
 
   const getContainerClassName = (selectId) => {
-    if (Object.keys(validationStatus).length === 0) return "ctItem1";
-    return `ctItem1 ${
+    if (Object.keys(validationStatus).length === 0) return "ctItem2";
+    return `ctItem2 ${
       validationStatus[selectId] ? "correcto-container" : "incorrecto-container"
     }`;
   };
 
   const getSelectClassName = (selectId) => {
-    if (Object.keys(validationStatus).length === 0) return "form-select1";
-    return `form-select1 ${validationStatus[selectId] ? "correct" : "incorrect"}`;
+    if (Object.keys(validationStatus).length === 0) return "form-select2";
+    return `form-select2 ${validationStatus[selectId] ? "correct" : "incorrect"}`;
   };
 
   return (
-    <div className="main-container1">
-      <div className="activity-container1">
-        <div className="questions-grid1">
+    <div className="main-containe1">
+      <div className="activity-container2">
+        <div className="questions-grid2 ">
           <div className="col-md-6">
             <div className="preguntas_01">
               <div className={getContainerClassName("select1")}>
-                <div className="audio-container1 mb-0">
+                <div className="audio-container2 mb-0">
                   <audio
                     controls
                     ref={(el) => (audioRefs.current[0] = el)}
@@ -180,7 +178,7 @@ export default function PreguntasTiposRiesgo() {
           <div className="col-md-6">
             <div className="preguntas_01">
               <div className={getContainerClassName("select2")}>
-                <div className="audio-container1 mb-0">
+                <div className="audio-container2 mb-0">
                   <audio
                     controls
                     ref={(el) => (audioRefs.current[1] = el)}
@@ -223,10 +221,10 @@ export default function PreguntasTiposRiesgo() {
             </div>
           </div>
 
-          <div className="bottom-question">
-            <div className="preguntas_01">
+          <div className="col-md-6">
+          <div className="preguntas_01">
               <div className={getContainerClassName("select3")}>
-                <div className="audio-container1 mb-0">
+                <div className="audio-container2 mb-0">
                   <audio
                     controls
                     ref={(el) => (audioRefs.current[2] = el)}
@@ -274,24 +272,24 @@ export default function PreguntasTiposRiesgo() {
             {(showValidateError || feedback) && (
               <div>
                 {showValidateError && (
-                  <div className="text-errorPTR" style={{ color: '#8f8f8f', fontWeight: 'bold'}}>
+                  <div className="text-errorPTRM" style={{ color: '#8f8f8f', fontWeight: 'bold' }}>
                     Por favor selecciona todas las opciones antes de validar
                   </div>
                 )}
                 {feedback && (
                   <div>
-                    {correctCount === 3 ? (
+                    {feedback.includes("Correcto") ? (
                       <p>
                         <span style={{ color: '#4caf50', fontWeight: 'bold' }}>¡Correcto!</span>{' '}
-                        <span style={{ color: '#8f8f8f', fontWeight: 'bold' }}>
+                        <span style={{ color: '#8F8F8F', fontWeight: 'bold' }}>
                           Todas las respuestas son correctas. ({percentage}%)
                         </span>
                       </p>
                     ) : (
                       <p>
                         <span style={{ color: '#f44336', fontWeight: 'bold' }}>¡Incorrecto!</span>{' '}
-                        <span style={{ color: '#8f8f8f', fontWeight: 'bold' }}>
-                          Tienes {correctCount} de 3 respuestas correctas. Intenta de nuevo. ({percentage}%)
+                        <span style={{ color: '#8F8F8F', fontWeight: 'bold' }}>
+                          Tienes {feedback.match(/\d+/)[0]} de 3 respuestas correctas. Intenta de nuevo. ({percentage}%)
                         </span>
                       </p>
                     )}

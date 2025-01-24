@@ -160,10 +160,10 @@ function PreguntasRiesgosMecanicos() {
                                         <p
                                             key={index}
                                             className={`
-                        ${selectedAnswers[currentQuestion]?.includes(index) ? 'act' : ''}
-                        ${isValidated && selectedAnswers[currentQuestion]?.includes(index) ?
-                                                    (option.correct ? 'true' : 'false') : ''}
-                      `}
+                                        ${selectedAnswers[currentQuestion]?.includes(index) ? 'act' : ''}
+                                        ${isValidated && selectedAnswers[currentQuestion]?.includes(index) ?
+                                                                    (option.correct ? 'true' : 'false') : ''}
+                                    `}
                                             onClick={() => handleAnswerSelect(index)}
                                         >
                                             {String.fromCharCode(97 + index)}. {option.text}
