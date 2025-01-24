@@ -19,9 +19,9 @@ export default function SelectAudios() {
   const [shuffledOptions, setShuffledOptions] = useState([]);
 
   const options = [
-    { id: "option1", label: "Seguridad" },
-    { id: "option2", label: "Velocidad" },
-    { id: "option3", label: "Comunicación" },
+    { id: "option1", label: "Procedimiento de rescate" },
+    { id: "option2", label: "Procediminento de evacuación" },
+    { id: "option3", label: "Plan para respuestas a emergencia" },
   ];
 
   const audios = [
@@ -74,8 +74,8 @@ export default function SelectAudios() {
 
     setMessage(
       totalCorrect === Object.keys(correctAnswers).length
-        ? `¡Muy bien! Estas listo para profundizar en los elementos de manejo de Rescate en trabajo en alturas​. Obtuviste un ${percentage}%`
-        : `¡Piénsalo bien! Escucha de nuevo el audio para relacionarlo correctamente. Obtuviste un ${percentage}%`
+        ? `¡Muy bien! Estás listo para profundizar en los elementos de manejo de emergencias​. Obtuviste un ${percentage}%`
+        : `¡Piénsalo bien! ¡Escucha nuevamente el audio y vuelve a intentarlo! Obtuviste un ${percentage}%`
     );
   };
 

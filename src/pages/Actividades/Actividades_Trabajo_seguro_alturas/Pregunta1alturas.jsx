@@ -69,19 +69,17 @@ function Pregunta1alturas() {
   };
 
   return (
-    <div className="flex flex-col md:flex-row">
-      <div className="md:flex-2 md:w-full w-full px-2 flex justify-center items-center">
-        <div className="w-full flex flex-col justify-center items-center ">
-          <div className="preguntas_01">
-            <div className="ctItem-7">
-              <Paragraph theme="light" justify="justify">
-                <strong>Pregunta:</strong> {question.question}
-              </Paragraph>
-              <div>
-                {question.options.map((option, index) => (
-                  <p
-                    key={index}
-                    className={`
+    <div>
+      <div className="preguntas_01">
+        <div className="ctItem-7">
+          <Paragraph theme="light" justify="justify">
+            <strong>Pregunta:</strong> {question.question}
+          </Paragraph>
+          <div>
+            {question.options.map((option, index) => (
+              <p
+                key={index}
+                className={`
                                             ${selectedAnswers.includes(index) ? "act" : ""}
                                             ${
                                               isValidated &&
@@ -92,64 +90,62 @@ function Pregunta1alturas() {
                                                 : ""
                                             }
                                         `}
-                    onClick={() => handleAnswerSelect(index)}
-                  >
-                    {String.fromCharCode(97 + index)}. {option.text}
-                  </p>
-                ))}
-              </div>
-              <div className="flex flex-col items-center">
-                {showErrorMessage && (
-                  <h3 className="text-secondary-color font-bold mb-2">
-                    Debes seleccionar una opción para continuar.
-                  </h3>
-                )}
-                <div className="flex gap-4">
-                  <Button
-                    bold={false}
-                    icon={faCheck}
-                    roundedFull={true}
-                    onClick={handleValidate}
-                    disabled={selectedAnswers.length === 0}
-                  >
-                    Validar
-                  </Button>
-                  <Button
-                    bold={false}
-                    icon={faRepeat}
-                    roundedFull={true}
-                    onClick={handleReset}
-                    disabled={selectedAnswers.length === 0}
-                  >
-                    Reiniciar
-                  </Button>
-                </div>
-              </div>
+                onClick={() => handleAnswerSelect(index)}
+              >
+                {String.fromCharCode(97 + index)}. {option.text}
+              </p>
+            ))}
+          </div>
+          <div className="flex flex-col items-center">
+            {showErrorMessage && (
+              <h3 className="text-secondary-color font-bold mb-2">
+                Debes seleccionar una opción para continuar.
+              </h3>
+            )}
+            <div className="flex gap-4">
+              <Button
+                bold={false}
+                icon={faCheck}
+                roundedFull={true}
+                onClick={handleValidate}
+                disabled={selectedAnswers.length === 0}
+              >
+                Validar
+              </Button>
+              <Button
+                bold={false}
+                icon={faRepeat}
+                roundedFull={true}
+                onClick={handleReset}
+                disabled={selectedAnswers.length === 0}
+              >
+                Reiniciar
+              </Button>
             </div>
           </div>
-
-          {showFeedback && (
-            <div className="feedback-container ctItem">
-              <Paragraph theme="light" justify="justify">
-                <strong
-                  style={{
-                    color: question.options[selectedAnswers[0]].correct
-                      ? "#4CAF50"
-                      : "#F44336",
-                  }}
-                >
-                  {question.options[selectedAnswers[0]].correct
-                    ? "Correcto: "
-                    : "Incorrecto: "}
-                </strong>
-                {question.options[selectedAnswers[0]].correct
-                  ? question.correctFeedback
-                  : question.incorrectFeedback}
-              </Paragraph>
-            </div>
-          )}
         </div>
       </div>
+
+      {showFeedback && (
+        <div className="feedback-container-alturas ctItem-7">
+          <Paragraph theme="light" justify="justify">
+            <strong
+              style={{
+                color: question.options[selectedAnswers[0]].correct
+                  ? "#4CAF50"
+                  : "#F44336",
+              }}
+            >
+              {question.options[selectedAnswers[0]].correct
+                ? "Correcto: "
+                : "Incorrecto: "}
+            </strong>
+            {question.options[selectedAnswers[0]].correct
+              ? question.correctFeedback
+              : question.incorrectFeedback}
+          </Paragraph>
+        </div>
+      )}
     </div>
   );
 }

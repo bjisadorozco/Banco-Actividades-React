@@ -29,12 +29,12 @@ function SeleccionImagenesAlturas() {
   const correctImages = [martillo, cintaMetrica, destornillador,taladro];
 
   const explanationsMap = {
-    [martillo]: 'TRABAJOS DE MONTAJES DE ESTRUCTURAS:   Bien!  Estos normalmente se hacen a más de 2 mts de altura.',
-    [cintaMetrica]: 'TRABAJOS EN TECHOS Y CUBIERTAS:   Bien!  Estos siempre se hacen a más de 2 mts de altura',
-    [destornillador]: 'TRABAJOS EN PAREDES Y FACHADAS:   Bien !  Estos normalmente se hacen a más de 2 mts de altura',
-    [taladro]: 'TRABAJOS EN ANDAMIOS:   Bien !  Estos normalmente permiten acceder a alturas superiores a 2 mts',
-    [sierraElectrica]: 'INSTALACION ELECTRICA DE PISO:   Piénsalo bien!  Este tipo de tareas normalmente NO se hacen a más de 2 metros de altura.',
-    [mezcladoraCemento]: 'INSTALACION DE PISOS:   Piénsalo bien!  Este tipo de tareas normalmente NO se hacen a más de 2 metros de altura.',
+    [martillo]: 'Tabajos de montajes de estructuras:   Bien!  Estos normalmente se hacen a más de 2 mts de altura.',
+    [cintaMetrica]: 'Trabajos en techos y cubiertas:   Bien!  Estos siempre se hacen a más de 2 mts de altura',
+    [destornillador]: 'Trabajos en paredes y fachadas:   Bien !  Estos normalmente se hacen a más de 2 mts de altura',
+    [taladro]: 'Trabajos en andamios:   Bien !  Estos normalmente permiten acceder a alturas superiores a 2 mts',
+    [sierraElectrica]: 'Instalación electrica de piso:   Piénsalo bien!  Este tipo de tareas normalmente NO se hacen a más de 2 metros de altura.',
+    [mezcladoraCemento]: 'Instalación de pisos:   Piénsalo bien!  Este tipo de tareas normalmente NO se hacen a más de 2 metros de altura.',
   };
 
   const actSelectImg = (image) => {

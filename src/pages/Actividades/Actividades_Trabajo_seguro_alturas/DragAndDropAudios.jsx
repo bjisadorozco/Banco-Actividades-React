@@ -77,9 +77,9 @@ export default function DragAndDropAudios() {
   );
 
   const options = [
-    { id: "option1", label: "Seguridad" },
-    { id: "option2", label: "Velocidad" },
-    { id: "option3", label: "Comunicación" },
+    { id: "option1", label: "Procedimiento de rescate" },
+    { id: "option2", label: "Procediminento de evacuación" },
+    { id: "option3", label: "Plan para respuestas a emergencia" },
   ];
 
   const audios = [audioSeguridad, audioVelocidad, audioComunicacion];
@@ -112,34 +112,40 @@ export default function DragAndDropAudios() {
       if (items[over.id]) return;
 
       setItems((prevItems) => {
-        const updatedItems = {
+        return {
           ...prevItems,
           [over.id]: active.id,
         };
-        validateDrop(over.id, active.id);
-        return updatedItems;
       });
     }
   };
 
-  const validateDrop = (dropId, optionId) => {
+  const handleValidation = () => {
     const correctAnswers = {
       drop1: "option1",
       drop2: "option2",
       drop3: "option3",
     };
 
-    const isCorrect = correctAnswers[dropId] === optionId;
+    let totalCorrect = 0;
 
-    setValidation((prevValidation) => ({
-      ...prevValidation,
-      [dropId]: isCorrect,
-    }));
+    const updatedValidation = Object.keys(items).reduce((acc, dropId) => {
+      const isCorrect = correctAnswers[dropId] === items[dropId];
+      if (isCorrect) totalCorrect++;
+      acc[dropId] = isCorrect;
+      return acc;
+    }, {});
+
+    setValidation(updatedValidation);
+
+    const percentage = Math.round(
+      (totalCorrect / Object.keys(correctAnswers).length) * 100
+    );
 
     setMessage(
-      isCorrect
-        ? "¡Muy bien! Estas listo para profundizar en los elementos de manejo de Rescate en trabajo en alturas​"
-        : "¡Piénsalo bien! Escucha de nuevo el audio para relacionarlo correctamente​"
+      totalCorrect === Object.keys(correctAnswers).length
+        ? `¡Muy bien! Estás listo para profundizar en los elementos de manejo de emergencias​. Obtuviste un ${percentage}% de respuestas correctas.`
+        : `¡Piénsalo bien! ¡Escucha nuevamente el audio y vuelve a intentarlo! Obtuviste un ${percentage}% de respuestas correctas.`
     );
   };
 
@@ -198,10 +204,17 @@ export default function DragAndDropAudios() {
         ))}
       </DndContext>
 
-      <div className="button-group">
-        <Button onClick={handleReset} icon="faRepeat" roundedFull={true}>
-          Reiniciar
-        </Button>
+      <div className="buttons">
+        <div className="button-group">
+          <Button onClick={handleValidation} icon="faCheck" roundedFull={true}>
+            Validar
+          </Button>
+        </div>
+        <div className="button-group">
+          <Button onClick={handleReset} icon="faRepeat" roundedFull={true}>
+            Reiniciar
+          </Button>
+        </div>
       </div>
 
       {message && (

@@ -83,6 +83,12 @@
     border-top: 10px solid gray; /* Color de la flecha, debe coincidir con el fondo de .sabias-que-info */
   }
 
+  .flex {
+    display: flex;
+    width: 100%;
+    margin: 5px auto !important;
+    padding: 10px;
+  }
 /* dispositivos moviles */
 
   @media screen and (max-width: 600px) {
