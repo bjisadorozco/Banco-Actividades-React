@@ -177,6 +177,26 @@ function EPS_Lugares_Confinados() {
                     Respuestas correctas: {correctAnswers} de {words.length} (
                       {Math.floor(percentage)}%)
                   </p>
+                  {feedback && (
+                  <div className="w-full flex text-center flex-col items-center justify-center rounded-lg">
+                    <div
+                      className="feedback mt-4 w-[50%]"
+                      style={{
+                        backgroundColor:
+                          feedback ===
+                          "¡Muy bien! identificaste este peligro correctamente."
+                            ? "#009A3D"
+                            : "#f44336",
+                        color: "white",
+                        padding: "10px",
+                        borderRadius: "5px",
+                        lineHeight: "1.2",
+                      }}
+                    >
+                      {feedback}
+                    </div>
+                  </div>
+                )}
                  
                 </div>
                 <div className="flex justify-center mb-4 opacity-100">
@@ -297,26 +317,7 @@ function EPS_Lugares_Confinados() {
                   </div>
                 </div>
 
-                {feedback && (
-                  <div className="w-full flex text-center flex-col items-center justify-center rounded-lg">
-                    <div
-                      className="feedback mt-4 w-[50%]"
-                      style={{
-                        backgroundColor:
-                          feedback ===
-                          "¡Muy bien! identificaste este peligro correctamente."
-                            ? "#009A3D"
-                            : "#f44336",
-                        color: "white",
-                        padding: "10px",
-                        borderRadius: "5px",
-                        lineHeight: "1.2",
-                      }}
-                    >
-                      {feedback}
-                    </div>
-                  </div>
-                )}
+              
 
                 <div className="w-full flex justify-center items-center">
                   <div className="flex justify-center mt-6 mx-2">
