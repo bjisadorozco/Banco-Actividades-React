@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
-import Audio1 from "../../../assets/audio/sld8_fatiga.mp3";
-import Audio2 from "../../../assets/audio/sld8_uso_repetitivo.mp3";
-import Audio3 from "../../../assets/audio/sld8_riesgo_ergonomico.mp3";
+import Audio1 from "../../../assets/audio/Alturas velocidad M3 – Slide 28 Audio.mp3";
+import Audio2 from "../../../assets/audio/Alturas comunicacion M3 – Slide 28 Audio.mp3";
+import Audio3 from "../../../assets/audio/Alturas seguridad M3 – Slide 28 Audio.mp3";
 import { faCheck, faRepeat } from "@fortawesome/free-solid-svg-icons";
 import Button from "../../components/Button";
 import correctIcon from "../../../assets/img/checkAct.png";
@@ -9,15 +9,15 @@ import incorrectIcon from "../../../assets/img/xmarkAct.png";
 import "./styles/PreguntasTiposRiesgoMobile.css";
 
 const OPTIONS = [
-  { value: "Uso repetitivo", label: "Uso repetitivo" },
-  { value: "Posturas incorrectas", label: "Posturas incorrectas" },
-  { value: "Fatiga", label: "Fatiga" },
+  { value: "Seguridad", label: "Seguridad" },
+  { value: "Velocidad", label: "Velocidad" },
+  { value: "Comunicación", label: "Comunicación" },
 ];
 
 const CORRECT_ANSWERS = {
-  select1: "Fatiga",
-  select2: "Uso repetitivo",
-  select3: "Posturas incorrectas",
+  select1: "Velocidad",
+  select2: "Comunicación",
+  select3: "Seguridad",
 };
 
 export default function PreguntasTiposRiesgo() {
@@ -31,6 +31,7 @@ export default function PreguntasTiposRiesgo() {
   const [isResetDisabled, setIsResetDisabled] = useState(true);
   const [validationStatus, setValidationStatus] = useState({});
   const [showValidateError, setShowValidateError] = useState(false);
+  const [percentage, setPercentage] = useState(0);
 
   useEffect(() => {
     const hasAnySelection = Object.values(selections).some(
@@ -103,17 +104,19 @@ export default function PreguntasTiposRiesgo() {
     setValidationStatus(results);
 
     const correctCount = Object.values(results).filter(Boolean).length;
+    const calculatedPercentage = Math.round((correctCount / 3) * 100);
+    setPercentage(calculatedPercentage);
     setFeedback(
       correctCount === 3
-        ? "¡Correcto! Todas las respuestas son correctas."
-        : `Tienes ${correctCount} de 3 respuestas correctas. Intenta de nuevo.`
+        ? `¡Correcto! Todas las respuestas son correctas. (${calculatedPercentage}%)`
+        : `Tienes ${correctCount} de 3 respuestas correctas. Intenta de nuevo. (${calculatedPercentage}%)`
     );
   };
 
   const getContainerClassName = (selectId) => {
     if (Object.keys(validationStatus).length === 0) return "ctItem2";
     return `ctItem2 ${
-      validationStatus[selectId] ? "correct-container" : "incorrect-container"
+      validationStatus[selectId] ? "correcto-container" : "incorrecto-container"
     }`;
   };
 
@@ -123,7 +126,7 @@ export default function PreguntasTiposRiesgo() {
   };
 
   return (
-    <div className="main-container">
+    <div className="main-containe1">
       <div className="activity-container2">
         <div className="questions-grid2 ">
           <div className="col-md-6">
@@ -132,7 +135,6 @@ export default function PreguntasTiposRiesgo() {
                 <div className="audio-container2 mb-0">
                   <audio
                     controls
-                    // className="w-100"
                     ref={(el) => (audioRefs.current[0] = el)}
                     onPlay={() => handleAudioPlay(0)}
                   >
@@ -160,10 +162,12 @@ export default function PreguntasTiposRiesgo() {
                         validationStatus.select1 ? correctIcon : incorrectIcon
                       }
                       alt={validationStatus.select1 ? "Correcto" : "Incorrecto"}
-                      className="feedback-icon"
+                      className="feedback-icon-TR"
                     />
                     <p className="feedback-text">
-                      {validationStatus.select1 ? "¡Correcto!" : "¡Incorrecto!"}
+                      <span style={{ color: validationStatus.select1 ? '#4caf50' : '#f44336' }}>
+                        {validationStatus.select1 ? "¡Correcto!" : "¡Incorrecto!"}
+                      </span>
                     </p>
                   </>
                 )}
@@ -177,7 +181,6 @@ export default function PreguntasTiposRiesgo() {
                 <div className="audio-container2 mb-0">
                   <audio
                     controls
-                    // className="w-100"
                     ref={(el) => (audioRefs.current[1] = el)}
                     onPlay={() => handleAudioPlay(1)}
                   >
@@ -205,10 +208,12 @@ export default function PreguntasTiposRiesgo() {
                         validationStatus.select2 ? correctIcon : incorrectIcon
                       }
                       alt={validationStatus.select2 ? "Correcto" : "Incorrecto"}
-                      className="feedback-icon"
+                      className="feedback-icon-TR"
                     />
                     <p className="feedback-text">
-                      {validationStatus.select2 ? "¡Correcto!" : "¡Incorrecto!"}
+                      <span style={{ color: validationStatus.select2 ? '#4caf50' : '#f44336' }}>
+                        {validationStatus.select2 ? "¡Correcto!" : "¡Incorrecto!"}
+                      </span>
                     </p>
                   </>
                 )}
@@ -222,7 +227,6 @@ export default function PreguntasTiposRiesgo() {
                 <div className="audio-container2 mb-0">
                   <audio
                     controls
-                    // className="w-100"
                     ref={(el) => (audioRefs.current[2] = el)}
                     onPlay={() => handleAudioPlay(2)}
                   >
@@ -250,10 +254,12 @@ export default function PreguntasTiposRiesgo() {
                         validationStatus.select3 ? correctIcon : incorrectIcon
                       }
                       alt={validationStatus.select3 ? "Correcto" : "Incorrecto"}
-                      className="feedback-icon"
+                      className="feedback-icon-TR"
                     />
                     <p className="feedback-text">
-                      {validationStatus.select3 ? "¡Correcto!" : "¡Incorrecto!"}
+                      <span style={{ color: validationStatus.select3 ? '#4caf50' : '#f44336' }}>
+                        {validationStatus.select3 ? "¡Correcto!" : "¡Incorrecto!"}
+                      </span>
                     </p>
                   </>
                 )}
@@ -266,19 +272,27 @@ export default function PreguntasTiposRiesgo() {
             {(showValidateError || feedback) && (
               <div>
                 {showValidateError && (
-                  <div className="text-error">
+                  <div className="text-errorPTRM" style={{ color: '#8f8f8f', fontWeight: 'bold' }}>
                     Por favor selecciona todas las opciones antes de validar
                   </div>
                 )}
                 {feedback && (
-                  <div
-                    className={
-                      feedback.includes("Correcto")
-                        ? "text-success"
-                        : "text-error"
-                    }
-                  >
-                    {feedback}
+                  <div>
+                    {feedback.includes("Correcto") ? (
+                      <p>
+                        <span style={{ color: '#4caf50', fontWeight: 'bold' }}>¡Correcto!</span>{' '}
+                        <span style={{ color: '#8F8F8F', fontWeight: 'bold' }}>
+                          Todas las respuestas son correctas. ({percentage}%)
+                        </span>
+                      </p>
+                    ) : (
+                      <p>
+                        <span style={{ color: '#f44336', fontWeight: 'bold' }}>¡Incorrecto!</span>{' '}
+                        <span style={{ color: '#8F8F8F', fontWeight: 'bold' }}>
+                          Tienes {feedback.match(/\d+/)[0]} de 3 respuestas correctas. Intenta de nuevo. ({percentage}%)
+                        </span>
+                      </p>
+                    )}
                   </div>
                 )}
               </div>
@@ -315,3 +329,4 @@ export default function PreguntasTiposRiesgo() {
     </div>
   );
 }
+

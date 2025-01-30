@@ -18,10 +18,10 @@
 }
 
 /* Contenedor de pasos */
-.contenedor-pasos {
+.contenedor-pasosWEB {
   display: flex;
   flex-direction: column;
-  gap: 12px; /* Aumento el espacio entre los pasos */
+  gap: 3px; /* Aumento el espacio entre los pasos */
 }
 
 /* Tarjeta de paso */
@@ -93,7 +93,7 @@
 /* Resultado */
 .resultado {
   text-align: center;
-  margin-top: 20px;
+  margin-top: 0;
   font-size: 1.2rem; /* Aumento el tamaño de la fuente del resultado */
   font-weight: bold;
 }
@@ -123,6 +123,9 @@
   color: #8f8f8f;
 }
 
+.resultado-contenedor{
+  color: #8f8f8f;
+}
 /* Ícono de resultado */
 .icono-resultado {
   width: 24px; /* Aumento el tamaño del ícono */
