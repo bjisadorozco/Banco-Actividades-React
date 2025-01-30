@@ -24,11 +24,19 @@ import PreguntasAlturas1 from "./pages/Actividades/Actividades_Trabajo_seguro_al
 import DragAndDropAlturas2 from "./pages/Actividades/Actividades_Trabajo_seguro_alturas/DragAndDropAlturas2.jsx";
 import DragAndDropAlturas2Movil from "./pages/Actividades/Actividades_Trabajo_seguro_alturas/DragAndDropAlturas2Movil.jsx";
 import PreguntasTiposRiesgoMobile from "./pages/Actividades/Actividades_Morelco_Riesgos_Manos/PreguntasTiposRiesgoMobile.jsx";
+import ActividadFalsoVerdadero from "./pages/Actividades/Actividades_Espacios_Confinados/Actividad_Falso_Verdadero.jsx"
+import Drag_And_Drop from "./pages/Actividades/Actividades_Espacios_Confinados/Drag_And_Drop.jsx"
+import Drag_And_DropMobile from "./pages/Actividades/Actividades_Espacios_Confinados/Drag_And_DropMobile.jsx"
+import EPSLugaresConfinados from "./pages/Actividades/Actividades_Espacios_Confinados/EPS_Lugares_Confinados.jsx"
+import ActividadMobileEntradaSalida from "./pages/Actividades/Actividades_Espacios_Confinados/Actividad_Mobile_Entrada_Salida.jsx"
 import "./main.css";
 
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <PreguntasRiesgosTermicos />
+    <EPSLugaresConfinados
+
+    
+     />
   </React.StrictMode>
 );
