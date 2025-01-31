@@ -18,16 +18,21 @@ import DragAndDropAlturas1Movil from "./pages/Actividades/Actividades_Trabajo_se
 import CardsInfoAlturas from "./pages/Actividades/Actividades_Trabajo_seguro_alturas/CardsInfoAlturas.jsx";
 import DragAndDrop from "./pages/Actividades/Actividades_Morelco_Riesgos_Manos/DragAndDrop.jsx";
 import PreguntasTiposRiesgo from "./pages/Actividades/Actividades_Morelco_Riesgos_Manos/PreguntasTiposRiesgo.jsx";
+import PreguntasTiposRiesgoMobile from "./pages/Actividades/Actividades_Morelco_Riesgos_Manos/PreguntasTiposRiesgoMobile.jsx";
 import PreguntasVorF from "./pages/Actividades/Actividades_Morelco_Riesgos_Manos/PreguntasVorF.jsx";
 import ActividadListaDesplegable from "./pages/Actividades/Actividades_Morelco_Riesgos_Manos/ActividadListaDesplegable.jsx";
 import PreguntasAlturas1 from "./pages/Actividades/Actividades_Trabajo_seguro_alturas/PreguntasAlturas1.jsx";
 import DragAndDropAlturas2 from "./pages/Actividades/Actividades_Trabajo_seguro_alturas/DragAndDropAlturas2.jsx";
 import DragAndDropAlturas2Movil from "./pages/Actividades/Actividades_Trabajo_seguro_alturas/DragAndDropAlturas2Movil.jsx";
+import SeleccionPreguntas from "./pages/Actividades/Actividades_Morelco_Riesgos_Manos/SeleccionPreguntas.jsx";
+import EspaciosConfinadosSeleccionMultiple from "./pages/Actividades/Actividades_Morelco_Riesgos_Manos/EspaciosConfinadosSeleccionMultiple.jsx";
+import SeleccionEspaciosConfinados from "./pages/Actividades/Actividades_Morelco_Riesgos_Manos/SeleccionEspaciosConfinados.jsx";
+import PreguntasSiNo from "./pages/Actividades/Actividades_Morelco_Riesgos_Manos/PreguntasSiNo.jsx";
 import "./main.css";
 
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <PreguntasAlturas1 />
+    <PreguntasSiNo />
   </React.StrictMode>
 );
