@@ -33,7 +33,8 @@ import "./main.css";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <EPSLugaresConfinados
-     />
+
+
+    <Drag_And_Drop />
   </React.StrictMode>
 );

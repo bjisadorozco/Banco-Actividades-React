@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faRepeat } from "@fortawesome/free-solid-svg-icons";
+import { faRepeat, faUndo } from "@fortawesome/free-solid-svg-icons";
 import imgTrue from "../../../assets/img/checkAct.png";
 import imgFalse from "../../../assets/img/xmarkAct.png";
-import DragAndDropMobile  from "./Drag_And_DropMobile"
+import DragAndDropMobile from "./Drag_And_DropMobile";
 
 const items = [
   {
@@ -13,7 +13,6 @@ const items = [
     image: "/src/assets/img/Elementos_EPP/casco_sldM2.webp",
     correctBoxId: "leftColumn",
   },
-
   {
     id: "H",
     name: "Botas",
@@ -74,8 +73,19 @@ const DragAndDrop = () => {
   const [feedbackMessage, setFeedbackMessage] = useState("");
   const [audioSrc, setAudioSrc] = useState("");
   const [isResetDisabled, setIsResetDisabled] = useState(true);
-  const [audioKey, setAudioKey] = useState(0);
+  const [history, setHistory] = useState([]);
   const audioRef = useRef(null);
+
+  // Usamos useEffect para escuchar los cambios de audioSrc y reproducir el audio automáticamente
+  useEffect(() => {
+    if (audioSrc && audioRef.current) {
+      // Asegurarse de que el audio se pause, se reinicie y luego se reproduzca
+      audioRef.current.pause();
+      audioRef.current.currentTime = 0;
+      audioRef.current.load();
+      audioRef.current.play();
+    }
+  }, [audioSrc]);
 
   const handleDragStart = (e, item) => {
     e.dataTransfer.setData("text/plain", item.id);
@@ -83,6 +93,7 @@ const DragAndDrop = () => {
 
   const handleDrop = (e, targetId) => {
     e.preventDefault();
+
     const itemId = e.dataTransfer.getData("text/plain");
     const draggedItem = items.find((item) => item.id === itemId);
 
@@ -91,52 +102,94 @@ const DragAndDrop = () => {
       return;
     }
 
-    const isCorrect = isItemCorrect(draggedItem.id, targetId);
+    // Guardamos el estado anterior antes de actualizar
+    const previousDroppedItems = { ...droppedItems };
+    const previousHistory = [...history];
 
-    if (!droppedItems[targetId]) {
-      setDroppedItems((prevDroppedItems) => ({
-        ...prevDroppedItems,
+    // Verificar si el item ya está en alguna caja
+    const existingItem = Object.values(droppedItems).find(
+      (droppedItem) => droppedItem.id === draggedItem.id
+    );
+
+    if (existingItem) {
+      // Eliminarlo de su caja anterior
+      const updatedDroppedItems = { ...droppedItems };
+      delete updatedDroppedItems[existingItem.correctBoxId];
+
+      // Actualizar el estado con el item en su nueva caja
+      setDroppedItems({
+        ...updatedDroppedItems,
         [targetId]: draggedItem,
-      }));
+      });
+    } else {
+      // Si no está en ninguna caja, colocarlo en la caja correspondiente
+      const isCorrect = isItemCorrect(draggedItem.id, targetId);
 
-      if (isCorrect) {
-        setFeedbackMessage(
-          <>
-            <span className="text-[#4CAF50] font-bold">
-              Relación correcta:{" "}
-            </span>
-            <span className="text-[#808693]">
-              ¡Muy bien! Identificaste este ítem correctamente. Ahora escucha el
-              siguiente audio:
-            </span>
-          </>
-        );
+      if (!droppedItems[targetId]) {
+        setDroppedItems((prevDroppedItems) => ({
+          ...prevDroppedItems,
+          [targetId]: draggedItem,
+        }));
 
-        // Cambiar la fuente del audio para el objeto actual
-        setAudioSrc(draggedItem.audio);
-
-        // Detener el audio anterior y empezar el nuevo
-        if (audioRef.current) {
-          audioRef.current.pause(); // Pausar el audio actual
-          audioRef.current.currentTime = 0; // Reiniciar al principio
-          audioRef.current.load(); // Recargar el nuevo archivo de audio
-          audioRef.current.play(); // Reproducir el nuevo audio
+        if (isCorrect) {
+          setFeedbackMessage(
+            <>
+              <span className="text-[#4CAF50] font-bold">
+                Relación correcta:{" "}
+              </span>
+              <span className="text-[#808693]">
+                ¡Muy bien! Identificaste este ítem correctamente. Ahora escucha
+                el siguiente audio:
+              </span>
+            </>
+          );
+          // Guardamos el historial de la acción realizada
+          setAudioSrc(draggedItem.audio);
+          previousHistory.push({
+            action: "add",
+            item: draggedItem,
+            to: targetId,
+          });
+        } else {
+          setFeedbackMessage(
+            <>
+              <span className="text-[#FF7043] font-bold">
+                Relación incorrecta:{" "}
+              </span>
+              <span className="text-[#808693]">
+                ¡Piénsalo bien! El ítem no corresponde a este elemento de
+                protección personal, vuelve a intentarlo.
+              </span>
+            </>
+          );
+          setAudioSrc(""); // Borra el audio si es incorrecto
+          previousHistory.push({
+            action: "incorrect",
+            item: draggedItem,
+            to: targetId,
+          });
         }
-      } else {
-        setFeedbackMessage(
-          <>
-            <span className="text-[#FF7043] font-bold">
-              Relación incorrecta:{" "}
-            </span>
-            <span className="text-[#808693]">
-              "¡Piénsalo bien! El ítem no corresponde a este elemento de
-              protección personal, vuelve a intentarlo."
-            </span>
-          </>
-        );
-        setAudioSrc("");
       }
+      // Actualizamos el historial
+      setHistory(previousHistory);
     }
+  };
+  const handleUndo = () => {
+    if (history.length === 0) return;
+
+    // Recuperamos la última acción y deshacemos la acción
+    const lastAction = history[history.length - 1];
+    const newDroppedItems = { ...droppedItems };
+
+    // Deshacer la acción según el tipo de acción guardada
+    if (lastAction.action === "add" || lastAction.action === "incorrect") {
+      // Si fue una acción de agregar o incorrecta, eliminamos el item de la caja
+      delete newDroppedItems[lastAction.to];
+    }
+
+    // Restablecer el historial
+    setDroppedItems(newDroppedItems);
+    setHistory(history.slice(0, -1)); // Eliminar la última acción del historial
   };
 
   const handleReset = () => {
@@ -169,7 +222,7 @@ const DragAndDrop = () => {
 
   return (
     <div className="flex flex-col md:flex-row md:mb-0">
-      <div className="md:w-full md:flex hidden bg-white  flex-col justify-center md:static relative md:top-0 top-0">
+      <div className="md:w-full md:flex hidden bg-white flex-col justify-center md:static relative md:top-0 top-0">
         <div className="flex flex-col items-center justify-center">
           <div className="grid grid-cols-1 gap-2 justify-start md:flex md:flex-col mb-3 h-auto w-full">
             <div className="leading-loose"></div>
@@ -361,27 +414,35 @@ const DragAndDrop = () => {
 
               {/* Botón de reinicio */}
               <div className="w-full flex justify-center py-6">
+              <button
+                  className={`bg-[#6E3CD2] text-white rounded-full h-12 px-8 py-2 text-[16px] mx-2`}
+                  onClick={handleUndo}
+                  disabled={history.length === 0}
+                >
+                  <FontAwesomeIcon icon={faUndo} /> Deshacer
+                </button>
                 <button
-                  className={`bg-[#6E3CD2] text-white rounded-full h-12 px-8 py-2 text-lg`}
+                  className={`bg-[#6E3CD2] text-white rounded-full h-12 px-8 py-2 text-[16px] mx-2`}
                   onClick={handleReset}
                 >
                   <FontAwesomeIcon icon={faRepeat} /> Reiniciar
                 </button>
+                
               </div>
             </div>
           </div>
         </div>
       </div>
       <div className="md:hidden w-full bg-white flex flex-col justify-center">
-        <DragAndDropMobile 
-          items={items} 
-          droppedItems={droppedItems} 
-          handleDragStart={handleDragStart} 
-          handleDrop={handleDrop} 
-          feedbackMessage={feedbackMessage} 
+        <DragAndDropMobile
+          items={items}
+          droppedItems={droppedItems}
+          handleDragStart={handleDragStart}
+          handleDrop={handleDrop}
+          feedbackMessage={feedbackMessage}
           audioRef={audioRef}
-          audioSrc={audioSrc} 
-          setAudioSrc={setAudioSrc} 
+          audioSrc={audioSrc}
+          setAudioSrc={setAudioSrc}
           handleReset={handleReset}
         />
       </div>

@@ -1,405 +1,555 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faRepeat } from "@fortawesome/free-solid-svg-icons";
-import imgTrue from "../../../assets/img/checkAct.png";
-import imgFalse from "../../../assets/img/xmarkAct.png";
+import checkIcon from "../../../assets/img/checkAct.png";
+import xmarkIcon from "../../../assets/img/xmarkAct.png";
+import audioCasco from "/src/assets/audio/EPP/casco_de_proteccion.mp3";
+import audioBotas from "/src/assets/audio/EPP/botas_con_punta_de_acero.mp3";
+import audioArnes from "/src/assets/audio/EPP/arnes_de_cuerpo_completo.mp3";
+import audioOverol from "/src/assets/audio/EPP/overoles_resistente_a_quimicos.mp3";
+import audioProtector from "/src/assets/audio/EPP/tapones_o_protectore_auditivos.mp3";
+import audioGafas from "/src/assets/audio/EPP/gafas_de_seguridad.mp3";
+import audioGuantes from "/src/assets/audio/EPP/guantes_resistentes_a_quimicos.mp3";
+import audioRespirador from "/src/assets/audio/EPP/respiradores_purificadores_de_aire.mp3";
+import casco from "/src/assets/img/Elementos_EPP/casco_sldM2.webp";
+import botas from "/src/assets/img/Elementos_EPP/botas_sldM2.webp";
+import arnes from "/src/assets/img/Elementos_EPP/arnes_sldM2.webp";
+import overol from "/src/assets/img/Elementos_EPP/overoles_resistentes_quimicos_sldM2.webp";
+import protector from "/src/assets/img/Elementos_EPP/protectores_auditivos_sldM2.webp";
+import gafas from "/src/assets/img/Elementos_EPP/gafas_seguridad_sldM2.webp";
+import guantes from "/src/assets/img/Elementos_EPP/guantes_sldM2.webp";
+import respirador from "/src/assets/img/Elementos_EPP/respiradores_sldM2.webp";
+import { faCheck, faRepeat } from "@fortawesome/free-solid-svg-icons";
+import Button from "../../components/Button";
 
-const items = [
-  {
-    id: "A",
-    name: "Casco de Protección",
-    audio: "/src/assets/audio/EPP/casco_de_proteccion.mp3",
-    image: "/src/assets/img/Elementos_EPP/casco_sldM2.webp",
-    correctBoxId: "leftColumn",
-  },
+const SelectAndValidateMobile = () => {
+  const [selectedOptions, setSelectedOptions] = useState({
+    select1: "",
+    select2: "",
+    select3: "",
+    select4: "",
+    select5: "",
+    select6: "",
+    select7: "",
+    select8: "",
+  });
 
-  {
-    id: "H",
-    name: "Botas",
-    audio: "/src/assets/audio/EPP/botas_con_punta_de_acero.mp3",
-    image: "/src/assets/img/Elementos_EPP/botas_sldM2.webp",
-    correctBoxId: "rightColumn",
-  },
-  {
-    id: "C",
-    name: "Arnés de Cuerpo Completo",
-    audio: "/src/assets/audio/EPP/arnes_de_cuerpo_completo.mp3",
-    image: "/src/assets/img/Elementos_EPP/arnes_sldM2.webp",
-    correctBoxId: "leftColumn",
-  },
-  {
-    id: "D",
-    name: "Overol",
-    audio: "/src/assets/audio/EPP/overoles_resistente_a_quimicos.mp3",
-    image:
-      "/src/assets/img/Elementos_EPP/overoles_resistentes_quimicos_sldM2.webp",
-    correctBoxId: "leftColumn",
-  },
-  {
-    id: "B",
-    name: "Tapones Auditivos",
-    audio: "/src/assets/audio/EPP/tapones_o_protectore_auditivos.mp3",
-    image: "/src/assets/img/Elementos_EPP/protectores_auditivos_sldM2.webp",
-    correctBoxId: "leftColumn",
-  },
-  {
-    id: "E",
-    name: "Gafas de Seguridad",
-    audio: "/src/assets/audio/EPP/gafas_de_seguridad.mp3",
-    image: "/src/assets/img/Elementos_EPP/gafas_seguridad_sldM2.webp",
-    correctBoxId: "rightColumn",
-  },
-  {
-    id: "G",
-    name: "Guantes Resistentes a Químicos",
-    audio: "/src/assets/audio/EPP/guantes_resistentes_a_quimicos.mp3",
-    image: "/src/assets/img/Elementos_EPP/guantes_sldM2.webp",
-    correctBoxId: "rightColumn",
-  },
-  {
-    id: "F",
-    name: "Respirador Purificador de Aire",
-    audio: "/src/assets/audio/EPP/respiradores_purificadores_de_aire.mp3",
-    image: "/src/assets/img/Elementos_EPP/respiradores_sldM2.webp",
-    correctBoxId: "rightColumn",
-  },
-];
+  const [validationStatus, setValidationStatus] = useState({
+    select1: null, // Valores: "correcto", "incorrecto" o null
+    select2: null,
+    select3: null,
+    select4: null,
+    select5: null,
+    select6: null,
+    select7: null,
+    select8: null,
+  });
 
-const leftColumnItems = ["A", "B", "C", "D"];
-const rightColumnItems = ["E", "F", "G", "H"];
+  const [audioSource, setAudioSource] = useState(null); // Estado para manejar el audio
+  const [errorMessage, setErrorMessage] = useState(""); // Estado para manejar el mensaje de error
+  const [successMessage, setSuccessMessage] = useState(""); // Estado para el mensaje de éxito
 
-const DragAndDropMobile = () => {
-  const [droppedItems, setDroppedItems] = useState({});
-  const [feedbackMessage, setFeedbackMessage] = useState("");
-  const [audioSrc, setAudioSrc] = useState("");
-  const [isResetDisabled, setIsResetDisabled] = useState(true);
-  const [audioKey, setAudioKey] = useState(0);
-  const audioRef = useRef(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const options = [
+    "Casco de Protección",
+    "Botas",
+    "Arnés de Cuerpo Completo",
+    "Overol",
+    "Tapones Auditivos",
+    "Gafas de Seguridad",
+    "Guantes Resistentes a Químicos",
+    "Resporador",
+  ]; // Opciones iniciales
 
-  const handleDragStart = (e, item) => {
-    e.dataTransfer.setData("text/plain", item.id);
-  };
+  const handleSelectChange = (e, selectId, correctAnswer, audio) => {
+    const selectedValue = e.target.value;
 
-  const handleDrop = (e, targetId) => {
-    e.preventDefault();
-    const itemId = e.dataTransfer.getData("text/plain");
-    const draggedItem = items.find((item) => item.id === itemId);
+    setSelectedOptions((prevState) => ({
+      ...prevState,
+      [selectId]: selectedValue,
+    }));
 
-    if (!draggedItem) {
-      console.error("Item no encontrado:", itemId);
-      return;
-    }
-
-    const isCorrect = isItemCorrect(draggedItem.id, targetId);
-
-    if (!droppedItems[targetId]) {
-      setDroppedItems((prevDroppedItems) => ({
-        ...prevDroppedItems,
-        [targetId]: draggedItem,
+    if (selectedValue === correctAnswer) {
+      setValidationStatus((prevState) => ({
+        ...prevState,
+        [selectId]: "correcto",
       }));
-
-      if (isCorrect) {
-        setFeedbackMessage(
-          <>
-            <span className="text-[#4CAF50] font-bold">
-              Relación correcta:{" "}
-            </span>
-            <span className="text-[#808693]">
-              ¡Muy bien! Identificaste este ítem correctamente. Ahora escucha el
-              siguiente audio:
-            </span>
-          </>
-        );
-
-        // Cambiar la fuente del audio para el objeto actual
-        setAudioSrc(draggedItem.audio);
-
-        // Detener el audio anterior y empezar el nuevo
-        if (audioRef.current) {
-          audioRef.current.pause(); // Pausar el audio actual
-          audioRef.current.currentTime = 0; // Reiniciar al principio
-          audioRef.current.load(); // Recargar el nuevo archivo de audio
-          audioRef.current.play(); // Reproducir el nuevo audio
-        }
-      } else {
-        setFeedbackMessage(
-          <>
-            <span className="text-[#FF7043] font-bold">
-              Relación incorrecta:{" "}
-            </span>
-            <span className="text-[#808693]">
-              "¡Piénsalo bien! El ítem no corresponde a este elemento de
-              protección personal, vuelve a intentarlo."
-            </span>
-          </>
-        );
-        setAudioSrc("");
-      }
+      setAudioSource(audio); // Asignar el audio correspondiente
+      setSuccessMessage(
+        <>
+        <span className="text-[#4CAF50] font-bold">
+          Relación correcta:{" "}
+        </span>
+        <span className="text-[#808693]">
+          ¡Muy bien! Identificaste este ítem correctamente. Ahora escucha
+          el siguiente audio:
+        </span>
+      </>
+      );
+      setErrorMessage("");
+    } else {
+      setValidationStatus((prevState) => ({
+        ...prevState,
+        [selectId]: "incorrecto",
+      }));
+      setAudioSource(null); // No asignar audio en caso de respuesta incorrecta
+      setErrorMessage(<>
+        <span className="text-[#FF7043] font-bold">
+          Relación incorrecta:{" "}
+        </span>
+        <span className="text-[#808693]">
+          ¡Piénsalo bien! El ítem no corresponde a este elemento de
+          protección personal, vuelve a intentarlo.
+        </span>
+      </>);
+      setSuccessMessage("");
     }
   };
 
   const handleReset = () => {
-    setDroppedItems({});
-    setFeedbackMessage("");
-    setAudioSrc("");
+    setSelectedOptions({
+      select1: "",
+      select2: "",
+      select3: "",
+    });
+    setValidationStatus({
+      select1: null,
+      select2: null,
+      select3: null,
+    });
+    setAudioSource(null); // Resetear el audio
+    setErrorMessage("");
+    setSuccessMessage("");
   };
 
-  const isItemCorrect = (itemId, targetId) => {
-    return (
-      (leftColumnItems.includes(targetId) &&
-        leftColumnItems.includes(itemId)) ||
-      (rightColumnItems.includes(targetId) && rightColumnItems.includes(itemId))
+  // Generar opciones disponibles dinámicamente
+  const getFilteredOptions = (currentSelectId) => {
+    const selectedValues = Object.values(selectedOptions).filter(Boolean);
+    return options.filter(
+      (option) =>
+        !selectedValues.includes(option) ||
+        selectedOptions[currentSelectId] === option
     );
   };
 
-  const allItemsCorrect = () => {
-    return Object.values(droppedItems).every((item) => {
-      return isItemCorrect(item.id, item.correctBoxId);
-    });
-  };
-
-  useEffect(() => {
-    if (Object.keys(droppedItems).length === items.length) {
-      setIsResetDisabled(false);
-    } else {
-      setIsResetDisabled(true);
-    }
-  }, [droppedItems]);
-
-  // Función para abrir el modal
-  const openModal = () => setIsModalOpen(true);
-
-  // Función para cerrar el modal
-  const closeModal = () => setIsModalOpen(false);
-
   return (
-    <div className="flex flex-col md:flex-row">
-      <div className="md:w-full bg-white flex flex-col justify-center md:static relative md:top-0 top-0">
-        <div className="flex flex-col items-center justify-center">
-          <div className="grid grid-cols-1 gap-2 justify-start md:flex md:flex-col mb-3 h-auto w-full">
-            <div className="leading-loose"></div>
-            <div className="bg-white flex flex-col items-center justify-center text-[#808693] border-[#e0e0e0] md:rounded-lg md:shadow-md mb-[1px] md:m-4 p-4 border rounded-md shadow-md m-6">
-              {/* Retroalimentación y Audio */}
-              <div className="mt-4">
-                <div className="shadow-lg bg-[#FCFCFC] p-4 rounded-lg text-[16px] text-center items-center justify-center flex flex-col">
-                  {/* Imagen central */}
-                  <div className="flex-col relative items-center flex my-2">
-                    {/* Botón para abrir el modal */}
-                    <button
-                      className="bg-[#6E3CD2] text-white rounded-full p-2 mt-4"
-                      onClick={openModal}
-                    >
-                      Ver Imagen
-                    </button>
-                  </div>
-
-                  {/* Modal */}
-                  {isModalOpen && (
-                    <div className="fixed inset-0 flex justify-center items-center bg-black bg-opacity-50 z-50">
-                      <div className="bg-white p-4 rounded-md w-[70%] max-w-lg relative">
-                        <button
-                          className="absolute top-0 right-2 text-[#6E3CD2] text-[40px] font-semibold"
-                          onClick={closeModal}
-                        >
-                          &times;
-                        </button>
-                        <img
-                          src="/src/assets/img/Elementos_EPP/avatar_elementos_epp.webp"
-                          alt="Trabajador con equipo de protección"
-                          className="w-full h-auto"
-                        />
-                      </div>
-                    </div>
-                  )}
-
-                  {feedbackMessage && (
-                    <>
-                      <p
-                        className={
-                          audioSrc
-                            ? "font-sembild text-[#4CAF50]"
-                            : "font-sembild text-[#FF7043]"
-                        }
-                      >
-                        {feedbackMessage}
-                      </p>
-                      {audioSrc && (
-                        <audio
-                          ref={audioRef}
-                          controls
-                          className="mt-2 border border-gray-300 rounded-md shadow-sm"
-                        >
-                          <source src={audioSrc} type="audio/mp3" />
-                          Tu navegador no soporta la etiqueta de audio.
-                        </audio>
-                      )}
-                    </>
-                  )}
-                </div>
-              </div>
-
-              {/* Objetos arrastrables */}
-              <div className="flex flex-wrap justify-center gap-4 my-6">
-                {items.map(
-                  (item) =>
-                    !Object.values(droppedItems).some(
-                      (droppedItem) => droppedItem.id === item.id
-                    ) && (
-                      <img
-                        key={item.id}
-                        src={item.image}
-                        alt={item.name}
-                        draggable
-                        onDragStart={(e) => handleDragStart(e, item)}
-                        className="w-20 h-20 cursor-pointer border-2 border-[#6E3CD2] rounded mb-0"
-                      />
-                    )
-                )}
-              </div>
-
-              {/* Contenedor principal */}
-              <div className="w-full flex justify-center items-center relative">
-                <div className="flex w-full justify-center items-center py-0">
-                  {/* Columna izquierda */}
-                  <div className="flex flex-col items-center mx-2">
-                    {leftColumnItems.map((itemId) => {
-                      const item = items.find((i) => i.id === itemId);
-                      const isCorrect = isItemCorrect(item.id, itemId);
-                      return (
-                        <div
-                          key={item.id}
-                          id={item.id}
-                          className={`relative w-28 h-28 border-2 flex flex-col items-center justify-center border-dashed border-[#9C99A1] ${
-                            droppedItems[item.id]
-                              ? isItemCorrect(droppedItems[item.id].id, itemId)
-                                ? "bg-[#4CAF50] border-solid"
-                                : "bg-[#FF7043] border-solid"
-                              : "bg-[#ebebeb] hover:bg-[#D3C4F1]"
-                          } rounded flex items-center justify-center my-2`}
-                          onDrop={(e) => handleDrop(e, item.id)}
-                          onDragOver={(e) => e.preventDefault()}
-                        >
-                          {/* {droppedItems[item.id] &&
-                            isItemCorrect(droppedItems[item.id].id, itemId) && (
-                              <span className="w-[200px] bg-[#4CAF50] text-white text-[16px] absolute z-30 object-cover top-10 right-28 text-center px-4 py-1 rounded-full">
-                                {droppedItems[item.id].name}
-                              </span>
-                            )} */}
-                          {droppedItems[item.id] && (
-                            <img
-                              src={
-                                isItemCorrect(droppedItems[item.id].id, itemId)
-                                  ? imgTrue
-                                  : imgFalse
-                              }
-                              alt={
-                                isItemCorrect(droppedItems[item.id].id, itemId)
-                                  ? "Correcto"
-                                  : "Incorrecto"
-                              }
-                              className="w-8 h-8 left-10 top-6 p-1"
-                            />
-                          )}
-                          {droppedItems[item.id] ? (
-                            <img
-                              src={droppedItems[item.id].image}
-                              alt={droppedItems[item.id].name}
-                              className="w-full h-full relative z-20 object-cover bottom-6 rounded m-0"
-                            />
-                          ) : (
-                            <span className="text-[#808693] text-center text-[16px] px-2">
-                              Arrastre aquí <br /> {item.id}
-                            </span>
-                          )}
-                        </div>
-                      );
-                    })}
-                  </div>
-
-                  {/* Columna derecha */}
-                  <div className="flex flex-col items-center mx-2">
-                    {rightColumnItems.map((itemId) => {
-                      const item = items.find((i) => i.id === itemId);
-                      const isCorrect = isItemCorrect(item.id, itemId);
-                      return (
-                        <div
-                          key={item.id}
-                          id={item.id}
-                          className={`relative w-28 h-28 border-2 flex flex-col items-center justify-center border-dashed border-[#9C99A1] ${
-                            droppedItems[item.id]
-                              ? isItemCorrect(droppedItems[item.id].id, itemId)
-                                ? "bg-[#4CAF50] border-solid"
-                                : "bg-[#FF7043] border-solid"
-                              : "bg-[#ebebeb] hover:bg-[#D3C4F1]"
-                          } rounded flex items-center justify-center my-2`}
-                          onDrop={(e) => handleDrop(e, item.id)}
-                          onDragOver={(e) => e.preventDefault()}
-                        >
-                          {droppedItems[item.id] && (
-                            <>
-                              {/* {droppedItems[item.id] &&
-                                isItemCorrect(
-                                  droppedItems[item.id].id,
-                                  itemId
-                                ) && (
-                                  <span className="w-[200px] bg-[#4CAF50] text-white text-[16px] absolute z-10 object-cover top-10 left-28 text-center px-4 py-1 rounded-full">
-                                    {droppedItems[item.id].name}
-                                  </span>
-                                )} */}
-                              <img
-                                src={
-                                  isItemCorrect(
-                                    droppedItems[item.id].id,
-                                    itemId
-                                  )
-                                    ? imgTrue
-                                    : imgFalse
-                                }
-                                alt={
-                                  isItemCorrect(
-                                    droppedItems[item.id].id,
-                                    itemId
-                                  )
-                                    ? "Correcto"
-                                    : "Incorrecto"
-                                }
-                                className="w-8 h-8 left-10 top-6 p-1"
-                              />
-                            </>
-                          )}
-                          {droppedItems[item.id] ? (
-                            <img
-                              src={droppedItems[item.id].image}
-                              alt={droppedItems[item.id].name}
-                              className="w-full h-full relative z-20 object-cover bottom-6 rounded m-0"
-                            />
-                          ) : (
-                            <span className="text-[#808693] text-center text-[16px] px-2">
-                              Arrastre aquí <br /> {item.id}
-                            </span>
-                          )}
-                        </div>
-                      );
-                    })}
-                  </div>
-                </div>
-              </div>
-              {/* Botón de reinicio */}
-              <div className="w-full flex justify-center py-6">
-                <button
-                  className={`bg-[#6E3CD2] text-white rounded-full h-12 px-8 py-2 text-lg`}
-                  onClick={handleReset}
-                >
-                  <FontAwesomeIcon icon={faRepeat} /> Reiniciar
-                </button>
-              </div>
-            </div>
+    <div className="mobile-container">
+      <div className="activity-container-mobile">
+        {/* Cuadro 1 */}
+        <div className="bg-[#E5E7EB] rounded-lg">
+          <div
+            className={`select-item rounded-xl ${
+              validationStatus.select1 === "correcto"
+                ? "correct"
+                : validationStatus.select1 === "incorrecto"
+                  ? "incorrect"
+                  : ""
+            }`}
+          >
+            <img src={casco} alt="Casco" className="select-image-mobile" />
+            {validationStatus.select1 === "correcto" && (
+              <img
+                src={checkIcon}
+                className="status-icon-mobile"
+                alt="Correcto"
+              />
+            )}
+            {validationStatus.select1 === "incorrecto" && (
+              <img
+                src={xmarkIcon}
+                className="status-icon-mobile"
+                alt="Incorrecto"
+              />
+            )}
+            <select
+              value={selectedOptions.select1}
+              onChange={(e) =>
+                handleSelectChange(
+                  e,
+                  "select1",
+                  "Casco de Protección",
+                  audioCasco
+                )
+              }
+              className="select-box-mobile rounded-xl w-[80%] text-[#9C99A1] border-none"
+            >
+              <option value="">Selecciona...</option>
+              {getFilteredOptions("select1").map((option) => (
+                <option key={option} value={option}>
+                  {option}
+                </option>
+              ))}
+            </select>
           </div>
         </div>
+
+        {/* Cuadro 2 */}
+        <div className="bg-[#E5E7EB] rounded-lg">
+          <div
+            className={`select-item rounded-xl ${
+              validationStatus.select2 === "correcto"
+                ? "correct"
+                : validationStatus.select2 === "incorrecto"
+                  ? "incorrect"
+                  : ""
+            }`}
+          >
+            <img src={botas} alt="Botas" className="select-image-mobile" />
+            {validationStatus.select2 === "correcto" && (
+              <img
+                src={checkIcon}
+                className="status-icon-mobile"
+                alt="Correcto"
+              />
+            )}
+            {validationStatus.select2 === "incorrecto" && (
+              <img
+                src={xmarkIcon}
+                className="status-icon-mobile"
+                alt="Incorrecto"
+              />
+            )}
+            <select
+              value={selectedOptions.select2}
+              onChange={(e) =>
+                handleSelectChange(e, "select2", "Botas", audioBotas)
+              }
+              className="select-box-mobile rounded-xl w-[80%] text-[#9C99A1] border-none"
+            >
+              <option value="">Selecciona...</option>
+              {getFilteredOptions("select2").map((option) => (
+                <option key={option} value={option}>
+                  {option}
+                </option>
+              ))}
+            </select>
+          </div>
+        </div>
+
+        {/* Cuadro 3 */}
+        <div className="bg-[#E5E7EB] rounded-lg">
+          <div
+            className={`select-item rounded-xl ${
+              validationStatus.select3 === "correcto"
+                ? "correct"
+                : validationStatus.select3 === "incorrecto"
+                  ? "incorrect"
+                  : ""
+            }`}
+          >
+            <img src={arnes} alt="Arnes" className="select-image-mobile mt-2" />
+            {validationStatus.select3 === "correcto" && (
+              <img
+                src={checkIcon}
+                className="status-icon-mobile"
+                alt="Correcto"
+              />
+            )}
+            {validationStatus.select3 === "incorrecto" && (
+              <img
+                src={xmarkIcon}
+                className="status-icon-mobile"
+                alt="Incorrecto"
+              />
+            )}
+            <select
+              value={selectedOptions.select3}
+              onChange={(e) =>
+                handleSelectChange(
+                  e,
+                  "select3",
+                  "Arnés de Cuerpo Completo",
+                  audioArnes
+                )
+              }
+              className="select-box-mobile rounded-xl w-[80%] text-[#9C99A1] border-none"
+            >
+              <option value="">Selecciona...</option>
+              {getFilteredOptions("select3").map((option) => (
+                <option key={option} value={option}>
+                  {option}
+                </option>
+              ))}
+            </select>
+          </div>
+        </div>
+
+        {/* Cuadro 4 */}
+        <div className="bg-[#E5E7EB] rounded-lg">
+          <div
+            className={`select-item rounded-xl ${
+              validationStatus.select4 === "correcto"
+                ? "correct"
+                : validationStatus.select4 === "incorrecto"
+                  ? "incorrect"
+                  : ""
+            }`}
+          >
+            <img
+              src={overol}
+              alt="Overol"
+              className="select-image-mobile mt-2"
+            />
+            {validationStatus.select4 === "correcto" && (
+              <img
+                src={checkIcon}
+                className="status-icon-mobile"
+                alt="Correcto"
+              />
+            )}
+            {validationStatus.select4 === "incorrecto" && (
+              <img
+                src={xmarkIcon}
+                className="status-icon-mobile"
+                alt="Incorrecto"
+              />
+            )}
+            <select
+              value={selectedOptions.select3}
+              onChange={(e) =>
+                handleSelectChange(e, "select4", "Overol", audioOverol)
+              }
+              className="select-box-mobile rounded-xl w-[80%] text-[#9C99A1] border-none"
+            >
+              <option value="">Selecciona...</option>
+              {getFilteredOptions("select4").map((option) => (
+                <option key={option} value={option}>
+                  {option}
+                </option>
+              ))}
+            </select>
+          </div>
+        </div>
+
+        {/* Cuadro 5 */}
+        <div className="bg-[#E5E7EB] rounded-lg">
+          <div
+            className={`select-item rounded-xl ${
+              validationStatus.select5 === "correcto"
+                ? "correct"
+                : validationStatus.select5 === "incorrecto"
+                  ? "incorrect"
+                  : ""
+            }`}
+          >
+            <img
+              src={protector}
+              alt="Protector"
+              className="select-image-mobile"
+            />
+            {validationStatus.select5 === "correcto" && (
+              <img
+                src={checkIcon}
+                className="status-icon-mobile"
+                alt="Correcto"
+              />
+            )}
+            {validationStatus.select5 === "incorrecto" && (
+              <img
+                src={xmarkIcon}
+                className="status-icon-mobile"
+                alt="Incorrecto"
+              />
+            )}
+            <select
+              value={selectedOptions.select3}
+              onChange={(e) =>
+                handleSelectChange(
+                  e,
+                  "select5",
+                  "Tapones Auditivos",
+                  audioProtector
+                )
+              }
+              className="select-box-mobile rounded-xl w-[80%] text-[#9C99A1] border-none"
+            >
+              <option value="">Selecciona...</option>
+              {getFilteredOptions("select5").map((option) => (
+                <option key={option} value={option}>
+                  {option}
+                </option>
+              ))}
+            </select>
+          </div>
+        </div>
+
+        {/* Cuadro 6 */}
+        <div className="bg-[#E5E7EB] rounded-lg">
+          <div
+            className={`select-item rounded-xl ${
+              validationStatus.select6 === "correcto"
+                ? "correct"
+                : validationStatus.select6 === "incorrecto"
+                  ? "incorrect"
+                  : ""
+            }`}
+          >
+            <img src={gafas} alt="Gafas" className="select-image-mobile" />
+            {validationStatus.select6 === "correcto" && (
+              <img
+                src={checkIcon}
+                className="status-icon-mobile"
+                alt="Correcto"
+              />
+            )}
+            {validationStatus.select6 === "incorrecto" && (
+              <img
+                src={xmarkIcon}
+                className="status-icon-mobile"
+                alt="Incorrecto"
+              />
+            )}
+            <select
+              value={selectedOptions.select3}
+              onChange={(e) =>
+                handleSelectChange(
+                  e,
+                  "select6",
+                  "Gafas de Seguridad",
+                  audioGafas
+                )
+              }
+              className="select-box-mobile rounded-xl w-[80%] text-[#9C99A1] border-none"
+            >
+              <option value="">Selecciona...</option>
+              {getFilteredOptions("select6").map((option) => (
+                <option key={option} value={option}>
+                  {option}
+                </option>
+              ))}
+            </select>
+          </div>
+        </div>
+
+        {/* Cuadro 7 */}
+        <div className="bg-[#E5E7EB] rounded-lg">
+          <div
+            className={`select-item rounded-xl ${
+              validationStatus.select7 === "correcto"
+                ? "correct"
+                : validationStatus.select7 === "incorrecto"
+                  ? "incorrect"
+                  : ""
+            }`}
+          >
+            <img
+              src={guantes}
+              alt="Guantes"
+              className="select-image-mobile mt-2"
+            />
+            {validationStatus.select7 === "correcto" && (
+              <img
+                src={checkIcon}
+                className="status-icon-mobile"
+                alt="Correcto"
+              />
+            )}
+            {validationStatus.select7 === "incorrecto" && (
+              <img
+                src={xmarkIcon}
+                className="status-icon-mobile"
+                alt="Incorrecto"
+              />
+            )}
+            <select
+              value={selectedOptions.select3}
+              onChange={(e) =>
+                handleSelectChange(
+                  e,
+                  "select7",
+                  "Guantes Resistentes a Químicos",
+                  audioGuantes
+                )
+              }
+              className="select-box-mobile rounded-xl w-[80%] text-[#9C99A1] border-none"
+            >
+              <option value="">Selecciona...</option>
+              {getFilteredOptions("select7").map((option) => (
+                <option key={option} value={option}>
+                  {option}
+                </option>
+              ))}
+            </select>
+          </div>
+        </div>
+
+        {/* Cuadro 8 */}
+        <div className="bg-[#E5E7EB] rounded-lg">
+          <div
+            className={`select-item rounded-xl ${
+              validationStatus.select8 === "correcto"
+                ? "correct"
+                : validationStatus.select8 === "incorrecto"
+                  ? "incorrect"
+                  : ""
+            }`}
+          >
+            <img
+              src={respirador}
+              alt="Respirador"
+              className="select-image-mobile mt-2"
+            />
+            {validationStatus.select8 === "correcto" && (
+              <img
+                src={checkIcon}
+                className="status-icon-mobile"
+                alt="Correcto"
+              />
+            )}
+            {validationStatus.select8 === "incorrecto" && (
+              <img
+                src={xmarkIcon}
+                className="status-icon-mobile"
+                alt="Incorrecto"
+              />
+            )}
+            <select
+              value={selectedOptions.select3}
+              onChange={(e) =>
+                handleSelectChange(
+                  e,
+                  "select8",
+                  "Respirador Purificador de Aire",
+                  audioRespirador
+                )
+              }
+              className="select-box-mobile rounded-xl w-[80%] text-[#9C99A1] border-none"
+            >
+              <option value="">Selecciona...</option>
+              {getFilteredOptions("select8").map((option) => (
+                <option key={option} value={option}>
+                  {option}
+                </option>
+              ))}
+            </select>
+          </div>
+        </div>
+      </div>
+      {errorMessage && (
+        <div className="error-message-mobile">{errorMessage}</div>
+      )}
+      {successMessage && (
+        <div className="success-message-mobile">{successMessage}</div>
+      )}
+      {/* Mostrar el audio si se ha seleccionado una respuesta correcta */}
+      {audioSource && (
+        <div className="audio-container-mobile">
+          <audio controls autoPlay key={audioSource}>
+            <source src={audioSource} type="audio/mp3" />
+            Tu navegador no soporta el elemento de audio.
+          </audio>
+        </div>
+      )}
+
+      <div className="flex-container-mobile flex-col justify-center items-center">
+        <button
+          className={`w-20 h-20 bg-[#6E3CD2] text-white rounded-full text-[30px]`}
+          onClick={handleReset}
+        >
+          <FontAwesomeIcon icon={faRepeat} />
+        </button>
+        <h1 className="text-[20px] text-black">Reiniciar</h1>
       </div>
     </div>
   );
 };
 
-export default DragAndDropMobile;
+export default SelectAndValidateMobile;
