@@ -22,7 +22,7 @@
 }
 
 .draggable-option {
-  width: 160px;
+  width: 180px;
   min-width: 160px;
   height: 60px;
   background-color: #c0185d;
@@ -31,14 +31,15 @@
   justify-content: center;
   align-items: center;
   border-radius: 8px;
-  font-weight: bold;
   text-align: center;
   cursor: grab;
   position: absolute;
+  font-weight: normal !important;
+  padding: 0 10px;
 }
 
 .drop-area {
-  width: 160px !important;
+  width: 180px !important;
   height: 60px;
   border: 2px dashed #e2e8f0;
   border-radius: 8px;
@@ -46,10 +47,14 @@
   justify-content: center;
   align-items: center;
   margin-top: 0 !important;
-  transition: background-color 0.3s, border-color 0.3s;
+  transition:
+    background-color 0.3s,
+    border-color 0.3s;
   position: absolute;
   left: 40%;
   z-index: -1;
+  padding: 0 10px;
+  text-align: center;
 }
 
 .drop-area-over {
@@ -62,20 +67,20 @@
 }
 
 .drop-area-correct {
-  background-color: #28a745 !important;
-  border-color: #28a745 !important;
+  background-color: #4caf50 !important;
+  border-color: #4caf50 !important;
   min-width: 160px;
 }
 
 .drop-area-incorrect {
-  background-color: #dc3545 !important;
-  border-color: #dc3545 !important;
+  background-color: #f44336 !important;
+  border-color: #f44336 !important;
   min-width: 160px;
 }
 
 .drop-area-content {
   color: white;
-  font-weight: bold;
+  font-weight: normal !important;
 }
 
 .audio-card {
@@ -86,7 +91,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  transition: background-color 0.3s, border-color 0.3s;
+  transition:
+    background-color 0.3s,
+    border-color 0.3s;
   border: 2px solid transparent;
 }
 
@@ -96,36 +103,34 @@
 }
 
 .audio-card.drop-area-correct {
-  background-color: #28a745;
-  border-color: #28a745;
+  background-color: #4caf50;
+  border-color: #4caf50;
 }
 
 .audio-card.drop-area-incorrect {
-  background-color: #dc3545;
-  border-color: #dc3545;
-}
-
-.button-group {
-  display: flex;
-  justify-content: center;
-  gap: 16px;
+  background-color: #f44336;
+  border-color: #f44336;
 }
 
 .message {
   padding: 10px;
-  color: white;
+  color: #fff;
   border-radius: 5px;
-  font-weight: bold;
   text-align: center;
   width: 100%;
 }
 
 .message-success {
-  background-color: #28a745;
+  background-color: #4caf50;
 }
 
 .message-error {
-  background-color: #dc3545;
+  background-color: #f44336;
+}
+
+.correct-answers-message {
+  color: #6e6e6e;
+  font-weight: bold;
 }
 
 .verification-image {
@@ -137,7 +142,7 @@
   transition: opacity 0.3s ease-in-out;
 }
 
-.buttons{
+.buttons {
   display: flex;
   justify-content: center;
   gap: 16px;

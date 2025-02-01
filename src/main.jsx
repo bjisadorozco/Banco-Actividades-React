@@ -24,12 +24,21 @@ import ActividadListaDesplegable from "./pages/Actividades/Actividades_Morelco_R
 import PreguntasAlturas1 from "./pages/Actividades/Actividades_Trabajo_seguro_alturas/PreguntasAlturas1.jsx";
 import DragAndDropAlturas2 from "./pages/Actividades/Actividades_Trabajo_seguro_alturas/DragAndDropAlturas2.jsx";
 import DragAndDropAlturas2Movil from "./pages/Actividades/Actividades_Trabajo_seguro_alturas/DragAndDropAlturas2Movil.jsx";
-import PreguntasTiposRiesgoMobile from "./pages/Actividades/Actividades_Morelco_Riesgos_Manos/PreguntasTiposRiesgoMobile.jsx";
-import ActividadFalsoVerdadero from "./pages/Actividades/Actividades_Espacios_Confinados/Actividad_Falso_Verdadero.jsx"
+import ActividadFalsoVerdadero from "./pages/Actividades/Actividades_Espacios_Confinados/Actividad_Falso_Verdadero.jsx";
 import "./main.css";
+import Slider13_Lista_desplegable from "./pages/Actividades/Actividades_Espacios_Confinados/Slider13_Lista_desplegable_movil.jsx";
+import DragAndDropAudios from "./pages/Actividades/Actividades_Trabajo_seguro_alturas/DragAndDropAudios.jsx";
+import DragAndDropAudiosMovil from "./pages/Actividades/Actividades_Espacios_Confinados/DragAndDropAudiosMovil.jsx";
+import Palabra_CorrectaMovil from "./pages/Actividades/Actividades_Espacios_Confinados/Slider13_Lista_desplegable_movil.jsx";
+import Slider12_drag_and_drop_audios_movil from "./pages/Actividades/Actividades_Espacios_Confinados/Slider12_drag_and_drop_audios_movil.jsx";
+import Slider14_Lista_desplegable from "./pages/Actividades/Actividades_Espacios_Confinados/Slider14_Lista_desplegable.jsx";
+import Slider14_Lista_desplegable_movil from "./pages/Actividades/Actividades_Espacios_Confinados/Slider14_Lista_desplegable_movil.jsx";
+import Slider12_drag_and_drop_audios from "./pages/Actividades/Actividades_Espacios_Confinados/Slider12_drag_and_drop_audios.jsx";
+import Slider15_Lista_desplegable from "./pages/Actividades/Actividades_Espacios_Confinados/Slider15_Lista_desplegable.jsx";
+import Slider15_Lista_desplegable_movil from "./pages/Actividades/Actividades_Espacios_Confinados/Slider15_Lista_desplegable_movil.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-<ActividadFalsoVerdadero />
+    <Slider12_drag_and_drop_audios_movil />
   </React.StrictMode>
 );

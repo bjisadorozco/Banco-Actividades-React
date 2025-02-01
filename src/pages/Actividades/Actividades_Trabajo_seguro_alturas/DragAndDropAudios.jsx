@@ -8,6 +8,8 @@ import audioVelocidad from "../../../assets/audio/Alturas velocidad M3 – Slide
 import audioComunicacion from "../../../assets/audio/Alturas comunicacion M3 – Slide 28 Audio.mp3";
 import uncheck from "../../../assets/img/xmarkAct.png";
 import check from "../../../assets/img/checkAct.png";
+import { faRepeat } from "@fortawesome/free-solid-svg-icons";
+import { faCheck } from "@fortawesome/free-solid-svg-icons";
 
 function DraggableOption({ id, label, isDropped }) {
   const { attributes, listeners, setNodeRef, transform } = useDraggable({
@@ -72,6 +74,11 @@ export default function DragAndDropAudios() {
 
   const [message, setMessage] = useState("");
 
+  // Estado para habilitar/deshabilitar botones
+  const [isResetEnabled, setIsResetEnabled] = useState(false);
+  const [isValidateEnabled, setIsValidateEnabled] = useState(false);
+  const [correctAnswersMessage, setCorrectAnswersMessage] = useState("");
+
   const sensors = useSensors(
     useSensor(MouseSensor, { activationConstraint: { distance: 10 } })
   );
@@ -111,12 +118,22 @@ export default function DragAndDropAudios() {
     if (over && over.id) {
       if (items[over.id]) return;
 
-      setItems((prevItems) => {
-        return {
-          ...prevItems,
-          [over.id]: active.id,
-        };
-      });
+      const updatedItems = {
+        ...items,
+        [over.id]: active.id,
+      };
+
+      setItems(updatedItems);
+
+      // Habilitar botón de reinicio si al menos un drop tiene un item
+      setIsResetEnabled(
+        Object.values(updatedItems).some((item) => item !== null)
+      );
+
+      // Habilitar botón de validar si todos los drops tienen items
+      setIsValidateEnabled(
+        Object.values(updatedItems).every((item) => item !== null)
+      );
     }
   };
 
@@ -144,8 +161,13 @@ export default function DragAndDropAudios() {
 
     setMessage(
       totalCorrect === Object.keys(correctAnswers).length
-        ? `¡Muy bien! Estás listo para profundizar en los elementos de manejo de emergencias​. Obtuviste un ${percentage}% de respuestas correctas.`
-        : `¡Piénsalo bien! ¡Escucha nuevamente el audio y vuelve a intentarlo! Obtuviste un ${percentage}% de respuestas correctas.`
+        ? "¡Muy bien! Estás listo para profundizar en los elementos de manejo de emergencias​."
+        : "¡Piénsalo bien! ¡Escucha nuevamente el audio y vuelve a intentarlo!"
+    );
+
+    // Mensaje adicional con las respuestas correctas
+    setCorrectAnswersMessage(
+      `Tus respuestas correctas son: ${totalCorrect} de 3 (${percentage}%).`
     );
   };
 
@@ -161,6 +183,9 @@ export default function DragAndDropAudios() {
       drop3: null,
     });
     setMessage("");
+    setCorrectAnswersMessage("");
+    setIsResetEnabled(false);
+    setIsValidateEnabled(false);
   };
 
   return (
@@ -205,24 +230,33 @@ export default function DragAndDropAudios() {
       </DndContext>
 
       <div className="buttons">
-        <div className="button-group">
-          <Button onClick={handleValidation} icon="faCheck" roundedFull={true}>
-            Validar
-          </Button>
-        </div>
-        <div className="button-group">
-          <Button onClick={handleReset} icon="faRepeat" roundedFull={true}>
-            Reiniciar
-          </Button>
-        </div>
+        <Button
+          onClick={handleValidation}
+          icon={faCheck}
+          roundedFull={true}
+          bold={false}
+          disabled={!isValidateEnabled}
+        >
+          Validar
+        </Button>
+        <Button
+          onClick={handleReset}
+          icon={faRepeat}
+          roundedFull={true}
+          disabled={!isResetEnabled}
+        >
+          Reiniciar
+        </Button>
       </div>
-
       {message && (
         <div
           className={`message ${message.includes("Muy bien") ? "message-success" : "message-error"}`}
         >
           {message}
         </div>
+      )}
+      {correctAnswersMessage && (
+        <div className="correct-answers-message">{correctAnswersMessage}</div>
       )}
     </div>
   );
