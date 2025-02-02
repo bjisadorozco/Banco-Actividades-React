@@ -221,14 +221,12 @@ const DragAndDrop = () => {
   }, [droppedItems]);
 
   return (
-    <div className="flex flex-col md:flex-row md:mb-0">
-      <div className="md:w-full md:flex hidden bg-white flex-col justify-center md:static relative md:top-0 top-0">
-        <div className="flex flex-col items-center justify-center">
-          <div className="grid grid-cols-1 gap-2 justify-start md:flex md:flex-col mb-3 h-auto w-full">
-            <div className="leading-loose"></div>
-            <div className="bg-white flex flex-col items-center justify-center text-[#808693] border-[#e0e0e0] md:rounded-lg md:shadow-md mb-[1px] md:m-4 p-4 border rounded-md shadow-md m-6">
+      <div className="md:w-full md:flex hidden bg-white flex-col justify-center md:static relative">
+        <div className="flex flex-col items-center justify-center relative">
+            <div className=""></div>
+            <div className="bg-white flex flex-col items-center justify-center text-[#808693] md:rounded-lg mb-[1px] md:m-2 p-4 rounded-md ">
               {/* Objetos arrastrables */}
-              <div className="flex flex-wrap justify-center gap-4 my-6">
+              <div className="flex flex-wrap justify-center gap-4 mb-4">
                 {items.map(
                   (item) =>
                     !Object.values(droppedItems).some(
@@ -240,7 +238,7 @@ const DragAndDrop = () => {
                         alt={item.name}
                         draggable
                         onDragStart={(e) => handleDragStart(e, item)}
-                        className="w-20 h-20 cursor-pointer border-2 border-[#6E3CD2] rounded mb-0"
+                        className="w-14 h-14 cursor-pointer border-2 border-[#6E3CD2] rounded mb-0"
                       />
                     )
                 )}
@@ -258,7 +256,7 @@ const DragAndDrop = () => {
                         <div
                           key={item.id}
                           id={item.id}
-                          className={`relative w-28 h-28 border-2 flex flex-col items-center justify-center border-dashed border-[#9C99A1] ${
+                          className={`relative w-20 h-20 border-2 flex flex-col items-center justify-center border-dashed border-[#9C99A1] ${
                             droppedItems[item.id]
                               ? isItemCorrect(droppedItems[item.id].id, itemId)
                                 ? "bg-[#4CAF50] border-solid"
@@ -270,7 +268,7 @@ const DragAndDrop = () => {
                         >
                           {droppedItems[item.id] &&
                             isItemCorrect(droppedItems[item.id].id, itemId) && (
-                              <span className="w-[200px] bg-[#4CAF50] text-white text-[16px] absolute z-30 object-cover top-10 right-28 text-center px-4 py-1 rounded-full">
+                              <span className="w-[200px] bg-[#4CAF50] text-white text-[16px] absolute z-30 object-cover top-4 right-20 text-center px-4 py-1 rounded-full">
                                 {droppedItems[item.id].name}
                               </span>
                             )}
@@ -286,7 +284,7 @@ const DragAndDrop = () => {
                                   ? "Correcto"
                                   : "Incorrecto"
                               }
-                              className="w-8 h-8 left-10 top-6 p-1"
+                              className="w-8 h-8 left-10 top-4 p-1"
                             />
                           )}
                           {droppedItems[item.id] ? (
@@ -306,11 +304,11 @@ const DragAndDrop = () => {
                   </div>
 
                   {/* Imagen central */}
-                  <div className=" flex-col relative items-center hidden md:flex">
+                  <div className="w-[50%] flex-col relative items-center hidden md:flex">
                     <img
                       src="/src/assets/img/Elementos_EPP/avatar_elementos_epp.webp"
                       alt="Trabajador con equipo de protección"
-                      className="w-[60%]"
+                      className="w-[150px]"
                     />
                   </div>
 
@@ -323,7 +321,7 @@ const DragAndDrop = () => {
                         <div
                           key={item.id}
                           id={item.id}
-                          className={`relative w-28 h-28 border-2 flex flex-col items-center justify-center border-dashed border-[#9C99A1] ${
+                          className={`relative w-20 h-20 border-2 flex flex-col items-center justify-center border-dashed border-[#9C99A1] ${
                             droppedItems[item.id]
                               ? isItemCorrect(droppedItems[item.id].id, itemId)
                                 ? "bg-[#4CAF50] border-solid"
@@ -340,7 +338,7 @@ const DragAndDrop = () => {
                                   droppedItems[item.id].id,
                                   itemId
                                 ) && (
-                                  <span className="w-[200px] bg-[#4CAF50] text-white text-[16px] absolute z-10 object-cover top-10 left-28 text-center px-4 py-1 rounded-full">
+                                  <span className="w-[200px] bg-[#4CAF50] text-white text-[16px] absolute z-10 object-cover top-4 left-20 text-center px-4 py-1 rounded-full">
                                     {droppedItems[item.id].name}
                                   </span>
                                 )}
@@ -361,7 +359,7 @@ const DragAndDrop = () => {
                                     ? "Correcto"
                                     : "Incorrecto"
                                 }
-                                className="w-8 h-8 left-10 top-6 p-1"
+                                className="w-8 h-8 left-10 top-4 p-1"
                               />
                             </>
                           )}
@@ -413,26 +411,24 @@ const DragAndDrop = () => {
               </div>
 
               {/* Botón de reinicio */}
-              <div className="w-full flex justify-center py-6">
+              <div className="w-full flex justify-center py-4">
               <button
-                  className={`bg-[#6E3CD2] text-white rounded-full h-12 px-8 py-2 text-[16px] mx-2`}
+                  className={`bg-[#6E3CD2] flex items-center justify-center text-white rounded-full h-8 px-8 py-2 text-[16px] mx-2`}
                   onClick={handleUndo}
                   disabled={history.length === 0}
                 >
                   <FontAwesomeIcon icon={faUndo} /> Deshacer
                 </button>
                 <button
-                  className={`bg-[#6E3CD2] text-white rounded-full h-12 px-8 py-2 text-[16px] mx-2`}
+                  className={`bg-[#6E3CD2] flex items-center justify-center text-white rounded-full h-8 px-8 py-2 text-[16px] mx-2`}
                   onClick={handleReset}
                 >
                   <FontAwesomeIcon icon={faRepeat} /> Reiniciar
                 </button>
                 
               </div>
-            </div>
           </div>
         </div>
-      </div>
       <div className="md:hidden w-full bg-white flex flex-col justify-center">
         <DragAndDropMobile
           items={items}
