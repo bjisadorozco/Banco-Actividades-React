@@ -1,0 +1,20 @@
+.chevron {
+  position: relative;
+  background: #0ea5e9;
+  color: white;
+  padding: 1rem;
+  margin-right: 20px;
+}
+
+.chevron::after {
+  content: '';
+  position: absolute;
+  right: -20px;
+  top: 0;
+  width: 0;
+  height: 0;
+  border-top: 25px solid transparent;
+  border-bottom: 25px solid transparent;
+  border-left: 20px solid #0ea5e9;
+}
+

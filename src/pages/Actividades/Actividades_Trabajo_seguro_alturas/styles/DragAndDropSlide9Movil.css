@@ -1,0 +1,13 @@
+:root{
+  font-family: 'Montserrat', sans-serif;
+}
+
+.validation-message.success {
+  background-color: #4caf50;
+}
+
+.validation-message.error {
+  background-color: white;
+  color: #818181;
+  font-weight: bold;
+}
