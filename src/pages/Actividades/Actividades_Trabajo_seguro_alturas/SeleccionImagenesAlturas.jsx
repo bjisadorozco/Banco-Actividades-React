@@ -56,10 +56,6 @@ function SeleccionImagenesAlturas() {
       ...prevResults,
       [image]: isSelected ? undefined : isCorrect
     }));
-
-    if (newSelectedImages.length === 6) {
-      setIsModalOpen(true);
-    }
   };
 
   const resetActivity = () => {
