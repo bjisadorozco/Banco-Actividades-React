@@ -2,24 +2,24 @@ import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import checkIcon from "../../../assets/img/checkAct.png";
 import xmarkIcon from "../../../assets/img/xmarkAct.png";
-import audioCasco from "/src/assets/audio/EPP/casco_de_proteccion.mp3";
-import audioBotas from "/src/assets/audio/EPP/botas_con_punta_de_acero.mp3";
-import audioArnes from "/src/assets/audio/EPP/arnes_de_cuerpo_completo.mp3";
-import audioOverol from "/src/assets/audio/EPP/overoles_resistente_a_quimicos.mp3";
-import audioProtector from "/src/assets/audio/EPP/tapones_o_protectore_auditivos.mp3";
-import audioGafas from "/src/assets/audio/EPP/gafas_de_seguridad.mp3";
-import audioGuantes from "/src/assets/audio/EPP/guantes_resistentes_a_quimicos.mp3";
-import audioRespirador from "/src/assets/audio/EPP/respiradores_purificadores_de_aire.mp3";
-import casco from "/src/assets/img/Elementos_EPP/casco_sldM2.webp";
-import botas from "/src/assets/img/Elementos_EPP/botas_sldM2.webp";
-import arnes from "/src/assets/img/Elementos_EPP/arnes_sldM2.webp";
-import overol from "/src/assets/img/Elementos_EPP/overoles_resistentes_quimicos_sldM2.webp";
-import protector from "/src/assets/img/Elementos_EPP/protectores_auditivos_sldM2.webp";
-import gafas from "/src/assets/img/Elementos_EPP/gafas_seguridad_sldM2.webp";
-import guantes from "/src/assets/img/Elementos_EPP/guantes_sldM2.webp";
-import respirador from "/src/assets/img/Elementos_EPP/respiradores_sldM2.webp";
+import audioCasco from "/src/assets/audio/casco_de_proteccion.mp3";
+import audioBotas from "/src/assets/audio/botas_con_punta_de_acero.mp3";
+import audioArnes from "/src/assets/audio/arnes_de_cuerpo_completo.mp3";
+import audioOverol from "/src/assets/audio/overoles_resistente_a_quimicos.mp3";
+import audioProtector from "/src/assets/audio/tapones_o_protectore_auditivos.mp3";
+import audioGafas from "/src/assets/audio/gafas_de_seguridad.mp3";
+import audioGuantes from "/src/assets/audio/guantes_resistentes_a_quimicos.mp3";
+import audioRespirador from "/src/assets/audio/respiradores_purificadores_de_aire.mp3";
+import casco from "/src/assets/img/casco_sldM2.webp";
+import botas from "/src/assets/img/botas_sldM2.webp";
+import arnes from "/src/assets/img/arnes_sldM2.webp";
+import overol from "/src/assets/img/overoles_resistentes_quimicos_sldM2.webp";
+import protector from "/src/assets/img/protectores_auditivos_sldM2.webp";
+import gafas from "/src/assets/img/gafas_seguridad_sldM2.webp";
+import guantes from "/src/assets/img/guantes_sldM2.webp";
+import respirador from "/src/assets/img/respiradores_sldM2.webp";
 import { faCheck, faRepeat } from "@fortawesome/free-solid-svg-icons";
-import Button from "../../components/Button";
+
 
 const SelectAndValidateMobile = () => {
   const [selectedOptions, setSelectedOptions] = useState({

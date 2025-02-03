@@ -9,58 +9,58 @@ const items = [
   {
     id: "A",
     name: "Casco de Protección",
-    audio: "/src/assets/audio/EPP/casco_de_proteccion.mp3",
-    image: "/src/assets/img/Elementos_EPP/casco_sldM2.webp",
+    audio: "/src/assets/audio/casco_de_proteccion.mp3",
+    image: "/src/assets/img/casco_sldM2.webp",
     correctBoxId: "leftColumn",
   },
   {
     id: "H",
     name: "Botas",
-    audio: "/src/assets/audio/EPP/botas_con_punta_de_acero.mp3",
-    image: "/src/assets/img/Elementos_EPP/botas_sldM2.webp",
+    audio: "/src/assets/audio/botas_con_punta_de_acero.mp3",
+    image: "/src/assets/img/botas_sldM2.webp",
     correctBoxId: "rightColumn",
   },
   {
     id: "C",
     name: "Arnés de Cuerpo Completo",
-    audio: "/src/assets/audio/EPP/arnes_de_cuerpo_completo.mp3",
-    image: "/src/assets/img/Elementos_EPP/arnes_sldM2.webp",
+    audio: "/src/assets/audio/arnes_de_cuerpo_completo.mp3",
+    image: "/src/assets/img/arnes_sldM2.webp",
     correctBoxId: "leftColumn",
   },
   {
     id: "D",
     name: "Overol",
-    audio: "/src/assets/audio/EPP/overoles_resistente_a_quimicos.mp3",
+    audio: "/src/assets/audio/overoles_resistente_a_quimicos.mp3",
     image:
-      "/src/assets/img/Elementos_EPP/overoles_resistentes_quimicos_sldM2.webp",
+      "/src/assets/img/overoles_resistentes_quimicos_sldM2.webp",
     correctBoxId: "leftColumn",
   },
   {
     id: "B",
     name: "Tapones Auditivos",
-    audio: "/src/assets/audio/EPP/tapones_o_protectore_auditivos.mp3",
-    image: "/src/assets/img/Elementos_EPP/protectores_auditivos_sldM2.webp",
+    audio: "/src/assets/audio/tapones_o_protectore_auditivos.mp3",
+    image: "/src/assets/img/protectores_auditivos_sldM2.webp",
     correctBoxId: "leftColumn",
   },
   {
     id: "E",
     name: "Gafas de Seguridad",
-    audio: "/src/assets/audio/EPP/gafas_de_seguridad.mp3",
-    image: "/src/assets/img/Elementos_EPP/gafas_seguridad_sldM2.webp",
+    audio: "/src/assets/audio/gafas_de_seguridad.mp3",
+    image: "/src/assets/img/gafas_seguridad_sldM2.webp",
     correctBoxId: "rightColumn",
   },
   {
     id: "G",
     name: "Guantes Resistentes a Químicos",
-    audio: "/src/assets/audio/EPP/guantes_resistentes_a_quimicos.mp3",
-    image: "/src/assets/img/Elementos_EPP/guantes_sldM2.webp",
+    audio: "/src/assets/audio/guantes_resistentes_a_quimicos.mp3",
+    image: "/src/assets/img/guantes_sldM2.webp",
     correctBoxId: "rightColumn",
   },
   {
     id: "F",
     name: "Respirador Purificador de Aire",
-    audio: "/src/assets/audio/EPP/respiradores_purificadores_de_aire.mp3",
-    image: "/src/assets/img/Elementos_EPP/respiradores_sldM2.webp",
+    audio: "/src/assets/audio/respiradores_purificadores_de_aire.mp3",
+    image: "/src/assets/img/respiradores_sldM2.webp",
     correctBoxId: "rightColumn",
   },
 ];
@@ -221,10 +221,10 @@ const DragAndDrop = () => {
   }, [droppedItems]);
 
   return (
-      <div className="md:w-full md:flex hidden bg-white flex-col justify-center md:static relative">
-        <div className="flex flex-col items-center justify-center relative">
+      <div className="md:w-full flex bg-white flex-col justify-center md:static relative">
+        <div className="md:flex flex-col items-center justify-center relative hidden">
             <div className=""></div>
-            <div className="bg-white flex flex-col items-center justify-center text-[#808693] md:rounded-lg mb-[1px] md:m-2 p-4 rounded-md ">
+            <div className="bg-white flex flex-col items-center justify-center text-[#808693] md:rounded-lg mb-[1px] p-2 rounded-md ">
               {/* Objetos arrastrables */}
               <div className="flex flex-wrap justify-center gap-4 mb-4">
                 {items.map(
@@ -256,19 +256,19 @@ const DragAndDrop = () => {
                         <div
                           key={item.id}
                           id={item.id}
-                          className={`relative w-20 h-20 border-2 flex flex-col items-center justify-center border-dashed border-[#9C99A1] ${
+                          className={`relative w-16 h-16 border-2 flex flex-col items-center justify-center border-dashed border-[#9C99A1] ${
                             droppedItems[item.id]
                               ? isItemCorrect(droppedItems[item.id].id, itemId)
                                 ? "bg-[#4CAF50] border-solid"
                                 : "bg-[#FF7043] border-solid"
                               : "bg-[#ebebeb] hover:bg-[#D3C4F1]"
-                          } rounded flex items-center justify-center my-2`}
+                          } rounded flex items-center justify-center my-1`}
                           onDrop={(e) => handleDrop(e, item.id)}
                           onDragOver={(e) => e.preventDefault()}
                         >
                           {droppedItems[item.id] &&
                             isItemCorrect(droppedItems[item.id].id, itemId) && (
-                              <span className="w-[200px] bg-[#4CAF50] text-white text-[16px] absolute z-30 object-cover top-4 right-20 text-center px-4 py-1 rounded-full">
+                              <span className="w-[200px] bg-[#4CAF50] text-white text-[14px] leading-4 absolute z-30 object-cover top-2 right-16 text-center px-4 py-1 rounded-full">
                                 {droppedItems[item.id].name}
                               </span>
                             )}
@@ -284,7 +284,7 @@ const DragAndDrop = () => {
                                   ? "Correcto"
                                   : "Incorrecto"
                               }
-                              className="w-8 h-8 left-10 top-4 p-1"
+                              className="w-8 h-8 left-8 top-2 p-1"
                             />
                           )}
                           {droppedItems[item.id] ? (
@@ -294,7 +294,7 @@ const DragAndDrop = () => {
                               className="w-full h-full relative z-20 object-cover bottom-6 rounded m-0"
                             />
                           ) : (
-                            <span className="text-[#808693] text-center text-[16px]">
+                            <span className="text-[#808693] text-center text-[14px] leading-4">
                               Arrastre aquí <br /> {item.id}
                             </span>
                           )}
@@ -304,11 +304,11 @@ const DragAndDrop = () => {
                   </div>
 
                   {/* Imagen central */}
-                  <div className="w-[50%] flex-col relative items-center hidden md:flex">
+                  <div className="w-[140px] flex-col relative items-center hidden md:flex">
                     <img
-                      src="/src/assets/img/Elementos_EPP/avatar_elementos_epp.webp"
+                      src="/src/assets/img/avatar_elementos_epp.webp"
                       alt="Trabajador con equipo de protección"
-                      className="w-[150px]"
+                      className="w-[100px]"
                     />
                   </div>
 
@@ -321,13 +321,13 @@ const DragAndDrop = () => {
                         <div
                           key={item.id}
                           id={item.id}
-                          className={`relative w-20 h-20 border-2 flex flex-col items-center justify-center border-dashed border-[#9C99A1] ${
+                          className={`relative w-16 h-16 border-2 flex flex-col items-center justify-center border-dashed border-[#9C99A1] ${
                             droppedItems[item.id]
                               ? isItemCorrect(droppedItems[item.id].id, itemId)
                                 ? "bg-[#4CAF50] border-solid"
                                 : "bg-[#FF7043] border-solid"
                               : "bg-[#ebebeb] hover:bg-[#D3C4F1]"
-                          } rounded flex items-center justify-center my-2`}
+                          } rounded flex items-center justify-center my-1`}
                           onDrop={(e) => handleDrop(e, item.id)}
                           onDragOver={(e) => e.preventDefault()}
                         >
@@ -338,7 +338,7 @@ const DragAndDrop = () => {
                                   droppedItems[item.id].id,
                                   itemId
                                 ) && (
-                                  <span className="w-[200px] bg-[#4CAF50] text-white text-[16px] absolute z-10 object-cover top-4 left-20 text-center px-4 py-1 rounded-full">
+                                  <span className="w-[200px] bg-[#4CAF50] text-white text-[14px] leading-4 absolute z-10 object-cover top-2 left-16 text-center px-4 py-1 rounded-full">
                                     {droppedItems[item.id].name}
                                   </span>
                                 )}
@@ -359,7 +359,7 @@ const DragAndDrop = () => {
                                     ? "Correcto"
                                     : "Incorrecto"
                                 }
-                                className="w-8 h-8 left-10 top-4 p-1"
+                                className="w-8 h-8 left-8 top-2 p-1"
                               />
                             </>
                           )}
@@ -370,7 +370,7 @@ const DragAndDrop = () => {
                               className="w-full h-full relative z-20 object-cover bottom-6 rounded m-0"
                             />
                           ) : (
-                            <span className="text-[#808693] text-center text-[16px]">
+                            <span className="text-[#808693] text-center text-[14px] leading-4">
                               Arrastre aquí <br /> {item.id}
                             </span>
                           )}
