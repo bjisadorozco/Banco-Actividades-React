@@ -39,6 +39,6 @@ import Slider15_Lista_desplegable_movil from "./pages/Actividades/Actividades_Es
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <Slider12_drag_and_drop_audios_movil />
+    <SeleccionImagenesAlturas />
   </React.StrictMode>
 );
