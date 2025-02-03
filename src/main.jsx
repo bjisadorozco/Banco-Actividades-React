@@ -24,7 +24,11 @@ import ActividadListaDesplegable from "./pages/Actividades/Actividades_Morelco_R
 import PreguntasAlturas1 from "./pages/Actividades/Actividades_Trabajo_seguro_alturas/PreguntasAlturas1.jsx";
 import DragAndDropAlturas2 from "./pages/Actividades/Actividades_Trabajo_seguro_alturas/DragAndDropAlturas2.jsx";
 import DragAndDropAlturas2Movil from "./pages/Actividades/Actividades_Trabajo_seguro_alturas/DragAndDropAlturas2Movil.jsx";
-import ActividadFalsoVerdadero from "./pages/Actividades/Actividades_Espacios_Confinados/Actividad_Falso_Verdadero.jsx";
+import ActividadFalsoVerdadero from "./pages/Actividades/Actividades_Espacios_Confinados/Actividad_Falso_Verdadero.jsx"
+import Drag_And_Drop from "./pages/Actividades/Actividades_Espacios_Confinados/Drag_And_Drop.jsx"
+import Drag_And_DropMobile from "./pages/Actividades/Actividades_Espacios_Confinados/Drag_And_DropMobile.jsx"
+import EPSLugaresConfinados from "./pages/Actividades/Actividades_Espacios_Confinados/EPS_Lugares_Confinados.jsx"
+import ActividadMobileEntradaSalida from "./pages/Actividades/Actividades_Espacios_Confinados/Actividad_Mobile_Entrada_Salida.jsx"
 import "./main.css";
 import Slider13_Lista_desplegable from "./pages/Actividades/Actividades_Espacios_Confinados/Slider13_Lista_desplegable_movil.jsx";
 import DragAndDropAudios from "./pages/Actividades/Actividades_Trabajo_seguro_alturas/DragAndDropAudios.jsx";
@@ -39,6 +43,7 @@ import Slider15_Lista_desplegable_movil from "./pages/Actividades/Actividades_Es
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <SeleccionImagenesAlturas />
+    <Drag_And_Drop
+   />
   </React.StrictMode>
 );
