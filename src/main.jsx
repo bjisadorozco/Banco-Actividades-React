@@ -35,6 +35,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
 
 
-    <Drag_And_Drop />
+    <Drag_And_Drop
+   />
   </React.StrictMode>
 );
