@@ -43,7 +43,11 @@ import Slider15_Lista_desplegable_movil from "./pages/Actividades/Actividades_Es
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <Drag_And_Drop
+
+
+
+    <ActividadFalsoVerdadero
+
    />
   </React.StrictMode>
 );
