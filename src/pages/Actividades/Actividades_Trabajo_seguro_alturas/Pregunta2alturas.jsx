@@ -113,9 +113,9 @@ function Pregunta2alturas() {
             {isValidated && question.options[selectedAnswers[0]].correct && (
                 <div className="info-container">
                     <Paragraph theme="light" justify="justify">
-                        <strong>Según la Resolución 4272 de 2021:</strong> 
+                        <strong>Según la Resolución 4272 de 2021: </strong>
                         se considera trabajo en alturas toda actividad realizada a una distancia superior a 2 metros del plano de los pies del trabajador. Esto significa que cualquier labor que se ejecute a esta altura o mayor, 
-                        <strong>SE CONSIDERA TRABAJO EN ALTURAS</strong>, y debe cumplir con las medidas de seguridad establecidas por la normativa vigente.
+                        <strong> SE CONSIDERA TRABAJO EN ALTURAS</strong>, y debe cumplir con las medidas de seguridad establecidas por la normativa vigente.
                     </Paragraph>
                 </div>
             )}

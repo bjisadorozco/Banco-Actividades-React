@@ -72,15 +72,8 @@ function SeleccionImagenesAlturas() {
   return (
     <>
       <div className="flex flex-col justify-center">
-       
-
-        {/* Columna derecha */}
-        <div className="flex flex-col md:flex-row ">
-            <div className="md:flex-2  md:w-full w-full px-2 flex justify-center items-center pb-2">
-                <div className="w-full flex flex-col justify-center items-center">
 
             {/* Image Container */}
-            <div className="col-lg-9 col-md-12">
               <div className="actSelectImg text-center">
                 <div className="items-container grid-container">
                   {[martillo, cintaMetrica, destornillador, taladro, sierraElectrica, mezcladoraCemento].map((imgSrc, index) => (
@@ -124,10 +117,6 @@ function SeleccionImagenesAlturas() {
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-      </div>
-</div>
 
       {/* Modal de resultados */}
       <ModalDialog
