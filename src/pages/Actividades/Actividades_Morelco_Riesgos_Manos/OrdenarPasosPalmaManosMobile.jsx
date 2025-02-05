@@ -1,26 +1,24 @@
 import React, { useState } from "react";
-import "./styles/OrdenarPasosMobile.css";
+import "./styles/OrdenarPasosPalmaManosMobile.css";
 import Button from "../../components/Button";
 import { faCheck, faRepeat } from "@fortawesome/free-solid-svg-icons";
 
 const OrdenarPasos = () => {
   const pasosCorrectos = [
-    "Se evalúan riesgos para identificar áreas peligrosas durante el montaje de la estructura metálica.",
-    "Se instalan guardas metálicas resistentes en herramientas como sierras y taladros para evitar contactos accidentales.",
-    "Los trabajadores reciben capacitación sobre el uso correcto de las guardas.",
-    "Se implementa un programa de mantenimiento para inspeccionar y asegurar el buen estado de las guardas.",
-    "Antes de cada turno, los trabajadores verifican que las guardas estén en su lugar y funcionando.",
+    "Primeros auxilios y atencion médica.",
+    "Reporte e investigación de accidentes.",
+    "Rehabilitación y reinserción laboral.",
   ];
 
-  const [respuestas, setRespuestas] = useState(Array(5).fill(""));
-  const [colores, setColores] = useState(Array(5).fill(""));
+  const [respuestas, setRespuestas] = useState(Array(3).fill(""));
+  const [colores, setColores] = useState(Array(3).fill(""));
   const [correctCount, setCorrectCount] = useState(0);
   const [habilitarValidar, setHabilitarValidar] = useState(false);
   const [mostrarResultado, setMostrarResultado] = useState(false);
   const [porcentaje, setPorcentaje] = useState(0);
 
-  const opciones = ["Paso 1", "Paso 2", "Paso 3", "Paso 4", "Paso 5"];
-  const numerosDesordenados = opciones.sort(() => Math.random() - 0.5);
+  const opciones = ["Paso 1", "Paso 2", "Paso 3"];
+  const numerosDesordenados = opciones.sort(() => Math.random() - 0.3);
 
   const handleSelectChange = (e, index) => {
     const newRespuestas = [...respuestas];
@@ -43,8 +41,8 @@ const OrdenarPasos = () => {
   };
 
   const reiniciarRespuestas = () => {
-    setRespuestas(Array(5).fill(""));
-    setColores(Array(5).fill(""));
+    setRespuestas(Array(3).fill(""));
+    setColores(Array(3).fill(""));
     setCorrectCount(0);
     setPorcentaje(0);
     setHabilitarValidar(false);

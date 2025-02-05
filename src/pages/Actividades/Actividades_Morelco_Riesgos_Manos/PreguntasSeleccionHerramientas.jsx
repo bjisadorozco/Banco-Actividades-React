@@ -24,7 +24,7 @@ function PreguntasSeleccionHerramientas() {
     const [showQuestions, setShowQuestions] = useState(true);
     const [selectedAnswers, setSelectedAnswers] = useState([]);
     const [showResults, setShowResults] = useState(false);
-    const [results, setResults] = useState({ correct: 0, total: 2 });
+    const [results, setResults] = useState({ correct: 0, total: 0, percentage: 0 });
     const [questionResults, setQuestionResults] = useState([]);
     const [isValidated, setIsValidated] = useState(false);
     const [showErrorMessage, setShowErrorMessage] = useState(false);
@@ -124,7 +124,8 @@ function PreguntasSeleccionHerramientas() {
         } else {
             setResults({
                 correct: questionResults.reduce((a, b) => a + b, 0),
-                total: questions.length
+                total: questions.length,
+                percentage: Math.round((questionResults.reduce((a, b) => a + b, 0) / questions.length) * 100),
             });
             setShowResults(true);
         }
@@ -145,7 +146,7 @@ function PreguntasSeleccionHerramientas() {
 
     return (
         <div className="flex flex-col md:flex-row overflow-x-hidden mb-36 md:mb-0">
-            <div className="md:flex-2 bg-white md:w-full w-full px-2 md:pr-20 flex justify-center items-center pb-2">
+            <div className="md:flex-2 bg-white md:w-full w-full px-2 md:pr-20 flex justify-center items-center pb-2 mt-12">
                 <div className="w-full flex flex-col justify-center items-center">
 
                     {showQuestions && !showResults && (
@@ -195,7 +196,7 @@ function PreguntasSeleccionHerramientas() {
                     )}
 
                     {showQuestions && !showResults && showFeedback && (
-                        <div className="feedback-container ctItem mt-4">
+                        <div className="feedback-containerPSH ctItemPSH mt-4">
                             <Paragraph theme="light" justify={isMobile ? "justify" : "justify"}>
                                 <strong
                                     style={{
@@ -212,19 +213,20 @@ function PreguntasSeleccionHerramientas() {
                     )}
 
                     {showResults && (
-                        <div className="resultado-container">
-                            <p className='text-secondary-color font-bold'>Resultados:</p>
+                        <div className="resultado-containerPSH">
+                            <p className='text-secondary-color font-bold text-color'>Resultados:</p>
                             <div className="results-list">
                                 {questionResults.map((result, index) => (
-                                    <Paragraph key={index} theme='light'>
+                                    <p key={index} theme='light' className="text-centrar">
                                         El resultado de la pregunta {index + 1} es{' '}
-                                        <span className={result === 1 ? 'text-success' : 'text-error'}>
+                                        <span className={result === 1 ? 'text-successPSH' : 'text-errorPSH'}>
                                             {result}/1
                                             {' '}respuestas correcta
                                         </span>
-                                    </Paragraph>
+                                    </p>
                                 ))}
                             </div>
+                            <p className="text-paragraph-light-color font-bold">Tus respuestas correctas son: {results.correct} de 2 ({results.percentage}%)</p>
                             <Button
                                 bold={false}
                                 icon={faRepeat}

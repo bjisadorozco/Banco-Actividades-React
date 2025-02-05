@@ -240,3 +240,7 @@
 .drop-item-sld5 {
   transition: background-color 0.3s ease; /* Agrega transición para un cambio suave */
 }
+
+.text-monserrat {
+  font-family: 'Montserrat', sans-serif;
+}

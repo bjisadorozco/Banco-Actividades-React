@@ -4,13 +4,14 @@ import { faRepeat, faUndo } from "@fortawesome/free-solid-svg-icons";
 import imgTrue from "../../../assets/img/checkAct.png";
 import imgFalse from "../../../assets/img/xmarkAct.png";
 import DragAndDropMobile from "./Drag_And_DropMobile";
+import imgA from "../../../assets/img/Elementos_EPP/casco_sldM2.webp";
 
 const items = [
   {
     id: "A",
     name: "Casco de Protección",
     audio: "/src/assets/audio/EPP/casco_de_proteccion.mp3",
-    image: "/src/assets/img/Elementos_EPP/casco_sldM2.webp",
+    image: imgA,
     correctBoxId: "leftColumn",
   },
   {

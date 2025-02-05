@@ -1,7 +1,9 @@
 /* Contenedor principal */
 .ordenar-pasos-container {
+  font-family: "Montserrat", sans-serif;
+  font-size: 16px;
   width: 100%; /* Asegura que ocupe el 100% del ancho disponible */
-  max-width: 800px; /* Mantiene un máximo de 800px */
+  max-width: 1000px; /* Mantiene un máximo de 800px */
   margin: 0 auto;
   padding: 20px;
   background: #fcfcfc;
@@ -21,7 +23,7 @@
 .contenedor-pasosWEB {
   display: flex;
   flex-direction: column;
-  gap: 3px; /* Aumento el espacio entre los pasos */
+  gap: 10px; /* Aumento el espacio entre los pasos */
 }
 
 /* Tarjeta de paso */
@@ -37,6 +39,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  font-size: 16px;
 }
 
 /* Estado correcto e incorrecto */
@@ -55,7 +58,7 @@
 }
 
 /* Contenedor de botones */
-.botones-container {
+.botones-containerOP {
   display: flex;
   justify-content: center;
   gap: 12px; /* Aumento el espacio entre los botones */
@@ -65,7 +68,7 @@
 /* Botón de validar */
 .btn-validar,
 .btn-reiniciar {
-  padding: 12px 24px; /* Aumento el padding para botones más grandes */
+  padding: 12px 44px; /* Aumento el padding para botones más grandes */
   font-size: 1.2rem; /* Aumento el tamaño de la fuente de los botones */
   border: none;
   border-radius: 8px;
@@ -91,18 +94,18 @@
 }
 
 /* Resultado */
-.resultado {
+.resultadoOP {
   text-align: center;
-  margin-top: 0;
-  font-size: 1.2rem; /* Aumento el tamaño de la fuente del resultado */
+  margin-top: 6px;
+  font-size: 1rem; /* Aumento el tamaño de la fuente del resultado */
   font-weight: bold;
 }
 
-.resultado.correcto {
+.resultadoOP.correcto {
   color: #4caf50;
 }
 
-.resultado.incorrecto {
+.resultadoOP.incorrecto {
   color: #f44336;
 }
 
@@ -125,6 +128,7 @@
 
 .resultado-contenedor{
   color: #8f8f8f;
+  font-size: 16px;
 }
 /* Ícono de resultado */
 .icono-resultado {
