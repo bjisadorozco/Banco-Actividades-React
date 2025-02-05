@@ -104,8 +104,8 @@ export default function SelectAlturas2() {
   };
 
   return (
-    <div className="flex flex-col overflow-x-hidden mb-36">
-      <div className="flex flex-col items-center gap-4 mb-4">
+    <div className="flex flex-col overflow-x-hidden" style = {{ padding: "0" }}>
+      <div className="flex flex-col items-center gap-4 mb-4" style = {{ padding: "0" }}>
         {options.map((option, index) => (
           <div
             key={option.id}
@@ -135,9 +135,10 @@ export default function SelectAlturas2() {
                 }
                 style={{
                   position: "absolute",
-                  top: "20%",
-                  width: "64px",
-                  height: "64px",
+                  top: "45%",
+                  right: "3%",
+                  width: "54px",
+                  height: "54px",
                 }}
               />
             )}
@@ -157,9 +158,9 @@ export default function SelectAlturas2() {
                   : "black",
               }}
             >
-              <ul>
+              <ul style={{ listStyleType: "disc" }}>
                 {option.text.map((item, i) => (
-                  <li key={i}>{item}</li>
+                  <li key={i} style = {{ marginLeft: "15px" }}>{item} </li>
                 ))}
               </ul>
             </Paragraph>
@@ -215,7 +216,7 @@ export default function SelectAlturas2() {
         ))}
       </div>
 
-      <div className="flex justify-center mt-4 gap-4">
+      <div className="flex justify-center mt-4 gap-6">
         <Button
           onClick={handleReset}
           icon={faRepeat}

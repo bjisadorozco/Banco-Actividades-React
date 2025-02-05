@@ -39,6 +39,7 @@ function DraggableOption({ id, label, isDropped }) {
         ...style,
         width: "160px",
         height: "60px",
+        padding: "10px",
         backgroundColor: "#C0185D",
         color: "white",
         display: "flex",
@@ -59,7 +60,6 @@ function DropArea({ id, children, isValidated, isCorrect }) {
   const { isOver, setNodeRef } = useDroppable({
     id,
   });
-
   const style = {
     backgroundColor: isValidated
       ? isCorrect
@@ -87,7 +87,7 @@ function DropArea({ id, children, isValidated, isCorrect }) {
     justifyContent: "center",
     alignItems: "center",
     marginTop: "1rem",
-    color: isValidated || children ? "white" : "inherit",
+    color: isValidated ? "inherit" : "white",
   };
 
   return (
@@ -213,9 +213,9 @@ export default function DragAndDropSlide9() {
   const areAllItemsDropped = Object.values(items).every((item) => item !== null);
 
   return (
-    <div className="flex flex-col overflow-x-hidden mb-36">
+    <div className="flex flex-col overflow-x-hidden">
       <DndContext sensors={sensors} onDragEnd={handleDragEnd}>
-        <div className="flex flex-row justify-center gap-4 mb-4">
+        <div className="flex flex-row justify-center gap-4">
           {shuffledOptions.map((option, index) => (
             <div
               key={option.id}
@@ -279,7 +279,7 @@ export default function DragAndDropSlide9() {
                 {option.text}
               </Paragraph>
 
-              <div style={{ width: "100%" }}>
+              <div className="area" style={{ width: "100%" }}>
                 <DropArea
                   id={`drop${index + 1}`}
                   isValidated={!!validationMessage}

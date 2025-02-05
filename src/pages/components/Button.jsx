@@ -15,7 +15,8 @@ const Button = ({
   // Estilo deshabilitado
   const disabledStyle = disabled
     ? {
-        backgroundColor: "#8d5fe4", // Color más claro
+        backgroundColor: "#6A8EBB", // Color más claro azul
+        backgroundColor: "#8d5fe4", // Color más claro morado
         cursor: "not-allowed",
         boxShadow: "none",
       }
@@ -25,8 +26,9 @@ const Button = ({
     <button
       onClick={!disabled ? onClick : undefined} // Deshabilitar evento si está deshabilitado
       disabled={disabled} // Propiedad HTML nativa
-      className={`bg-main-color text-white px-2 py-1  text-p-size shadow-sm hover:shadow-md shadow-main-color/50 hover:shadow-main-color/40 transition-shadow duration-300 ${boldClass} ${roundedFullClass}`}
+      className={`bg-main-color text-white px-2 py-2 text-p-size shadow-sm hover:shadow-md shadow-main-color/50 hover:shadow-main-color/40 transition-shadow duration-300 ${boldClass} ${roundedFullClass}`}
       style={{
+				backgroundColor: "#003454",
         fontFamily: "Montserrat, sans-serif",
         ...disabledStyle, // Aplicar estilos condicionalmente
       }}
