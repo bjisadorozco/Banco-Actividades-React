@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import imgTrue from "../../../assets/img/checkAct.png";
 import imgFalse from "../../../assets/img/xmarkAct.png";
-
+import imgPeligro from "/src/assets/img/avatar-hombre-check_morado_blanco.png";
 const Feedback = ({ isCorrect, message }) => (
-  <div className={`text-${isCorrect ? 'green' : 'red'}-600 font-monserrat`}>
-    {isCorrect ? '¡Correcto!' : '¡Piénsalo bien!'}
+  <div className={`text-${isCorrect ? "green" : "red"}-600 font-monserrat`}>
+    {isCorrect ? "¡Correcto!" : "¡Piénsalo bien!"}
     <span className="text-gray-500"> {message}</span>
   </div>
 );
@@ -98,7 +98,6 @@ function Actividad_Falso_Verdadero() {
   const percentage = Math.round((score / questions.length) * 100);
   return (
     <div className="container ">
-      <div className="w-full flex justify-center items-center my-2">
         <div className="max-w-md w-full bg-gray-100 border-2 border-gray-300 rounded-lg overflow-hidden mx-auto min-w-[35vw]">
           {showScore ? (
             <div className="text-center p-6 font-monserrat">
@@ -109,7 +108,7 @@ function Actividad_Falso_Verdadero() {
               <div className="w-full flex flex-col items-center justify-center">
                 <button
                   onClick={resetQuiz}
-                  className="group bg-main-color rounded-full px-4 py-2 shadow-main-color text-white my-3"
+                  className="group font-semibold bg-main-color rounded-full px-4 py-2 shadow-main-color text-white my-3"
                 >
                   Reiniciar
                 </button>
@@ -121,26 +120,32 @@ function Actividad_Falso_Verdadero() {
                 <span className="inc">{currentQuestion + 1}</span>/
                 <span className="tol">{questions.length}</span>
               </div>
-              <div className=" view p-6">
-                <div className="mb-2 min-h-[50px]">
-                  <p className="text-gray-800 text-justify font-monserrat">
+              <div className=" view p-3">
+                <div className="min-h-[50px]">
+                  <p className="text-gray-800 text-justify font-monserrat ">
                     {questions[currentQuestion].text}
                   </p>
                 </div>
-                <div className="relative flex justify-center">
-                  <div className="w-32">
-                    {answerSelected !== null && (
-                      <div className="flex items-center justify-center">
-                        <img
-                          src={answerSelected ? imgTrue : imgFalse}
-                          alt={answerSelected ? "Correct" : "Incorrect"}
-                          className="w-full h-full object-contain mb-0"
-                        />
-                      </div>
-                    )}
+                  <div className="relative items-center flex justify-center">
+                    <img
+                      src={
+                        answerSelected === null
+                          ? imgPeligro
+                          : answerSelected
+                            ? imgTrue
+                            : imgFalse
+                      }
+                      alt={
+                        answerSelected === null
+                          ? "Pregunta"
+                          : answerSelected
+                            ? "Correcto"
+                            : "Incorrecto"
+                      }
+                      className=" w-[30%] mb-0 "
+                    />
                   </div>
-                </div>
-                <div className="text-justify mt-2">
+                <div className="text-justify">
                   <p
                     className={`text-[16px] font-regular leading-tight ${
                       answerSelected === null
@@ -157,19 +162,18 @@ function Actividad_Falso_Verdadero() {
                         : questions[currentQuestion].feedBackIncorrect}
                   </p>
                 </div>
-                <hr className="mb-4 border-none" />
-                <div className="check flex justify-center space-x-4">
+                <div className="flex justify-center">
                   {!showFeedback && (
-                    <div className="check flex justify-center space-x-4">
+                    <div className="flex md:flex-row flex-col justify-center">
                       <button
-                        className="flex justify-center items-center group bg-main-color rounded-full px-4 py-2 shadow-main-color text-white"
+                        className="mx-2 w-[200px] font-semibold flex l justify-center items-center group bg-main-color rounded-full px-4 py-1 shadow-main-color text-white"
                         onClick={() => handleAnswer(true)}
                         disabled={answerSelected !== null}
                       >
                         Verdadero
                       </button>
                       <button
-                        className="flex justify-center items-center group bg-main-color rounded-full px-4 py-2 shadow-main-color text-white m-0"
+                        className="mx-2 w-[200px] font-semibold flex justify-center items-center group bg-main-color rounded-full px-4 py-1 shadow-main-color text-white"
                         onClick={() => handleAnswer(false)}
                         disabled={answerSelected !== null}
                       >
@@ -178,23 +182,20 @@ function Actividad_Falso_Verdadero() {
                     </div>
                   )}
                   {showFeedback && (
-                    <div className="flex items-center justify-center mt-4 text-white ">
                       <button
                         onClick={handleNext}
-                        className="bg-main-color py-2 px-4 rounded-full text-[16px] font-bold"
+                        className="bg-main-color text-white py-2 px-4 rounded-full text-[16px] font-bold"
                       >
                         {currentQuestion === questions.length - 1
                           ? "Finalizar"
                           : "Siguiente"}
                       </button>
-                    </div>
                   )}
                 </div>
               </div>
             </>
           )}
         </div>
-      </div>
     </div>
   );
 }
