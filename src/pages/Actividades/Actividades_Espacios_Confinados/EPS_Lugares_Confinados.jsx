@@ -193,166 +193,169 @@ function EPS_Lugares_Confinados() {
   }
   const isResetButtonDisabled = words.some((word) => !word.isDropped);
   return (
-      <div className="md:flex hidden flex-col items-center  justify-center relative">
-        <div className="grid grid-cols-1 justify-start md:flex md:flex-col h-auto w-full relative  ">
-          <div className="leading-loose relative">
-            <div className="h-96 text-[16px] text-[#afafaf] md:rounded-lg-md rounded-md font-monserrat">
-              <div className="text-center">
-               
-                {feedback && (
-                  <div className="w-full flex text-center flex-col items-center justify-center rounded-lg relative top-[-10px] my-0">
-                    <div
-                      className="w-[50%]"
-                      style={{
-                        backgroundColor:
-                          feedback ===
-                          "¡Muy bien! identificaste este peligro correctamente."
-                            ? "#009A3D"
-                            : "#f44336",
-                        color: "white",
-                        padding: "10px",
-                        borderRadius: "5px",
-                        lineHeight: "1.2",
-                      }}
-                    >
-                      {feedback}
-                      
-                    </div>
-                    <p className="leading-tight">
-
-                  Respuestas correctas: {correctAnswers} de {words.length} (
-                  {Math.floor(percentage)}%)
-                </p>
-                  </div>
-                )}
-              </div>
-              <div className="flex justify-center my-0 items-center flex-col">
-                {wordToShow && (
+    <div className="md:flex hidden flex-col items-center  justify-center relative">
+      <div className="grid grid-cols-1 justify-start md:flex md:flex-col h-auto w-full relative  ">
+        <div className="leading-loose relative">
+          <div className="h-96 text-[16px] text-[#afafaf] md:rounded-lg-md rounded-md font-monserrat">
+          
+            <div className="text-center">
+           
+              {feedback && (
+                <div className="w-full flex text-center flex-col items-center justify-center rounded-lg relative  my-0">
                   <div
-                    key={wordToShow.id}
-                    className="mb-2 bg-[#6E3CD2] rounded-[15px] px-2 py-2 cursor-pointer text-white text-center opacity-100"
-                    draggable
-                    onDragStart={(e) => handleDragStart(e, wordToShow.id)}
-                    onDragEnd={handleDragEnd}
+                    className="w-[50%]"
+                    style={{
+                      backgroundColor:
+                        feedback ===
+                        "¡Muy bien! identificaste este peligro correctamente."
+                          ? "#009A3D"
+                          : "#f44336",
+                      color: "white",
+                      padding: "10px",
+                      borderRadius: "5px",
+                      lineHeight: "1.2",
+                    }}
                   >
-                    {wordToShow.text}
+                    {feedback}
                   </div>
-                )}
-              <h3 className="text-lg font-bold">Quedan {words.filter(word => !word.isDropped).length} de 6</h3>
-                 
-              </div>
+                  <p className="leading-tight">
+                    Respuestas correctas: {correctAnswers} de {words.length} (
+                    {Math.floor(percentage)}%)
+                  </p>
+                </div>
+              )}
+             
+            </div>
+            <div className="w-full flex items-center justify-center relative">
+            <h3 className="text-[16px] font-semibold h-8 absolute z-30 top-0">
+                Quedan {words.filter((word) => !word.isDropped).length} de 6
+              </h3></div>
+            <div className="flex justify-center my-0 items-center flex-col">
+            
+              {wordToShow && (
+                <div
+                  key={wordToShow.id}
+                  className="mb-2 bg-[#6E3CD2] rounded-[15px] px-2 py-2 cursor-pointer text-white text-center opacity-100"
+                  draggable
+                  onDragStart={(e) => handleDragStart(e, wordToShow.id)}
+                  onDragEnd={handleDragEnd}
+                >
+                  {wordToShow.text}
+                </div>
+              )}
+             
+            </div>
 
-              <div className="flex justify-around w-full min-h-[200px] max-h-[400px] h-auto relative bottom-10">
-                <div className="w-[40%] items-center flex flex-col justify-center rounded-[15px]">
-                    {/*salida*/}
-                  <div className="w-full rounded-md bg-[#6E3CD2] text-white my-2">
-                    <h3 className="text-[16px] font-semibold text-center">
-                      A la entrada...
-                    </h3>
-                  </div>
-                  <div
-                    className="pt-2 w-full min-h-[200px] max-h-[400px] h-auto shadow-md rounded-[10px] border-2 border-gray-300 flex flex-col justify-start items-center"
-                    onDrop={(e) => handleDrop(e, "entrada")}
-                    onDragOver={allowDrop}
-                  >
-                    <div className="drop-box overflow-auto height-full h-auto leading-tight ">
-                      {words
-                        .filter(
-                          (word) =>
-                            word.currentBox === "entrada" && word.isDropped
-                        )
-                        .map((word) => (
-                          <div
-                            key={word.id}
-                            className="px-2 my-4 text-[16px] text-white bg-gray-200 p-2 mx-4 rounded-[15px] relative"
-                            style={{
-                              backgroundColor: word.isCorrect
-                                ? "#009A3D"
-                                : "#f44336",
-                            }}
-                          >
-                            <div className="absolute top-[-15px] right-[-10px] w-8 h-8">
-                              {word.isCorrect ? (
-                                <img src={trueImage} alt="Correct" />
-                              ) : (
-                                <img src={falseImage} alt="Incorrect" />
-                              )}
-                            </div>
-                            {word.text}
+            <div className="flex justify-around w-full min-h-[200px] max-h-[400px] h-auto relative bottom-10">
+              <div className="w-[40%] items-center flex flex-col justify-center rounded-[15px]">
+                {/*salida*/}
+                <div className="w-full rounded-md bg-[#6E3CD2] text-white my-2">
+                  <h3 className="text-[16px] font-semibold text-center">
+                    A la entrada...
+                  </h3>
+                </div>
+                <div
+                  className="pt-2 w-full min-h-[200px] max-h-[400px] h-auto shadow-md rounded-[10px] border-2 border-gray-300 flex flex-col justify-start items-center"
+                  onDrop={(e) => handleDrop(e, "entrada")}
+                  onDragOver={allowDrop}
+                >
+                  <div className="drop-box overflow-auto height-full h-auto leading-tight ">
+                    {words
+                      .filter(
+                        (word) =>
+                          word.currentBox === "entrada" && word.isDropped
+                      )
+                      .map((word) => (
+                        <div
+                          key={word.id}
+                          className="px-2 my-4 text-[16px] text-white bg-gray-200 p-2 mx-4 rounded-[15px] relative"
+                          style={{
+                            backgroundColor: word.isCorrect
+                              ? "#009A3D"
+                              : "#f44336",
+                          }}
+                        >
+                          <div className="absolute top-[-15px] right-[-10px] w-8 h-8">
+                            {word.isCorrect ? (
+                              <img src={trueImage} alt="Correct" />
+                            ) : (
+                              <img src={falseImage} alt="Incorrect" />
+                            )}
                           </div>
-                        ))}
-                    </div>
-                  </div>
-                </div>
-                <div className="w-[20%] flex justify-center items-center">
-                  <img className="w-full" src={hombre} alt="" />
-                </div>
-                
-                <div className="w-[40%] items-center flex flex-col justify-center rounded-[15px]">
-                  {/*salida*/}
-                  <div className="w-full rounded-md bg-[#6E3CD2] text-white my-2">
-                    <h3 className="text-[16px] font-semibold text-center">
-                      A la salida...
-                    </h3>
-                  </div>
-                  <div
-                    className="w-full pt-2 min-h-[200px] max-h-[600px] h-auto shadow-md rounded-[10px] border-2 border-gray-300 flex flex-col justify-start items-center"
-                    onDrop={(e) => handleDrop(e, "salida")}
-                    onDragOver={allowDrop}
-                  >
-                    <div className="drop-box overflow-auto h-auto leading-tight">
-                      {words
-                        .filter(
-                          (word) =>
-                            word.currentBox === "salida" && word.isDropped
-                        )
-                        .map((word) => (
-                          <div
-                            key={word.id}
-                            className="px-4 my-4 text-[16px] text-white bg-gray-200 rounded-[15px] p-2 mx-4 relative"
-                            style={{
-                              backgroundColor: word.isCorrect
-                                ? "#009A3D"
-                                : "#f44336",
-                            }}
-                          >
-                            <div className="absolute top-[-15px] right-[-10px] w-8 h-8">
-                              {word.isCorrect ? (
-                                <img src={trueImage} alt="Correct" />
-                              ) : (
-                                <img src={falseImage} alt="Incorrect" />
-                              )}
-                            </div>
-                            {word.text}
-                          </div>
-                        ))}
-                    </div>
+                          {word.text}
+                        </div>
+                      ))}
                   </div>
                 </div>
               </div>
+              <div className="w-[20%] flex justify-center items-center">
+                <img className="w-full" src={hombre} alt="" />
+              </div>
 
-              <div className="w-full flex justify-center items-center relative bottom-20">
-                <div className="w-[50%] flex justify-center mx-2">
-                  <button
-                    onClick={handleUndo}
-                    className="w-[200px] flex mx-2 h-8 justify-center items-center group bg-main-color rounded-full px-4 shadow-main-color text-white"
-                  >
-                    Deshacer
-                  </button>
-                  <button
-                    onClick={handleReset}
-                    className="w-[200px] flex mx-2 h-8 justify-center items-center group bg-main-color rounded-full px-4 shadow-main-color text-white"
-                    disabled={isResetButtonDisabled}
-                  >
-                    <FontAwesomeIcon icon={faRepeat} className="mr-2" />
-                    Reiniciar
-                  </button>
+              <div className="w-[40%] items-center flex flex-col justify-center rounded-[15px]">
+                {/*salida*/}
+                <div className="w-full rounded-md bg-[#6E3CD2] text-white my-2">
+                  <h3 className="text-[16px] font-semibold text-center">
+                    A la salida...
+                  </h3>
                 </div>
+                <div
+                  className="w-full pt-2 min-h-[200px] max-h-[600px] h-auto shadow-md rounded-[10px] border-2 border-gray-300 flex flex-col justify-start items-center"
+                  onDrop={(e) => handleDrop(e, "salida")}
+                  onDragOver={allowDrop}
+                >
+                  <div className="drop-box overflow-auto h-auto leading-tight">
+                    {words
+                      .filter(
+                        (word) => word.currentBox === "salida" && word.isDropped
+                      )
+                      .map((word) => (
+                        <div
+                          key={word.id}
+                          className="px-4 my-4 text-[16px] text-white bg-gray-200 rounded-[15px] p-2 mx-4 relative"
+                          style={{
+                            backgroundColor: word.isCorrect
+                              ? "#009A3D"
+                              : "#f44336",
+                          }}
+                        >
+                          <div className="absolute top-[-15px] right-[-10px] w-8 h-8">
+                            {word.isCorrect ? (
+                              <img src={trueImage} alt="Correct" />
+                            ) : (
+                              <img src={falseImage} alt="Incorrect" />
+                            )}
+                          </div>
+                          {word.text}
+                        </div>
+                      ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="w-full flex justify-center items-center relative bottom-20">
+              <div className="w-[50%] flex justify-center mx-2">
+                <button
+                  onClick={handleUndo}
+                  className="w-[200px] flex mx-2 h-8 justify-center items-center group bg-main-color rounded-full px-4 shadow-main-color text-white"
+                >
+                  Deshacer
+                </button>
+                <button
+                  onClick={handleReset}
+                  className="w-[200px] flex mx-2 h-8 justify-center items-center group bg-main-color rounded-full px-4 shadow-main-color text-white"
+                  disabled={isResetButtonDisabled}
+                >
+                  <FontAwesomeIcon icon={faRepeat} className="mr-2" />
+                  Reiniciar
+                </button>
               </div>
             </div>
           </div>
         </div>
-        <div className="md:hidden w-full bg-white flex flex-col justify-center">
+      </div>
+      <div className="md:hidden w-full bg-white flex flex-col justify-center">
         <Actividad_Mobile_entada_salida
           words={words}
           droppedCount={droppedCount}
@@ -361,8 +364,7 @@ function EPS_Lugares_Confinados() {
           feedback={feedback}
         />
       </div>
-      </div>
-     
+    </div>
   );
 }
 

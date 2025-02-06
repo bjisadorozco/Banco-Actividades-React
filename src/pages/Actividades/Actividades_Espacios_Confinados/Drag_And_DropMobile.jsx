@@ -155,7 +155,7 @@ const SelectAndValidateMobile = () => {
 
   return (
     <div className="w-full flex flex-col items-center justify-center relative">
-      <div className="w-full flex flex-col items-center justify-center m-6">
+      <div className="w-full flex flex-col items-center justify-center absolute top-0 h-[68vh]">
         {/* Cuadro 1 */}
         <div className="bg-[#E5E7EB] rounded-lg flex flex-col items-center justify-center">
           <div

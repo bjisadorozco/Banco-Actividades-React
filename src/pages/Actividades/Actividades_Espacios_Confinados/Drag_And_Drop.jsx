@@ -21,7 +21,7 @@ import gafas from "/src/assets/img/gafas_seguridad_sldM2.webp";
 import guantes from "/src/assets/img/guantes_sldM2.webp";
 import respirador from "/src/assets/img/respiradores_sldM2.webp";
 import trabajador from "/src/assets/img/avatar_elementos_epp.webp";
-
+import Magnifier from "react-magnifier";
 const items = [
   {
     id: "A",
@@ -236,16 +236,6 @@ const DragAndDrop = () => {
     }
   }, [droppedItems]);
 
-  const calculateScore = () => {
-    const correctCount = Object.values(droppedItems).filter(
-      (item) => isItemCorrect(item.id, item.correctBoxId)
-    ).length;
-    
-    const percentage = Math.round((correctCount / items.length) * 100);
-  
-    return `${correctCount} de ${items.length} (${percentage}%)`;
-  };
-
   return (
     <div className="w-full flex flex-col items-center justify-center relative ">
       <div className="hidden  w-full md:absolute md:top-[-40px] md:left-0 md:flex flex-col items-center justify-center overflow-hidden">
@@ -271,18 +261,6 @@ const DragAndDrop = () => {
                     onDrop={(e) => handleDrop(e, item.id)}
                     onDragOver={(e) => e.preventDefault()}
                   >
-                    {/* {droppedItems[item.id] &&
-                      isItemCorrect(droppedItems[item.id].id, itemId) && (
-                        <span
-                          className={`w-40 bg-[#4CAF50] text-white text-[12px] leading-4 absolute z-10 object-cover top-6 right-20 text-center px-2 py-1 rounded-full ${
-                            leftColumnItems.includes(item.id)
-                              ? "right-[calc(100%+8px)]"
-                              : "left-[calc(100%+8px)]"
-                          } top-2`}
-                        >
-                          {droppedItems[item.id].name}
-                        </span>
-                      )} */}
                     {droppedItems[item.id] && (
                       <img
                         src={
@@ -314,12 +292,20 @@ const DragAndDrop = () => {
               })}
             </div>
             {/* Imagen central */}
+            
             <div className="flex-1 flex flex-col items-center justify-center">
-              <img
+              <Magnifier
                 src={trabajador}
-                alt="Trabajador con equipo de protección"
-                className="w-56 h-auto object-contain"
-              /></div>
+                width="80%"
+                mgWidth={200}
+                mgHeight={200}
+                mgShape="circle"
+                mgBorderWidth={3}
+                mgBorderColor="#f0f0f0"
+                mgShadow={true}
+                
+              />
+            </div>
             {/* Columna derecha */}
             <div className="flex-1 flex flex-col items-center justify-center">
               {rightColumnItems.map((itemId) => {
@@ -341,12 +327,6 @@ const DragAndDrop = () => {
                   >
                     {droppedItems[item.id] && (
                       <>
-                        {/* {droppedItems[item.id] &&
-                          isItemCorrect(droppedItems[item.id].id, itemId) && (
-                            <span className="w-40 bg-[#4CAF50] text-white text-[12px] leading-4 absolute z-10 object-cover top-6 left-20 text-center px-2 py-1 rounded-full">
-                              {droppedItems[item.id].name}
-                            </span>
-                          )} */}
                         <img
                           src={
                             isItemCorrect(droppedItems[item.id].id, itemId)
@@ -427,7 +407,7 @@ const DragAndDrop = () => {
                           : "font-sembild text-[#FF7043]"
                       }
                     >
-                     
+                      Objetos correctos: {calculateScore()}
                       {feedbackMessage}
                     </p>
                     {audioSrc && (

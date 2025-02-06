@@ -46,7 +46,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
 
 
 
-    <EPSLugaresConfinados
+    <Drag_And_Drop
 
    />
   </React.StrictMode>
