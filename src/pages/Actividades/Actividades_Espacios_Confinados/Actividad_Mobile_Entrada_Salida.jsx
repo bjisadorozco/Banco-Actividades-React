@@ -1,18 +1,21 @@
 import React, { useState } from "react";
 import imgTrue from "../../../assets/img/checkAct.png";
 import imgFalse from "../../../assets/img/xmarkAct.png";
+import imgPeligro from "../../../assets/img/avatar-hombre-morado-blanco.webp";
 
-
-{/* Componente de retroalimentación, muestra si la respuesta es correcta o incorrecta */}
+{
+  /* Componente de retroalimentación, muestra si la respuesta es correcta o incorrecta */
+}
 const Feedback = ({ isCorrect, message }) => (
-  <div className={`text-${isCorrect ? 'green' : 'red'}-600 font-monserrat`}>
-    {isCorrect ? '¡Correcto!' : '¡Piénsalo bien!'}
+  <div className={`text-${isCorrect ? "green" : "red"}-600 font-monserrat`}>
+    {isCorrect ? "¡Correcto!" : "¡Piénsalo bien!"}
     <span className="text-gray-500"> {message}</span>
   </div>
 );
 
-
-{/* Array con las preguntas y las respuestas correctas */}
+{
+  /* Array con las preguntas y las respuestas correctas */
+}
 const questions = [
   {
     text: "Se debe obtener un permiso de trabajo",
@@ -110,19 +113,21 @@ const questions = [
       />
     ),
   },
-
-  
 ];
 
 function Actividad_Mobile_entada_salida() {
-    {/* stados para controlar el cuestionario y las respuesta */}
+  {
+    /* stados para controlar el cuestionario y las respuesta */
+  }
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [score, setScore] = useState(0);
   const [showScore, setShowScore] = useState(false);
   const [showFeedback, setShowFeedback] = useState(false);
   const [answerSelected, setAnswerSelected] = useState(null);
 
-  {/* Función para manejar la respuesta del usuario */}
+  {
+    /* Función para manejar la respuesta del usuario */
+  }
   const handleAnswer = (userAnswer) => {
     const isCorrect = userAnswer === questions[currentQuestion].correct;
     setAnswerSelected(isCorrect);
@@ -133,8 +138,9 @@ function Actividad_Mobile_entada_salida() {
     setShowFeedback(true);
   };
 
-
-  {/* Función para ir a la siguiente pregunta o mostrar el resultado final */}
+  {
+    /* Función para ir a la siguiente pregunta o mostrar el resultado final */
+  }
   const handleNext = () => {
     const nextQuestion = currentQuestion + 1;
     if (nextQuestion < questions.length) {
@@ -154,22 +160,25 @@ function Actividad_Mobile_entada_salida() {
     setAnswerSelected(null);
   };
 
-  {/* Calcula el porcentaje de respuestas correctas */}
+  {
+    /* Calcula el porcentaje de respuestas correctas */
+  }
   const percentage = Math.round((score / questions.length) * 100);
   return (
     <div className="container ">
       <div className="w-full flex justify-center items-center p-4">
         <div className="max-w-md w-full bg-gray-100 border-2 border-gray-300 rounded-lg overflow-hidden mx-auto min-w-[35vw]">
           {showScore ? (
-            <div className="text-center p-6 font-monserrat">
+            <div className="text-center p-6 font-monserrat w-full flex-col flex justify-center items-center">
               <p className="my-2 text-gray-500 font-semibold">
                 Respuestas correctas son: {score} de {questions.length} (
                 {percentage}%)
               </p>
-              <div className="reset-container">
+
+              <div className="">
                 <button
                   onClick={resetQuiz}
-                  className="flex justify-center items-center group bg-main-color rounded-full px-4 py-2 shadow-main-color text-white mx-auto my-3"
+                  className="group bg-main-color rounded-full px-4 py-2 shadow-main-color text-white mx-auto my-3"
                 >
                   Reiniciar
                 </button>
@@ -178,7 +187,7 @@ function Actividad_Mobile_entada_salida() {
           ) : (
             <>
               <div className="bg-gray-800 text-white text-center py-2 text-[16px] font-monserrat">
-                <span className="inc">{currentQuestion + 1}</span>/ 
+                <span className="inc">{currentQuestion + 1}</span>/
                 <span className="tol">{questions.length}</span>
               </div>
               <div className=" view p-6">
@@ -189,32 +198,41 @@ function Actividad_Mobile_entada_salida() {
                 </div>
                 <div className="relative flex justify-center">
                   <div className="w-32">
-                    {answerSelected !== null && (
-                      <div className="flex items-center justify-center">
-                        <img
-                          src={answerSelected ? imgTrue : imgFalse}
-                          alt={answerSelected ? "Correct" : "Incorrect"}
-                          className="w-full h-full object-contain mb-0"
-                        />
-                      </div>
-                    )}
+                    <img
+                      src={
+                        answerSelected === null
+                          ? imgPeligro
+                          : answerSelected
+                            ? imgTrue
+                            : imgFalse
+                      }
+                      alt={
+                        answerSelected === null
+                          ? "Pregunta"
+                          : answerSelected
+                            ? "Correcto"
+                            : "Incorrecto"
+                      }
+                      className="w-full h-full object-contain"
+                    />
                   </div>
                 </div>
-                <div className="text-justify mt-2">
+
+                <div className="relative w-full text-justify items-center justify-center flex flex-col">
                   <p
                     className={`text-[16px] font-regular leading-tight ${
                       answerSelected === null
                         ? "opacity-0"
                         : answerSelected
-                        ? "opacity-100"
-                        : "opacity-100"
+                          ? "opacity-100"
+                          : "opacity-100"
                     }`}
                   >
                     {answerSelected === null
                       ? " "
                       : answerSelected
-                      ? questions[currentQuestion].feedBackCorrect
-                      : questions[currentQuestion].feedBackIncorrect}
+                        ? questions[currentQuestion].feedBackCorrect
+                        : questions[currentQuestion].feedBackIncorrect}
                   </p>
                 </div>
                 <hr className="mb-4 border-none" />
