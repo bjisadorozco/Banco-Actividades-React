@@ -38,9 +38,10 @@ import Slider15_Lista_desplegable from "./pages/Actividades/Actividades_Espacios
 import Slider15_Lista_desplegable_movil from "./pages/Actividades/Actividades_Espacios_Confinados/Slider15_Lista_desplegable_movil.jsx";
 import DragAndDropSlide9 from "./pages/Actividades/Actividades_Trabajo_seguro_alturas/DragnAndDropSlide9.jsx";
 import DragAndDropSlide9Movil from "./pages/Actividades/Actividades_Trabajo_seguro_alturas/DragAndDropSlide9Movil.jsx";
+import PPT8_List_Desplegable from "./pages/Actividades/Actividades_PESV/PPT8_List_Desplegable.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <DragAndDropAlturas2Movil />
+    <Slider12_drag_and_drop_audios />
   </React.StrictMode>
 );

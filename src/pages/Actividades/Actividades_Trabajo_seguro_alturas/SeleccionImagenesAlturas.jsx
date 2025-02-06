@@ -25,6 +25,7 @@ function SeleccionImagenesAlturas() {
   const [results, setResults] = useState({});
   const [explanation, setExplanation] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [validationMessage, setValidationMessage] = useState('');
   const isMobile = useMediaQuery({ maxWidth: 640 });
   const correctImages = [martillo, cintaMetrica, destornillador,taladro];
 
@@ -33,8 +34,8 @@ function SeleccionImagenesAlturas() {
     [cintaMetrica]: 'Trabajos en techos y cubiertas:   Bien!  Estos siempre se hacen a más de 2 mts de altura',
     [destornillador]: 'Trabajos en paredes y fachadas:   Bien !  Estos normalmente se hacen a más de 2 mts de altura',
     [taladro]: 'Trabajos en andamios:   Bien !  Estos normalmente permiten acceder a alturas superiores a 2 mts',
-    [sierraElectrica]: 'Instalación electrica de piso:   Piénsalo bien!  Este tipo de tareas normalmente NO se hacen a más de 2 metros de altura.',
-    [mezcladoraCemento]: 'Instalación de pisos:   Piénsalo bien!  Este tipo de tareas normalmente NO se hacen a más de 2 metros de altura.',
+    [sierraElectrica]: 'Instalación electrica de piso:  Este tipo de tareas normalmente NO se hacen a más de 2 metros de altura.',
+    [mezcladoraCemento]: 'Instalación de pisos: Piénsalo bien!  Este tipo de tareas normalmente NO se hacen a más de 2 metros de altura.',
   };
 
   const actSelectImg = (image) => {
@@ -56,13 +57,36 @@ function SeleccionImagenesAlturas() {
       ...prevResults,
       [image]: isSelected ? undefined : isCorrect
     }));
+
+    updateValidationMessage(newSelectedImages);
   };
+
+	const updateValidationMessage = (selected) => {
+			if (selected.length === 0) {
+        setValidationMessage('');
+        return;
+      }
+
+      const totalCorrect = selected.filter(img => correctImages.includes(img)).length;
+      const percentage = Math.round((totalCorrect / 4) * 100);
+
+      if (totalCorrect === 4) {
+        setValidationMessage(
+          `Tus respuestas correctas son: ${totalCorrect} de 4 (${percentage}%)`
+        );
+      } else {
+        setValidationMessage(
+          `Tus respuestas correctas son: ${totalCorrect} de 4 (${percentage}%)`
+        );
+      }
+    };
 
   const resetActivity = () => {
     setResults({});
     setSelectedImages([]);
     setExplanation(null);
     setIsModalOpen(false);
+    setValidationMessage('');
   };
 
   const handleCloseModal = () => {
@@ -82,7 +106,7 @@ function SeleccionImagenesAlturas() {
                       className={`itemAct ${selectedImages.includes(imgSrc) ? 'selected' : ''} ${correctImages.includes(imgSrc) ? 'check' : 'xmark'}`}
                       onClick={() => actSelectImg(imgSrc)}
                     >
-                      <img src={imgSrc} alt={`Imagen ${index}`} />
+                      <img src={imgSrc} alt={`Imagen ${index}`} style={{ marginBottom: '0' }}/>
                       {selectedImages.includes(imgSrc) && (
                         <img
                           className="resAct"
@@ -97,15 +121,27 @@ function SeleccionImagenesAlturas() {
                 {explanation && (
                   <Paragraph>
                   <div
-                    style={{ fontSize: '16px', textAlign: 'center', marginBottom: '10px' }}
+                    style={{ fontSize: '16px', textAlign: 'center', marginTop: '10px' }}
                     className={`p-2 md:w-[100%] w-[100%] text-white ${explanation.isCorrect ? 'bg-[#4CAF50]' : 'bg-[#F44336]'} rounded`}
                   >
                     {explanationsMap[explanation.image]}
                   </div>
                   </Paragraph>
                 )}
+							 {/* Mensaje de validación en tiempo real */}
+                        {validationMessage && (
+                          <Paragraph>
+                            <div
+                              style={{ fontWeight: 'bold', textAlign: 'center', color: 'grey' }}
+                              className="p-2 w-[100%] rounded"
+                            >
+                              {validationMessage}
+                            </div>
+                          </Paragraph>
+                        )}
+
                 {/* Botón de reinicio centrado en la parte inferior */}
-                <div className="flex justify-center items-center">
+                <div className="flex justify-center items-center" style={{ marginTop: '0' }}>
                   <Button
                     onClick={resetActivity}
                     roundedFull={true}

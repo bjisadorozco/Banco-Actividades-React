@@ -222,6 +222,7 @@ export default function DragAndDropSlide9() {
               className="p-6 mt-4 border rounded-lg shadow-md flex flex-col items-center relative"
               style={{
                 width: "350px",
+                height: "300px",
                 justifyContent: "space-between",
                 textAlign: "center",
                 backgroundColor: validationMessage

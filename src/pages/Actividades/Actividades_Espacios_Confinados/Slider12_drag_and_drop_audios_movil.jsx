@@ -1,6 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Button from "../../components/Button";
 import { faCheck, faRepeat } from "@fortawesome/free-solid-svg-icons";
+import audio1 from "../../../assets/audio/sld13_procedimiento_recaste.mp3";
+import audio2 from "../../../assets/audio/sld13_procedimiento_evacuacion.mp3";
+import audio3 from "../../../assets/audio/sld13_plan_para_respuesta_emer.mp3";
 import "./styles/Slider12_drag_and_drop_audios.css"
 
 export default function slider12_drag_and_drop_audios_movil() {  
@@ -12,25 +15,29 @@ export default function slider12_drag_and_drop_audios_movil() {
   });
 
   const [message, setMessage] = useState("");
+  const [currentAudio, setCurrentAudio] = useState(null);
   const [cardStatus, setCardStatus] = useState({
     drop1: "",
     drop2: "",
     drop3: "",
   });
 
+	const audioRefs = {
+    drop1: useRef(null),
+    drop2: useRef(null),
+    drop3: useRef(null),
+  };
+
   const [shuffledOptions, setShuffledOptions] = useState([]);
 
   const options = [
-    { id: "option1", label: "Procedimiento de rescate" },
     { id: "option2", label: "Procediminento de evacuación" },
     { id: "option3", label: "Plan para respuestas a emergencia" },
+    { id: "option1", label: "Procedimiento de rescate" },
   ];
 
-  const audios = [
-    "audio1.mp3", // Reemplaza con las rutas reales de los audios
-    "audio2.mp3",
-    "audio3.mp3",
-  ];
+
+  const audios = [audio1, audio2, audio3];
 
   useEffect(() => {
     shuffleOptions();
@@ -84,6 +91,11 @@ export default function slider12_drag_and_drop_audios_movil() {
     setCorrectAnswersMessage(
       `Tus respuestas correctas son: ${totalCorrect} de 3 (${percentage}%).`
     );
+	// Pausar cualquier audio en reproducción al resetear
+     if (currentAudio) {
+			 currentAudio.pause();
+       setCurrentAudio(null);
+     }
   };
 
   const handleReset = () => {
@@ -101,6 +113,14 @@ export default function slider12_drag_and_drop_audios_movil() {
     setCorrectAnswersMessage("");
     shuffleOptions();
   };
+
+	const handlePlayAudio = (dropId) => {
+      if (currentAudio && currentAudio !== audioRefs[dropId].current) {
+        currentAudio.pause(); // Pausar el audio en reproducción
+      }
+
+      setCurrentAudio(audioRefs[dropId].current);
+    };
 
   const getAvailableOptions = (currentDropId) => {
     const selectedValues = Object.values(selectedOptions).filter(
@@ -141,7 +161,12 @@ export default function slider12_drag_and_drop_audios_movil() {
             }}
           >
             {/* Botón de audio */}
-            <audio controls style={{ height: "30px", width: "240px" }}>
+            <audio
+              ref={audioRefs[`drop${index + 1}`]}
+              controls
+              className="audio-control"
+              onPlay={() => handlePlayAudio(`drop${index + 1}`)}
+            >
               <source src={audio} type="audio/mp3" />
               Tu navegador no soporta audio HTML5.
             </audio>
