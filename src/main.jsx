@@ -46,7 +46,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
 
 
 
-    <ActividadFalsoVerdadero
+    <EPSLugaresConfinados
 
    />
   </React.StrictMode>

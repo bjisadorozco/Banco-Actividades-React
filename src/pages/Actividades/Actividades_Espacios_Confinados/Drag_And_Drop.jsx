@@ -318,7 +318,7 @@ const DragAndDrop = () => {
               <img
                 src={trabajador}
                 alt="Trabajador con equipo de protección"
-                className="w-40 h-auto object-contain"
+                className="w-56 h-auto object-contain"
               /></div>
             {/* Columna derecha */}
             <div className="flex-1 flex flex-col items-center justify-center">

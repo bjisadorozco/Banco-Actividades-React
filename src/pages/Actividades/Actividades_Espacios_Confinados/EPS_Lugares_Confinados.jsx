@@ -219,13 +219,14 @@ function EPS_Lugares_Confinados() {
                       
                     </div>
                     <p className="leading-tight">
+
                   Respuestas correctas: {correctAnswers} de {words.length} (
                   {Math.floor(percentage)}%)
                 </p>
                   </div>
                 )}
               </div>
-              <div className="flex justify-center my-0">
+              <div className="flex justify-center my-0 items-center flex-col">
                 {wordToShow && (
                   <div
                     key={wordToShow.id}
@@ -237,6 +238,8 @@ function EPS_Lugares_Confinados() {
                     {wordToShow.text}
                   </div>
                 )}
+              <h3 className="text-lg font-bold">Quedan {words.filter(word => !word.isDropped).length} de 6</h3>
+                 
               </div>
 
               <div className="flex justify-around w-full min-h-[200px] max-h-[400px] h-auto relative bottom-10">
