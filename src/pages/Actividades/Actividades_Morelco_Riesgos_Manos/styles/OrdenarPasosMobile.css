@@ -34,53 +34,26 @@
   gap: 10px; /* Espacio entre el texto y el selector */
 }
 
-.tarjeta-paso:hover {
-  background-color: transparent; /* El fondo no cambia cuando se pasa el ratón */
-  cursor: default; /* El cursor no cambia */
+/* Elimina el hover para tarjetas seleccionadas */
+.tarjeta-paso.seleccionado:hover {
+  background-color: #6e3cd2; /* Mantiene el morado al hacer hover */
+  color: #fff; /* Mantiene el texto blanco */
 }
 
 /* Estilos adicionales para colores dinámicos */
 .tarjeta-paso.correcto {
-  background-color: #4caf50;
+  background-color: #4caf50; /* Verde para respuestas correctas */
   color: #fff;
 }
 
 .tarjeta-paso.incorrecto {
-  background-color: #f44336;
+  background-color: #f44336; /* Rojo para respuestas incorrectas */
   color: #fff;
 }
 
-.tarjeta-paso.correcto .numero-cuadro {
-  color: #fff; /* Cambia a blanco cuando la tarjeta es correcta */
-}
-
-.tarjeta-paso.incorrecto .numero-cuadro {
-  color: #fff; /* Cambia a blanco cuando la tarjeta es incorrecta */
-}
-
-.respuestas-container {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr); /* Tres columnas */
-  gap: 15px;
-  margin-top: 20px;
-  max-width: 800px;
-  
-}
-
-.resultado-mensaje {
-  font-family: 'Montserrat', sans-serif;
-  color: #8f8f8f;
-}
-
-.respuestas-separadas {
-  display: flex;
-  justify-content: center; /* Centra horizontalmente */
-  gap: 20px; /* Espaciado entre los dos elementos */
-  margin-top: 20px; /* Espaciado superior para separación */
-}
-
-.respuesta-item {
-  text-align: center;
+.tarjeta-paso.seleccionado {
+  background-color: #6e3cd2; /* Morado oscuro cuando se selecciona una opción */
+  color: #fff;
 }
 
 .respuesta-select {
@@ -93,6 +66,27 @@
   box-sizing: border-box; /* Incluye el padding y el borde en el ancho total */
 }
 
+.respuesta-select.seleccionado {
+  background-color: #8d5dee; /* Morado claro cuando se selecciona una opción */
+  color: #fff;
+}
+
+.respuesta-select.correcto {
+  background-color: #4caf50; /* Verde para respuestas correctas */
+  color: #fff;
+}
+
+.respuesta-select.incorrecto {
+  background-color: #f44336; /* Rojo para respuestas incorrectas */
+  color: #fff;
+}
+
+
+
+.respuesta-select option {
+  background-color: #fff; /* Fondo blanco para las opciones */
+  color: #8f8f8f; /* Texto negro para las opciones */
+}
 
 .botones-container {
   display: flex;
@@ -102,36 +96,18 @@
   max-width: 400px;
 }
 
-.resultado {
-  margin-top: 20px;
-  font-size: 18px;
+.resultado-mensaje {
+  font-family: 'Montserrat', sans-serif;
+  color: #8f8f8f;
+}
+
+/* Estilos para los mensajes de retroalimentación */
+.texto-verde {
+  color: #4caf50; /* Verde para el mensaje de éxito */
   font-weight: bold;
 }
 
-.respuesta-select.correcto {
-  background-color: #4caf50;
-  color: #fff;
+.texto-rojo {
+  color: #f44336; /* Rojo para el mensaje de error */
+  font-weight: bold;
 }
-
-.respuesta-select.incorrecto {
-  background-color: #f44336;
-  color: #fff;
-}
-
-/* Mensaje de porcentaje correcto/incorrecto */
-.porcentaje-mensaje {
-  margin-top: 10px;
-  font-size: 16px;
-}
-
-.porcentaje-mensaje.correcto {
-  color: #8f8f8f; /* Verde para 100% */
-}
-
-.porcentaje-mensaje.incorrecto {
-  color: #8f8f8f; /* Rojo para menos del 100% */
-}
-
-
-
-

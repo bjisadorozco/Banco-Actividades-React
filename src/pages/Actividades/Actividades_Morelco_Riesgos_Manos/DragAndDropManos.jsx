@@ -155,7 +155,7 @@ const DragAndDropManos = () => {
 
       if (isCorrect) {
         setSuccessMessage("¡Correcto! Ahora, escucha el siguiente audio que complementa esta información")
-
+        setErrorMessage("") // Clear error message on correct placement
         let audioSource = null
         switch (draggedElementId) {
           case "img1-sld5":
@@ -175,8 +175,7 @@ const DragAndDropManos = () => {
           setAudioElement(audioSource)
         }
       } else {
-        setErrorMessage("Oops, esta imagen solo puede soltarse en el contenedor correcto.")
-        setTimeout(() => setErrorMessage(""), 2000)
+        setErrorMessage("Nos has arrastrado correctamente la imagen")
         setSuccessMessage("")
         setCurrentAudio(null)
         setAudioElement(null)
@@ -372,7 +371,7 @@ const DragAndDropManos = () => {
 
       {/* Nuevo contenedor para mostrar el conteo de respuestas correctas y el porcentaje */}
       {isActivityCompleted && (
-        <div className="results-container text-center mt-4 mb-4">
+        <div className="results-containerDAD text-center mt-4 mb-4">
           <h3 className="text-md font-bold text-paragraph-light-color text-monserrat">Tus respuestas correctas son: {correctCount} de 3 ({percentage}%)</h3>
         </div>
       )}

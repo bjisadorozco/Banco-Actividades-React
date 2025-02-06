@@ -16,6 +16,7 @@ const OrdenarPasos = () => {
   const [habilitarValidar, setHabilitarValidar] = useState(false);
   const [mostrarResultado, setMostrarResultado] = useState(false);
   const [porcentaje, setPorcentaje] = useState(0);
+  const [mensajeRetroalimentacion, setMensajeRetroalimentacion] = useState("");
 
   const opciones = ["Paso 1", "Paso 2", "Paso 3"];
   const numerosDesordenados = opciones.sort(() => Math.random() - 0.3);
@@ -36,7 +37,24 @@ const OrdenarPasos = () => {
 
     const correctas = nuevosColores.filter((color) => color === "correcto").length;
     setCorrectCount(correctas);
-    setPorcentaje((correctas / pasosCorrectos.length) * 100);
+    const nuevoPorcentaje = Math.round((correctas / pasosCorrectos.length) * 100); // Redondea el porcentaje
+    setPorcentaje(nuevoPorcentaje);
+
+    // Determinar el mensaje de retroalimentación
+    if (correctas === pasosCorrectos.length) {
+      setMensajeRetroalimentacion(
+        <>
+          <span className="texto-verde">¡Correcto!</span> Todas las respuestas son correctas. ({nuevoPorcentaje}%)
+        </>
+      );
+    } else {
+      setMensajeRetroalimentacion(
+        <>
+          <span className="texto-rojo">¡Incorrecto!</span> Tus respuestas correctas son: {correctas} de {pasosCorrectos.length}. Intenta de nuevo. ({nuevoPorcentaje}%)
+        </>
+      );
+    }
+
     setMostrarResultado(true); // Muestra el mensaje al validar
   };
 
@@ -47,6 +65,7 @@ const OrdenarPasos = () => {
     setPorcentaje(0);
     setHabilitarValidar(false);
     setMostrarResultado(false); // Oculta el mensaje al reiniciar
+    setMensajeRetroalimentacion(""); // Reinicia el mensaje de retroalimentación
   };
 
   const opcionesDisponibles = (index) => {
@@ -57,17 +76,30 @@ const OrdenarPasos = () => {
     );
   };
 
+  // Función para determinar si el select tiene una opción seleccionada
+  const tieneSeleccion = (index) => {
+    return respuestas[index] !== "" && !mostrarResultado; // Solo aplica morado si no se ha validado
+  };
+
   return (
     <div className="ordenar-pasos-container">
       <div className="contenedor-pasos">
         {pasosCorrectos.map((paso, index) => (
-          <div key={index} className={`tarjeta-paso ${colores[index]}`}>
+          <div
+            key={index}
+            className={`tarjeta-paso ${colores[index]} ${
+              tieneSeleccion(index) ? "seleccionado" : ""
+            }`}
+          >
             <p>{paso}</p>
             <select
               id={`respuesta-${index}`}
               value={respuestas[index]}
               onChange={(e) => handleSelectChange(e, index)}
-              className={`respuesta-select ${colores[index]}`}
+              className={`respuesta-select ${colores[index]} ${
+                tieneSeleccion(index) ? "seleccionado" : ""
+              }`}
+              disabled={mostrarResultado} // Deshabilita el select después de validar
             >
               <option value="">Seleccione...</option>
               {opcionesDisponibles(index).map((opcion) => (
@@ -83,7 +115,7 @@ const OrdenarPasos = () => {
       {mostrarResultado && (
         <div className="contador-correctas">
           <p className="text-md mt-4 font-bold text-center resultado-mensaje">
-            Respuestas correctas: {correctCount} de {pasosCorrectos.length} ({porcentaje}%)
+            {mensajeRetroalimentacion}
           </p>
         </div>
       )}

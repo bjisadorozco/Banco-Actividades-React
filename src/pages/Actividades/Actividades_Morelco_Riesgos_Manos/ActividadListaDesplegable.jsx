@@ -53,6 +53,14 @@ function ActividadListaDesplegable() {
     setIsResetActive(anySelected)
   }, [items])
 
+  useEffect(() => {
+    // Evitar el scroll temporal al recargar la página
+    document.body.style.overflow = "hidden"
+    setTimeout(() => {
+      document.body.style.overflow = "auto"
+    }, 100)
+  }, [])
+
   const handleSelect = (index, value) => {
     const updatedItems = [...items]
     updatedItems[index].selectedAnswer = value
@@ -89,16 +97,21 @@ function ActividadListaDesplegable() {
   }
 
   return (
-    <div className="quiz-container">
+    <div className="quiz-containerALD">
       <div className="items-grid">
         {items.map((item, index) => (
-          <div key={index} className={`item-box ${isVerified ? (item.isCorrect ? "correct" : "incorrect") : ""}`}>
-            <div className="image-container">
+          <div
+            key={index}
+            className={`item-box ${
+              item.selectedAnswer !== "" && !isVerified ? "selected" : ""
+            } ${isVerified ? (item.isCorrect ? "correct" : "incorrect") : ""}`}
+          >
+            <div className="image-containerALD">
               <img src={item.image || "/placeholder.svg"} alt={`Item ${index + 1}`} className="item-image" />
               {isVerified && (
                 <img
                   src={item.isCorrect ? correctIcon : incorrectIcon}
-                  className="feedback-icon"
+                  className="feedback-iconALD"
                 />
               )}
             </div>
@@ -106,7 +119,9 @@ function ActividadListaDesplegable() {
             <p className={`item-description ${isVerified ? "text-white" : ""}`}>{item.description}</p>
 
             <select
-              className="item-select"
+              className={`item-select ${
+                item.selectedAnswer !== "" && !isVerified ? "selected" : ""
+              }`}
               value={item.selectedAnswer}
               onChange={(e) => handleSelect(index, e.target.value)}
               disabled={isVerified}
@@ -131,8 +146,8 @@ function ActividadListaDesplegable() {
       <div className="feedback-containerALD">
         {errorMessage && <p className="text-secondary-color text-center text-md font-bold mt-2">{errorMessage}</p>}
         {isVerified && (
-          <div className="results-container text-center mt-4 mb-4">
-            <p className={`text-md mt-2 font-bold text-paragraph-light-color`}>
+          <div className="results-containerALD text-center">
+            <p className={`text-md font-bold text-paragraph-light-color`}>
             Tus respuestas correctas son: {correctCount} de {items.length} ({percentage}%)
             </p>
           </div>
@@ -158,4 +173,3 @@ function ActividadListaDesplegable() {
 }
 
 export default ActividadListaDesplegable
-

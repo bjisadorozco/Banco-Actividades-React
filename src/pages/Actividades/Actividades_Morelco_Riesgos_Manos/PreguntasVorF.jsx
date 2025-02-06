@@ -10,7 +10,7 @@ import Button from "../../components/Button";
 import imgTrue from "../../../assets/img/checkAct.png";
 import imgFalse from "../../../assets/img/xmarkAct.png";
 import imgPeligro from "../../../assets/img/avatar-hombre-morado-blanco.webp";
-import "./styles/PreguntasVorF.css"
+import "./styles/PreguntasVorF.css";
 
 const questions = [
   {
@@ -44,7 +44,6 @@ const questions = [
   },
 ];
 
-// Asume que questions será proporcionado como prop
 function PreguntasVorF() {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [score, setScore] = useState(0);
@@ -81,20 +80,23 @@ function PreguntasVorF() {
     setAnswerSelected(null);
   };
 
+  // Calcular el porcentaje de respuestas correctas
+  const percentage = Math.round((score / questions.length) * 100);
+
   return (
     <div className="container">
-      <div className="w-full flex justify-center items-center p-4">
+      <div className="w-full flex justify-center items-center p-2">
         <div
           className="max-w-md w-full bg-gray-100 border-2 border-gray-300 rounded-lg overflow-hidden"
           style={{ margin: "0 auto", minWidth: "35vw" }}
         >
           {showScore ? (
             <div className="text-center p-6">
-              <p className="my-2 text-secondary-color font-bold">
+              <p className="my-2 text-secondary-colorVF font-bold">
                 Respuestas correctas
               </p>
-              <p className="text-lg">
-                {score} de {questions.length}
+              <p className="text-lg text-secondary-colorVF">
+                Tus respuestas correctas son: {score} de {questions.length} ({percentage}%)
               </p>
               <div className="reset-container">
                 <button
@@ -111,9 +113,9 @@ function PreguntasVorF() {
                 <span className="inc">{currentQuestion + 1}</span>/
                 <span className="tol">{questions.length}</span>
               </div>
-              <div className="itemQ view p-6">
+              <div className="itemQ view p-4">
                 <div className="mb-3" style={{ minHeight: "50px" }}>
-                  <p className="text-gray-800">
+                  <p className="text-gray-800 texto-gray">
                     {questions[currentQuestion].text}
                   </p>
                 </div>
@@ -163,7 +165,7 @@ function PreguntasVorF() {
                 />
                 <div className="check flex justify-center space-x-4">
                   {!showFeedback && (
-                    <div className="check flex justify-center space-x-4">
+                    <div className="check flex flex-button justify-center space-x-4">
                       <button
                         className="flex justify-center items-center group bg-main-color rounded-full px-4 py-2 shadow-main-color text-white"
                         onClick={() => handleAnswer(true)}
@@ -172,6 +174,7 @@ function PreguntasVorF() {
                         <FontAwesomeIcon icon={faCheck} className="mr-2" />{" "}
                         Verdadero
                       </button>
+
                       <button
                         className="flex justify-center items-center group bg-main-color rounded-full px-4 py-2 shadow-main-color text-white m-0"
                         onClick={() => handleAnswer(false)}
