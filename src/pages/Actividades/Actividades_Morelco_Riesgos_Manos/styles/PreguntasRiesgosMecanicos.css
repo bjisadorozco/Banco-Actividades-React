@@ -67,7 +67,7 @@
   }
   
   .preguntas_01 .ctItem-7 > div p.act {
-    background: #353846;
+    /* background: #353846; */
     color: white;
   }
   
@@ -82,7 +82,6 @@
   }
   
   .validation-text {
-    position: absolute;
     right: 10px;
     font-weight: bold;
   }
@@ -167,10 +166,3 @@
     }
   }
   
-  .text-success {
-    color: #4CAF50;
-  }
-  
-  .text-error {
-    color: #F44336;
-  }

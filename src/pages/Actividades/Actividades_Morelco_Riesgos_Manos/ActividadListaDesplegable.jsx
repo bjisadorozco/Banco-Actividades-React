@@ -5,8 +5,8 @@ import Button from "../../components/Button";
 import metodo5Porque from "../../../assets/img/metodo_5_porque_sldM3.webp";
 import metodoArbolFallas from "../../../assets/img/metodo_arbol_fallas_sldM3.webp";
 import metodoEspinaPescado from "../../../assets/img/metodo_espina_pescado_sldm3.webp";
-import correctIcon from "../../../assets/img/checkAct.png"
-import incorrectIcon from "../../../assets/img/xmarkAct.png"
+import correctIcon from "../../../assets/img/checkAct.png";
+import incorrectIcon from "../../../assets/img/xmarkAct.png";
 import "./styles/ActividadListaDesplegable.css";
 
 function ActividadListaDesplegable() {
@@ -16,8 +16,7 @@ function ActividadListaDesplegable() {
   const [items, setItems] = useState([
     {
       image: metodo5Porque,
-      description:
-        `Este método se centra en indagar en las causas raíz de un incidente haciendo repetidamente (5 veces) la pregunta "¿por qué?" hasta llegar a la causa raíz.​`,
+      description: `Este método se centra en indagar en las causas raíz de un incidente haciendo repetidamente (5 veces) la pregunta "¿por qué?" hasta llegar a la causa raíz.​`,
       correctAnswer: "1",
       selectedAnswer: "",
       isCorrect: false,
@@ -80,6 +79,7 @@ function ActividadListaDesplegable() {
     setCorrectCount(0);
   };
 
+  const allSelected = items.every((item) => item.selectedAnswer !== "");
   return (
     <div className="quiz-container">
       <div className="items-grid">
@@ -122,7 +122,8 @@ function ActividadListaDesplegable() {
                 .filter(
                   (option) =>
                     !items.some(
-                      (item, i) => i !== index && item.selectedAnswer === option.value
+                      (item, i) =>
+                        i !== index && item.selectedAnswer === option.value
                     )
                 )
                 .map((option) => (
@@ -141,13 +142,16 @@ function ActividadListaDesplegable() {
         ))}
       </div>
 
-      <div className="feedback-container">        
-      {errorMessage && <p className="text-secondary-color text-center text-md font-bold mt-2">{errorMessage}</p>}
+      <div className="mt-4">
+        {errorMessage && (
+          <p className="text-secondary-color text-center text-md font-bold">
+            {errorMessage}
+          </p>
+        )}
         {isVerified && (
-          <p
-            className={`text-md mt-2 font-bold text-paragraph-light-color`}
-          >
-            {correctCount} de {items.length} respuestas correctas
+          <p className="text-md font-bold text-paragraph-light-color">
+            {correctCount} de {items.length} respuestas correctas (
+            {Math.round((correctCount / items.length) * 100)}%)
           </p>
         )}
         <div className="button-container">
@@ -164,6 +168,7 @@ function ActividadListaDesplegable() {
             icon={faRepeat}
             roundedFull={true}
             onClick={handleReset}
+            disabled={!allSelected}
           >
             {"Reiniciar"}
           </Button>
@@ -174,4 +179,3 @@ function ActividadListaDesplegable() {
 }
 
 export default ActividadListaDesplegable;
-
