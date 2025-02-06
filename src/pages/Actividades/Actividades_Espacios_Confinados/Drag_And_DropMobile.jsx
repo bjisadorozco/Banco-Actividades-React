@@ -131,10 +131,10 @@ const SelectAndValidateMobile = () => {
   };
 
   return (
-    <div className="mobile-container">
-      <div className="activity-container-mobile">
+    <div className="w-full flex flex-col items-center justify-center relative my-2">
+      <div className="w-full flex flex-col items-center justify-center mx-2">
         {/* Cuadro 1 */}
-        <div className="bg-[#E5E7EB] rounded-lg">
+        <div className="bg-[#E5E7EB] rounded-lg flex flex-col items-center justify-center">
           <div
             className={`select-item rounded-xl ${
               validationStatus.select1 === "correcto"
@@ -182,7 +182,7 @@ const SelectAndValidateMobile = () => {
         </div>
 
         {/* Cuadro 2 */}
-        <div className="bg-[#E5E7EB] rounded-lg">
+        <div className="bg-[#E5E7EB] rounded-lg flex flex-col items-center justify-center">
           <div
             className={`select-item rounded-xl ${
               validationStatus.select2 === "correcto"
@@ -225,7 +225,7 @@ const SelectAndValidateMobile = () => {
         </div>
 
         {/* Cuadro 3 */}
-        <div className="bg-[#E5E7EB] rounded-lg">
+        <div className="bg-[#E5E7EB] rounded-lg flex flex-col items-center justify-center">
           <div
             className={`select-item rounded-xl ${
               validationStatus.select3 === "correcto"
@@ -273,7 +273,7 @@ const SelectAndValidateMobile = () => {
         </div>
 
         {/* Cuadro 4 */}
-        <div className="bg-[#E5E7EB] rounded-lg">
+        <div className="bg-[#E5E7EB] rounded-lg flex flex-col items-center justify-center">
           <div
             className={`select-item rounded-xl ${
               validationStatus.select4 === "correcto"
@@ -320,7 +320,7 @@ const SelectAndValidateMobile = () => {
         </div>
 
         {/* Cuadro 5 */}
-        <div className="bg-[#E5E7EB] rounded-lg">
+        <div className="bg-[#E5E7EB] rounded-lg flex flex-col items-center justify-center">
           <div
             className={`select-item rounded-xl ${
               validationStatus.select5 === "correcto"
@@ -372,7 +372,7 @@ const SelectAndValidateMobile = () => {
         </div>
 
         {/* Cuadro 6 */}
-        <div className="bg-[#E5E7EB] rounded-lg">
+        <div className="bg-[#E5E7EB] rounded-lg flex flex-col items-center justify-center">
           <div
             className={`select-item rounded-xl ${
               validationStatus.select6 === "correcto"
@@ -420,7 +420,7 @@ const SelectAndValidateMobile = () => {
         </div>
 
         {/* Cuadro 7 */}
-        <div className="bg-[#E5E7EB] rounded-lg">
+        <div className="bg-[#E5E7EB] rounded-lg flex flex-col items-center justify-center">
           <div
             className={`select-item rounded-xl ${
               validationStatus.select7 === "correcto"
@@ -472,7 +472,7 @@ const SelectAndValidateMobile = () => {
         </div>
 
         {/* Cuadro 8 */}
-        <div className="bg-[#E5E7EB] rounded-lg">
+        <div className="bg-[#E5E7EB] rounded-lg flex flex-col items-center justify-center">
           <div
             className={`select-item rounded-xl ${
               validationStatus.select8 === "correcto"
@@ -541,12 +541,11 @@ const SelectAndValidateMobile = () => {
 
       <div className="flex-container-mobile flex-col justify-center items-center">
         <button
-          className={`w-20 h-20 bg-[#6E3CD2] text-white rounded-full text-[30px]`}
+          className={`w-[80%] py-2 bg-[#6E3CD2] text-white rounded-lg text-[20px]`}
           onClick={handleReset}
         >
-          <FontAwesomeIcon icon={faRepeat} />
+          <FontAwesomeIcon icon={faRepeat} /> Reiniciar
         </button>
-        <h1 className="text-[20px] text-black">Reiniciar</h1>
       </div>
     </div>
   );

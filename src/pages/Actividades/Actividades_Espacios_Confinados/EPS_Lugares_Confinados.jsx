@@ -1,7 +1,11 @@
 import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRepeat } from "@fortawesome/free-solid-svg-icons";
-import Actividad_Mobile_entada_salida from "../Actividades_Espacios_Confinados/Actividad_Mobile_Entrada_Salida"
+import Actividad_Mobile_entada_salida from "../Actividades_Espacios_Confinados/Actividad_Mobile_Entrada_Salida";
+import hombre from "/src/assets/img/avatar-hombre-morado-blanco.webp";
+import trueImage from "/src/assets/img/checkAct.png";
+import falseImage from "/src/assets/img/false.png";
+
 
 function EPS_Lugares_Confinados() {
   {/* Estado inicial de las palabras con su texto, id, caja correcta y otras propiedades*/}
@@ -164,14 +168,13 @@ function EPS_Lugares_Confinados() {
   {/* Verifica si el botón de reiniciar debe estar deshabilitado */}
   const isResetButtonDisabled = words.some((word) => !word.isDropped);
   return (
-    <div className="flex flex-col md:flex-row mb-36 md:mb-0 w-full">
-      <div className="md:w-full bg-white hidden md:flex flex-col justify-center md:static relative md:top-0 top-0">
-        <div className="flex flex-col items-center justify-center">
+      <div className="md:w-full bg-white  md:flex flex-col justify-center md:static relative">
+        <div className="md:flex flex-col items-center hidden justify-center">
           <div className="grid grid-cols-1 gap-2 justify-start md:flex md:flex-col mb-3 h-auto w-full">
             <div className="leading-loose">
-              <div className="bg-white text-[16px] text-[#afafaf] border-[#e0e0e0] md:rounded-lg md:shadow-md mb-[1px] md:m-4 p-4 border rounded-md shadow-md m-6 font-monserrat">
-                <div className="mt-4 text-center">
-                  <p className="leading-tight my-4">
+              <div className="bg-white text-[16px] text-[#afafaf] border-[#e0e0e0] md:rounded-lg-md mb-[1px]border rounded-md font-monserrat">
+                <div className="text-center">
+                  <p className="leading-tight mb-2">
                     Has arrastrado {droppedCount} de las {words.length} opciones
                     disponibles. <br />
                     Respuestas correctas: {correctAnswers} de {words.length} (
@@ -180,7 +183,7 @@ function EPS_Lugares_Confinados() {
                   {feedback && (
                   <div className="w-full flex text-center flex-col items-center justify-center rounded-lg">
                     <div
-                      className="feedback mt-4 w-[50%]"
+                      className="feedback mt-2 w-[50%]"
                       style={{
                         backgroundColor:
                           feedback ===
@@ -199,11 +202,11 @@ function EPS_Lugares_Confinados() {
                 )}
                  
                 </div>
-                <div className="flex justify-center mb-4 opacity-100">
+                <div className="flex justify-center opacity-100">
                   {wordToShow && (
                     <div
                       key={wordToShow.id}
-                      className="mb-2 bg-[#6E3CD2] rounded-[15px] px-4 py-2 cursor-pointer text-white text-center opacity-100"
+                      className="mb-2 bg-[#6E3CD2] rounded-[15px] px-2 py-2 cursor-pointer text-white text-center opacity-100"
                       draggable
                       onDragStart={(e) => handleDragStart(e, wordToShow.id)}
                     >
@@ -214,14 +217,14 @@ function EPS_Lugares_Confinados() {
 
                 <div className="flex justify-around h-full w-full">
                   <div className="w-[30%] items-center flex flex-col justify-center rounded-[15px]">
-                    <div className="w-full rounded-md bg-[#6E3CD2] px-4 text-white my-2">
+                    <div className="w-full rounded-md bg-[#6E3CD2] text-white my-2">
                       <h3 className="text-[16px] font-semibold text-center">
                         A la entrada...
                       </h3>
                     </div>
 
                     <div
-                      className="pt-2 w-full min-h-[300px] max-h-[600px] h-auto shadow-md rounded-[10px] border-2  border-gray-300 flex flex-col justify-start items-center"
+                      className="pt-2 w-full min-h-[200px] max-h-[400px] h-auto shadow-md rounded-[10px] border-2  border-gray-300 flex flex-col justify-start items-center"
                       onDrop={(e) => handleDrop(e, "entrada")}
                       onDragOver={allowDrop}
                     >
@@ -245,12 +248,12 @@ function EPS_Lugares_Confinados() {
                               <div className="absolute top-[-15px] right-[-10px] w-8 h-8">
                                 {word.isCorrect ? (
                                   <img
-                                    src="/src/assets/img/checkAct.png"
+                                    src={trueImage}
                                     alt="Correct"
                                   />
                                 ) : (
                                   <img
-                                    src="/src/assets/img/false.png"
+                                    src={falseImage}
                                     alt="Incorrect"
                                   />
                                 )}
@@ -264,19 +267,19 @@ function EPS_Lugares_Confinados() {
                   <div className="w-[20%] flex justify-center items-center">
                     <img
                       className="w-full"
-                      src="/src/assets/img/avatar-hombre-morado-blanco.webp"
+                      src={hombre}
                       alt=""
                     />
                   </div>
 
                   <div className="w-[30%] items-center flex flex-col justify-center rounded-[15px]">
-                    <div className="w-full rounded-md bg-[#6E3CD2] px-2 text-white my-2">
+                    <div className="w-full rounded-md bg-[#6E3CD2] text-white my-2">
                       <h3 className="text-[16px] font-semibold text-center">
                         A la salida...
                       </h3>
                     </div>
                     <div
-                      className="w-full pt-2 min-h-[300px] max-h-[600px] h-auto shadow-md rounded-[10px] border-2 border-gray-300 flex flex-col justify-start items-center"
+                      className="w-full pt-2 min-h-[200px] max-h-[600px] h-auto shadow-md rounded-[10px] border-2 border-gray-300 flex flex-col justify-start items-center"
                       onDrop={(e) => handleDrop(e, "salida")}
                       onDragOver={allowDrop}
                     >
@@ -299,12 +302,12 @@ function EPS_Lugares_Confinados() {
                               <div className="absolute top-[-15px] right-[-10px] w-8 h-8">
                                 {word.isCorrect ? (
                                   <img
-                                    src="/src/assets/img/checkAct.png"
+                                    src={trueImage}
                                     alt="Correct"
                                   />
                                 ) : (
                                   <img
-                                    src="/src/assets/img/false.png"
+                                    src={falseImage}
                                     alt="Incorrect"
                                   />
                                 )}
@@ -320,16 +323,16 @@ function EPS_Lugares_Confinados() {
               
 
                 <div className="w-full flex justify-center items-center">
-                  <div className="flex justify-center mt-6 mx-2">
+                  <div className="flex justify-center mx-2">
                     <button
                       onClick={handleUndo}
-                      className="flex mx-2 justify-center items-center group bg-main-color rounded-full px-4 py-2 shadow-main-color text-white my-3"
+                      className="flex mx-2 justify-center items-center group bg-main-color rounded-full px-4 shadow-main-color text-white"
                     >
                       Deshacer
                     </button>
                     <button
                       onClick={handleReset}
-                      className="flex mx-2 justify-center items-center group bg-main-color rounded-full px-4 py-2 shadow-main-color text-white my-3"
+                      className="flex mx-2 justify-center items-center group bg-main-color rounded-full px-4 shadow-main-color text-white"
                       disabled={isResetButtonDisabled}
                     >
                       <FontAwesomeIcon icon={faRepeat} className="mr-2" />
@@ -341,9 +344,7 @@ function EPS_Lugares_Confinados() {
             </div>
           </div>
         </div>
-      </div>
-
-      <div className="md:hidden w-full bg-white flex flex-col justify-center">
+        <div className="md:hidden w-full bg-white flex flex-col justify-center">
         <Actividad_Mobile_entada_salida
           words={words}
           droppedCount={droppedCount}
@@ -352,6 +353,8 @@ function EPS_Lugares_Confinados() {
           feedback={feedback}
         />
     </div>
+
+     
     </div>
   );
 }
