@@ -1,0 +1,5 @@
+.buttons-group {
+  display: flex;
+  width: 260px !important;
+  gap: 16px;
+}

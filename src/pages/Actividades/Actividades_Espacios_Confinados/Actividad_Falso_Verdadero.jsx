@@ -98,7 +98,7 @@ function Actividad_Falso_Verdadero() {
   const percentage = Math.round((score / questions.length) * 100);
   return (
     <div className="container ">
-      <div className="w-full flex justify-center items-center p-4">
+      <div className="w-full flex justify-center items-center my-2">
         <div className="max-w-md w-full bg-gray-100 border-2 border-gray-300 rounded-lg overflow-hidden mx-auto min-w-[35vw]">
           {showScore ? (
             <div className="text-center p-6 font-monserrat">
@@ -106,10 +106,10 @@ function Actividad_Falso_Verdadero() {
                 Respuestas correctas son: {score} de {questions.length} (
                 {percentage}%)
               </p>
-              <div className="reset-container">
+              <div className="w-full flex flex-col items-center justify-center">
                 <button
                   onClick={resetQuiz}
-                  className="flex justify-center items-center group bg-main-color rounded-full px-4 py-2 shadow-main-color text-white mx-auto my-3"
+                  className="group bg-main-color rounded-full px-4 py-2 shadow-main-color text-white my-3"
                 >
                   Reiniciar
                 </button>
@@ -178,7 +178,7 @@ function Actividad_Falso_Verdadero() {
                     </div>
                   )}
                   {showFeedback && (
-                    <div className="flex justify-center mt-4 text-white ">
+                    <div className="flex items-center justify-center mt-4 text-white ">
                       <button
                         onClick={handleNext}
                         className="bg-main-color py-2 px-4 rounded-full text-[16px] font-bold"

@@ -29,9 +29,24 @@ import OrdenarPasosPalmaManosMobile from "./pages/Actividades/Actividades_Morelc
 import PreguntasSiNo from "./pages/Actividades/Actividades_Morelco_Riesgos_Manos/PreguntasSiNo.jsx";
 
 import "./main.css";
+import Slider13_Lista_desplegable from "./pages/Actividades/Actividades_Espacios_Confinados/Slider13_Lista_desplegable_movil.jsx";
+import DragAndDropAudios from "./pages/Actividades/Actividades_Trabajo_seguro_alturas/DragAndDropAudios.jsx";
+import DragAndDropAudiosMovil from "./pages/Actividades/Actividades_Espacios_Confinados/DragAndDropAudiosMovil.jsx";
+import Palabra_CorrectaMovil from "./pages/Actividades/Actividades_Espacios_Confinados/Slider13_Lista_desplegable_movil.jsx";
+import Slider12_drag_and_drop_audios_movil from "./pages/Actividades/Actividades_Espacios_Confinados/Slider12_drag_and_drop_audios_movil.jsx";
+import Slider14_Lista_desplegable from "./pages/Actividades/Actividades_Espacios_Confinados/Slider14_Lista_desplegable.jsx";
+import Slider14_Lista_desplegable_movil from "./pages/Actividades/Actividades_Espacios_Confinados/Slider14_Lista_desplegable_movil.jsx";
+import Slider12_drag_and_drop_audios from "./pages/Actividades/Actividades_Espacios_Confinados/Slider12_drag_and_drop_audios.jsx";
+import Slider15_Lista_desplegable from "./pages/Actividades/Actividades_Espacios_Confinados/Slider15_Lista_desplegable.jsx";
+import Slider15_Lista_desplegable_movil from "./pages/Actividades/Actividades_Espacios_Confinados/Slider15_Lista_desplegable_movil.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <PreguntasRiesgosTermicos />
+
+
+
+    <ActividadFalsoVerdadero
+
+   />
   </React.StrictMode>
 );

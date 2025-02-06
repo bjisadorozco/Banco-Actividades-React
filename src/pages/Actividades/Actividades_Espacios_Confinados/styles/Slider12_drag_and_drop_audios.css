@@ -1,0 +1,163 @@
+.drag-and-drop-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+  margin-top: 40px;
+}
+
+.drag-and-drop-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  width: 100%;
+}
+
+.drag-and-drop-items {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.draggable-option {
+  width: 180px;
+  min-width: 160px;
+  height: 60px;
+  background-color: #c0185d;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+  text-align: center;
+  cursor: grab;
+  position: absolute;
+  font-weight: normal !important;
+  padding: 0 10px;
+}
+
+.drop-area {
+  width: 180px !important;
+  height: 60px;
+  border: 2px dashed #a7a7a7;
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 0 !important;
+  transition:
+    background-color 0.3s,
+    border-color 0.3s;
+  position: absolute;
+  left: 31%;
+  z-index: -1;
+  padding: 0 10px;
+  text-align: center;
+}
+
+.drop-area-over {
+  background-color: #e6e6e6;
+}
+
+.drop-area-filled {
+  background-color: #c0185d;
+  border-color: #c0185d;
+}
+
+.drop-area-correct {
+  background-color: #4caf50 !important;
+  border-color: #4caf50 !important;
+  min-width: 160px;
+}
+
+.drop-area-incorrect {
+  background-color: #f44336 !important;
+  border-color: #f44336 !important;
+  min-width: 160px;
+}
+
+.drop-area-content {
+  color: white;
+  font-weight: normal !important;
+}
+
+.audio-card {
+  width: 270px;
+  height: 60px;
+  background-color: #f3f4f6;
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition:
+    background-color 0.3s,
+    border-color 0.3s;
+  border: 2px solid transparent;
+}
+
+.audio-control {
+  width: 90%;
+  height: 40px;
+}
+
+.audio-card.drop-area-correct {
+  background-color: #4caf50;
+  border-color: #4caf50;
+}
+
+.audio-card.drop-area-incorrect {
+  background-color: #f44336;
+  border-color: #f44336;
+}
+
+.message {
+  padding: 10px;
+  color: #fff;
+  border-radius: 5px;
+  text-align: center;
+  width: 100%;
+}
+
+.message-success {
+  background-color: #4caf50;
+}
+
+.message-error {
+  background-color: #f44336;
+}
+
+.select-correct {
+  background-color: #90ee90;
+  border-color: #90ee90;
+  color: #0f172a;
+}
+
+.select-incorrect {
+  background-color: #ffb6c1;
+  border-color: #ffb6c1;
+  color: #0f172a;
+}
+
+
+.correct-answers-message {
+  color: #6e6e6e;
+  font-weight: bold;
+  text-align: center;
+}
+
+.verification-image {
+  width: 54px;
+  height: 54px;
+  position: absolute;
+  top: 50%;
+  left: -20%;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+}

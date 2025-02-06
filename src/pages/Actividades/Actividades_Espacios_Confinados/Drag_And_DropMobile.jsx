@@ -2,24 +2,24 @@ import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import checkIcon from "../../../assets/img/checkAct.png";
 import xmarkIcon from "../../../assets/img/xmarkAct.png";
-import audioCasco from "/src/assets/audio/EPP/casco_de_proteccion.mp3";
-import audioBotas from "/src/assets/audio/EPP/botas_con_punta_de_acero.mp3";
-import audioArnes from "/src/assets/audio/EPP/arnes_de_cuerpo_completo.mp3";
-import audioOverol from "/src/assets/audio/EPP/overoles_resistente_a_quimicos.mp3";
-import audioProtector from "/src/assets/audio/EPP/tapones_o_protectore_auditivos.mp3";
-import audioGafas from "/src/assets/audio/EPP/gafas_de_seguridad.mp3";
-import audioGuantes from "/src/assets/audio/EPP/guantes_resistentes_a_quimicos.mp3";
-import audioRespirador from "/src/assets/audio/EPP/respiradores_purificadores_de_aire.mp3";
-import casco from "/src/assets/img/Elementos_EPP/casco_sldM2.webp";
-import botas from "/src/assets/img/Elementos_EPP/botas_sldM2.webp";
-import arnes from "/src/assets/img/Elementos_EPP/arnes_sldM2.webp";
-import overol from "/src/assets/img/Elementos_EPP/overoles_resistentes_quimicos_sldM2.webp";
-import protector from "/src/assets/img/Elementos_EPP/protectores_auditivos_sldM2.webp";
-import gafas from "/src/assets/img/Elementos_EPP/gafas_seguridad_sldM2.webp";
-import guantes from "/src/assets/img/Elementos_EPP/guantes_sldM2.webp";
-import respirador from "/src/assets/img/Elementos_EPP/respiradores_sldM2.webp";
+import audioCasco from "/src/assets/audio/casco_de_proteccion.mp3";
+import audioBotas from "/src/assets/audio/botas_con_punta_de_acero.mp3";
+import audioArnes from "/src/assets/audio/arnes_de_cuerpo_completo.mp3";
+import audioOverol from "/src/assets/audio/overoles_resistente_a_quimicos.mp3";
+import audioProtector from "/src/assets/audio/tapones_o_protectore_auditivos.mp3";
+import audioGafas from "/src/assets/audio/gafas_de_seguridad.mp3";
+import audioGuantes from "/src/assets/audio/guantes_resistentes_a_quimicos.mp3";
+import audioRespirador from "/src/assets/audio/respiradores_purificadores_de_aire.mp3";
+import casco from "/src/assets/img/casco_sldM2.webp";
+import botas from "/src/assets/img/botas_sldM2.webp";
+import arnes from "/src/assets/img/arnes_sldM2.webp";
+import overol from "/src/assets/img/overoles_resistentes_quimicos_sldM2.webp";
+import protector from "/src/assets/img/protectores_auditivos_sldM2.webp";
+import gafas from "/src/assets/img/gafas_seguridad_sldM2.webp";
+import guantes from "/src/assets/img/guantes_sldM2.webp";
+import respirador from "/src/assets/img/respiradores_sldM2.webp";
 import { faCheck, faRepeat } from "@fortawesome/free-solid-svg-icons";
-import Button from "../../components/Button";
+
 
 const SelectAndValidateMobile = () => {
   const [selectedOptions, setSelectedOptions] = useState({
@@ -131,10 +131,10 @@ const SelectAndValidateMobile = () => {
   };
 
   return (
-    <div className="mobile-container">
-      <div className="activity-container-mobile">
+    <div className="w-full flex flex-col items-center justify-center relative my-2">
+      <div className="w-full flex flex-col items-center justify-center mx-2">
         {/* Cuadro 1 */}
-        <div className="bg-[#E5E7EB] rounded-lg">
+        <div className="bg-[#E5E7EB] rounded-lg flex flex-col items-center justify-center">
           <div
             className={`select-item rounded-xl ${
               validationStatus.select1 === "correcto"
@@ -182,7 +182,7 @@ const SelectAndValidateMobile = () => {
         </div>
 
         {/* Cuadro 2 */}
-        <div className="bg-[#E5E7EB] rounded-lg">
+        <div className="bg-[#E5E7EB] rounded-lg flex flex-col items-center justify-center">
           <div
             className={`select-item rounded-xl ${
               validationStatus.select2 === "correcto"
@@ -225,7 +225,7 @@ const SelectAndValidateMobile = () => {
         </div>
 
         {/* Cuadro 3 */}
-        <div className="bg-[#E5E7EB] rounded-lg">
+        <div className="bg-[#E5E7EB] rounded-lg flex flex-col items-center justify-center">
           <div
             className={`select-item rounded-xl ${
               validationStatus.select3 === "correcto"
@@ -273,7 +273,7 @@ const SelectAndValidateMobile = () => {
         </div>
 
         {/* Cuadro 4 */}
-        <div className="bg-[#E5E7EB] rounded-lg">
+        <div className="bg-[#E5E7EB] rounded-lg flex flex-col items-center justify-center">
           <div
             className={`select-item rounded-xl ${
               validationStatus.select4 === "correcto"
@@ -320,7 +320,7 @@ const SelectAndValidateMobile = () => {
         </div>
 
         {/* Cuadro 5 */}
-        <div className="bg-[#E5E7EB] rounded-lg">
+        <div className="bg-[#E5E7EB] rounded-lg flex flex-col items-center justify-center">
           <div
             className={`select-item rounded-xl ${
               validationStatus.select5 === "correcto"
@@ -372,7 +372,7 @@ const SelectAndValidateMobile = () => {
         </div>
 
         {/* Cuadro 6 */}
-        <div className="bg-[#E5E7EB] rounded-lg">
+        <div className="bg-[#E5E7EB] rounded-lg flex flex-col items-center justify-center">
           <div
             className={`select-item rounded-xl ${
               validationStatus.select6 === "correcto"
@@ -420,7 +420,7 @@ const SelectAndValidateMobile = () => {
         </div>
 
         {/* Cuadro 7 */}
-        <div className="bg-[#E5E7EB] rounded-lg">
+        <div className="bg-[#E5E7EB] rounded-lg flex flex-col items-center justify-center">
           <div
             className={`select-item rounded-xl ${
               validationStatus.select7 === "correcto"
@@ -472,7 +472,7 @@ const SelectAndValidateMobile = () => {
         </div>
 
         {/* Cuadro 8 */}
-        <div className="bg-[#E5E7EB] rounded-lg">
+        <div className="bg-[#E5E7EB] rounded-lg flex flex-col items-center justify-center">
           <div
             className={`select-item rounded-xl ${
               validationStatus.select8 === "correcto"
@@ -541,12 +541,11 @@ const SelectAndValidateMobile = () => {
 
       <div className="flex-container-mobile flex-col justify-center items-center">
         <button
-          className={`w-20 h-20 bg-[#6E3CD2] text-white rounded-full text-[30px]`}
+          className={`w-[80%] py-2 bg-[#6E3CD2] text-white rounded-lg text-[20px]`}
           onClick={handleReset}
         >
-          <FontAwesomeIcon icon={faRepeat} />
+          <FontAwesomeIcon icon={faRepeat} /> Reiniciar
         </button>
-        <h1 className="text-[20px] text-black">Reiniciar</h1>
       </div>
     </div>
   );

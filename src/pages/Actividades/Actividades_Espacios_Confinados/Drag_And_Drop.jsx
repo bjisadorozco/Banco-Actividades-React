@@ -4,64 +4,79 @@ import { faRepeat, faUndo } from "@fortawesome/free-solid-svg-icons";
 import imgTrue from "../../../assets/img/checkAct.png";
 import imgFalse from "../../../assets/img/xmarkAct.png";
 import DragAndDropMobile from "./Drag_And_DropMobile";
-import imgA from "../../../assets/img/Elementos_EPP/casco_sldM2.webp";
+import audioCasco from "/src/assets/audio/casco_de_proteccion.mp3";
+import audioBotas from "/src/assets/audio/botas_con_punta_de_acero.mp3";
+import audioArnes from "/src/assets/audio/arnes_de_cuerpo_completo.mp3";
+import audioOverol from "/src/assets/audio/overoles_resistente_a_quimicos.mp3";
+import audioProtector from "/src/assets/audio/tapones_o_protectore_auditivos.mp3";
+import audioGafas from "/src/assets/audio/gafas_de_seguridad.mp3";
+import audioGuantes from "/src/assets/audio/guantes_resistentes_a_quimicos.mp3";
+import audioRespirador from "/src/assets/audio/respiradores_purificadores_de_aire.mp3";
+import casco from "/src/assets/img/casco_sldM2.webp";
+import botas from "/src/assets/img/botas_sldM2.webp";
+import arnes from "/src/assets/img/arnes_sldM2.webp";
+import overol from "/src/assets/img/overoles_resistentes_quimicos_sldM2.webp";
+import protector from "/src/assets/img/protectores_auditivos_sldM2.webp";
+import gafas from "/src/assets/img/gafas_seguridad_sldM2.webp";
+import guantes from "/src/assets/img/guantes_sldM2.webp";
+import respirador from "/src/assets/img/respiradores_sldM2.webp";
+import trabajador from "/src/assets/img/avatar_elementos_epp.webp";
 
 const items = [
   {
     id: "A",
     name: "Casco de Protección",
     audio: "/src/assets/audio/EPP/casco_de_proteccion.mp3",
-    image: imgA,
+    image: "/src/assets/img/Elementos_EPP/casco_sldM2.webp",
     correctBoxId: "leftColumn",
   },
   {
     id: "H",
     name: "Botas",
-    audio: "/src/assets/audio/EPP/botas_con_punta_de_acero.mp3",
-    image: "/src/assets/img/Elementos_EPP/botas_sldM2.webp",
+    audio: audioBotas,
+    image: botas,
     correctBoxId: "rightColumn",
   },
   {
     id: "C",
     name: "Arnés de Cuerpo Completo",
-    audio: "/src/assets/audio/EPP/arnes_de_cuerpo_completo.mp3",
-    image: "/src/assets/img/Elementos_EPP/arnes_sldM2.webp",
+    audio: audioArnes,
+    image: arnes,
     correctBoxId: "leftColumn",
   },
   {
     id: "D",
     name: "Overol",
-    audio: "/src/assets/audio/EPP/overoles_resistente_a_quimicos.mp3",
-    image:
-      "/src/assets/img/Elementos_EPP/overoles_resistentes_quimicos_sldM2.webp",
+    audio: audioOverol,
+    image: overol,
     correctBoxId: "leftColumn",
   },
   {
     id: "B",
     name: "Tapones Auditivos",
-    audio: "/src/assets/audio/EPP/tapones_o_protectore_auditivos.mp3",
-    image: "/src/assets/img/Elementos_EPP/protectores_auditivos_sldM2.webp",
+    audio: audioProtector,
+    image: protector,
     correctBoxId: "leftColumn",
   },
   {
     id: "E",
     name: "Gafas de Seguridad",
-    audio: "/src/assets/audio/EPP/gafas_de_seguridad.mp3",
-    image: "/src/assets/img/Elementos_EPP/gafas_seguridad_sldM2.webp",
+    audio: audioGafas,
+    image: gafas,
     correctBoxId: "rightColumn",
   },
   {
     id: "G",
     name: "Guantes Resistentes a Químicos",
-    audio: "/src/assets/audio/EPP/guantes_resistentes_a_quimicos.mp3",
-    image: "/src/assets/img/Elementos_EPP/guantes_sldM2.webp",
+    audio: audioGuantes,
+    image: guantes,
     correctBoxId: "rightColumn",
   },
   {
     id: "F",
     name: "Respirador Purificador de Aire",
-    audio: "/src/assets/audio/EPP/respiradores_purificadores_de_aire.mp3",
-    image: "/src/assets/img/Elementos_EPP/respiradores_sldM2.webp",
+    audio: audioRespirador,
+    image: respirador,
     correctBoxId: "rightColumn",
   },
 ];
@@ -222,219 +237,209 @@ const DragAndDrop = () => {
   }, [droppedItems]);
 
   return (
-    <div className="flex flex-col md:flex-row md:mb-0">
-      <div className="md:w-full md:flex hidden bg-white flex-col justify-center md:static relative md:top-0 top-0">
-        <div className="flex flex-col items-center justify-center">
-          <div className="grid grid-cols-1 gap-2 justify-start md:flex md:flex-col mb-3 h-auto w-full">
-            <div className="leading-loose"></div>
-            <div className="bg-white flex flex-col items-center justify-center text-[#808693] border-[#e0e0e0] md:rounded-lg md:shadow-md mb-[1px] md:m-4 p-4 border rounded-md shadow-md m-6">
-              {/* Objetos arrastrables */}
-              <div className="flex flex-wrap justify-center gap-4 my-6">
-                {items.map(
-                  (item) =>
-                    !Object.values(droppedItems).some(
-                      (droppedItem) => droppedItem.id === item.id
-                    ) && (
-                      <img
-                        key={item.id}
-                        src={item.image}
-                        alt={item.name}
-                        draggable
-                        onDragStart={(e) => handleDragStart(e, item)}
-                        className="w-20 h-20 cursor-pointer border-2 border-[#6E3CD2] rounded mb-0"
-                      />
-                    )
-                )}
+    <div className="md:w-full flex bg-white flex-col justify-center md:static relative mb-0">
+      <div className="md:flex flex-col items-center justify-center relative hidden">
+        <div className="w-full bg-white flex flex-col items-center justify-center text-[#808693] md:rounded-lg mb-[1px] rounded-md ">
+          <div className="w-full flex justify-center items-center">
+            {/* Contenedor inicial */}
+            <div className="flex justify-start items-center relative right-16">
+              {/* Columna izquierda */}
+              <div className="flex flex-col items-center mr-4">
+                {leftColumnItems.map((itemId) => {
+                  const item = items.find((i) => i.id === itemId);
+                  const isCorrect = isItemCorrect(item.id, itemId);
+                  return (
+                    <div
+                      key={item.id}
+                      id={item.id}
+                      className={`relative w-16 h-16 border-2 flex flex-col items-center justify-center border-dashed border-[#9C99A1] ${
+                        droppedItems[item.id]
+                          ? isItemCorrect(droppedItems[item.id].id, itemId)
+                            ? "bg-[#4CAF50] border-solid"
+                            : "bg-[#FF7043] border-solid"
+                          : "bg-[#ebebeb] hover:bg-[#D3C4F1]"
+                      } rounded flex items-center justify-center my-1`}
+                      onDrop={(e) => handleDrop(e, item.id)}
+                      onDragOver={(e) => e.preventDefault()}
+                    >
+                      {droppedItems[item.id] &&
+                        isItemCorrect(droppedItems[item.id].id, itemId) && (
+                          <span
+                            className={`w-[150px] bg-[#4CAF50] text-white text-[14px] leading-4 absolute z-30 text-center px-2 py-1 rounded-full ${
+                              leftColumnItems.includes(item.id)
+                                ? "right-[calc(100%+10px)]"
+                                : "left-[calc(100%+10px)]"
+                            } top-2`}
+                          >
+                            {droppedItems[item.id].name}
+                          </span>
+                        )}
+                      {droppedItems[item.id] && (
+                        <img
+                          src={
+                            isItemCorrect(droppedItems[item.id].id, itemId)
+                              ? imgTrue
+                              : imgFalse
+                          }
+                          alt={
+                            isItemCorrect(droppedItems[item.id].id, itemId)
+                              ? "Correcto"
+                              : "Incorrecto"
+                          }
+                          className="w-8 h-8 left-8 top-2 p-1"
+                        />
+                      )}
+                      {droppedItems[item.id] ? (
+                        <img
+                          src={droppedItems[item.id].image}
+                          alt={droppedItems[item.id].name}
+                          className="w-full h-full relative z-20 object-cover bottom-6 rounded m-0"
+                        />
+                      ) : (
+                        <span className="text-[#808693] text-center text-[14px] leading-4">
+                          Arrastre aquí <br /> {item.id}
+                        </span>
+                      )}
+                    </div>
+                  );
+                })}
               </div>
 
-              {/* Contenedor principal */}
-              <div className="w-full flex justify-center items-center relative">
-                <div className="flex w-full justify-center items-center py-0">
-                  {/* Columna izquierda */}
-                  <div className="flex flex-col items-center">
-                    {leftColumnItems.map((itemId) => {
-                      const item = items.find((i) => i.id === itemId);
-                      const isCorrect = isItemCorrect(item.id, itemId);
-                      return (
-                        <div
-                          key={item.id}
-                          id={item.id}
-                          className={`relative w-28 h-28 border-2 flex flex-col items-center justify-center border-dashed border-[#9C99A1] ${
-                            droppedItems[item.id]
-                              ? isItemCorrect(droppedItems[item.id].id, itemId)
-                                ? "bg-[#4CAF50] border-solid"
-                                : "bg-[#FF7043] border-solid"
-                              : "bg-[#ebebeb] hover:bg-[#D3C4F1]"
-                          } rounded flex items-center justify-center my-2`}
-                          onDrop={(e) => handleDrop(e, item.id)}
-                          onDragOver={(e) => e.preventDefault()}
-                        >
+              {/* Imagen central */}
+              <div className="flex items-center justify-center mx-4">
+                <img
+                  src={trabajador}
+                  alt="Trabajador con equipo de protección"
+                  className="w-[120px] mb-0"
+                />
+              </div>
+
+              {/* Columna derecha */}
+              <div className="flex flex-col items-center ml-4">
+                {rightColumnItems.map((itemId) => {
+                  const item = items.find((i) => i.id === itemId);
+                  const isCorrect = isItemCorrect(item.id, itemId);
+                  return (
+                    <div
+                      key={item.id}
+                      id={item.id}
+                      className={`relative w-16 h-16 border-2 flex flex-col items-center justify-center border-dashed border-[#9C99A1] ${
+                        droppedItems[item.id]
+                          ? isItemCorrect(droppedItems[item.id].id, itemId)
+                            ? "bg-[#4CAF50] border-solid"
+                            : "bg-[#FF7043] border-solid"
+                          : "bg-[#ebebeb] hover:bg-[#D3C4F1]"
+                      } rounded flex items-center justify-center my-1`}
+                      onDrop={(e) => handleDrop(e, item.id)}
+                      onDragOver={(e) => e.preventDefault()}
+                    >
+                      {droppedItems[item.id] && (
+                        <>
                           {droppedItems[item.id] &&
                             isItemCorrect(droppedItems[item.id].id, itemId) && (
-                              <span className="w-[200px] bg-[#4CAF50] text-white text-[16px] absolute z-30 object-cover top-10 right-28 text-center px-4 py-1 rounded-full">
+                              <span className="w-[150px] bg-[#4CAF50] text-white text-[14px] leading-4 absolute z-10 object-cover top-2 left-16 text-center px-2 py-1 rounded-full">
                                 {droppedItems[item.id].name}
                               </span>
                             )}
-                          {droppedItems[item.id] && (
-                            <img
-                              src={
-                                isItemCorrect(droppedItems[item.id].id, itemId)
-                                  ? imgTrue
-                                  : imgFalse
-                              }
-                              alt={
-                                isItemCorrect(droppedItems[item.id].id, itemId)
-                                  ? "Correcto"
-                                  : "Incorrecto"
-                              }
-                              className="w-8 h-8 left-10 top-6 p-1"
-                            />
-                          )}
-                          {droppedItems[item.id] ? (
-                            <img
-                              src={droppedItems[item.id].image}
-                              alt={droppedItems[item.id].name}
-                              className="w-full h-full relative z-20 object-cover bottom-6 rounded m-0"
-                            />
-                          ) : (
-                            <span className="text-[#808693] text-center text-[16px]">
-                              Arrastre aquí <br /> {item.id}
-                            </span>
-                          )}
-                        </div>
-                      );
-                    })}
-                  </div>
-
-                  {/* Imagen central */}
-                  <div className=" flex-col relative items-center hidden md:flex">
-                    <img
-                      src="/src/assets/img/Elementos_EPP/avatar_elementos_epp.webp"
-                      alt="Trabajador con equipo de protección"
-                      className="w-[60%]"
-                    />
-                  </div>
-
-                  {/* Columna derecha */}
-                  <div className="flex flex-col items-center">
-                    {rightColumnItems.map((itemId) => {
-                      const item = items.find((i) => i.id === itemId);
-                      const isCorrect = isItemCorrect(item.id, itemId);
-                      return (
-                        <div
-                          key={item.id}
-                          id={item.id}
-                          className={`relative w-28 h-28 border-2 flex flex-col items-center justify-center border-dashed border-[#9C99A1] ${
-                            droppedItems[item.id]
-                              ? isItemCorrect(droppedItems[item.id].id, itemId)
-                                ? "bg-[#4CAF50] border-solid"
-                                : "bg-[#FF7043] border-solid"
-                              : "bg-[#ebebeb] hover:bg-[#D3C4F1]"
-                          } rounded flex items-center justify-center my-2`}
-                          onDrop={(e) => handleDrop(e, item.id)}
-                          onDragOver={(e) => e.preventDefault()}
-                        >
-                          {droppedItems[item.id] && (
-                            <>
-                              {droppedItems[item.id] &&
-                                isItemCorrect(
-                                  droppedItems[item.id].id,
-                                  itemId
-                                ) && (
-                                  <span className="w-[200px] bg-[#4CAF50] text-white text-[16px] absolute z-10 object-cover top-10 left-28 text-center px-4 py-1 rounded-full">
-                                    {droppedItems[item.id].name}
-                                  </span>
-                                )}
-                              <img
-                                src={
-                                  isItemCorrect(
-                                    droppedItems[item.id].id,
-                                    itemId
-                                  )
-                                    ? imgTrue
-                                    : imgFalse
-                                }
-                                alt={
-                                  isItemCorrect(
-                                    droppedItems[item.id].id,
-                                    itemId
-                                  )
-                                    ? "Correcto"
-                                    : "Incorrecto"
-                                }
-                                className="w-8 h-8 left-10 top-6 p-1"
-                              />
-                            </>
-                          )}
-                          {droppedItems[item.id] ? (
-                            <img
-                              src={droppedItems[item.id].image}
-                              alt={droppedItems[item.id].name}
-                              className="w-full h-full relative z-20 object-cover bottom-6 rounded m-0"
-                            />
-                          ) : (
-                            <span className="text-[#808693] text-center text-[16px]">
-                              Arrastre aquí <br /> {item.id}
-                            </span>
-                          )}
-                        </div>
-                      );
-                    })}
-                  </div>
-                </div>
-              </div>
-
-              {/* Retroalimentación y Audio */}
-              <div className="mt-4">
-                <div className="shadow-lg bg-[#FCFCFC] p-4 rounded-lg text-[16px] text-center items-center justify-center flex flex-col">
-                  {feedbackMessage && (
-                    <>
-                      <p
-                        className={
-                          audioSrc
-                            ? "font-sembild text-[#4CAF50]"
-                            : "font-sembild text-[#FF7043]"
-                        }
-                      >
-                        {feedbackMessage}
-                      </p>
-                      {audioSrc && (
-                        <audio
-                          ref={audioRef}
-                          controls
-                          className="mt-2 border border-gray-300 rounded-md shadow-sm"
-                        >
-                          <source src={audioSrc} type="audio/mp3" />
-                          Tu navegador no soporta la etiqueta de audio.
-                        </audio>
+                          <img
+                            src={
+                              isItemCorrect(droppedItems[item.id].id, itemId)
+                                ? imgTrue
+                                : imgFalse
+                            }
+                            alt={
+                              isItemCorrect(droppedItems[item.id].id, itemId)
+                                ? "Correcto"
+                                : "Incorrecto"
+                            }
+                            className="w-8 h-8 left-8 top-2 p-1"
+                          />
+                        </>
                       )}
-                    </>
-                  )}
-                </div>
-              </div>
-
-              {/* Botón de reinicio */}
-              <div className="w-full flex justify-center py-6">
-              <button
-                  className={`bg-[#6E3CD2] text-white rounded-full h-12 px-8 py-2 text-[16px] mx-2`}
-                  onClick={handleUndo}
-                  disabled={history.length === 0}
-                >
-                  <FontAwesomeIcon icon={faUndo} /> Deshacer
-                </button>
-                <button
-                  className={`bg-[#6E3CD2] text-white rounded-full h-12 px-8 py-2 text-[16px] mx-2`}
-                  onClick={handleReset}
-                >
-                  <FontAwesomeIcon icon={faRepeat} /> Reiniciar
-                </button>
-                
+                      {droppedItems[item.id] ? (
+                        <img
+                          src={droppedItems[item.id].image}
+                          alt={droppedItems[item.id].name}
+                          className="w-full h-full relative z-20 object-cover bottom-6 rounded m-0"
+                        />
+                      ) : (
+                        <span className="text-[#808693] text-center text-[14px] leading-4">
+                          Arrastre aquí <br /> {item.id}
+                        </span>
+                      )}
+                    </div>
+                  );
+                })}
               </div>
             </div>
+
+            {/* Objetos arrastrables */}
+            <div className="grid grid-cols-2 gap-2 relative left-28  ">
+              {items.map(
+                (item) =>
+                  !Object.values(droppedItems).some(
+                    (droppedItem) => droppedItem.id === item.id
+                  ) && (
+                    <img
+                      key={item.id}
+                      src={item.image}
+                      alt={item.name}
+                      draggable
+                      onDragStart={(e) => handleDragStart(e, item)}
+                      className="w-16 h-16 mb-0 cursor-pointer border-2 border-[#6E3CD2] rounded"
+                    />
+                  )
+              )}
+            </div>
+          </div>
+
+          {/* Retroalimentación y Audio */}
+          <div className="my-4">
+            <div className="shadow-lg bg-[#FCFCFC]  p-2 rounded-lg text-[16px] text-center items-center justify-center flex flex-col">
+              {feedbackMessage && (
+                <>
+                  <p
+                    className={
+                      audioSrc
+                        ? "font-sembild text-[#4CAF50]"
+                        : "font-sembild text-[#FF7043]"
+                    }
+                  >
+                    {feedbackMessage}
+                  </p>
+                  {audioSrc && (
+                    <audio
+                      ref={audioRef}
+                      controls
+                      className="border border-gray-300 rounded-md shadow-sm"
+                    >
+                      <source src={audioSrc} type="audio/mp3" />
+                      Tu navegador no soporta la etiqueta de audio.
+                    </audio>
+                  )}
+                </>
+              )}
+            </div>
+          </div>
+
+          {/* Botón de reinicio */}
+          <div className="w-full flex justify-center py-2">
+            <button
+              className={`bg-[#6E3CD2] flex items-center justify-center text-white rounded-full h-8 px-8 py-2 text-[16px] mx-2`}
+              onClick={handleUndo}
+              disabled={history.length === 0}
+            >
+              <FontAwesomeIcon icon={faUndo} /> Deshacer
+            </button>
+            <button
+              className={`bg-[#6E3CD2] flex items-center justify-center text-white rounded-full h-8 px-8 py-2 text-[16px] mx-2`}
+              onClick={handleReset}
+            >
+              <FontAwesomeIcon icon={faRepeat} /> Reiniciar
+            </button>
           </div>
         </div>
       </div>
-      <div className="md:hidden w-full bg-white flex flex-col justify-center">
         <DragAndDropMobile
           items={items}
           droppedItems={droppedItems}
@@ -446,7 +451,6 @@ const DragAndDrop = () => {
           setAudioSrc={setAudioSrc}
           handleReset={handleReset}
         />
-      </div>
     </div>
   );
 };
