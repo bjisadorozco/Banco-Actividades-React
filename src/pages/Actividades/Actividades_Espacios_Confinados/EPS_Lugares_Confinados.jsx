@@ -193,22 +193,16 @@ function EPS_Lugares_Confinados() {
   }
   const isResetButtonDisabled = words.some((word) => !word.isDropped);
   return (
-    <div className="md:w-full md:flex flex-col justify-center md:static">
-      <div className="md:flex flex-col items-center hidden justify-center relative">
-        <div className="grid grid-cols-1 gap-2 justify-start md:flex md:flex-col h-auto w-full relative">
+      <div className="md:flex hidden flex-col items-center  justify-center relative">
+        <div className="grid grid-cols-1 justify-start md:flex md:flex-col h-auto w-full relative  ">
           <div className="leading-loose relative">
             <div className="h-96 text-[16px] text-[#afafaf] md:rounded-lg-md rounded-md font-monserrat">
               <div className="text-center">
-                <p className="leading-tight">
-                  Has arrastrado {droppedCount} de las {words.length} opciones
-                  disponibles. <br />
-                  Respuestas correctas: {correctAnswers} de {words.length} (
-                  {Math.floor(percentage)}%)
-                </p>
+               
                 {feedback && (
-                  <div className="w-full flex text-center flex-col items-center justify-center rounded-lg relative bottom-4">
+                  <div className="w-full flex text-center flex-col items-center justify-center rounded-lg relative top-[-10px] my-0">
                     <div
-                      className="feedback w-[50%]"
+                      className="w-[50%]"
                       style={{
                         backgroundColor:
                           feedback ===
@@ -222,7 +216,12 @@ function EPS_Lugares_Confinados() {
                       }}
                     >
                       {feedback}
+                      
                     </div>
+                    <p className="leading-tight">
+                  Respuestas correctas: {correctAnswers} de {words.length} (
+                  {Math.floor(percentage)}%)
+                </p>
                   </div>
                 )}
               </div>
@@ -350,8 +349,7 @@ function EPS_Lugares_Confinados() {
             </div>
           </div>
         </div>
-      </div>
-      <div className="md:hidden w-full bg-white flex flex-col justify-center">
+        <div className="md:hidden w-full bg-white flex flex-col justify-center">
         <Actividad_Mobile_entada_salida
           words={words}
           droppedCount={droppedCount}
@@ -360,7 +358,8 @@ function EPS_Lugares_Confinados() {
           feedback={feedback}
         />
       </div>
-    </div>
+      </div>
+     
   );
 }
 

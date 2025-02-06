@@ -47,6 +47,7 @@ const SelectAndValidateMobile = () => {
   const [audioSource, setAudioSource] = useState(null); // Estado para manejar el audio
   const [errorMessage, setErrorMessage] = useState(""); // Estado para manejar el mensaje de error
   const [successMessage, setSuccessMessage] = useState(""); // Estado para el mensaje de éxito
+  const [score, setScore] = useState(0);
 
   const options = [
     "Casco de Protección",
@@ -56,7 +57,7 @@ const SelectAndValidateMobile = () => {
     "Tapones Auditivos",
     "Gafas de Seguridad",
     "Guantes Resistentes a Químicos",
-    "Resporador",
+    "Respirador",
   ]; // Opciones iniciales
 
   const handleSelectChange = (e, selectId, correctAnswer, audio) => {
@@ -85,6 +86,7 @@ const SelectAndValidateMobile = () => {
       </>
       );
       setErrorMessage("");
+      setScore(prevScore => prevScore + 1);
     } else {
       setValidationStatus((prevState) => ({
         ...prevState,
@@ -104,20 +106,41 @@ const SelectAndValidateMobile = () => {
     }
   };
 
+  const countCorrectAnswers = () => {
+    const correctAnswers = Object.values(validationStatus).filter(
+      (status) => status === "correcto"
+    ).length;
+    return correctAnswers;
+  };
+  const totalAnswers = 8;
+  const correctAnswers = countCorrectAnswers();
+  const percentage = Math.floor((correctAnswers / totalAnswers) * 100);
+
   const handleReset = () => {
     setSelectedOptions({
       select1: "",
       select2: "",
       select3: "",
+      select4: "",
+      select5: "",
+      select6: "",
+      select7: "",
+      select8: "",
     });
     setValidationStatus({
       select1: null,
       select2: null,
       select3: null,
+      select4: null,
+      select5: null,
+      select6: null,
+      select7: null,
+      select8: null,
     });
     setAudioSource(null); // Resetear el audio
     setErrorMessage("");
     setSuccessMessage("");
+    setScore(0);
   };
 
   // Generar opciones disponibles dinámicamente
@@ -131,8 +154,8 @@ const SelectAndValidateMobile = () => {
   };
 
   return (
-    <div className="w-full flex flex-col items-center justify-center relative my-2">
-      <div className="w-full flex flex-col items-center justify-center mx-2">
+    <div className="w-full flex flex-col items-center justify-center relative">
+      <div className="w-full flex flex-col items-center justify-center m-6">
         {/* Cuadro 1 */}
         <div className="bg-[#E5E7EB] rounded-lg flex flex-col items-center justify-center">
           <div
@@ -303,7 +326,7 @@ const SelectAndValidateMobile = () => {
               />
             )}
             <select
-              value={selectedOptions.select3}
+              value={selectedOptions.select4}
               onChange={(e) =>
                 handleSelectChange(e, "select4", "Overol", audioOverol)
               }
@@ -350,7 +373,7 @@ const SelectAndValidateMobile = () => {
               />
             )}
             <select
-              value={selectedOptions.select3}
+              value={selectedOptions.select5}
               onChange={(e) =>
                 handleSelectChange(
                   e,
@@ -398,7 +421,7 @@ const SelectAndValidateMobile = () => {
               />
             )}
             <select
-              value={selectedOptions.select3}
+              value={selectedOptions.select6}
               onChange={(e) =>
                 handleSelectChange(
                   e,
@@ -450,7 +473,7 @@ const SelectAndValidateMobile = () => {
               />
             )}
             <select
-              value={selectedOptions.select3}
+              value={selectedOptions.select7}
               onChange={(e) =>
                 handleSelectChange(
                   e,
@@ -502,7 +525,7 @@ const SelectAndValidateMobile = () => {
               />
             )}
             <select
-              value={selectedOptions.select3}
+              value={selectedOptions.select8}
               onChange={(e) =>
                 handleSelectChange(
                   e,
@@ -523,6 +546,10 @@ const SelectAndValidateMobile = () => {
           </div>
         </div>
       </div>
+       {/* Mostrar cantidad de respuestas correctas y porcentaje */}
+          <p className="font-bold text-gray-400">
+         Respuestas correctas {correctAnswers} de {totalAnswers} ({percentage}%)
+          </p>
       {errorMessage && (
         <div className="error-message-mobile">{errorMessage}</div>
       )}

@@ -46,7 +46,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
 
 
 
-    <PreguntasVorF
+    <ActividadFalsoVerdadero
 
    />
   </React.StrictMode>
