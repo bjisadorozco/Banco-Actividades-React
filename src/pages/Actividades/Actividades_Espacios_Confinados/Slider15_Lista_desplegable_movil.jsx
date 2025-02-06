@@ -32,6 +32,7 @@ function Slider15_Lista_desplegable_movil() {
   const [percentage, setPercentage] = useState(0); // Nuevo estado para el porcentaje
   const [errorMessage, setErrorMessage] = useState(""); //Porcentaje de respuestas correctas
   const [isValid, setIsValid] = useState(false); //Estado para habilitar el estado de validación
+  const [hasSelection, setHasSelection] = useState(false);
 
   // Configuración inicial del estado global
   useEffect(() => {
@@ -49,6 +50,9 @@ function Slider15_Lista_desplegable_movil() {
     const newDropdowns = [...dropdowns];
     newDropdowns[index] = value;
     setDropdowns(newDropdowns);
+
+    // Verifica si al menos un dropdown tiene una opción seleccionada
+    setHasSelection(newDropdowns.some((val) => val !== "0"));
 
     // Cambia los colores de los botones según las selecciones
     const newButtonColors = [...buttonColors];
@@ -120,6 +124,7 @@ function Slider15_Lista_desplegable_movil() {
     setPercentage(0); // Reinicia el porcentaje
     setErrorMessage("");
     setIsValid(false);
+    setHasSelection(false);
   };
 
   //   Filtra las opciones disponibles para cada dropdownisValid
@@ -212,7 +217,10 @@ function Slider15_Lista_desplegable_movil() {
             {errorMessage}
           </p>
         )}
-        <div className="flex justify-around h-full items-center w-full max-w-[400px] my-1">
+        <div
+          className="flex justify-around h-full items-center w-full max-w-[400px] my-1"
+          style={{ gap: "20px", justifyContent: "center" }}
+        >
           <Button
             bold={false}
             icon={faCheck}
@@ -226,7 +234,7 @@ function Slider15_Lista_desplegable_movil() {
             icon={faRepeat}
             roundedFull={true}
             onClick={resetDropdowns}
-            // disabled={!isValidated}
+            disabled={!isValidated}
           >
             Reiniciar
           </Button>
