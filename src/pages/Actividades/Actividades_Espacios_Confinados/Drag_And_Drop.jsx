@@ -297,8 +297,8 @@ const DragAndDrop = () => {
               <Magnifier
                 src={trabajador}
                 width="80%"
-                mgWidth={200}
-                mgHeight={200}
+                mgWidth={300}
+                mgHeight={300}
                 mgShape="circle"
                 mgBorderWidth={3}
                 mgBorderColor="#f0f0f0"
@@ -407,7 +407,7 @@ const DragAndDrop = () => {
                           : "font-sembild text-[#FF7043]"
                       }
                     >
-                      Objetos correctos: {calculateScore()}
+                     
                       {feedbackMessage}
                     </p>
                     {audioSrc && (
