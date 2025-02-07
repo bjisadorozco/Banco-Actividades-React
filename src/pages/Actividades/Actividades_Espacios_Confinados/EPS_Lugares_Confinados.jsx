@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRepeat } from "@fortawesome/free-solid-svg-icons";
 import Actividad_Mobile_entada_salida from "../Actividades_Espacios_Confinados/Actividad_Mobile_Entrada_Salida";
@@ -172,14 +172,44 @@ function EPS_Lugares_Confinados() {
   {
     /* Verifica si todas las respuestas son correctas y actualiza el mensaje de retroalimentación */
   }
-  const checkFeedback = () => {
-    const allCorrect = words.every((word) => word.isCorrect === true);
-    setFeedback(
-      allCorrect
-        ? "¡Muy bien! identificaste este peligro correctamente."
-        : "¡Piénsalo bien! ¡Este peligro no corresponde, vuelve a intentarlo!​"
-    );
-  };
+// Función para manejar el cálculo de retroalimentación
+const checkFeedback = () => {
+  const correctAnswers = words.filter((word) => word.isCorrect).length;
+  const incorrectAnswers = words.length - correctAnswers;
+
+  if (correctAnswers === words.length) {
+    // Todas las respuestas son correctas
+    setFeedback("¡Muy bien! identificaste los peligros correctamente.");
+  } else if (incorrectAnswers === words.length) {
+    // Todas las respuestas son incorrectas
+    setFeedback("Todas las opciones son incorrectas, piénsalo bien y vuelve a intentarlo.");
+  } else {
+    // Algunas respuestas son correctas, otras incorrectas
+    setFeedback("¡Piénsalo bien! ¡Algunos peligros no corresponden, vuelve a intentarlo!");
+  }
+};
+
+// Llamar a checkFeedback cuando todas las palabras han sido soltadas
+useEffect(() => {
+  if (droppedCount === words.length && feedback === null) {
+    checkFeedback();
+  }
+}, [droppedCount, words]);
+
+// Cambiar el color de fondo según la retroalimentación
+const getFeedbackColor = () => {
+  const correctAnswers = words.filter((word) => word.isCorrect).length;
+  const incorrectAnswers = words.length - correctAnswers;
+
+  if (correctAnswers === words.length) {
+    return "#009A3D"; // Verde para todas correctas
+  } else if (incorrectAnswers === words.length) {
+    return "#f44336"; // Rojo para todas incorrectas
+  } else {
+    return "#FF9800"; // Naranja para mixto
+  }
+};
+
 
   {
     /* Muestra retroalimentación cuando se han soltado todas las palabras */
@@ -197,41 +227,34 @@ function EPS_Lugares_Confinados() {
       <div className="grid grid-cols-1 justify-start md:flex md:flex-col h-auto w-full relative  ">
         <div className="leading-loose relative">
           <div className="h-96 text-[16px] text-[#afafaf] md:rounded-lg-md rounded-md font-monserrat">
-          
             <div className="text-center">
-           
               {feedback && (
-                <div className="w-full flex text-center flex-col items-center justify-center rounded-lg relative  my-0">
-                  <div
-                    className="w-[50%]"
-                    style={{
-                      backgroundColor:
-                        feedback ===
-                        "¡Muy bien! identificaste este peligro correctamente."
-                          ? "#009A3D"
-                          : "#f44336",
-                      color: "white",
-                      padding: "10px",
-                      borderRadius: "5px",
-                      lineHeight: "1.2",
-                    }}
-                  >
-                    {feedback}
-                  </div>
+                <div className="w-full flex text-center flex-col items-center justify-center rounded-lg relative my-0">
+                 <div
+  className="w-[50%]"
+  style={{
+    backgroundColor: getFeedbackColor(),
+    color: "white",
+    padding: "5px",
+    borderRadius: "5px",
+    lineHeight: "1.2",
+  }}
+>
+  {feedback}
+</div>
                   <p className="leading-tight">
                     Respuestas correctas: {correctAnswers} de {words.length} (
-                    {Math.floor(percentage)}%)
+                    {Math.floor((correctAnswers / words.length) * 100)}%)
                   </p>
                 </div>
               )}
-             
             </div>
             <div className="w-full flex items-center justify-center relative">
-            <h3 className="text-[16px] font-semibold h-8 absolute z-30 top-0">
+              <h3 className="text-[16px] font-semibold h-8 absolute z-30 top-0">
                 Quedan {words.filter((word) => !word.isDropped).length} de 6
-              </h3></div>
+              </h3>
+            </div>
             <div className="flex justify-center my-0 items-center flex-col">
-            
               {wordToShow && (
                 <div
                   key={wordToShow.id}
@@ -243,7 +266,6 @@ function EPS_Lugares_Confinados() {
                   {wordToShow.text}
                 </div>
               )}
-             
             </div>
 
             <div className="flex justify-around w-full min-h-[200px] max-h-[400px] h-auto relative bottom-10">
