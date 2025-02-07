@@ -30,7 +30,8 @@ import Drag_And_DropMobile from "./pages/Actividades/Actividades_Espacios_Confin
 import EPSLugaresConfinados from "./pages/Actividades/Actividades_Espacios_Confinados/EPS_Lugares_Confinados.jsx"
 import ActividadMobileEntradaSalida from "./pages/Actividades/Actividades_Espacios_Confinados/Actividad_Mobile_Entrada_Salida.jsx"
 import "./main.css";
-import Slider13_Lista_desplegable from "./pages/Actividades/Actividades_Espacios_Confinados/Slider13_Lista_desplegable_movil.jsx";
+import Slider13_Lista_desplegable from "./pages/Actividades/Actividades_Espacios_Confinados/Slider13_Lista_desplegable.jsx";
+import Slider13_Lista_desplegable_movil from "./pages/Actividades/Actividades_Espacios_Confinados/Slider13_Lista_desplegable_movil.jsx";
 import DragAndDropAudios from "./pages/Actividades/Actividades_Trabajo_seguro_alturas/DragAndDropAudios.jsx";
 import DragAndDropAudiosMovil from "./pages/Actividades/Actividades_Espacios_Confinados/DragAndDropAudiosMovil.jsx";
 import Palabra_CorrectaMovil from "./pages/Actividades/Actividades_Espacios_Confinados/Slider13_Lista_desplegable_movil.jsx";
@@ -40,14 +41,12 @@ import Slider14_Lista_desplegable_movil from "./pages/Actividades/Actividades_Es
 import Slider12_drag_and_drop_audios from "./pages/Actividades/Actividades_Espacios_Confinados/Slider12_drag_and_drop_audios.jsx";
 import Slider15_Lista_desplegable from "./pages/Actividades/Actividades_Espacios_Confinados/Slider15_Lista_desplegable.jsx";
 import Slider15_Lista_desplegable_movil from "./pages/Actividades/Actividades_Espacios_Confinados/Slider15_Lista_desplegable_movil.jsx";
+import DragAndDropSlide9 from "./pages/Actividades/Actividades_Trabajo_seguro_alturas/DragnAndDropSlide9.jsx";
+import DragAndDropSlide9Movil from "./pages/Actividades/Actividades_Trabajo_seguro_alturas/DragAndDropSlide9Movil.jsx";
+import PPT8_List_Desplegable from "./pages/Actividades/Actividades_PESV/PPT8_List_Desplegable.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-
-
-
-    <ActividadFalsoVerdadero
-
-   />
+    <DragAndDropSlide9 />
   </React.StrictMode>
 );

@@ -1,11 +1,11 @@
 import "./styles/slider12_drag_and_drop_audios.css";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { DndContext, useSensor, useSensors, MouseSensor } from "@dnd-kit/core";
 import { useDraggable, useDroppable } from "@dnd-kit/core";
 import Button from "../../components/Button";
-import audioSeguridad from "../../../assets/audio/Alturas seguridad M3 – Slide 28 Audio.mp3";
-import audioVelocidad from "../../../assets/audio/Alturas velocidad M3 – Slide 28 Audio.mp3";
-import audioComunicacion from "../../../assets/audio/Alturas comunicacion M3 – Slide 28 Audio.mp3";
+import audio1 from "../../../assets/audio/sld13_procedimiento_recaste.mp3";
+import audio2 from "../../../assets/audio/sld13_procedimiento_evacuacion.mp3";
+import audio3 from "../../../assets/audio/sld13_plan_para_respuesta_emer.mp3";
 import uncheck from "../../../assets/img/xmarkAct.png";
 import check from "../../../assets/img/checkAct.png";
 import { faRepeat } from "@fortawesome/free-solid-svg-icons";
@@ -78,18 +78,25 @@ export default function slider12_drag_and_drop_audios() {
   const [isResetEnabled, setIsResetEnabled] = useState(false);
   const [isValidateEnabled, setIsValidateEnabled] = useState(false);
   const [correctAnswersMessage, setCorrectAnswersMessage] = useState("");
+  const [currentAudio, setCurrentAudio] = useState(null);
 
   const sensors = useSensors(
     useSensor(MouseSensor, { activationConstraint: { distance: 10 } })
   );
 
+const audioRefs = {
+    drop1: useRef(null),
+    drop2: useRef(null),
+    drop3: useRef(null),
+  };
+
   const options = [
-    { id: "option1", label: "Procedimiento de rescate" },
     { id: "option2", label: "Procediminento de evacuación" },
     { id: "option3", label: "Plan para respuestas a emergencia" },
+    { id: "option1", label: "Procedimiento de rescate" },
   ];
 
-  const audios = [audioSeguridad, audioVelocidad, audioComunicacion];
+  const audios = [audio1, audio2, audio3];
 
   const verificationImages = {
     drop1:
@@ -186,6 +193,19 @@ export default function slider12_drag_and_drop_audios() {
     setCorrectAnswersMessage("");
     setIsResetEnabled(false);
     setIsValidateEnabled(false);
+    // Pausar cualquier audio en reproducción al resetear
+        if (currentAudio) {
+          currentAudio.pause();
+          setCurrentAudio(null);
+        }
+  };
+
+const handlePlayAudio = (dropId) => {
+    if (currentAudio && currentAudio !== audioRefs[dropId].current) {
+      currentAudio.pause(); // Pausar el audio en reproducción
+    }
+
+    setCurrentAudio(audioRefs[dropId].current);
   };
 
   return (
@@ -220,7 +240,12 @@ export default function slider12_drag_and_drop_audios() {
                   : ""
               }`}
             >
-              <audio controls className="audio-control">
+              <audio
+                ref={audioRefs[`drop${index + 1}`]}
+                controls
+                className="audio-control"
+                onPlay={() => handlePlayAudio(`drop${index + 1}`)}
+              >
                 <source src={audios[index]} type="audio/mp3" />
                 Tu navegador no soporta audio HTML5.
               </audio>
