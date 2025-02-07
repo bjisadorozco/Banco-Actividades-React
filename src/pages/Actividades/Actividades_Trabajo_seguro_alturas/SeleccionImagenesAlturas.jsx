@@ -5,12 +5,12 @@ import Paragraph from "../../components/Paragraph";
 // import Instruction from "../../components/Instruction";
 import { useMediaQuery } from "react-responsive";
 // import imgIngenieroHerramientas from '../../assets/img/ingenieroMorelcoHerramientas.webp';
-import martillo from '../../../assets/img/trabajos_techos.webp';
-import cintaMetrica from '../../../assets/img/trabajos_paredes_fachadas.webp';
-import destornillador from '../../../assets/img/trabajos_montajes_estructura.webp';
-import taladro from '../../../assets/img/trabajos_andamios.webp';
-import sierraElectrica from '../../../assets/img/instalacion_pisos.webp';
-import mezcladoraCemento from '../../../assets/img/instalacion_electrica.webp';
+import trabajoTechos from '../../../assets/img/trabajos_techos.webp';
+import trabajosFachados from '../../../assets/img/trabajos_paredes_fachadas.webp';
+import trabajosMontajes from '../../../assets/img/trabajos_montajes_estructura.webp';
+import trabajosAndamios from '../../../assets/img/trabajos_andamios.webp';
+import instalacionPisos from '../../../assets/img/instalacion_pisos.webp';
+import instalacionElectrica from '../../../assets/img/instalacion_electrica.webp';
 import '../../Actividades/Actividades_Trabajo_seguro_alturas/styles/SeleccionImagenesAlturas.css';
 import imgVerdadero from '../../../assets/img/checkAct.png';
 import imgFalso from '../../../assets/img/xmarkAct.png';
@@ -27,15 +27,15 @@ function SeleccionImagenesAlturas() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [validationMessage, setValidationMessage] = useState('');
   const isMobile = useMediaQuery({ maxWidth: 640 });
-  const correctImages = [martillo, cintaMetrica, destornillador,taladro];
+  const correctImages = [trabajoTechos, trabajosFachados, trabajosMontajes,trabajosAndamios];
 
   const explanationsMap = {
-    [martillo]: 'Tabajos de montajes de estructuras:   Bien!  Estos normalmente se hacen a más de 2 mts de altura.',
-    [cintaMetrica]: 'Trabajos en techos y cubiertas:   Bien!  Estos siempre se hacen a más de 2 mts de altura',
-    [destornillador]: 'Trabajos en paredes y fachadas:   Bien !  Estos normalmente se hacen a más de 2 mts de altura',
-    [taladro]: 'Trabajos en andamios:   Bien !  Estos normalmente permiten acceder a alturas superiores a 2 mts',
-    [sierraElectrica]: 'Instalación electrica de piso:  Este tipo de tareas normalmente NO se hacen a más de 2 metros de altura.',
-    [mezcladoraCemento]: 'Instalación de pisos: Piénsalo bien!  Este tipo de tareas normalmente NO se hacen a más de 2 metros de altura.',
+    [trabajoTechos]: 'Trabajos en techos y cubiertas:   Bien!  Estos normalmente se hacen a más de 2 mts de altura.',
+    [trabajosFachados]: 'Trabajos en paredes y fachadas:   Bien!  Estos siempre se hacen a más de 2 mts de altura',
+    [trabajosMontajes]: 'Tabajos de montajes de estructuras:   Bien !  Estos normalmente se hacen a más de 2 mts de altura',
+    [trabajosAndamios]: 'Trabajos en andamios:   Bien !  Estos normalmente permiten acceder a alturas superiores a 2 mts',
+    [instalacionPisos]: 'Instalación de pisos:  Este tipo de tareas normalmente NO se hacen a más de 2 metros de altura.',
+    [instalacionElectrica]: 'Instalación electrica de piso: Este tipo de tareas normalmente NO se hacen a más de 2 metros de altura.',
   };
 
   const actSelectImg = (image) => {
@@ -100,7 +100,7 @@ function SeleccionImagenesAlturas() {
             {/* Image Container */}
               <div className="actSelectImg text-center">
                 <div className="items-container grid-container">
-                  {[martillo, cintaMetrica, destornillador, taladro, sierraElectrica, mezcladoraCemento].map((imgSrc, index) => (
+                  {[trabajoTechos, trabajosFachados, trabajosMontajes, trabajosAndamios, instalacionPisos, instalacionElectrica].map((imgSrc, index) => (
                     <div
                       key={index}
                       className={`itemAct ${selectedImages.includes(imgSrc) ? 'selected' : ''} ${correctImages.includes(imgSrc) ? 'check' : 'xmark'}`}

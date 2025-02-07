@@ -47,6 +47,6 @@ import PPT8_List_Desplegable from "./pages/Actividades/Actividades_PESV/PPT8_Lis
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <Slider15_Lista_desplegable_movil />
+    <DragAndDropSlide9 />
   </React.StrictMode>
 );
