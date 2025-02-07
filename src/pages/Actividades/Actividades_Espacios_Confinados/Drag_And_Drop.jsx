@@ -238,10 +238,19 @@ const DragAndDrop = () => {
 
   return (
     <div className="w-full flex flex-col items-center justify-center relative ">
-      <div className="hidden  w-full md:absolute md:top-[-40px] md:left-0 md:flex flex-col items-center justify-center overflow-hidden">
-        <div className="w-full flex   justify-center items-center overflow-hidden">
+      <div className="hidden  w-full md:absolute md:top-0 md:left-0 md:flex flex-col items-center justify-center overflow-hidden">
+        <div className="w-full flex justify-center items-center overflow-hidden ">
           {/* Contenedor inicial */}
-          <div className="w-full  flex justify-between items-center">
+          <div className="flex items-start justify-start absolute top-[-10px] left-16 z-30 ">
+                {" "}
+                <i class="w-[45%] inline-block bg-[#c0185d33] text-[#c0185d] px-2 py-2 rounded-[10px] font-montserrat font-medium text-sm italic leading-[1.3rem]">
+                  Pasa el mouse por la imagen para descubrir su contenido
+                  <span class="icono-inst">
+                    <i class="fa-solid fa-arrow-turn-down"></i>
+                  </span>
+                </i>
+              </div>
+          <div className="w-full flex justify-between items-center relative top-4">
             {/* Columna izquierda */}
             <div className="flex-1 flex flex-col items-center justify-center">
               {leftColumnItems.map((itemId) => {
@@ -292,18 +301,18 @@ const DragAndDrop = () => {
               })}
             </div>
             {/* Imagen central */}
-            
-            <div className="flex-1 flex flex-col items-center justify-center">
+
+            <div className="w-full flex-1 flex flex-col items-center justify-center">
+              
               <Magnifier
                 src={trabajador}
-                width="80%"
-                mgWidth={300}
-                mgHeight={300}
+                width="100%"
+                mgWidth={400}
+                mgHeight={400}
                 mgShape="circle"
                 mgBorderWidth={3}
                 mgBorderColor="#f0f0f0"
                 mgShadow={true}
-                
               />
             </div>
             {/* Columna derecha */}
@@ -407,7 +416,6 @@ const DragAndDrop = () => {
                           : "font-sembild text-[#FF7043]"
                       }
                     >
-                     
                       {feedbackMessage}
                     </p>
                     {audioSrc && (

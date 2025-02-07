@@ -172,44 +172,47 @@ function EPS_Lugares_Confinados() {
   {
     /* Verifica si todas las respuestas son correctas y actualiza el mensaje de retroalimentación */
   }
-// Función para manejar el cálculo de retroalimentación
-const checkFeedback = () => {
-  const correctAnswers = words.filter((word) => word.isCorrect).length;
-  const incorrectAnswers = words.length - correctAnswers;
+  // Función para manejar el cálculo de retroalimentación
+  const checkFeedback = () => {
+    const correctAnswers = words.filter((word) => word.isCorrect).length;
+    const incorrectAnswers = words.length - correctAnswers;
 
-  if (correctAnswers === words.length) {
-    // Todas las respuestas son correctas
-    setFeedback("¡Muy bien! identificaste los peligros correctamente.");
-  } else if (incorrectAnswers === words.length) {
-    // Todas las respuestas son incorrectas
-    setFeedback("Todas las opciones son incorrectas, piénsalo bien y vuelve a intentarlo.");
-  } else {
-    // Algunas respuestas son correctas, otras incorrectas
-    setFeedback("¡Piénsalo bien! ¡Algunos peligros no corresponden, vuelve a intentarlo!");
-  }
-};
+    if (correctAnswers === words.length) {
+      // Todas las respuestas son correctas
+      setFeedback("¡Muy bien! identificaste los peligros correctamente.");
+    } else if (incorrectAnswers === words.length) {
+      // Todas las respuestas son incorrectas
+      setFeedback(
+        "Todas las opciones son incorrectas, piénsalo bien y vuelve a intentarlo."
+      );
+    } else {
+      // Algunas respuestas son correctas, otras incorrectas
+      setFeedback(
+        "¡Piénsalo bien! ¡Algunos peligros no corresponden, vuelve a intentarlo!"
+      );
+    }
+  };
 
-// Llamar a checkFeedback cuando todas las palabras han sido soltadas
-useEffect(() => {
-  if (droppedCount === words.length && feedback === null) {
-    checkFeedback();
-  }
-}, [droppedCount, words]);
+  // Llamar a checkFeedback cuando todas las palabras han sido soltadas
+  useEffect(() => {
+    if (droppedCount === words.length && feedback === null) {
+      checkFeedback();
+    }
+  }, [droppedCount, words]);
 
-// Cambiar el color de fondo según la retroalimentación
-const getFeedbackColor = () => {
-  const correctAnswers = words.filter((word) => word.isCorrect).length;
-  const incorrectAnswers = words.length - correctAnswers;
+  // Cambiar el color de fondo según la retroalimentación
+  const getFeedbackColor = () => {
+    const correctAnswers = words.filter((word) => word.isCorrect).length;
+    const incorrectAnswers = words.length - correctAnswers;
 
-  if (correctAnswers === words.length) {
-    return "#009A3D"; // Verde para todas correctas
-  } else if (incorrectAnswers === words.length) {
-    return "#f44336"; // Rojo para todas incorrectas
-  } else {
-    return "#FF9800"; // Naranja para mixto
-  }
-};
-
+    if (correctAnswers === words.length) {
+      return "#009A3D"; // Verde para todas correctas
+    } else if (incorrectAnswers === words.length) {
+      return "#f44336"; // Rojo para todas incorrectas
+    } else {
+      return "#FF9800"; // Naranja para mixto
+    }
+  };
 
   {
     /* Muestra retroalimentación cuando se han soltado todas las palabras */
@@ -230,18 +233,18 @@ const getFeedbackColor = () => {
             <div className="text-center">
               {feedback && (
                 <div className="w-full flex text-center flex-col items-center justify-center rounded-lg relative my-0">
-                 <div
-  className="w-[50%]"
-  style={{
-    backgroundColor: getFeedbackColor(),
-    color: "white",
-    padding: "5px",
-    borderRadius: "5px",
-    lineHeight: "1.2",
-  }}
->
-  {feedback}
-</div>
+                  <div
+                    className="w-[50%]"
+                    style={{
+                      backgroundColor: getFeedbackColor(),
+                      color: "white",
+                      padding: "5px",
+                      borderRadius: "5px",
+                      lineHeight: "1.2",
+                    }}
+                  >
+                    {feedback}
+                  </div>
                   <p className="leading-tight">
                     Respuestas correctas: {correctAnswers} de {words.length} (
                     {Math.floor((correctAnswers / words.length) * 100)}%)
