@@ -135,8 +135,7 @@ function Slider15_Lista_desplegable_movil() {
   return (
     <div className="leading-loose">
       <div
-        className="bg-white text-[#afafaf] border-[#e0e0e0] md:rounded-lg md:shadow-md mb-[1px] m-5 md:m-4 border rounded-md shadow-md"
-        style={{ padding: "18px", margin: "20px" }}
+        className="bg-white text-[#afafaf] border-[#e0e0e0] overflow-hidden rounded-lg mb-[1px] p-4 border shadow-md"
       >
         <Paragraph theme="light" className="w-full">
           a. Debemos definir las Líneas de actuación: Pasos para verificar el
@@ -212,12 +211,13 @@ function Slider15_Lista_desplegable_movil() {
             {errorMessage}
           </p>
         )}
-        <div className="flex justify-around h-full items-center w-full max-w-[400px] my-1">
+        <div className="flex justify-between h-full items-center w-full max-w-[400px] my-1">
           <Button
             bold={false}
             icon={faCheck}
             roundedFull={true}
             onClick={validateDropdowns}
+            
           >
             Validar
           </Button>

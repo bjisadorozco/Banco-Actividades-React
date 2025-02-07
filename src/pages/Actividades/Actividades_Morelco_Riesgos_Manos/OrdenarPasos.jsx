@@ -108,7 +108,7 @@ const OrdenarPasos = () => {
 
       {resultado && (
         <div className="resultado-contenedor">
-          <p className="text-md mt-0 font-bold text-center">
+          <p className="text-md mt-4 font-bold text-center">
             {correctCount} de {pasosCorrectos.length} respuestas correctas {porcentaje}%
           </p>
           <p className={`resultado ${resultado}`}>
