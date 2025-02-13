@@ -170,14 +170,14 @@ function Actividad_Falso_Verdadero() {
                 {!showFeedback && (
                   <div className="w-full flex md:flex-row flex-col justify-between">
                     <button
-                      className="mx-2 w-[40%] font-semibold flex justify-center items-center group bg-main-color rounded-full px-4 py-1 shadow-main-color text-white"
+                      className="mx-2 w-[80%] md:w-[40%] font-semibold flex justify-center items-center group bg-main-color rounded-full px-4 py-1 shadow-main-color text-white"
                       onClick={() => handleAnswer(true)}
                       disabled={answerSelected !== null}
                     >
                       Verdadero
                     </button>
                     <button
-                      className="mx-2 w-[40%] font-semibold flex justify-center items-center group bg-main-color rounded-full px-4 py-1 shadow-main-color text-white"
+                      className="mx-2 w-[80%] md:w-[40%] font-semibold flex justify-center items-center group bg-main-color rounded-full px-4 py-1 shadow-main-color text-white"
                       onClick={() => handleAnswer(false)}
                       disabled={answerSelected !== null}
                     >

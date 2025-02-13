@@ -237,18 +237,18 @@ const DragAndDrop = () => {
   }, [droppedItems]);
 
   return (
-    <div className="w-full flex flex-col items-center justify-center relative ">
+    <div className="w-full flex flex-col items-center justify-center relative font-monserrat">
       <div className="hidden  w-full md:absolute md:top-0 md:left-0 md:flex flex-col items-center justify-center overflow-hidden">
         <div className="w-full flex justify-center items-center overflow-hidden ">
           {/* Contenedor inicial */}
-          <div className="flex items-start justify-start absolute top-[-10px] left-16 z-30 ">
+          <div className="flex items-start justify-start absolute top-[-10px] left-16">
                 {" "}
-                <i class="w-[45%] inline-block bg-[#c0185d33] text-[#c0185d] px-2 py-2 rounded-[10px] font-montserrat font-medium text-sm italic leading-[1.3rem]">
+                <p className="w-[45%] inline-block bg-[#c0185d33] text-[#c0185d] px-2 py-2 rounded-[10px] text-sm leading-[1.3rem]">
                   Pasa el mouse por la imagen para descubrir su contenido
-                  <span class="icono-inst">
-                    <i class="fa-solid fa-arrow-turn-down"></i>
+                  <span className="icono-inst">
+                    <i className="fa-solid fa-arrow-turn-down"></i>
                   </span>
-                </i>
+                </p>
               </div>
           <div className="w-full flex justify-between items-center relative top-4">
             {/* Columna izquierda */}

@@ -155,8 +155,8 @@ const SelectAndValidateMobile = () => {
     (value) => value !== ""
   );
   return (
-    <div className="w-full flex flex-col items-center justify-center ">
-      <div className="w-full flex flex-col items-center justify-center ">
+    <div className="w-full flex flex-col items-center justify-center h-full">
+      <div className="w-full flex flex-col items-center justify-center py-0 ">
         {/* Cuadro 1 */}
         <div className="bg-[#E5E7EB] rounded-lg flex flex-col items-center justify-center">
           <div
