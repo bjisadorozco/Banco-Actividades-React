@@ -40,12 +40,13 @@ import Slider14_Lista_desplegable_movil from "./pages/Actividades/Actividades_Es
 import Slider12_drag_and_drop_audios from "./pages/Actividades/Actividades_Espacios_Confinados/Slider12_drag_and_drop_audios.jsx";
 import Slider15_Lista_desplegable from "./pages/Actividades/Actividades_Espacios_Confinados/Slider15_Lista_desplegable.jsx";
 import Slider15_Lista_desplegable_movil from "./pages/Actividades/Actividades_Espacios_Confinados/Slider15_Lista_desplegable_movil.jsx";
-import DndActivity from "./pages/Actividades/Actividades_Plan_Estrategido_Seguridad_Vial/DndActivity.jsx"
+import DndActivityDesktop from "./pages/Actividades/Actividades_Plan_Estrategido_Seguridad_Vial/DndActivityDesktop.jsx"
+import DndActivityMobile from "./pages/Actividades/Actividades_Plan_Estrategido_Seguridad_Vial/DndActivityMobile"
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
 
 
-    <Drag_And_Drop
+    <DndActivityDesktop
 
 
    />
