@@ -1,234 +1,287 @@
 import React, { useState } from "react";
-import trueImage from "/src/assets/img/checkAct.png";
-import falseImage from "/src/assets/img/false.png";
+import imgTrue from "../../../assets/img/checkAct.png";
+import imgFalse from "../../../assets/img/xmarkAct.png";
+import imgPeligro from "/src/assets/img/avatar-hombre-check_morado_blanco.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faRepeat, faUndo } from "@fortawesome/free-solid-svg-icons";
-const items = [
-  "Reducción de los costos asociados a los accidentes de tránsito.",
-  "Mejora de la imagen y reputación de la organización.",
-  "Mayor compromiso de los trabajadores con la seguridad vial.",
-  "Disminución del absentismo laboral.",
-  "Aumento de la productividad.",
-  "Aumento de los salarios a los trabajadores.",
-  "Mayor riesgo de los conductores al salir a las vías.",
-  "Mayor desgaste de los vehículos.",
+import { faRepeat } from "@fortawesome/free-solid-svg-icons";
+const Feedback = ({ isCorrect, message }) => (
+  <div className={`text-${isCorrect ? "green" : "red"}-600 font-monserrat`}>
+    {isCorrect ? "¡Correcto!" : "¡Piénsalo bien!"}
+    <span className="text-gray-500"> {message}</span>
+  </div>
+);
+
+const questions = [
+  {
+    text: "Reducción de los costos asociados a los accidentes de tránsito.",
+    correct: true,
+    feedBackCorrect: (
+      <Feedback
+        isCorrect={true}
+        message="Reducir los costos asociados a los accidentes de tránsito es un beneficio del PESV."
+      />
+    ),
+    feedBackIncorrect: (
+      <Feedback
+        isCorrect={false}
+        message="Lee correctamente e inténtalo nuevamente."
+      />
+    ),
+  },
+  {
+    text: `Aumento de los salarios a los trabajadores.`,
+    correct: false,
+    feedBackCorrect: (
+      <Feedback
+        isCorrect={true}
+        message="El aumento de salarios a los trabajadores no es un beneficio del PESV."
+      />
+    ),
+    feedBackIncorrect: (
+      <Feedback
+        isCorrect={false}
+        message="Lee correctamente e inténtalo nuevamente."
+      />
+    ),
+  },
+  {
+    text: "Mejora de la imagen y reputación de la organización.​",
+    correct: true,
+    feedBackCorrect: (
+      <Feedback
+        isCorrect={true}
+        message="La mejora de la imagen y reputación de la organización es un beneficio del PESV."
+      />
+    ),
+    feedBackIncorrect: (
+      <Feedback
+        isCorrect={false}
+        message="Lee correctamente e inténtalo nuevamente."
+      />
+    ),
+  },
+  {
+    text: "Mayor riesgo de los conductores al salir a las vías.​",
+    correct: false,
+    feedBackCorrect: (
+      <Feedback
+        isCorrect={true}
+        message="Mayor riesgo de los conductores al salir a las vías no es un beneficio del PESV."
+      />
+    ),
+    feedBackIncorrect: (
+      <Feedback
+        isCorrect={false}
+        message="Lee correctamente e inténtalo nuevamente."
+      />
+    ),
+  },
+  {
+    text: "Mayor compromiso de los trabajadores con la seguridad vial.​",
+    correct: true,
+    feedBackCorrect: (
+      <Feedback
+        isCorrect={true}
+        message="Mayor compromiso de los trabajadores con la seguridad vial es un beneficio del PESV."
+      />
+    ),
+    feedBackIncorrect: (
+      <Feedback
+        isCorrect={false}
+        message="Lee correctamente e inténtalo nuevamente."
+      />
+    ),
+  },
+  {
+    text: "Mayor desgaste de los vehículos..​",
+    correct: false,
+    feedBackCorrect: (
+      <Feedback
+        isCorrect={true}
+        message="Mayor desgaste de los vehículos no es un beneficio del PESV."
+      />
+    ),
+    feedBackIncorrect: (
+      <Feedback
+        isCorrect={false}
+        message="Lee correctamente e inténtalo nuevamente."
+      />
+    ),
+  },
+  {
+    text: "Disminución del absentismo laboral..​",
+    correct: true,
+    feedBackCorrect: (
+      <Feedback
+        isCorrect={true}
+        message="Disminución del absentismo laboral es un beneficio del PESV."
+      />
+    ),
+    feedBackIncorrect: (
+      <Feedback
+        isCorrect={false}
+        message="Lee correctamente e inténtalo nuevamente."
+      />
+    ),
+  },
+  {
+    text: "Aumento de la productividad..​",
+    correct: true,
+    feedBackCorrect: (
+      <Feedback
+        isCorrect={true}
+        message="Aumento de la productividad es un beneficio del PESV."
+      />
+    ),
+    feedBackIncorrect: (
+      <Feedback
+        isCorrect={false}
+        message="Lee correctamente e inténtalo nuevamente."
+      />
+    ),
+  },
 ];
 
-const correctAnswers = {
-  Si: [
-    "Reducción de los costos asociados a los accidentes de tránsito.",
-    "Mejora de la imagen y reputación de la organización.",
-    "Mayor compromiso de los trabajadores con la seguridad vial.",
-    "Disminución del absentismo laboral.",
-    "Aumento de la productividad.",
-  ],
-  No: [
-    "Aumento de los salarios a los trabajadores.",
-    "Mayor riesgo de los conductores al salir a las vías.",
-    "Mayor desgaste de los vehículos.",
-  ],
-};
+function Actividad_Falso_Verdadero() {
+  const [currentQuestion, setCurrentQuestion] = useState(0);
+  const [score, setScore] = useState(0);
+  const [showScore, setShowScore] = useState(false);
+  const [showFeedback, setShowFeedback] = useState(false);
+  const [answerSelected, setAnswerSelected] = useState(null);
+  const handleAnswer = (userAnswer) => {
+    const isCorrect = userAnswer === questions[currentQuestion].correct;
+    setAnswerSelected(isCorrect);
 
-function SelectItem({ id, content, correct, onChange }) {
-  const [isCorrect, setIsCorrect] = useState(correct);
-
-  const handleChange = (e) => {
-    const value = e.target.value;
-    onChange(id, value);
-    const isCorrect = value
-      ? (correctAnswers[value]?.includes(content) ?? false)
-      : null;
-    setIsCorrect(isCorrect);
+    if (isCorrect) {
+      setScore((prevScore) => prevScore + 1);
+    }
+    setShowFeedback(true);
   };
 
+  const handleNext = () => {
+    const nextQuestion = currentQuestion + 1;
+    if (nextQuestion < questions.length) {
+      setCurrentQuestion(nextQuestion);
+      setAnswerSelected(null);
+      setShowFeedback(false);
+    } else {
+      setShowScore(true);
+      setShowFeedback(false);
+    }
+  };
+
+  const resetQuiz = () => {
+    setCurrentQuestion(0);
+    setScore(0);
+    setShowScore(false);
+    setAnswerSelected(null);
+  };
+
+  const percentage = Math.round((score / questions.length) * 100);
   return (
-    <div
-      className={`w-full flex flex-col items-center justify-center p-2 rounded-lg mb-2 ${
-        isCorrect === null ? "bg-[#6E3CD2]" : isCorrect ? "bg-[#4caf50]" : "bg-[#f44336]"
-      }`}
-    >
-      <span className="text-white">{content}</span>
-      <select
-        id={id}
-        onChange={handleChange}
-        className="w-full bg-white text-[#808693] rounded-lg px-2 py-1 my-2"
-      >
-        <option value="">Seleccionar</option>
-        <option value="Si">Sí</option>
-        <option value="No">No</option>
-      </select>
-      {isCorrect !== null && (
-        <div className="flex items-center justify-center mt-2">
-          <img
-            src={isCorrect ? trueImage : falseImage}
-            alt={isCorrect ? "Correcto" : "Incorrecto"}
-            className="w-[50px] mr-2"
-          />
-          <span className="text-white">{isCorrect ? "Correcto" : "Incorrecto"}</span>
-        </div>
-      )}
-    </div>
-  );
-}
-
-export default function DndActivityMobile() {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [itemsState, setItemsState] = useState(
-    items.reduce(
-      (acc, item) => ({ ...acc, [item]: { box: "", correct: null } }),
-      {}
-    )
-  );
-  const [feedback, setFeedback] = useState(null);
-  const [finalFeedback, setFinalFeedback] = useState(null);
-
-  const handleSelectChange = (item, value) => {
-    setItemsState((prev) => {
-      const isCorrect = value
-        ? (correctAnswers[value]?.includes(item) ?? false)
-        : null;
-      const newState = {
-        ...prev,
-        [item]: { box: value, correct: isCorrect },
-      };
-
-      const correctCount = Object.values(newState).filter(
-        (data) => data.correct === true
-      ).length;
-      const totalItems = items.length;
-      const correctPercentage = Math.round((correctCount / totalItems) * 100);
-
-      setFeedback(
-        `Respuestas correctas: ${correctCount} de ${totalItems} (${correctPercentage}%)`
-      );
-
-      return newState;
-    });
-  };
-
-  const nextQuestion = () => {
-    if (currentIndex < items.length - 1) {
-      setCurrentIndex((prevIndex) => prevIndex + 1);
-    } else {
-      validateAnswers();
-    }
-  };
-
-  const validateAnswers = () => {
-    let correctCount = 0;
-    let incorrectCount = 0;
-
-    Object.values(itemsState).forEach((data) => {
-      if (data.correct === true) correctCount++;
-      if (data.correct === false) incorrectCount++;
-    });
-
-    const totalItems = items.length;
-    const correctPercentage = Math.round((correctCount / totalItems) * 100);
-
-    if (correctCount === totalItems) {
-      setFinalFeedback(
-        `¡Muy bien! Conoces correctamente los beneficios del PESV. Respuestas correctas ${correctCount} de ${totalItems} (${correctPercentage}%).`
-      );
-    } else if (incorrectCount === totalItems) {
-      setFinalFeedback(
-        `Todas las opciones son incorrectas, piénsalo bien y vuelve a intentarlo. Respuestas correctas ${correctCount} de ${totalItems} (${correctPercentage}%).`
-      );
-    } else {
-      setFinalFeedback(
-        `¡Piénsalo bien! Algunos beneficios no son correctos. Respuestas correctas ${correctCount} de ${totalItems} (${correctPercentage}%).`
-      );
-    }
-  };
-
-  const resetActivity = () => {
-    setItemsState(
-      items.reduce(
-        (acc, item) => ({ ...acc, [item]: { box: "", correct: null } }),
-        {}
-      )
-    );
-    setFeedback(null);
-    setFinalFeedback(null);
-    setCurrentIndex(0);
-  };
-
-  const getFeedbackColor = () => {
-    const correctAnswersCount = Object.values(itemsState).filter(
-      (data) => data.correct === true
-    ).length;
-    const incorrectAnswersCount = Object.values(itemsState).filter(
-      (data) => data.correct === false
-    ).length;
-
-    if (correctAnswersCount === items.length) {
-      return "#009A3D"; // Verde para todas correctas
-    } else if (incorrectAnswersCount === items.length) {
-      return "#f44336"; // Rojo para todas incorrectas
-    } else {
-      return "#FF9800"; // Naranja para mixto
-    }
-  };
-
-  return (
-    <div className="p-4">
-      <div className="flex flex-col items-center justify-center">
-        <div className="flex flex-col items-center justify-center p-2 bg-[#6E3CD2] rounded-lg">
-          <span className="text-white font-bold">
-            {currentIndex + 1}/{items.length}
-          </span>
-        </div>
-        <SelectItem
-          key={items[currentIndex]}
-          id={items[currentIndex]}
-          content={items[currentIndex]}
-          correct={itemsState[items[currentIndex]].correct}
-          onChange={handleSelectChange}
-        />
-        {feedback && (
-          <div className="text-[#808693] text-center">
-            {feedback}
+    <div className="container ">
+      <div className="max-w-md w-full bg-gray-100 border-2 border-gray-300 rounded-lg overflow-hidden mx-auto min-w-[35vw]">
+        {showScore ? (
+          <div className="text-center p-6 font-monserrat">
+            <p className="my-2 text-gray-500 font-semibold">
+              Respuestas correctas son: {score} de {questions.length} (
+              {percentage}%)
+            </p>
+            <div className="w-full flex flex-col items-center justify-center">
+              <button
+                onClick={resetQuiz}
+                className="group font-semibold bg-main-color rounded-full px-4 py-2 shadow-main-color text-white my-3"
+              >
+                  <FontAwesomeIcon
+                                  icon={faRepeat}
+                                  style={{ marginRight: "8px" }}
+                                />
+                                Reiniciar
+              </button>
+            </div>
           </div>
-        )}
-      </div>
-
-      <div className="w-full flex items-center justify-center">
-        {currentIndex < items.length - 1 ? (
-          <button
-            onClick={nextQuestion}
-            className="bg-[#6E3CD2] text-white px-4 py-2 rounded-full mr-2"
-          >
-            Siguiente
-          </button>
         ) : (
-          <button
-            onClick={validateAnswers}
-            className="bg-[#6E3CD2] text-white px-4 py-2 rounded-full mr-2"
-          >
-            <FontAwesomeIcon icon={faUndo} className="mr-2" />
-            Validar
-          </button>
+          <>
+            <div className="bg-gray-800 text-white text-center py-2 text-[16px] font-monserrat">
+              <span className="inc">{currentQuestion + 1}</span>/
+              <span className="tol">{questions.length}</span>
+            </div>
+            <div className=" view px-3 pt-2 pb-0 w-full flex items-center justify-center flex-col">
+              <div className="min-h-[50px]">
+                <p className="text-gray-800 text-justify font-monserrat ">
+                  {questions[currentQuestion].text}
+                </p>
+              </div>
+              <img
+                src={
+                  answerSelected === null
+                    ? imgPeligro
+                    : answerSelected
+                      ? imgTrue
+                      : imgFalse
+                }
+                alt={
+                  answerSelected === null
+                    ? "Pregunta"
+                    : answerSelected
+                      ? "Correcto"
+                      : "Incorrecto"
+                }
+                className=" w-24 my-2 "
+              />
+              <div className="text-justify">
+                <p
+                  className={`text-[16px] font-regular leading-tight ${
+                    answerSelected === null
+                      ? "opacity-0"
+                      : answerSelected
+                        ? "opacity-100"
+                        : "opacity-100"
+                  }`}
+                >
+                  {answerSelected === null
+                    ? " "
+                    : answerSelected
+                      ? questions[currentQuestion].feedBackCorrect
+                      : questions[currentQuestion].feedBackIncorrect}
+                </p>
+              </div>
+              <div className="flex justify-center m-0">
+                {!showFeedback && (
+                  <div className="w-full flex md:flex-row flex-col justify-between">
+                    <button
+                      className="mx-2 w-[80%] md:w-[40%] font-semibold flex justify-center items-center group bg-main-color rounded-full px-4 py-1 shadow-main-color text-white"
+                      onClick={() => handleAnswer(true)}
+                      disabled={answerSelected !== null}
+                    >
+                      Si
+                    </button>
+                    <button
+                      className="mx-2 w-[80%] md:w-[40%] font-semibold flex justify-center items-center group bg-main-color rounded-full px-4 py-1 shadow-main-color text-white"
+                      onClick={() => handleAnswer(false)}
+                      disabled={answerSelected !== null}
+                    >
+                      No
+                    </button>
+                  </div>
+                )}
+                {showFeedback && (
+                  <button
+                    onClick={handleNext}
+                    className="bg-main-color text-white py-2 px-4 rounded-full text-[16px] font-bold"
+                  >
+                    {currentQuestion === questions.length - 1
+                      ? "Finalizar"
+                      : "Siguiente"}
+                  </button>
+                )}
+              </div>
+            </div>
+          </>
         )}
-        <button
-          onClick={resetActivity}
-          className="bg-[#6E3CD2] text-white px-4 py-2 rounded-full"
-        >
-          <FontAwesomeIcon icon={faRepeat} className="mr-2" />
-          Reiniciar
-        </button>
       </div>
-
-      {finalFeedback && (
-        <div
-          className={`w-full mt-4 p-3 rounded text-white flex flex-col items-center justify-center text-center`}
-          style={{ backgroundColor: getFeedbackColor() }}
-        >
-          {finalFeedback}
-        </div>
-      )}
-
-
     </div>
-    
   );
 }
+
+export default Actividad_Falso_Verdadero;

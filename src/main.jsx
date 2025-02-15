@@ -42,11 +42,12 @@ import Slider15_Lista_desplegable from "./pages/Actividades/Actividades_Espacios
 import Slider15_Lista_desplegable_movil from "./pages/Actividades/Actividades_Espacios_Confinados/Slider15_Lista_desplegable_movil.jsx";
 import DndActivityDesktop from "./pages/Actividades/Actividades_Plan_Estrategido_Seguridad_Vial/DndActivityDesktop.jsx"
 import DndActivityMobile from "./pages/Actividades/Actividades_Plan_Estrategido_Seguridad_Vial/DndActivityMobile"
+import OrdenarPESVDesktop from "./pages/Actividades/Actividades_Plan_Estrategido_Seguridad_Vial/OrdenarPESVDesktop.jsx"
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
 
 
-    <DndActivityDesktop
+    <OrdenarPESVDesktop
 
 
    />

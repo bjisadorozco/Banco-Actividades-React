@@ -13,7 +13,6 @@ import trueImage from "/src/assets/img/checkAct.png";
 import falseImage from "/src/assets/img/false.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRepeat, faUndo } from "@fortawesome/free-solid-svg-icons";
-import imgPeligro from "/src/assets/img/avatar-hombre-check_morado_blanco.png";
 import DndActivityMobile from "./DndActivityMobile";
 
 const items = [
@@ -48,8 +47,7 @@ function DraggableItem({ id, content, correct }) {
     transform: CSS.Translate.toString(transform),
     backgroundColor:
       correct === null ? "#6E3CD2" : correct ? "#4caf50" : "#f44336",
-    padding: "10px",
-    marginBottom: "5px",
+    padding: "4px",
     borderRadius: "5px",
     cursor: "grab",
     display: "flex",
@@ -83,7 +81,7 @@ function DroppableBox({ id, items }) {
   return (
     <div
       ref={setNodeRef}
-      className={`p-4 border-2 border-solid rounded-lg border-gray-400 min-w-[350px] min-h-[250px] ${isOver ? "bg-gray-100" : ""}`}
+      className={`p-4 border-2 border-solid rounded-lg border-gray-400 min-w-[200px] min-h-[250px] ${isOver ? "bg-gray-100" : ""}`}
     >
       {items}
     </div>
@@ -197,7 +195,7 @@ export default function DndActivityDesktop() {
   };
 
   return (
-    <div className="mt-0">
+    <div className="mx-8">
       <div className="hidden md:flex jusitfy-center items-center flex-col">
       <DndContext sensors={sensors} onDragEnd={handleDragEnd}>
         <div className="w-full flex items-center justify-center">
@@ -212,7 +210,7 @@ export default function DndActivityDesktop() {
             )}
           </div>
         </div>
-        <div className="grid grid-cols-3 mx-4">
+        <div className="grid grid-cols-2 mx-4">
           <div className="flex flex-col items-center justify-center">
             <p className="text-[16px] text-[#009A3D] font-bold">SI</p>
             <DroppableBox
@@ -229,9 +227,7 @@ export default function DndActivityDesktop() {
                 ))}
             />
           </div>
-          <div className="w-full h-full flex flex-col items-center justify-center">
-            <img src={imgPeligro} alt="Peligro" className="w-[200px]" />
-          </div>
+          
           <div className="flex flex-col items-center justify-center">
             <p className="text-[16px] text-[#f44336] font-bold">NO</p>
             <DroppableBox
@@ -255,7 +251,7 @@ export default function DndActivityDesktop() {
         <button
           onClick={validateAnswers}
           disabled={!allItemsInBoxes} // Deshabilitar si no todos los elementos están en las cajas
-          className={`bg-[#6E3CD2] text-white px-4 py-2 rounded-full mr-2 ${!allItemsInBoxes ? "opacity-50 cursor-not-allowed" : ""}`}
+          className={`bg-[#6E3CD2] text-white px-4 py-1 rounded-full mr-2 ${!allItemsInBoxes ? "opacity-50 cursor-not-allowed" : ""}`}
         >
           <FontAwesomeIcon icon={faUndo} className="mr-2" />
           Validar
@@ -263,7 +259,7 @@ export default function DndActivityDesktop() {
         <button
           onClick={resetActivity}
           disabled={!allItemsInBoxes} // Deshabilitar si no todos los elementos están en las cajas
-          className={`bg-[#6E3CD2] text-white px-4 py-2 rounded-full ${!allItemsInBoxes ? "opacity-50 cursor-not-allowed" : ""}`}
+          className={`bg-[#6E3CD2] text-white px-4 py-1 rounded-full ${!allItemsInBoxes ? "opacity-50 cursor-not-allowed" : ""}`}
         >
           <FontAwesomeIcon icon={faRepeat} className="mr-2" />
           Reiniciar
@@ -272,7 +268,7 @@ export default function DndActivityDesktop() {
 
       {feedback && (
         <div
-          className={`w-[60%] mt-4 p-3 rounded text-white flex flex-col items-center justify-center text-center`}
+          className={`w-full p-1 rounded text-white flex flex-col items-center justify-center text-center`}
           style={{ backgroundColor: getFeedbackColor() }}
         >
           {feedback}
