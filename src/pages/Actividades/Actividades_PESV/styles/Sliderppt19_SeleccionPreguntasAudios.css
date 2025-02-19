@@ -1,0 +1,93 @@
+.quiz-container-SPA {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-top: 2rem; /* Espacio superior */
+  }
+  
+  .cards-container-SPA {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 columnas en una sola fila */
+    gap: 2rem; /* Espacio entre elementos */
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+  }
+  
+  .image-select-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem; /* Espacio entre la imagen y el select */
+  }
+  
+  /* Contenedor de audio y validación */
+  .audio-validation-container {
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  /* Estilo para imágenes circulares */
+  .circular-image {
+    border-radius: 50%; /* Hace que la imagen sea circular */
+    width: 150px; /* Ajusta el tamaño de la imagen */
+    height: 150px; /* Ajusta el tamaño de la imagen */
+    object-fit: cover; /* Asegura que la imagen cubra el espacio sin distorsionarse */
+    border: 3px solid #e5e7eb; /* Opcional: Agrega un borde */
+  }
+  
+  .custom-select {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #e5e7eb;
+    border-radius: 0.25rem;
+    background-color: white;
+    font-size: 0.9rem;
+    color: #000; /* Asegurar que el texto sea visible */
+  }
+  
+  .custom-select option {
+    color: #000; /* Asegurar que el texto de las opciones sea visible */
+  }
+  
+  .validation-icon-container {
+    position: absolute;
+    top: 0; /* Posición arriba de la imagen */
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    pointer-events: none;
+  }
+  
+  .validation-icon {
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
+    opacity: 0.9;
+  }
+  
+  .audio-container {
+    margin-bottom: 0.5rem; /* Espacio entre el audio y la imagen */
+  }
+  
+  .reset-button-container {
+    margin-top: 2rem; /* Espacio superior para el botón */
+  }
+  
+  @media (max-width: 1024px) {
+    .cards-container-SPA {
+      grid-template-columns: repeat(2, 1fr); /* 2 columnas en tablets */
+    }
+  }
+  
+  @media (max-width: 640px) {
+    .cards-container-SPA {
+      grid-template-columns: 1fr; /* 1 columna en móviles */
+    }
+  }

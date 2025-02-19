@@ -51,6 +51,11 @@
   border: 2px dashed #aaa;
 }
 
+.dropbox-over .dropbox-sld5 {
+  background-color: #cbbee5; /* Cambia el color de fondo cuando una imagen está sobre el área */
+  border-color: #cbbee5; /* Cambia el color del borde si es necesario */
+}
+
 .dropbox-sld5 img {
   max-width: 100%; /* Ajusta la imagen al tamaño del contenedor */
   max-height: 100%; /* Ajusta la imagen al tamaño del contenedor */
@@ -88,8 +93,13 @@
   text-align: center;
 }
 
+.drop-text-over {
+  color: #9880CA;
+}
+
 .dropbox-over {
-  background-color: #d3c4f1;
+  background-color: #cbbee5; /* Cambia el color de fondo cuando una imagen está sobre el área */
+  border-color: #cbbee5; /* Cambia el color del borde si es necesario */
 }
 
 /* Quitar cualquier efecto hover */
@@ -209,6 +219,7 @@
   justify-content: center; /* Centra los íconos horizontalmente */
   align-items: center; /* Centra los íconos verticalmente */
   gap: 10px; /* Agrega un espacio entre los elementos, puedes ajustar este valor */
+  margin-top: 5px;
 }
 
 .status-icon-sld5 {

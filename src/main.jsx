@@ -27,6 +27,8 @@ import DragAndDropAlturas2Movil from "./pages/Actividades/Actividades_Trabajo_se
 import Drag_And_Drop from "./pages/Actividades/Actividades_Espacios_confinados/Drag_And_Drop.jsx";
 import OrdenarPasosPalmaManosMobile from "./pages/Actividades/Actividades_Morelco_Riesgos_Manos/OrdenarPasosPalmaManosMobile.jsx";
 import PreguntasSiNo from "./pages/Actividades/Actividades_Morelco_Riesgos_Manos/PreguntasSiNo.jsx";
+import EspaciosConfinadosSeleccionMultiple from "./pages/Actividades/Actividades_Morelco_Riesgos_Manos/EspaciosConfinadosSeleccionMultiple.jsx";
+import SeleccionEspaciosConfinados from "./pages/Actividades/Actividades_Morelco_Riesgos_Manos/SeleccionEspaciosConfinados.jsx";
 
 import "./main.css";
 import Slider13_Lista_desplegable from "./pages/Actividades/Actividades_Espacios_Confinados/Slider13_Lista_desplegable_movil.jsx";
@@ -40,8 +42,14 @@ import Slider12_drag_and_drop_audios from "./pages/Actividades/Actividades_Espac
 import Slider15_Lista_desplegable from "./pages/Actividades/Actividades_Espacios_Confinados/Slider15_Lista_desplegable.jsx";
 import Slider15_Lista_desplegable_movil from "./pages/Actividades/Actividades_Espacios_Confinados/Slider15_Lista_desplegable_movil.jsx";
 import PreguntasRiesgosTermicosV2 from "./pages/Actividades/Actividades_Morelco_Riesgos_Manos/PreguntasRiesgosTermicosV2.jsx";
+import Sliderppt24_SeleccionMultiple from "./pages/Actividades/Actividades_Uso_Seguro_Andamios/Sliderppt24_SeleccionMultiple.jsx";
+import Sliderppt15_SeleccionMultipleCheckbox from "./pages/Actividades/Actividades_Uso_Seguro_Andamios/Sliderppt15_SeleccionMultipleCheckbox.jsx";
+import Sliderppt16_SeleccionPreguntasParte1 from "./pages/Actividades/Actividades_Uso_Seguro_Andamios/Sliderppt16_SeleccionPreguntasParte1.jsx";
+import Sliderppt17_SeleccionPreguntasParte2 from "./pages/Actividades/Actividades_Uso_Seguro_Andamios/Sliderppt17_SeleccionPreguntasParte2.jsx";
+import Sliderppt18_SeleccionPreguntas from "./pages/Actividades/Actividades_PESV/Sliderppt18_SeleccionPreguntas.jsx";
+import Sliderppt19_SeleccionPreguntasAudios from "./pages/Actividades/Actividades_PESV/Sliderppt19_SeleccionPreguntasAudios.jsx";
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <DragAndDropManos />
+    <Sliderppt19_SeleccionPreguntasAudios />
   </React.StrictMode>
 );

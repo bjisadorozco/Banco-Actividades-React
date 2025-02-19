@@ -35,7 +35,7 @@
 
 .quiz-card-SEC {
   perspective: 1500px;
-  height: 200px;
+  height: 183px;
   cursor: pointer;
   min-width: 220px;
 }
@@ -82,9 +82,9 @@
 }
 
 .card-image-SEC {
-  height: 160px; /* Mantén este valor o ajústalo según tus necesidades */
+  height: 120px; /* Reducimos la altura del contenedor */
   background-position: center;
-  background-size: cover;
+  background-size: contain; /* Aseguramos que la imagen no se corte */
   border-top-left-radius: 1rem;
   border-top-right-radius: 1rem;
   overflow: hidden;
@@ -94,9 +94,9 @@
 }
 
 .card-image-SEC img {
-  max-width: 100%;
-  max-height: 100%;
-  object-fit: contain; /* Cambiado a 'contain' para evitar el estiramiento */
+  max-width: 80%; /* Reducimos el ancho máximo de la imagen */
+  max-height: 80%; /* Reducimos la altura máxima de la imagen */
+  object-fit: contain; /* Aseguramos que la imagen no se estire */
 }
 
 .card-content-SEC {
@@ -192,6 +192,11 @@ select {
 }
 
 @media (max-width: 640px) {
+  .feedback-container-SEC {
+    padding: 0.5rem; /* Reducir el padding en móviles si es necesario */
+  }
+}
+@media (max-width: 640px) {
   .cards-container-SEC {
     grid-template-columns: 1fr;
     padding-left: 0;
@@ -232,6 +237,20 @@ select {
   background-color: #f44336;
 }
 
+ texto-gris {
+  color: #8f8f8f;
+}
+.text-green-personalizado {
+  color: #4caf50;
+}
+
+.text-red-personalizado {
+  color: #f44336;
+}
+
+.text-orange-personalizado {
+  color: #ff9800;
+}
 .bg-green-personalizado select,
 .bg-red-personalizado select {
   background-color: rgba(255, 255, 255, 0.2);
@@ -247,10 +266,13 @@ select {
 
 .feedback-container-SEC {
   margin: 0 auto;
-  border: 1px solid #e5e7eb;
+  text-align: center; /* Centrar el texto horizontalmente */
 }
 
 .feedback-container-SEC p {
+  font-weight: bold;
+  color: #8f8f8f;
+  text-align: center;
   font-size: 1rem;
   font-weight: 500;
 }

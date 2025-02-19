@@ -15,7 +15,7 @@ const Button = ({
   // Estilo deshabilitado
   const disabledStyle = disabled
     ? {
-        backgroundColor: "#8d5fe4", // Color más claro
+        backgroundColor: "#102044", // Color más claro
         cursor: "not-allowed",
         boxShadow: "none",
       }

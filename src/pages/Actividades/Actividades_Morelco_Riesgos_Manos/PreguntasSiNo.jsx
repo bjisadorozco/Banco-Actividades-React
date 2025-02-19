@@ -10,6 +10,7 @@ import "./styles/PreguntasSiNo.css"
 import mano1 from "../../../assets/img/pieza_1_espacios_confinados.webp"
 import mano2 from "../../../assets/img/pieza_2_espacios_confinados.webp"
 import mano3 from "../../../assets/img/pieza_3_espacios_confinados.webp"
+import imgcompleta from "../../../assets/img/este_es_un_espacio_confinado_sldM1.webp"
 import xmarkIcon from "../../../assets/img/xmarkAct.png"
 import checkIcon from "../../../assets/img/checkAct.png"
 
@@ -106,6 +107,9 @@ function PreguntasSiNo() {
     setShowFeedback(false)
   }
 
+  const allCorrect = results.correct === results.total;
+  const allIncorrect = results.correct === 0;
+
   return (
     <div className="flex flex-col mb-36 md:mb-0">
       <div className="flex flex-col md:flex-row gap-8">
@@ -116,17 +120,37 @@ function PreguntasSiNo() {
           >
             {!showResults && questionResults.length === 0 ? (
               <p className="discover-text font-text">Descubre la imagen</p>
+            ) : showResults && results.correct === results.total ? (
+              <div className="full-image-container">
+                <img
+                  src={imgcompleta}
+                  alt="Imagen completa"
+                  className="full-image"
+                />
+                <img
+                  src={checkIcon}
+                  alt="Correcto"
+                  className="check-icon-center"
+                />
+              </div>    
             ) : (
               <div className="image-sections">
                 {[0, 1, 2].map((index) => (
                   <div key={index} className="image-section">
                     {questionResults[index] !== undefined &&
                       (questionResults[index] === 1 ? (
-                        <img
-                          src={questions[index].image || "/placeholder.svg"}
-                          alt={`Imagen ${index + 1}`}
-                          className="section-image"
-                        />
+                        <>
+                          <img
+                            src={questions[index].image || "/placeholder.svg"}
+                            alt={`Imagen ${index + 1}`}
+                            className="section-image"
+                          />
+                          <img
+                            src={checkIcon || "/placeholder.svg"}
+                            alt="Correcto"
+                            className="check-icon"
+                          />
+                        </>
                       ) : (
                         <img src={xmarkIcon || "/placeholder.svg"} alt="Incorrecto" className="error-icon" />
                       ))}
@@ -143,7 +167,7 @@ function PreguntasSiNo() {
             {showQuestions && !showResults && (
               <div className="preguntas_SN">
                 <div className="ctItem-SN">
-                  <p className="mb-4 text-lg texto-gray font-text">
+                  <p className="mb-4 text-zise texto-gray font-text">
                     <strong>Pregunta {currentQuestion + 1}: </strong>
                     {questions[currentQuestion].question}
                   </p>
@@ -182,6 +206,7 @@ function PreguntasSiNo() {
                       onClick={isValidated ? handleNext : handleValidate}
                       disabled={selectedAnswers[currentQuestion]?.length === 0}
                     >Siguiente
+
                       </Button>
                         </>
                       ) : (
@@ -203,25 +228,25 @@ function PreguntasSiNo() {
 
             {showResults && (
               <div className="results-container font-text texto-gray font-text">
-                <h2 className="text-xl font-bold mb-4 text-center">Resultados:</h2>
-                <div className="separation-result">
-                  <div className="correct-answers mb-4">
-                    <h3 className="preguntas_true font-bold inline-flex items-center">Preguntas respondidas </h3>
-                    <h3 className="preguntas_true font-bold flex items-center">
-                      correctamente:
-                      <img className="w-6 m-0 ml-1" src={checkIcon || "/placeholder.svg"} />
-                    </h3>
-                    <ul className="ml-4">
-                      {questionResults.map(
-                        (result, index) => result === 1 && <li key={index}>Pregunta {index + 1}</li>,
-                      )}
-                    </ul>
-                  </div>
-                  {questionResults.some((result) => result === 0) && (
-                    <div className="incorrect-answers mb-4">
-                      <h3 className="preguntas_false font-bold inline-flex items-center">Preguntas respondidas </h3>
+                <h2 className="text-size font-bold mb-4 text-center">Resultados:</h2>
+                <div className={`separation-result ${allCorrect || allIncorrect ? "full-width" : ""}`}>
+                  {(allCorrect || !allIncorrect) && (
+                    <div className={`correct-answers ${allCorrect ? "full-width" : ""}`}>
+                      <h3 className="preguntas_true font-bold flex items-center">
+                        Preguntas respondidas correctamente:
+                        <img className="w-6 m-0 ml-1" src={checkIcon || "/placeholder.svg"} />
+                      </h3>
+                      <ul className="ml-4">
+                        {questionResults.map(
+                          (result, index) => result === 1 && <li key={index}>Pregunta {index + 1}</li>,
+                        )}
+                      </ul>
+                    </div>
+                  )}
+                  {(allIncorrect || !allCorrect) && (
+                    <div className={`incorrect-answers ${allIncorrect ? "full-width" : ""}`}>
                       <h3 className="preguntas_false font-bold flex items-center">
-                        incorrectamente:
+                        Preguntas respondidas incorrectamente:
                         <img className="w-6 m-0 ml-1" src={xmarkIcon || "/placeholder.svg"} />
                       </h3>
                       <ul className="ml-4">
@@ -238,13 +263,14 @@ function PreguntasSiNo() {
                   </p>
                 </div>
                 <div className="flex justify-center">
-                <Button
-                      roundedFull="true"
-                      icon={faRepeat}
-                      variant="outline"
-                      onClick={handleReset}
-                    >Reiniciar
-                      </Button>
+                  <Button
+                    roundedFull="true"
+                    icon={faRepeat}
+                    variant="outline"
+                    onClick={handleReset}
+                  >
+                    Reiniciar
+                  </Button>
                 </div>
               </div>
             )}
@@ -255,7 +281,7 @@ function PreguntasSiNo() {
       {showResults && (
         <div className="mt-8 text-center container-feedbackPSN font-text">
           <p
-            className="mb-4 font-bold text-lg"
+            className="mb-4 font-bold text-size"
             style={{
               color: results.correct === results.total ? "#4caf50" : results.correct === 0 ? "#f44336" : "#fb923c",
             }}
@@ -289,4 +315,3 @@ function PreguntasSiNo() {
 }
 
 export default PreguntasSiNo
-

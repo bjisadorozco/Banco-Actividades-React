@@ -2,7 +2,7 @@ import { useState, useRef } from "react"
 import { DndContext, useSensor, useSensors, MouseSensor, TouchSensor } from "@dnd-kit/core"
 import { useDroppable, useDraggable } from "@dnd-kit/core"
 import mano1 from "../../../assets/img/fisicas_correccion_sin_ruido_visual.webp"
-import mano2 from "../../../assets/img/economicas_con_fondo_sld5.webp"
+import mano2 from "../../../assets/img/economicas_correccion-sin_flecha.webp"
 import mano3 from "../../../assets/img/laborales_con_fondo_sld5.webp"
 import checkIcon from "../../../assets/img/checkAct.png"
 import xmarkIcon from "../../../assets/img/xmarkAct.png"
@@ -36,7 +36,7 @@ function DroppableArea({ id, children }) {
   })
 
   return (
-    <div ref={setNodeRef} className={isOver ? "dropbox-over" : ""}>
+    <div ref={setNodeRef} className={`drop-item-sld5 ${isOver ? "dropbox-over" : ""}`}>
       {children}
     </div>
   )

@@ -1,26 +1,26 @@
-import { useState, useEffect } from "react"
-import useStore from "../../../store"
-import Button from "../../components/Button"
-import Paragraph from "../../components/Paragraph"
-import img1 from "../../../assets/img/falta_oxigeno_ppt11_sldm2.webp"
-import img2 from "../../../assets/img/gases_toxicos_ppt11_sldm2.webp"
-import img3 from "../../../assets/img/atmosferas_explosivas_ppt11_sldm2.webp"
-import img4 from "../../../assets/img/atrapamiento_ppt11_sldm2.webp"
-import img5 from "../../../assets/img/virus_bacterias_ppt11_sldm2.webp"
-import img6 from "../../../assets/img/estres_ppt11_sldm2.webp"
-import audio1 from "../../../assets/audio/FISICAS-Morelco.mp3"
-import audio2 from "../../../assets/audio/FISICAS-Morelco.mp3"
-import audio3 from "../../../assets/audio/FISICAS-Morelco.mp3"
-import audio4 from "../../../assets/audio/FISICAS-Morelco.mp3"
-import audio5 from "../../../assets/audio/FISICAS-Morelco.mp3"
-import audio6 from "../../../assets/audio/FISICAS-Morelco.mp3"
-import { faRefresh, faCheck } from "@fortawesome/free-solid-svg-icons"
-import "./styles/SeleccionEspaciosConfinados.css"
-import imgVerdadero from "../../../assets/img/checkAct.png"
-import imgFalso from "../../../assets/img/xmarkAct.png"
+import { useState, useEffect } from "react";
+import useStore from "../../../store";
+import Button from "../../components/Button";
+import Paragraph from "../../components/Paragraph";
+import img1 from "../../../assets/img/falta_oxigeno_ppt11_sldm2.webp";
+import img2 from "../../../assets/img/gases_toxicos_ppt11_sldm2.webp";
+import img3 from "../../../assets/img/atrapamiento_ppt11_sldm2.webp";
+import img4 from "../../../assets/img/atmosferas_explosivas_ppt11_sldm2.webp";
+import img5 from "../../../assets/img/virus_bacterias_ppt11_sldm2.webp";
+import img6 from "../../../assets/img/estres_ppt11_sldm2.webp";
+import audio1 from "../../../assets/audio/FISICAS-Morelco.mp3";
+import audio2 from "../../../assets/audio/FISICAS-Morelco.mp3";
+import audio3 from "../../../assets/audio/FISICAS-Morelco.mp3";
+import audio4 from "../../../assets/audio/FISICAS-Morelco.mp3";
+import audio5 from "../../../assets/audio/FISICAS-Morelco.mp3";
+import audio6 from "../../../assets/audio/FISICAS-Morelco.mp3";
+import { faRefresh, faCheck } from "@fortawesome/free-solid-svg-icons";
+import "./styles/SeleccionEspaciosConfinados.css";
+import imgVerdadero from "../../../assets/img/checkAct.png";
+import imgFalso from "../../../assets/img/xmarkAct.png";
 
 function SeleccionEspaciosConfinados() {
-  const setIsOnDivisor = useStore((state) => state.setIsOnDivisor)
+  const setIsOnDivisor = useStore((state) => state.setIsOnDivisor);
   const [selections, setSelections] = useState({
     drop1: "",
     drop2: "",
@@ -28,7 +28,7 @@ function SeleccionEspaciosConfinados() {
     drop4: "",
     drop5: "",
     drop6: "",
-  })
+  });
   const [availableOptions, setAvailableOptions] = useState({
     drop1: [],
     drop2: [],
@@ -36,17 +36,18 @@ function SeleccionEspaciosConfinados() {
     drop4: [],
     drop5: [],
     drop6: [],
-  })
-  const [isVerified, setIsVerified] = useState(false)
-  const [correctCount, setCorrectCount] = useState(0)
-  const [isValidateEnabled, setIsValidateEnabled] = useState(false)
-  const [selectedCard, setSelectedCard] = useState(null)
-  const [selectedCards, setSelectedCards] = useState([])
+  });
+  const [isVerified, setIsVerified] = useState(false);
+  const [correctCount, setCorrectCount] = useState(0);
+  const [isValidateEnabled, setIsValidateEnabled] = useState(false);
+  const [selectedCard, setSelectedCard] = useState(null);
+  const [selectedCards, setSelectedCards] = useState([]);
+  const [showValidationMessage, setShowValidationMessage] = useState(false);
 
   useEffect(() => {
-    setIsOnDivisor(false)
+    setIsOnDivisor(false);
     // Initialize available options
-    const initialOptions = options.slice(1)
+    const initialOptions = options.slice(1);
     setAvailableOptions({
       drop1: initialOptions,
       drop2: initialOptions,
@@ -54,42 +55,49 @@ function SeleccionEspaciosConfinados() {
       drop4: initialOptions,
       drop5: initialOptions,
       drop6: initialOptions,
-    })
-  }, [setIsOnDivisor])
+    });
+  }, [setIsOnDivisor]);
 
   const handleChange = (dropId, value) => {
     setSelections((prev) => {
-      const newSelections = { ...prev, [dropId]: value }
+      const newSelections = { ...prev, [dropId]: value };
 
       // Update available options for all dropdowns
-      const selectedValues = Object.values(newSelections).filter((v) => v !== "")
-      const newAvailableOptions = {}
+      const selectedValues = Object.values(newSelections).filter((v) => v !== "");
+      const newAvailableOptions = {};
       Object.keys(availableOptions).forEach((key) => {
         newAvailableOptions[key] = options
           .slice(1)
-          .filter((option) => !selectedValues.includes(option.value) || option.value === newSelections[key])
-      })
-      setAvailableOptions(newAvailableOptions)
+          .filter((option) => !selectedValues.includes(option.value) || option.value === newSelections[key]);
+      });
+      setAvailableOptions(newAvailableOptions);
 
       // Enable validate button if at least one option is selected
-      setIsValidateEnabled(Object.values(newSelections).some((value) => value !== ""))
+      setIsValidateEnabled(Object.values(newSelections).some((value) => value !== ""));
 
-      return newSelections
-    })
-    setSelectedCards((prev) => [...new Set([...prev, dropId])])
-  }
+      return newSelections;
+    });
+    setSelectedCards((prev) => [...new Set([...prev, dropId])]);
+  };
 
   const handleVerify = () => {
-    let count = 0
+    const allSelected = Object.values(selections).every((value) => value !== "");
+    if (!allSelected) {
+      setShowValidationMessage(true);
+      return;
+    }
+
+    let count = 0;
     Object.keys(selections).forEach((key) => {
       if (selections[key] === correctItems[key]) {
-        count++
+        count++;
       }
-    })
-    setCorrectCount(count)
-    setIsVerified(true)
-    setIsValidateEnabled(false)
-  }
+    });
+    setCorrectCount(count);
+    setIsVerified(true);
+    setIsValidateEnabled(false);
+    setShowValidationMessage(false);
+  };
 
   const handleReset = () => {
     setSelections({
@@ -99,14 +107,14 @@ function SeleccionEspaciosConfinados() {
       drop4: "",
       drop5: "",
       drop6: "",
-    })
-    setIsVerified(false)
-    setCorrectCount(0)
-    setIsValidateEnabled(false)
-    setSelectedCard(null)
-    setSelectedCards([])
+    });
+    setIsVerified(false);
+    setCorrectCount(0);
+    setIsValidateEnabled(false);
+    setSelectedCard(null);
+    setSelectedCards([]);
     // Reset available options
-    const initialOptions = options.slice(1)
+    const initialOptions = options.slice(1);
     setAvailableOptions({
       drop1: initialOptions,
       drop2: initialOptions,
@@ -114,24 +122,24 @@ function SeleccionEspaciosConfinados() {
       drop4: initialOptions,
       drop5: initialOptions,
       drop6: initialOptions,
-    })
-  }
+    });
+  };
 
   const getCardBackgroundColor = (dropId) => {
     if (isVerified) {
-      const percentage = (correctCount / Object.keys(correctItems).length) * 100
+      const percentage = (correctCount / Object.keys(correctItems).length) * 100;
       if (selections[dropId] === correctItems[dropId]) {
-        return "bg-green-personalizado"
+        return "bg-green-personalizado";
       } else if (percentage > 60) {
-        return "bg-orange-personalizado"
+        return "bg-orange-personalizado";
       } else {
-        return "bg-red-personalizado"
+        return "bg-red-personalizado";
       }
     } else if (selectedCards.includes(dropId)) {
-      return "bg-purple-personalizado"
+      return "bg-purple-personalizado";
     }
-    return ""
-  }
+    return "";
+  };
 
   const risks = [
     {
@@ -176,16 +184,17 @@ function SeleccionEspaciosConfinados() {
       description: "Estrés o angustia",
       dropId: "drop6",
     },
-  ]
+  ];
+
   const options = [
     { value: "", label: "Selecciona una opción" },
-    { value: "option1", label: "Riesgo químico 2" },
+    { value: "option1", label: "Riesgo físico-químico" },
     { value: "option2", label: "Riesgo físico" },
     { value: "option3", label: "Riesgo Mecánico" },
     { value: "option4", label: "Riesgo químico" },
     { value: "option5", label: "Riesgo psicosocial" },
     { value: "option6", label: "Riesgo biológico" },
-  ]
+  ];
 
   const correctItems = {
     drop1: "option2",
@@ -194,7 +203,7 @@ function SeleccionEspaciosConfinados() {
     drop4: "option3",
     drop5: "option6",
     drop6: "option5",
-  }
+  };
 
   return (
     <div className="quiz-container-SEC mb-36 md:mb-0 overflow-auto">
@@ -202,7 +211,7 @@ function SeleccionEspaciosConfinados() {
         {risks.map((risk, index) => (
           <div className="quiz-card-SEC" key={index}>
             <div className={`card-front-SEC ${getCardBackgroundColor(risk.dropId)}`}>
-              <div className="card-image-SEC bg-gradient-to-b" style={{ position: "relative" }}>
+              <div className="card-image-SEC bg-gradient-to-b">
                 <img
                   src={risk.image || "/placeholder.svg"}
                   alt={risk.title}
@@ -263,25 +272,31 @@ function SeleccionEspaciosConfinados() {
           </div>
         ))}
       </div>
-      {isVerified && (
-        <div
-          className={`feedback-container-SEC mt-1 p-4 rounded-lg text-center text-white ${
-            correctCount === Object.keys(correctItems).length
-              ? "bg-green-personalizado"
-              : correctCount / Object.keys(correctItems).length > 0.6
-                ? "bg-orange-personalizado"
-                : "bg-red-personalizado"
-          }`}
-        >
-          {correctCount === Object.keys(correctItems).length ? (
-            <Paragraph>Respuesta correcta: ¡Muy bien! Todas las repuestas son correctas.</Paragraph>
-          ) : (
-            <Paragraph>
-              Respuesta Incorrecta: ¡Piénsalo bien! ¡Revisa muy bien la pregunta y vuelve a intentarlo!​
-            </Paragraph>
-          )}
+
+      {showValidationMessage && (
+        <div className="feedback-container-SEC mt-1 p-0 rounded-lg text-center font-bold">
+          <Paragraph>Debes seleccionar todos los elementos antes de validar.</Paragraph>
         </div>
       )}
+
+{isVerified && (
+  <div className="feedback-container-SEC mt-1 p-0 rounded-lg text-center">
+    {correctCount === Object.keys(correctItems).length ? (
+      <Paragraph>
+        <span className="text-green-personalizado font-bold">Respuesta correcta:</span> <span className="texto-gray">¡Muy bien! Todas las respuestas son correctas.</span>
+      </Paragraph>
+    ) : correctCount === Object.keys(correctItems).length - 2 ? (
+      <Paragraph>
+        <span className="text-orange-personalizado font-bold">Piénsalo bien:</span> <span className="texto-gray">Algunas preguntas NO las has relacionado correctamente.</span>
+      </Paragraph>
+    ) : (
+      <Paragraph>
+        <span className="text-red-personalizado font-bold">Respuesta Incorrecta:</span> <span className="texto-gray">¡Piénsalo bien! ¡Revisa muy bien la pregunta y vuelve a intentarlo!​</span>
+      </Paragraph>
+    )}
+  </div>
+)}
+
       {isVerified && (
         <div className="text-center mt-1">
           <p theme="ligth" bold="true" className="bold-text">
@@ -290,6 +305,7 @@ function SeleccionEspaciosConfinados() {
           </p>
         </div>
       )}
+
       <div className="flex justify-center gap-4 my-2">
         <Button
           bold={false}
@@ -301,13 +317,18 @@ function SeleccionEspaciosConfinados() {
         >
           Validar
         </Button>
-        <Button bold={false} icon={faRefresh} roundedFull={true} onClick={handleReset}>
+        <Button
+          bold={false}
+          icon={faRefresh}
+          roundedFull={true}
+          onClick={handleReset}
+          disabled={!isVerified} // Solo habilitado después de validar
+        >
           Reiniciar
         </Button>
       </div>
     </div>
-  )
+  );
 }
 
-export default SeleccionEspaciosConfinados
-
+export default SeleccionEspaciosConfinados;
