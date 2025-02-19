@@ -29,6 +29,8 @@ export default {
         "incorrect-feedback": "#F44336",
         "acordion": "#ffffff",
         "introduccion": "#64748b",
+        "button-figma": "#102044",
+        "response-figma": "#808693"
       },
       // Here we can configure the sizes of the project. We can use this in the className of each component.
       fontSize: {

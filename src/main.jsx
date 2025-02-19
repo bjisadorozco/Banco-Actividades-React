@@ -48,8 +48,9 @@ import Sliderppt16_SeleccionPreguntasParte1 from "./pages/Actividades/Actividade
 import Sliderppt17_SeleccionPreguntasParte2 from "./pages/Actividades/Actividades_Uso_Seguro_Andamios/Sliderppt17_SeleccionPreguntasParte2.jsx";
 import Sliderppt18_SeleccionPreguntas from "./pages/Actividades/Actividades_PESV/Sliderppt18_SeleccionPreguntas.jsx";
 import Sliderppt19_SeleccionPreguntasAudios from "./pages/Actividades/Actividades_PESV/Sliderppt19_SeleccionPreguntasAudios.jsx";
+import PreguntasFactorHumano from "./pages/Actividades/Actividades_PESV/PreguntasFactorHumano.jsx";
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <Sliderppt19_SeleccionPreguntasAudios />
+    <Sliderppt24_SeleccionMultiple />
   </React.StrictMode>
 );
