@@ -43,23 +43,7 @@ const PreguntasFactorHumano = () => {
             requiredSelections: 2,
             correctFeedback: "¡Muy bien! Reconoces los elementos del factor humano.",
             incorrectFeedback: "¡Piénsalo bien! Observa nuevamente el video e inténtalo de nuevo.",
-        },
-        {
-            question: "Identifica los 2 elementos del FACTOR HUMANO que Pedro NO tuvo en cuenta:",
-            options: [
-                { text: "Uso de cinturón de seguridad", correct: false },
-                { text: "Capacitación de los conductores", correct: false },
-                { text: "Evitar consumo de alcohol y drogas", correct: false },
-                { text: "Uso de casco de motocicleta", correct: true },
-                { text: "Límites de velocidad y señales de tránsito", correct: true },
-                { text: "Evitar uso de elementos distractores", correct: true },
-            ],
-            multipleCorrect: true,
-            correctCount: 3,
-            requiredSelections: 3,
-            correctFeedback: "¡Muy bien! Reconoces los elementos del factor humano.",
-            incorrectFeedback: "¡Piénsalo bien! Observa nuevamente el video e inténtalo de nuevo.",
-        },
+        }
     ]
 
     const handleComplete = (results) => {

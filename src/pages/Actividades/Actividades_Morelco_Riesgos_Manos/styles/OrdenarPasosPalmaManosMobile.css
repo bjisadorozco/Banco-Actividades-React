@@ -35,10 +35,10 @@
 }
 
 /* Elimina el hover que causa el cambio de color */
-.tarjeta-paso:hover {
-  background-color: #ffffff; /* Fondo blanco siempre */
-  cursor: default; /* El cursor no cambia */
-}
+/* .tarjeta-paso:hover {
+  background-color: #ffffff; 
+  cursor: default; 
+} */
 
 /* Estilos adicionales para colores dinámicos */
 .tarjeta-paso.correcto {

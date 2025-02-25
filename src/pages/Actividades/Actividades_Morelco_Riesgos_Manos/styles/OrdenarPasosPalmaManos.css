@@ -35,10 +35,10 @@
     border: 1px solid #ddd;
   }
   
-  .tarjeta-paso:hover {
+  /* .tarjeta-paso:hover {
     background: #8f8f8f;
   }
-  
+   */
   /* Estado correcto e incorrecto */
   .tarjeta-paso.correcto {
     background: #4caf50;

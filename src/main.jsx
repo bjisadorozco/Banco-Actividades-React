@@ -29,7 +29,6 @@ import OrdenarPasosPalmaManosMobile from "./pages/Actividades/Actividades_Morelc
 import PreguntasSiNo from "./pages/Actividades/Actividades_Morelco_Riesgos_Manos/PreguntasSiNo.jsx";
 import EspaciosConfinadosSeleccionMultiple from "./pages/Actividades/Actividades_Morelco_Riesgos_Manos/EspaciosConfinadosSeleccionMultiple.jsx";
 import SeleccionEspaciosConfinados from "./pages/Actividades/Actividades_Morelco_Riesgos_Manos/SeleccionEspaciosConfinados.jsx";
-
 import "./main.css";
 import Slider13_Lista_desplegable from "./pages/Actividades/Actividades_Espacios_Confinados/Slider13_Lista_desplegable_movil.jsx";
 import DragAndDropAudios from "./pages/Actividades/Actividades_Trabajo_seguro_alturas/DragAndDropAudios.jsx";
@@ -48,9 +47,9 @@ import Sliderppt16_SeleccionPreguntasParte1 from "./pages/Actividades/Actividade
 import Sliderppt17_SeleccionPreguntasParte2 from "./pages/Actividades/Actividades_Uso_Seguro_Andamios/Sliderppt17_SeleccionPreguntasParte2.jsx";
 import Sliderppt18_SeleccionPreguntas from "./pages/Actividades/Actividades_PESV/Sliderppt18_SeleccionPreguntas.jsx";
 import Sliderppt19_SeleccionPreguntasAudios from "./pages/Actividades/Actividades_PESV/Sliderppt19_SeleccionPreguntasAudios.jsx";
-import PreguntasFactorHumano from "./pages/Actividades/Actividades_PESV/PreguntasFactorHumano.jsx";
+import PreguntasFactorHumanoTF from "./pages/Actividades/Actividades_PESV/PreguntasFactorHumanoTF.jsx";
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <Sliderppt24_SeleccionMultiple />
+    <PreguntasFactorHumanoTF />
   </React.StrictMode>
 );
