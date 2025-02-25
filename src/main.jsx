@@ -43,6 +43,7 @@ import Slider15_Lista_desplegable from "./pages/Actividades/Actividades_Espacios
 import Slider15_Lista_desplegable_movil from "./pages/Actividades/Actividades_Espacios_Confinados/Slider15_Lista_desplegable_movil.jsx";
 import PreguntasRiesgosTermicosV2 from "./pages/Actividades/Actividades_Morelco_Riesgos_Manos/PreguntasRiesgosTermicosV2.jsx";
 import Sliderppt24_SeleccionMultiple from "./pages/Actividades/Actividades_Uso_Seguro_Andamios/Sliderppt24_SeleccionMultiple.jsx";
+import Sliderppt9_DragAndDrop from "./pages/Actividades/Actividades_Uso_Seguro_Andamios/Sliderppt9_DragAndDrop.jsx";
 import Sliderppt15_SeleccionMultipleCheckbox from "./pages/Actividades/Actividades_Uso_Seguro_Andamios/Sliderppt15_SeleccionMultipleCheckbox.jsx";
 import Sliderppt16_SeleccionPreguntasParte1 from "./pages/Actividades/Actividades_Uso_Seguro_Andamios/Sliderppt16_SeleccionPreguntasParte1.jsx";
 import Sliderppt17_SeleccionPreguntasParte2 from "./pages/Actividades/Actividades_Uso_Seguro_Andamios/Sliderppt17_SeleccionPreguntasParte2.jsx";
@@ -51,6 +52,6 @@ import Sliderppt19_SeleccionPreguntasAudios from "./pages/Actividades/Actividade
 import PreguntasFactorHumano from "./pages/Actividades/Actividades_PESV/PreguntasFactorHumano.jsx";
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <Sliderppt24_SeleccionMultiple />
+    <Sliderppt18_SeleccionPreguntas />
   </React.StrictMode>
 );

@@ -1,93 +1,237 @@
 .quiz-container-SPA {
-    width: 100%;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding-top: 2rem; /* Espacio superior */
-  }
-  
+  width: 100%;
+  min-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-top: 0rem;
+}
+
+.cards-container-SPA {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.image-select-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.top-content,
+.bottom-content {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 90px;
+}
+
+.top-content {
+  justify-content: flex-end;
+  padding-bottom: 10px;
+}
+
+.image-validation-container {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 0.1rem 0;
+  margin-top: 10px;
+}
+
+.circular-image {
+  border-radius: 50%;
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border: 3px solid #e5e7eb;
+}
+
+.custom-select-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 200px;
+}
+
+.custom-select {
+  width: 100%;
+  padding: 0.5rem;
+  border: 2px solid #0f1721;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  font-size: 0.9rem;
+  color: #333;
+  white-space: normal;
+  height: auto;
+  resize: none;
+  overflow: hidden;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.custom-select:focus {
+  border-color: #007bff;
+  box-shadow: 0 2px 8px rgba(0, 123, 255, 0.25);
+  outline: none;
+}
+
+.custom-select-wrapper::after {
+  content: "▼";
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  pointer-events: none;
+  font-size: 0.8rem;
+  color: #0f1721;
+}
+
+.bottom-content .custom-select-wrapper::after {
+  content: "▲";
+}
+
+.validation-icon-container {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  pointer-events: none;
+}
+
+.validation-iconSPA {
+  width: 50px;
+  height: 50px;
+  object-fit: contain;
+  opacity: 0.9;
+}
+
+.audio-container audio {
+  height: 40px;
+  width: 200px;
+}
+
+.audio-container {
+  border-radius: 36%;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.reset-button-container {
+  margin-top: 0.5rem;
+}
+
+.reset-button-container button.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+@media (max-width: 640px) {
   .cards-container-SPA {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr); /* 4 columnas en una sola fila */
-    gap: 2rem; /* Espacio entre elementos */
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 1rem;
+    grid-template-columns: 1fr;
   }
-  
+}
+
+.feedback-container-SEC {
+  margin: 0 auto;
+  text-align: center;
+}
+
+.feedback-container-SEC p {
+  font-weight: bold;
+  color: #8f8f8f;
+  text-align: center;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.text-green-personalizado {
+  color: #4caf50;
+}
+
+.text-red-personalizado {
+  color: #f44336;
+}
+
+.text-orange-personalizado {
+  color: #ff9800;
+}
+
+.texto-gray {
+  color: #8f8f8f;
+}
+
+.bold-text {
+  font-weight: bold;
+  color: #8f8f8f;
+  font-family: Montserrat, sans-serif;
+}
+
+/* Nuevos estilos para mobile */
+@media (max-width: 640px) {
+  .cards-container-SPA {
+    grid-template-columns: 1fr;
+  }
+
   .image-select-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1rem; /* Espacio entre la imagen y el select */
+    display: grid;
+    grid-template-rows: auto auto auto;
+    gap: 1rem;
+    padding: 1rem 0;
   }
-  
-  /* Contenedor de audio y validación */
-  .audio-validation-container {
-    position: relative;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  /* Estilo para imágenes circulares */
-  .circular-image {
-    border-radius: 50%; /* Hace que la imagen sea circular */
-    width: 150px; /* Ajusta el tamaño de la imagen */
-    height: 150px; /* Ajusta el tamaño de la imagen */
-    object-fit: cover; /* Asegura que la imagen cubra el espacio sin distorsionarse */
-    border: 3px solid #e5e7eb; /* Opcional: Agrega un borde */
-  }
-  
-  .custom-select {
-    width: 100%;
-    padding: 0.5rem;
-    border: 1px solid #e5e7eb;
-    border-radius: 0.25rem;
-    background-color: white;
-    font-size: 0.9rem;
-    color: #000; /* Asegurar que el texto sea visible */
-  }
-  
-  .custom-select option {
-    color: #000; /* Asegurar que el texto de las opciones sea visible */
-  }
-  
-  .validation-icon-container {
-    position: absolute;
-    top: 0; /* Posición arriba de la imagen */
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 10;
-    pointer-events: none;
-  }
-  
-  .validation-icon {
-    width: 50px;
-    height: 50px;
-    object-fit: contain;
-    opacity: 0.9;
-  }
-  
+
+  /* Forzar todos los audios arriba */
   .audio-container {
-    margin-bottom: 0.5rem; /* Espacio entre el audio y la imagen */
+    order: -1 !important;
   }
-  
-  .reset-button-container {
-    margin-top: 2rem; /* Espacio superior para el botón */
+
+  /* Forzar todos los selects abajo */
+  .custom-select-wrapper {
+    order: 3 !important;
   }
-  
-  @media (max-width: 1024px) {
-    .cards-container-SPA {
-      grid-template-columns: repeat(2, 1fr); /* 2 columnas en tablets */
-    }
+
+  /* Ajustar el contenedor de imagen al medio */
+  .image-validation-container {
+    order: 2;
+    margin: 1rem 0;
   }
-  
-  @media (max-width: 640px) {
-    .cards-container-SPA {
-      grid-template-columns: 1fr; /* 1 columna en móviles */
-    }
+
+  /* Reorganizar el contenido superior e inferior */
+  .top-content,
+  .bottom-content {
+    display: contents;
   }
+
+  /* Asegurar que los íconos de validación se mantengan sobre la imagen */
+  .validation-icon-container {
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  /* Ajustar el espacio entre elementos */
+  .audio-container,
+  .custom-select-wrapper {
+    margin: 0.5rem 0;
+  }
+
+  /* Mantener la flecha del select consistente */
+  .custom-select-wrapper::after {
+    content: "▼" !important;
+  }
+}
+
