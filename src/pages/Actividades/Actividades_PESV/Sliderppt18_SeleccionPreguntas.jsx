@@ -21,18 +21,18 @@ const correctAnswers = ["6", "1", "3", "4", "5", "2"];
 // Componente principal que representa la actividad de preguntas relacionadas con riesgos térmicos
 function Sliderppt18_SeleccionPreguntas() {
   // Estados para manejar las opciones seleccionadas, estilos y feedback
-  const [dropdowns, setDropdowns] = useState(Array(6).fill("0")); //Estado para los valores seleccionados de los dropdowns
+  const [dropdowns, setDropdowns] = useState(Array(6).fill("0")); // Estado para los valores seleccionados de los dropdowns
   const [borderColors, setBorderColors] = useState(
-    Array(6).fill("border-[#afafaf]") //Colores de los bordes de los dropdowns
+    Array(6).fill("border-[#afafaf]") // Colores de los bordes de los dropdowns
   );
-  const [isValidated, setIsValidated] = useState(false); //Estado para validar si las respuestas han sido validadas
-  const [buttonColors, setButtonColors] = useState(Array(6).fill("bg-white")); //Colores de fondo de los botones
-  const setIsOnDivisor = useStore((state) => state.setIsOnDivisor); //Manejo del estado global
-  const [correctCount, setCorrectCount] = useState(0); //Número de respuestas correctas
-  const [feedback, setFeedback] = useState(""); //Mensaje de retroalimentación
-  const [percentage, setPercentage] = useState(0); // Nuevo estado para el porcentaje
-  const [errorMessage, setErrorMessage] = useState(""); //Porcentaje de respuestas correctas
-  const [isValid, setIsValid] = useState(false); //Estado para habilitar el estado de validación
+  const [isValidated, setIsValidated] = useState(false); // Estado para validar si las respuestas han sido validadas
+  const [buttonColors, setButtonColors] = useState(Array(6).fill("bg-white")); // Colores de fondo de los botones
+  const setIsOnDivisor = useStore((state) => state.setIsOnDivisor); // Manejo del estado global
+  const [correctCount, setCorrectCount] = useState(0); // Número de respuestas correctas
+  const [feedback, setFeedback] = useState(""); // Mensaje de retroalimentación
+  const [percentage, setPercentage] = useState(0); // Porcentaje de respuestas correctas
+  const [errorMessage, setErrorMessage] = useState(""); // Mensaje de error
+  const [isValid, setIsValid] = useState(false); // Estado para habilitar el estado de validación
 
   // Configuración inicial del estado global
   useEffect(() => {
@@ -51,21 +51,25 @@ function Sliderppt18_SeleccionPreguntas() {
     newDropdowns[index] = value;
     setDropdowns(newDropdowns);
 
-    // Cambia los colores de los botones según las selecciones
-    const newButtonColors = [...buttonColors];
-    newButtonColors[index] =
-      value !== "0"
-        ? "bg-[#b232fc] border-none shadow-md text-white"
-        : "bg-white text-black";
-    setButtonColors(newButtonColors);
+    // Cambia los colores de los botones según las selecciones solo si no se ha validado
+    if (!isValidated) {
+      const newButtonColors = [...buttonColors];
+      newButtonColors[index] =
+        value !== "0"
+          ? "bg-[#0F172A] border-none shadow-md text-white"
+          : "bg-white text-black";
+      setButtonColors(newButtonColors);
+    }
   };
 
   // Valida las respuestas seleccionadas por el usuario
   const validateDropdowns = () => {
     if (dropdowns.includes("0")) {
-      setErrorMessage( <div className="text-incorrect-feedback w-full">
-       Debe seleccionar todas las opciones antes de validar.
-      </div> );
+      setErrorMessage(
+        <div className="text-incorrect-feedback w-full">
+          Debe seleccionar todas las opciones antes de validar.
+        </div>
+      );
       return;
     }
     setErrorMessage("");
@@ -94,24 +98,32 @@ function Sliderppt18_SeleccionPreguntas() {
     // Muestra feedback según el resultado
     if (correct === correctAnswers.length) {
       setFeedback(
-        <div className="bg-correct-feedback text-white py-1 px-2 my-2 rounded-md w-[80%]">
-          ¡Muy bien! Has diseñado e implementado correctamente los programas del Plan Estratégico.
+        <div className="bg-correct-feedback text-white text-monserrat py-1 px-2 my-2 rounded-md w-[80%]">
+          ¡Muy bien! Has ayudado a Antonio a reconocer las políticas de seguridad vial.​
         </div>
       );
     } else {
       setFeedback(
-        <div className="bg-incorrect-feedback text-white py-1 my-2 rounded-md w-[80%]">
-          ¡Piénsalo bien e intenta de nuevo!
+        <div className="bg-incorrect-feedback text-white text-monserrat py-1 my-2 rounded-md w-[80%]">
+          ¡Piénsalo bien! Algunas políticas de seguridad no son las correctas.
         </div>
       );
     }
+
+    // Aplica los colores de validación a los botones
+    const newButtonColors = dropdowns.map((value, index) =>
+      value === correctAnswers[index]
+        ? "bg-correct-feedback text-white border-[#afafaf]"
+        : "bg-incorrect-feedback text-white border-[#afafaf]"
+    );
+    setButtonColors(newButtonColors);
   };
 
   // Reinicia todos los estados al valor inicial
   const resetDropdowns = () => {
     setDropdowns(Array(6).fill("0"));
     setBorderColors(Array(6).fill("border-[#afafaf]"));
-    setButtonColors(Array(6).fill("bg-white"));
+    setButtonColors(Array(6).fill("bg-white")); // Reinicia los colores de los botones
     setIsValidated(false);
     setCorrectCount(0);
     setFeedback("");
@@ -204,7 +216,7 @@ function Sliderppt18_SeleccionPreguntas() {
                 {isValidated && (
                   <div className="text-center w-full items-center justify-center flex flex-col">
                     {feedback}
-                    <h3 className="text-md mt-0 font-bold text-paragraph-light-color ">
+                    <h3 className="text-md mt-0 font-bold text-paragraph-light-color text-monserrat">
                       Tus respuestas correctas son: {correctCount} de {correctAnswers.length} ({percentage}%)
                     </h3>
                   </div>
@@ -263,7 +275,7 @@ function Select({
       <option value="0">Seleccione...</option>
       {options.map((option) => (
         <option
-          className="bg-white text-[#3a3a3a] hover:bg-[#dcaff7] hover:text-[#b232fc] focus:bg-[#dcaff7] focus:text-[#b232fc] transition-colors duration-300"
+          className="bg-white text-[#3a3a3a] hover:bg-[#dcaff7] hover:text-[#0F172A] focus:bg-[#dcaff7] focus:text-[#0F172A] transition-colors duration-300"
           key={option.value}
           value={option.value}
         >
