@@ -40,7 +40,7 @@ function DraggableOption({ id, label, isDropped }) {
         width: "160px",
         height: "60px",
         padding: "10px",
-        backgroundColor: "#C0185D",
+        backgroundColor: "#0F172A",
         color: "white",
         display: "flex",
         justifyContent: "center",
@@ -66,7 +66,7 @@ function DropArea({ id, children, isValidated, isCorrect }) {
         ? "#90EE90" // Light green
         : "#FFB6C1" // Light red
       : children
-        ? "#C0185D"
+        ? "#0F172A"
         : isOver
           ? "#e6e6e6"
           : "#f3f4f6",
@@ -79,7 +79,7 @@ function DropArea({ id, children, isValidated, isCorrect }) {
           ? "#90EE90"
           : "#FFB6C1"
         : children
-          ? "#C0185D"
+          ? "#0F172A"
           : "#e2e8f0"
     }`,
     borderRadius: "8px",
@@ -172,8 +172,8 @@ export default function DragAndDropSlide9() {
 
     if (totalCorrect === 4) {
       setValidationMessage(
-        `¡Muy bien ! ¡Este es un riesgo de la actividad seleccionada! 
-        \nTus respuestas correctas son: ${totalCorrect} de 4 (${percentage}%)`
+        `¡Muy bien! ¡Este es un riesgo de la actividad seleccionada! 
+        \nTus resp1uestas correctas son: ${totalCorrect} de 4 (${percentage}%)`
       );
     } else {
       setValidationMessage(

@@ -8,12 +8,13 @@ import imgS from "../../../assets/img/ImagenesPESV/letra_s_sld_M1.webp";
 import imgV from "../../../assets/img/ImagenesPESV/letra_v_sld_M1.webp";
 import correctIcon from "../../../assets/img/checkAct.png";
 import incorrectIcon from "../../../assets/img/xmarkAct.png";
-import "./styles/PPT8_Lista_Desplegable.css"
+import "./styles/PPT8_Lista_Desplegable.css";
 
 function PPT8_List_Desplegable() {
   const [errorMessage, setErrorMessage] = useState("");
   const [isVerified, setIsVerified] = useState(false);
   const [correctCount, setCorrectCount] = useState(0);
+  const [validationMessage, setValidationMessage] = useState("");
   const [items, setItems] = useState([
     {
       image: imgP,
@@ -39,21 +40,21 @@ function PPT8_List_Desplegable() {
       selectedAnswer: "",
       isCorrect: false,
     },
-		{
-			image: imgV,
+    {
+      image: imgV,
       description:
         "Este diagrama clasifica las causas de un problema en categorías como personas, máquinas, materiales, métodos, medio ambiente y medición.",
       correctAnswer: "4",
       selectedAnswer: "",
       isCorrect: false,
-      }
+    },
   ]);
 
   const [availableOptions] = useState([
-    { value: "3", label: "S" },
-    { value: "1", label: "P" },
-    { value: "2", label: "E" },
-    { value: "4", label: "V" },
+    { value: "3", label: "Seguridad" },
+    { value: "1", label: "Plan" },
+    { value: "2", label: "Estrátegico de" },
+    { value: "4", label: "Vial" },
   ]);
 
   const handleSelect = (index, value) => {
@@ -75,6 +76,18 @@ function PPT8_List_Desplegable() {
       return { ...item, isCorrect };
     });
 
+    const percentage = Math.round((correct / items.length) * 100);
+
+    if (correct === items.length) {
+      setValidationMessage(
+        `¡Muy bien! Tus respuestas correctas son: ${correct} de 4 (${percentage}%)`
+      );
+    } else {
+      setValidationMessage(
+        `¡Piénsalo bien! Tus respuestas correctas son: ${correct} de 4 (${percentage}%)`
+      );
+    }
+
     setItems(updatedItems);
     setCorrectCount(correct);
     setIsVerified(true);
@@ -88,6 +101,7 @@ function PPT8_List_Desplegable() {
     setErrorMessage("");
     setIsVerified(false);
     setCorrectCount(0);
+    setValidationMessage("");
   };
 
   return (
@@ -128,7 +142,8 @@ function PPT8_List_Desplegable() {
                 .filter(
                   (option) =>
                     !items.some(
-                      (item, i) => i !== index && item.selectedAnswer === option.value
+                      (item, i) =>
+                        i !== index && item.selectedAnswer === option.value
                     )
                 )
                 .map((option) => (
@@ -148,12 +163,18 @@ function PPT8_List_Desplegable() {
       </div>
 
       <div className="feedback-container">
-        {errorMessage && (
-          <p className="error-message">{errorMessage}</p>
-        )}
+        {errorMessage && <p className="error-message">{errorMessage}</p>}
         {isVerified && (
-          <p className="score-text">
-            {correctCount} de {items.length} respuestas correctas
+          // <p className="validation-message">
+          //   ¡Muy bien! Tus respuestas correctas son: {correctCount} de 4 (
+          //   {(correctCount / 4) * 100}%)
+          // </p>
+          <p
+            className={`validation-message ${
+              validationMessage.includes("Muy bien") ? "successs" : "errors"
+            }`}
+          >
+            {validationMessage}
           </p>
         )}
         <div className="button-container">

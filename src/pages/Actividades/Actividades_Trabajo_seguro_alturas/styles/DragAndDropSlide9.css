@@ -31,7 +31,7 @@
 .draggable-option {
   width: 150px;
   height: 60px;
-  background-color: #c0185d;
+  background-color: #0f172a;
   color: white;
   display: flex;
   justify-content: center;
@@ -95,8 +95,8 @@
 }
 
 .drop-area-filled {
-  background-color: #c0185d;
-  border: 2px dashed #c0185d;
+  background-color: #0f172a;
+  border: 2px dashed #0f172a;
   color: white;
 }
 
@@ -125,7 +125,7 @@
   color: #818181;
   font-weight: bold;
   padding: 10px;
-  white-space: pre-line; 
+  white-space: pre-line;
 }
 
 .verification-icon {

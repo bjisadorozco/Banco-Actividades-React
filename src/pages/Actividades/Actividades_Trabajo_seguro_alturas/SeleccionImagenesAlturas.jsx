@@ -32,8 +32,8 @@ function SeleccionImagenesAlturas() {
   const explanationsMap = {
     [trabajoTechos]: 'Trabajos en techos y cubiertas:   Bien!  Estos normalmente se hacen a más de 2 mts de altura.',
     [trabajosFachados]: 'Trabajos en paredes y fachadas:   Bien!  Estos siempre se hacen a más de 2 mts de altura',
-    [trabajosMontajes]: 'Tabajos de montajes de estructuras:   Bien !  Estos normalmente se hacen a más de 2 mts de altura',
-    [trabajosAndamios]: 'Trabajos en andamios:   Bien !  Estos normalmente permiten acceder a alturas superiores a 2 mts',
+    [trabajosMontajes]: 'Tabajos de montajes de estructuras:   Bien!  Estos normalmente se hacen a más de 2 mts de altura',
+    [trabajosAndamios]: 'Trabajos en andamios:   Bien!  Estos normalmente permiten acceder a alturas superiores a 2 mts',
     [instalacionPisos]: 'Instalación de pisos:  Este tipo de tareas normalmente NO se hacen a más de 2 metros de altura.',
     [instalacionElectrica]: 'Instalación electrica de piso: Este tipo de tareas normalmente NO se hacen a más de 2 metros de altura.',
   };
