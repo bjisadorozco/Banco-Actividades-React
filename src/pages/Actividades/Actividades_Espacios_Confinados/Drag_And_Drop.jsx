@@ -21,7 +21,7 @@ import gafas from "/src/assets/img/gafas_seguridad_sldM2.webp";
 import guantes from "/src/assets/img/guantes_sldM2.webp";
 import respirador from "/src/assets/img/respiradores_sldM2.webp";
 import trabajador from "/src/assets/img/avatar_elementos_epp.webp";
-import Magnifier from "react-magnifier";
+// import Magnifier from "react-magnifier";
 const items = [
   {
     id: "A",
@@ -242,14 +242,14 @@ const DragAndDrop = () => {
         <div className="w-full flex justify-center items-center overflow-hidden ">
           {/* Contenedor inicial */}
           <div className="flex items-start justify-start absolute top-[-10px] left-16">
-                {" "}
-                <p className="w-[45%] inline-block bg-[#c0185d33] text-[#c0185d] px-2 py-2 rounded-[10px] text-sm leading-[1.3rem]">
-                  Pasa el mouse por la imagen para descubrir su contenido
-                  <span className="icono-inst">
-                    <i className="fa-solid fa-arrow-turn-down"></i>
-                  </span>
-                </p>
-              </div>
+            {" "}
+            <p className="w-[45%] inline-block bg-[#c0185d33] text-[#c0185d] px-2 py-2 rounded-[10px] text-sm leading-[1.3rem]">
+              Pasa el mouse por la imagen para descubrir su contenido
+              <span className="icono-inst">
+                <i className="fa-solid fa-arrow-turn-down"></i>
+              </span>
+            </p>
+          </div>
           <div className="w-full flex justify-between items-center relative top-4">
             {/* Columna izquierda */}
             <div className="flex-1 flex flex-col items-center justify-center">
@@ -303,7 +303,6 @@ const DragAndDrop = () => {
             {/* Imagen central */}
 
             <div className="w-full flex-1 flex flex-col items-center justify-center">
-              
               <Magnifier
                 src={trabajador}
                 width="100%"

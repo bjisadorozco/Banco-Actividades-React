@@ -12,8 +12,9 @@ import { CSS } from "@dnd-kit/utilities";
 import trueImage from "/src/assets/img/checkAct.png";
 import falseImage from "/src/assets/img/false.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faRepeat, faUndo } from "@fortawesome/free-solid-svg-icons";
+import { faCheck, faRepeat, faUndo } from "@fortawesome/free-solid-svg-icons";
 import DndActivityMobile from "./DndActivityMobile";
+import Button from "../../components/Button";
 
 const items = [
   "Reducción de los costos asociados a los accidentes de tránsito.",
@@ -46,7 +47,7 @@ function DraggableItem({ id, content, correct }) {
   const style = {
     transform: CSS.Translate.toString(transform),
     backgroundColor:
-      correct === null ? "#6E3CD2" : correct ? "#4caf50" : "#f44336",
+      correct === null ? "#0F172A" : correct ? "#4caf50" : "#f44336",
     padding: "4px",
     borderRadius: "5px",
     cursor: "grab",
@@ -81,7 +82,7 @@ function DroppableBox({ id, items }) {
   return (
     <div
       ref={setNodeRef}
-      className={`p-4 border-2 border-solid rounded-lg border-gray-400 min-w-[200px] min-h-[250px] ${isOver ? "bg-gray-100" : ""}`}
+      className={`p-4 border-2 border-solid rounded-lg border-gray-400 min-w-[400px] min-h-[250px] ${isOver ? "bg-gray-100" : ""}`}
     >
       {items}
     </div>
@@ -100,6 +101,8 @@ export default function DndActivityDesktop() {
   const sensors = useSensors(useSensor(MouseSensor), useSensor(TouchSensor));
 
   const [allItemsInBoxes, setAllItemsInBoxes] = useState(false);
+  const [atLeastOneItemPlaced, setAtLeastOneItemPlaced] = useState(false);
+  const [remainingItemsCount, setRemainingItemsCount] = useState(items.length);
 
   const handleDragEnd = (event) => {
     const { active, over } = event;
@@ -110,11 +113,20 @@ export default function DndActivityDesktop() {
           [active.id]: { box: over.id, correct: null },
         };
 
+        // Verificar cuántos elementos quedan sin colocar
+        const placedItemsCount = Object.values(updatedState).filter(
+          (data) => data.box !== null
+        ).length;
+        setRemainingItemsCount(items.length - placedItemsCount);
+
         // Verificar si todos los elementos están en las cajas
         const allInBoxes = Object.values(updatedState).every(
           (data) => data.box !== null
         );
-        setAllItemsInBoxes(allInBoxes);
+        setAtLeastOneItemPlaced(
+          Object.values(updatedState).some((data) => data.box !== null)
+        );
+        setAllItemsInBoxes(allInBoxes); // Verificar si al menos un elemento ha sido colocado en una caja
 
         return updatedState;
       });
@@ -174,7 +186,8 @@ export default function DndActivityDesktop() {
     );
     setFeedback(null);
     setCurrentIndex(0);
-    setAllItemsInBoxes(false);
+    setAllItemsInBoxes(false); // Verificar si al menos un elemento ha sido colocado en una caja
+    setAtLeastOneItemPlaced(false); // Asegurar que se reinicie correctamente
   };
 
   const getFeedbackColor = () => {
@@ -197,88 +210,92 @@ export default function DndActivityDesktop() {
   return (
     <div className="mx-8">
       <div className="hidden md:flex jusitfy-center items-center flex-col">
-      <DndContext sensors={sensors} onDragEnd={handleDragEnd}>
-        <div className="w-full flex items-center justify-center">
-          <div className="bg-[#6E3CD2] rounded-lg text-white">
-            {currentIndex < items.length && (
-              <DraggableItem
-                key={items[currentIndex]}
-                id={items[currentIndex]}
-                content={items[currentIndex]}
-                correct={null}
+        <DndContext sensors={sensors} onDragEnd={handleDragEnd}>
+          {remainingItemsCount > 0 && (
+            <p className="text-center text-gray-500 font-bold">
+              Te faltan {remainingItemsCount} opciones
+            </p>
+          )}
+          <div className="w-full flex items-center justify-center">
+            <div className="bg-[#0F172A] rounded-lg text-white">
+              {currentIndex < items.length && (
+                <DraggableItem
+                  key={items[currentIndex]}
+                  id={items[currentIndex]}
+                  content={items[currentIndex]}
+                  correct={null}
+                />
+              )}
+            </div>
+          </div>
+          <div className="grid grid-cols-2 mx-4">
+            <div className="flex flex-col items-center justify-center">
+              <p className="text-[16px] text-[#009A3D] font-bold">SI</p>
+              <DroppableBox
+                id="Si"
+                items={Object.entries(itemsState)
+                  .filter(([_, data]) => data.box === "Si")
+                  .map(([item, data]) => (
+                    <DraggableItem
+                      key={item}
+                      id={item}
+                      content={item}
+                      correct={data.correct}
+                    />
+                  ))}
               />
-            )}
-          </div>
-        </div>
-        <div className="grid grid-cols-2 mx-4">
-          <div className="flex flex-col items-center justify-center">
-            <p className="text-[16px] text-[#009A3D] font-bold">SI</p>
-            <DroppableBox
-              id="Si"
-              items={Object.entries(itemsState)
-                .filter(([_, data]) => data.box === "Si")
-                .map(([item, data]) => (
-                  <DraggableItem
-                    key={item}
-                    id={item}
-                    content={item}
-                    correct={data.correct}
-                  />
-                ))}
-            />
-          </div>
-          
-          <div className="flex flex-col items-center justify-center">
-            <p className="text-[16px] text-[#f44336] font-bold">NO</p>
-            <DroppableBox
-              id="No"
-              items={Object.entries(itemsState)
-                .filter(([_, data]) => data.box === "No")
-                .map(([item, data]) => (
-                  <DraggableItem
-                    key={item}
-                    id={item}
-                    content={item}
-                    correct={data.correct}
-                  />
-                ))}
-            />
-          </div>
-        </div>
-      </DndContext>
+            </div>
 
-      <div className="w-full flex items-center justify-center">
-        <button
-          onClick={validateAnswers}
-          disabled={!allItemsInBoxes} // Deshabilitar si no todos los elementos están en las cajas
-          className={`bg-[#6E3CD2] text-white px-4 py-1 rounded-full mr-2 ${!allItemsInBoxes ? "opacity-50 cursor-not-allowed" : ""}`}
-        >
-          <FontAwesomeIcon icon={faUndo} className="mr-2" />
-          Validar
-        </button>
-        <button
-          onClick={resetActivity}
-          disabled={!allItemsInBoxes} // Deshabilitar si no todos los elementos están en las cajas
-          className={`bg-[#6E3CD2] text-white px-4 py-1 rounded-full ${!allItemsInBoxes ? "opacity-50 cursor-not-allowed" : ""}`}
-        >
-          <FontAwesomeIcon icon={faRepeat} className="mr-2" />
-          Reiniciar
-        </button>
+            <div className="flex flex-col items-center justify-center">
+              <p className="text-[16px] text-[#f44336] font-bold">NO</p>
+              <DroppableBox
+                id="No"
+                items={Object.entries(itemsState)
+                  .filter(([_, data]) => data.box === "No")
+                  .map(([item, data]) => (
+                    <DraggableItem
+                      key={item}
+                      id={item}
+                      content={item}
+                      correct={data.correct}
+                    />
+                  ))}
+              />
+            </div>
+          </div>
+        </DndContext>
+
+        <div className="w-full flex items-center justify-center gap-4">
+          <Button
+            onClick={validateAnswers}
+            disabled={!allItemsInBoxes} // Deshabilitar si no todos los elementos están en las cajas
+            // className={`bg-[#182032] text-white px-4 py-1 rounded-full mr-2 ${!allItemsInBoxes ? "opacity-50 cursor-not-allowed" : ""}`}
+          >
+            <FontAwesomeIcon icon={faCheck} className="mr-2" />
+            Validar
+          </Button>
+          <Button
+            onClick={resetActivity}
+            disabled={!atLeastOneItemPlaced} // Deshabilitar si no todos los elementos están en las cajas
+            // className={`bg-[#182032] text-white px-4 py-1 rounded-full ${atLeastOneItemPlaced ? "opacity-50 cursor-not-allowed" : ""}`}
+          >
+            <FontAwesomeIcon icon={faRepeat} className="mr-2" />
+            Reiniciar
+          </Button>
+        </div>
+
+        {feedback && (
+          <div
+            className={`w-full p-1 rounded text-white flex flex-col items-center justify-center text-center`}
+            style={{ backgroundColor: getFeedbackColor() }}
+          >
+            {feedback}
+          </div>
+        )}
       </div>
-
-      {feedback && (
-        <div
-          className={`w-full p-1 rounded text-white flex flex-col items-center justify-center text-center`}
-          style={{ backgroundColor: getFeedbackColor() }}
-        >
-          {feedback}
-        </div>
-      )}
+      <div className="md:hidden">
+        <DndActivityMobile />
       </div>
-<div className="md:hidden">
-<DndActivityMobile />
-
-</div>
     </div>
   );
 }

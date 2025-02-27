@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import imgTrue from "../../../assets/img/checkAct.png";
 import imgFalse from "../../../assets/img/xmarkAct.png";
-import imgPeligro from "/src/assets/img/avatar-hombre-check_morado_blanco.png";
+import imgPeligro from "/src/assets/img/avatar_feliz.webp";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRepeat } from "@fortawesome/free-solid-svg-icons";
+import Button from "../../components/Button";
 const Feedback = ({ isCorrect, message }) => (
   <div className={`text-${isCorrect ? "green" : "red"}-600 font-monserrat`}>
     {isCorrect ? "¡Correcto!" : "¡Piénsalo bien!"}
@@ -188,16 +189,16 @@ function Actividad_Falso_Verdadero() {
               {percentage}%)
             </p>
             <div className="w-full flex flex-col items-center justify-center">
-              <button
+              <Button
                 onClick={resetQuiz}
-                className="group font-semibold bg-main-color rounded-full px-4 py-2 shadow-main-color text-white my-3"
+                // className="group font-semibold bg-main-color rounded-full px-4 py-2 shadow-main-color text-white my-3"
               >
-                  <FontAwesomeIcon
-                                  icon={faRepeat}
-                                  style={{ marginRight: "8px" }}
-                                />
-                                Reiniciar
-              </button>
+                <FontAwesomeIcon
+                  icon={faRepeat}
+                  style={{ marginRight: "8px" }}
+                />
+                Reiniciar
+              </Button>
             </div>
           </div>
         ) : (
@@ -227,7 +228,7 @@ function Actividad_Falso_Verdadero() {
                       ? "Correcto"
                       : "Incorrecto"
                 }
-                className=" w-24 my-2 "
+                className="w-40 h-40 my-2 "
               />
               <div className="text-justify">
                 <p
@@ -248,32 +249,32 @@ function Actividad_Falso_Verdadero() {
               </div>
               <div className="flex justify-center m-0">
                 {!showFeedback && (
-                  <div className="w-full flex md:flex-row flex-col justify-between">
-                    <button
-                      className="mx-2 w-[80%] md:w-[40%] font-semibold flex justify-center items-center group bg-main-color rounded-full px-4 py-1 shadow-main-color text-white"
+                  <div className="flex justify-center gap-2">
+                    <Button
+                      // className="mx-2 w-[80%] md:w-[40%] font-semibold flex justify-center items-center group bg-main-color rounded-full px-4 py-1 shadow-main-color text-white"
                       onClick={() => handleAnswer(true)}
                       disabled={answerSelected !== null}
                     >
                       Si
-                    </button>
-                    <button
-                      className="mx-2 w-[80%] md:w-[40%] font-semibold flex justify-center items-center group bg-main-color rounded-full px-4 py-1 shadow-main-color text-white"
+                    </Button>
+                    <Button
+                      // className="mx-2 w-[80%] md:w-[40%] font-semibold flex justify-center items-center group bg-main-color rounded-full px-4 py-1 shadow-main-color text-white"
                       onClick={() => handleAnswer(false)}
                       disabled={answerSelected !== null}
                     >
                       No
-                    </button>
+                    </Button>
                   </div>
                 )}
                 {showFeedback && (
-                  <button
+                  <Button
                     onClick={handleNext}
-                    className="bg-main-color text-white py-2 px-4 rounded-full text-[16px] font-bold"
+                    // className="bg-main-color text-white py-2 px-4 rounded-full text-[16px] font-bold"
                   >
                     {currentQuestion === questions.length - 1
                       ? "Finalizar"
                       : "Siguiente"}
-                  </button>
+                  </Button>
                 )}
               </div>
             </div>
