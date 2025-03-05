@@ -153,11 +153,11 @@ const QuestionsComponent = ({ questions, onComplete }) => {
                                 </div>
                                 <div className="flex flex-col items-center">
                                     {/* Mostrar el contador solo si se ha seleccionado al menos una opción y no se han seleccionado todas */}
-                                    {selectedAnswers[currentQuestion]?.length > 0 && remainingSelections > 0 && (
+                                    {/* {selectedAnswers[currentQuestion]?.length > 0 && remainingSelections > 0 && (
                                         <p className="text-button-figma bg-counter  mb-2" style={baseTextStyle}>
                                             Te faltan <span className="font-bold">{remainingSelections}</span> opciones por seleccionar.
                                         </p>
-                                    )}
+                                    )} */}
                                     <Button
                                         bold={false}
                                         icon={isValidated ? faArrowRight : faCheck}
@@ -174,7 +174,7 @@ const QuestionsComponent = ({ questions, onComplete }) => {
 
                     {!showResults && showFeedback && (
                         <div className="feedback-container ctItem mt-4">
-                            <Paragraph theme="light" justify={isMobile ? "justify" : "justify"} style={baseTextStyle}>
+                            <Paragraph theme="light" justify={isMobile ? "justify" : "center"} style={baseTextStyle}>
                                 <strong
                                     style={{
                                         color: questionResults[currentQuestion] === 1 ? "#4CAF50" : "#F44336",

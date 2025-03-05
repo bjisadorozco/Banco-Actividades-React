@@ -194,7 +194,7 @@ const SortSteps = ({
 
             {resultado === "validado" && (
                 <div className="space-y-2">
-                    <p className="text-center text-response-figma my-4 font-bold" style={baseTextStyle}>
+                    <p className="text-center text-response-figma my-2 font-bold" style={baseTextStyle}>
                         Tus respuestas correctas son {correctCount} de {correctOrder.length}. ({porcentaje}%)
                     </p>
                     <div className="text-center" style={baseTextStyle}>
@@ -208,7 +208,7 @@ const SortSteps = ({
                 </div>
             )}
 
-            <div className="buttons-container mt-4">
+            <div className="buttons-container mt-2">
                 <Button
                     bold={false}
                     icon={resultado === "validado" ? faRepeat : faCheck}

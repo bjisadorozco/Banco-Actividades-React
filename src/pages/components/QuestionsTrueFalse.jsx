@@ -142,10 +142,13 @@ const QuestionsTrueFalse = ({
                                         }
                                     </p>
                                 </div>
-                                {questions[currentQuestion].feedback && showFeedback && (
+                                {showFeedback && (
                                     <div className="feedback-container p-3 bg-gray-200 rounded-lg mb-4">
                                         <p className="text-response-figma">
-                                            {questions[currentQuestion].feedback}
+                                            {answerSelected
+                                                ? (questions[currentQuestion].feedbackCorrect || "")
+                                                : (questions[currentQuestion].feedbackIncorrect || "")
+                                            }
                                         </p>
                                     </div>
                                 )}

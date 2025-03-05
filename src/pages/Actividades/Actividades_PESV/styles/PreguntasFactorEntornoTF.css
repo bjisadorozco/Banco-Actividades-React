@@ -39,9 +39,9 @@
     gap: 10px;
   }
   
-  .feedback-container {
+  /* .feedback-container {
     border-left: 4px solid var(--main-color);
-  }
+  } */
   
   .reset-container button:hover {
     background-color: var(--secondary-colorVF);
