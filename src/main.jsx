@@ -24,6 +24,11 @@ import ActividadListaDesplegable from "./pages/Actividades/Actividades_Morelco_R
 import PreguntasAlturas1 from "./pages/Actividades/Actividades_Trabajo_seguro_alturas/PreguntasAlturas1.jsx";
 import DragAndDropAlturas2 from "./pages/Actividades/Actividades_Trabajo_seguro_alturas/DragAndDropAlturas2.jsx";
 import DragAndDropAlturas2Movil from "./pages/Actividades/Actividades_Trabajo_seguro_alturas/DragAndDropAlturas2Movil.jsx";
+import Drag_And_Drop from "./pages/Actividades/Actividades_Espacios_confinados/Drag_And_Drop.jsx";
+import OrdenarPasosPalmaManosMobile from "./pages/Actividades/Actividades_Morelco_Riesgos_Manos/OrdenarPasosPalmaManosMobile.jsx";
+import PreguntasSiNo from "./pages/Actividades/Actividades_Morelco_Riesgos_Manos/PreguntasSiNo.jsx";
+import EspaciosConfinadosSeleccionMultiple from "./pages/Actividades/Actividades_Morelco_Riesgos_Manos/EspaciosConfinadosSeleccionMultiple.jsx";
+import SeleccionEspaciosConfinados from "./pages/Actividades/Actividades_Morelco_Riesgos_Manos/SeleccionEspaciosConfinados.jsx";
 import ActividadFalsoVerdadero from "./pages/Actividades/Actividades_Espacios_Confinados/Actividad_Falso_Verdadero.jsx";
 import Drag_And_Drop from "./pages/Actividades/Actividades_Espacios_Confinados/Drag_And_Drop.jsx";
 import Drag_And_DropMobile from "./pages/Actividades/Actividades_Espacios_Confinados/Drag_And_DropMobile.jsx";
@@ -41,6 +46,18 @@ import Slider14_Lista_desplegable_movil from "./pages/Actividades/Actividades_Es
 import Slider12_drag_and_drop_audios from "./pages/Actividades/Actividades_Espacios_Confinados/Slider12_drag_and_drop_audios.jsx";
 import Slider15_Lista_desplegable from "./pages/Actividades/Actividades_Espacios_Confinados/Slider15_Lista_desplegable.jsx";
 import Slider15_Lista_desplegable_movil from "./pages/Actividades/Actividades_Espacios_Confinados/Slider15_Lista_desplegable_movil.jsx";
+import PreguntasRiesgosTermicosV2 from "./pages/Actividades/Actividades_Morelco_Riesgos_Manos/PreguntasRiesgosTermicosV2.jsx";
+import Sliderppt24_SeleccionMultiple from "./pages/Actividades/Actividades_Uso_Seguro_Andamios/Sliderppt24_SeleccionMultiple.jsx";
+import Sliderppt9_DragAndDrop from "./pages/Actividades/Actividades_Uso_Seguro_Andamios/Sliderppt9_DragAndDrop.jsx";
+import Sliderppt15_SeleccionMultipleCheckbox from "./pages/Actividades/Actividades_Uso_Seguro_Andamios/Sliderppt15_SeleccionMultipleCheckbox.jsx";
+import Sliderppt16_SeleccionPreguntasParte1 from "./pages/Actividades/Actividades_Uso_Seguro_Andamios/Sliderppt16_SeleccionPreguntasParte1.jsx";
+import Sliderppt17_SeleccionPreguntasParte2 from "./pages/Actividades/Actividades_Uso_Seguro_Andamios/Sliderppt17_SeleccionPreguntasParte2.jsx";
+import Sliderppt18_SeleccionPreguntas from "./pages/Actividades/Actividades_PESV/Sliderppt18_SeleccionPreguntas.jsx";
+import Sliderppt19_SeleccionPreguntasAudios from "./pages/Actividades/Actividades_PESV/Sliderppt19_SeleccionPreguntasAudios.jsx";
+import PreguntaCasoTF from "./pages/Actividades/Actividades_Riesgo_Biologico/PreguntaCasoTF.jsx";
+import PicadurasAnimalesPeligrosos from "./pages/Actividades/Actividades_Riesgo_Biologico/PicadurasAnimalesPeligrosos.jsx";
+import IdentificarRiesgosBiologicos from "./pages/Actividades/Actividades_Riesgo_Biologico/IdentificarRiesgosBiologicos.jsx";
+import OrdenarMedidasCorrectivas from "./pages/Actividades/Actividades_Riesgo_Biologico/OrdenarMedidasCorrectivas.jsx";
 import DragAndDropSlide9 from "./pages/Actividades/Actividades_Trabajo_seguro_alturas/DragnAndDropSlide9.jsx";
 import DragAndDropSlide9Movil from "./pages/Actividades/Actividades_Trabajo_seguro_alturas/DragAndDropSlide9Movil.jsx";
 import PPT8_List_Desplegable from "./pages/Actividades/Actividades_PESV/PPT8_List_Desplegable.jsx";
@@ -55,6 +72,7 @@ import PPT_21_Preguntas from "./pages/Actividades/Actividades_Izajes_De_Cargas/P
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
+    <PreguntaCasoTF />
     <PPT_21_Preguntas />
   </React.StrictMode>
 );

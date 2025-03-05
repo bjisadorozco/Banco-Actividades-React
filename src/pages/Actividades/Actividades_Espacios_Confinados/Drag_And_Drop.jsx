@@ -26,8 +26,8 @@ const items = [
   {
     id: "A",
     name: "Casco de Protección",
-    audio: audioCasco,
-    image: casco,
+    audio: "/src/assets/audio/EPP/casco_de_proteccion.mp3",
+    image: "/src/assets/img/Elementos_EPP/casco_sldM2.webp",
     correctBoxId: "leftColumn",
   },
   {

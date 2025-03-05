@@ -1,0 +1,116 @@
+.ordenar-pasos-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.contenedor-pasos {
+  display: flex;
+  flex-direction: column; /* Alinea los pasos en una sola columna */
+  gap: 20px;
+  width: 100%;
+  max-width: 800px;
+  background: #ffffff;
+}
+
+.numero-cuadro {
+  margin-top: 10px;
+  font-size: 16px;
+  color: #8f8f8f;
+  text-align: center;
+  transition: color 0.3s ease; /* Transición suave para el cambio de color */
+}
+
+.tarjeta-paso {
+  padding: 15px;
+  background: #ffffff;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  text-align: justify;
+  font-size: 16px;
+  color: #8f8f8f;
+  display: flex;
+  flex-direction: column; /* Organiza el contenido verticalmente */
+  gap: 10px; /* Espacio entre el texto y el selector */
+}
+
+/* Elimina el hover que causa el cambio de color */
+/* .tarjeta-paso:hover {
+  background-color: #ffffff; 
+  cursor: default; 
+} */
+
+/* Estilos adicionales para colores dinámicos */
+.tarjeta-paso.correcto {
+  background-color: #4caf50; /* Verde para respuestas correctas */
+  color: #fff;
+}
+
+.tarjeta-paso.incorrecto {
+  background-color: #f44336; /* Rojo para respuestas incorrectas */
+  color: #fff;
+}
+
+.tarjeta-paso.seleccionado {
+  background-color: #6e3cd2; /* Morado oscuro cuando se selecciona una opción */
+  color: #fff;
+}
+
+/* Elimina el hover para tarjetas seleccionadas */
+.tarjeta-paso.seleccionado:hover {
+  background-color: #6e3cd2; /* Mantiene el morado al hacer hover */
+  color: #fff; /* Mantiene el texto blanco */
+}
+
+.respuesta-select {
+  width: 100%; /* Asegura que el select ocupe todo el ancho del contenedor */
+  padding: 8px;
+  font-size: 16px;
+  text-align: center;
+  border-radius: 12px;
+  border: 1px solid #ccc;
+  box-sizing: border-box; /* Incluye el padding y el borde en el ancho total */
+}
+
+.respuesta-select.seleccionado {
+  background-color: #8d5dee; /* Morado claro cuando se selecciona una opción */
+  color: #fff;
+}
+
+.respuesta-select.correcto {
+  background-color: #4caf50; /* Verde para respuestas correctas */
+  color: #fff;
+}
+
+.respuesta-select.incorrecto {
+  background-color: #f44336; /* Rojo para respuestas incorrectas */
+  color: #fff;
+}
+
+
+.respuesta-select option {
+  background-color: #fff; /* Fondo blanco para las opciones */
+  color: #8f8f8f; /* Texto negro para las opciones */
+}
+
+.botones-container {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20px;
+  width: 100%;
+  max-width: 400px;
+}
+
+.resultado-mensaje {
+  font-family: 'Montserrat', sans-serif;
+  color: #8f8f8f; /* Color gris para el texto general */
+}
+
+/* Estilos para los mensajes de retroalimentación */
+.texto-verde {
+  color: #4caf50; /* Verde para "¡Correcto!" */
+}
+
+.texto-rojo {
+  color: #f44336; /* Rojo para "¡Incorrecto!" */
+}

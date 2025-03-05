@@ -50,6 +50,12 @@
   align-items: center;
   border: 2px dashed #aaa;
 }
+
+.dropbox-over .dropbox-sld5 {
+  background-color: #cbbee5; /* Cambia el color de fondo cuando una imagen está sobre el área */
+  border-color: #cbbee5; /* Cambia el color del borde si es necesario */
+}
+
 .dropbox-sld5 img {
   max-width: 100%; /* Ajusta la imagen al tamaño del contenedor */
   max-height: 100%; /* Ajusta la imagen al tamaño del contenedor */
@@ -65,6 +71,7 @@
   gap: 6rem;
   justify-content: center;
 }
+
 .option-sld5 {
   padding: 8px 16px;
   border: none;
@@ -77,6 +84,7 @@
   text-align: center; /* Centra el texto dentro del botón */
   transition: none; /* Elimina cualquier transición */
 }
+
 .drop-text {
   font-family: "Montserrat", sans-serif;
   font-size: 16px;
@@ -84,9 +92,16 @@
   color: #888;
   text-align: center;
 }
-.dropbox-over {
-  background-color: #d3c4f1;
+
+.drop-text-over {
+  color: #9880ca;
 }
+
+.dropbox-over {
+  background-color: #cbbee5; /* Cambia el color de fondo cuando una imagen está sobre el área */
+  border-color: #cbbee5; /* Cambia el color del borde si es necesario */
+}
+
 /* Quitar cualquier efecto hover */
 .option-sld5:hover {
   background-color: #c0185d; /* Mantiene el color original al pasar el mouse */
@@ -117,7 +132,7 @@
   display: flex;
   justify-content: center;
   gap: 1rem;
-  margin-top: 2rem;
+  margin-top: 0.8rem;
 }
 
 .btn {
@@ -157,7 +172,7 @@
 
 /* Estilo para el mensaje de error */
 .error-message {
-  color: #888888;
+  color: #f44336;
   font-weight: bold;
   margin-top: 10px;
 }
@@ -168,6 +183,7 @@
   font-weight: bold;
   margin-top: 10px;
 }
+
 .dropped-image {
   width: 100px;
   height: 100px;
@@ -198,12 +214,12 @@
 }
 
 /*audio container s1d5*/
-
 .audio-container-sld5 {
   display: flex;
   justify-content: center; /* Centra los íconos horizontalmente */
   align-items: center; /* Centra los íconos verticalmente */
   gap: 10px; /* Agrega un espacio entre los elementos, puedes ajustar este valor */
+  margin-top: 5px;
 }
 
 .status-icon-sld5 {
@@ -223,6 +239,7 @@
   width: 60px;
   height: 60px;
 }
+
 .correct {
   background-color: #4caf50; /* Verde */
 }
@@ -233,4 +250,16 @@
 
 .drop-item-sld5 {
   transition: background-color 0.3s ease; /* Agrega transición para un cambio suave */
+}
+
+.text-monserrat {
+  font-family: "Montserrat", sans-serif;
+}
+
+/* Nuevo estilo para centrar el feedback de porcentaje */
+.results-containerDAD {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
 }
