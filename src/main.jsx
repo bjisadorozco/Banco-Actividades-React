@@ -50,9 +50,11 @@ import PPT_19_Preguntas from "./pages/Actividades/Herramientas de poder/PPT_19_P
 import PPT_21_DragAndDrop from "./pages/Actividades/Actividades_PESV/PPT_21_DragAndDrop.jsx";
 import PPT_21_DragAndDrop_Mobile from "./pages/Actividades/Actividades_PESV/PPT_21_DragAndDrop_Mobile.jsx";
 import PPT_22_Preguntas from "./pages/Actividades/Herramientas de poder/PPT_22_Preguntas.jsx";
+import PPT_09_DragAndDrop from "./pages/Actividades/Actividades_Izajes_De_Cargas/PPT_09_DragAndDrop.jsx";
+import PPT_21_Preguntas from "./pages/Actividades/Actividades_Izajes_De_Cargas/PPT_21_Preguntas.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <PPT_10_Preguntas />
+    <PPT_21_Preguntas />
   </React.StrictMode>
 );

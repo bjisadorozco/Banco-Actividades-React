@@ -31,7 +31,8 @@ function DraggableOption({ id, label, isDropped }) {
       ref={setNodeRef}
       style={{
         ...style,
-        width: "160px",
+        width: "30%",
+        minWidth: "20%",
         height: "60px",
         padding: "10px",
         backgroundColor: "#0F172A",
@@ -41,6 +42,7 @@ function DraggableOption({ id, label, isDropped }) {
         alignItems: "center",
         borderRadius: "8px",
         textAlign: "center",
+        lineHeight: "1.2rem",
       }}
       {...listeners}
       {...attributes}
@@ -50,43 +52,105 @@ function DraggableOption({ id, label, isDropped }) {
   );
 }
 
+// function DropArea({ id, children, isValidated, isCorrect }) {
+//   const { isOver, setNodeRef } = useDroppable({
+//     id,
+//   });
+//   const style = {
+//     backgroundColor: isValidated
+//       ? isCorrect
+//         ? "#4CAF50" // Light green
+//         : "#F44336" // Light red
+//       : children
+//         ? "#0F172A"
+//         : isOver
+//           ? "#e6e6e6"
+//           : "#f3f4f6",
+//     width: "100%",
+//     height: "50px",
+//     padding: "1.6rem",
+//     border: `2px dashed ${
+//       isValidated
+//         ? isCorrect
+//           ? "#4CAF50"
+//           : "#F44336"
+//         : children
+//           ? "#0F172A"
+//           : "#e2e8f0"
+//     }`,
+//     borderRadius: "8px",
+//     display: "flex",
+//     justifyContent: "center",
+//     alignItems: "center",
+//     color: isValidated ? "inherit" : "white",
+//     lineHeight: "1.2rem",
+//   };
+
+//   return (
+//     <div ref={setNodeRef} style={style}>
+//       {children}
+//     </div>
+//   );
+// }
+
 function DropArea({ id, children, isValidated, isCorrect }) {
   const { isOver, setNodeRef } = useDroppable({
     id,
   });
+
+  // Determinar el estilo de fondo y borde basado en las condiciones
+  let backgroundColor, borderColor;
+
+  if (isValidated) {
+    // Si está validado, usar colores de correcta/incorrecta
+    backgroundColor = isCorrect ? "#4CAF50" : "#F44336"; // Verde o rojo
+    borderColor = isCorrect ? "#4CAF50" : "#F44336";
+  } else if (children) {
+    // Si contiene un elemento (ya se soltó algo)
+    backgroundColor = "#0F172A";
+    borderColor = "#0F172A";
+  } else if (isOver) {
+    // Si está arrastrando sobre el área
+    backgroundColor = "#e6e6e6";
+    borderColor = "#0F172A";
+  } else {
+    // Estado inicial/default
+    backgroundColor = "red";
+    borderColor = "#e2e8f0";
+  }
+
   const style = {
-    backgroundColor: isValidated
-      ? isCorrect
-        ? "#4CAF50" // Light green
-        : "#F44336" // Light red
-      : children
-        ? "#0F172A"
-        : isOver
-          ? "#e6e6e6"
-          : "#f3f4f6",
+    backgroundColor,
     width: "100%",
     height: "50px",
     padding: "1.6rem",
-    border: `2px dashed ${
-      isValidated
-        ? isCorrect
-          ? "#4CAF50"
-          : "#F44336"
-        : children
-          ? "gray"
-          : "#e2e8f0"
-    }`,
+    border: `2px dashed ${borderColor}`,
     borderRadius: "8px",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    marginTop: "1rem",
-    color: isValidated ? "inherit" : "white",
+    color: children || isValidated ? "white" : "inherit",
+    lineHeight: "1.2rem",
+    position: "relative", // Para posicionar correctamente los íconos
   };
 
   return (
     <div ref={setNodeRef} style={style}>
       {children}
+      {isValidated && (
+        <img
+          src={isCorrect ? check : uncheck}
+          alt={isCorrect ? "Correct" : "Incorrect"}
+          style={{
+            position: "absolute",
+            top: "50%",
+            right: "10px",
+            transform: "translateY(-50%)",
+            width: "24px",
+            height: "24px",
+          }}
+        />
+      )}
     </div>
   );
 }
@@ -377,7 +441,7 @@ export default function PPT_21_DragAndDrop() {
                             : "Incorrect"
                         }
                         style={{
-                          top: "10px",
+                          top: "0px",
                           right: "-10px",
                           width: "32px",
                           height: "32px",
@@ -391,7 +455,7 @@ export default function PPT_21_DragAndDrop() {
           ))}
         </div>
 
-        <div className="flex flex-wrap gap-4 justify-center">
+        <div className="options-container">
           {options.map((option) => (
             <DraggableOption
               key={option.id}
