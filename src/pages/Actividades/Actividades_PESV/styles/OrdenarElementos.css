@@ -1,6 +1,6 @@
 .sort-steps-container {
   width: 100%;
-  max-width: 800px;
+  max-width: 1000px;
   margin: 0 auto;
   padding: 1.25rem;
   background: #fcfcfc;
@@ -80,7 +80,7 @@
   display: flex;
   justify-content: center;
   gap: 0.75rem;
-  margin-top: 1.25rem;
+  /* margin-top: 1.25rem; */
 }
 
 @media (max-width: 640px) {
