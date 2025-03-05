@@ -69,7 +69,7 @@ const QuestionsTrueFalse = ({
             <div className="w-full flex justify-center items-center p-2">
                 <div
                     className="max-w-md w-full bg-gray-100 border-2 border-gray-300 rounded-lg overflow-hidden"
-                    style={{ margin: "0 auto", minWidth: "40vw" }}
+                    style={{ margin: "0 auto", minWidth: "90vw" }}
                 >
                     <div className="bg-button-figma text-white text-center py-2 text-xl">
                         <span className="inc">{currentQuestion + 1}</span>/

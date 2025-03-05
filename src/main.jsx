@@ -46,11 +46,16 @@ import Sliderppt9_DragAndDrop from "./pages/Actividades/Actividades_Uso_Seguro_A
 import Sliderppt15_SeleccionMultipleCheckbox from "./pages/Actividades/Actividades_Uso_Seguro_Andamios/Sliderppt15_SeleccionMultipleCheckbox.jsx";
 import Sliderppt16_SeleccionPreguntasParte1 from "./pages/Actividades/Actividades_Uso_Seguro_Andamios/Sliderppt16_SeleccionPreguntasParte1.jsx";
 import Sliderppt17_SeleccionPreguntasParte2 from "./pages/Actividades/Actividades_Uso_Seguro_Andamios/Sliderppt17_SeleccionPreguntasParte2.jsx";
+import Sliderppt26_PreguntasTF from "./pages/Actividades/Actividades_Uso_Seguro_Andamios/Sliderppt26_PreguntasTF.jsx";
 import Sliderppt18_SeleccionPreguntas from "./pages/Actividades/Actividades_PESV/Sliderppt18_SeleccionPreguntas.jsx";
 import Sliderppt19_SeleccionPreguntasAudios from "./pages/Actividades/Actividades_PESV/Sliderppt19_SeleccionPreguntasAudios.jsx";
 import PreguntasFactorHumanoTF from "./pages/Actividades/Actividades_PESV/PreguntasFactorHumanoTF.jsx";
+import OrdenarElementos from "./pages/Actividades/Actividades_PESV/OrdenarElementos.jsx";
+import PPT14_EscogerOpcionSirena from "./pages/Actividades/Actividades_PESV/PPT14_EscogerOpcionSirena.jsx";
+import SlidePP11_seleccione from "./pages/Actividades/Actividades_PESV/SlidePP11_seleccione.jsx";
+import Sliderppt8_seleccione from "./pages/Actividades/Actividades_Izaje_Cargas/Sliderppt8_seleccione.jsx";
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <PreguntasFactorHumanoTF />
+    <Sliderppt8_seleccione />
   </React.StrictMode>
 );
