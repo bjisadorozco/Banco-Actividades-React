@@ -74,6 +74,6 @@ import PPT_27_Lista_desplegable_imagen from "./pages/Actividades/Actividades_Iza
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <PPT_27_Lista_desplegable_imagen />
+    <PPT_17_SeleccionMultiple />
   </React.StrictMode>
 );

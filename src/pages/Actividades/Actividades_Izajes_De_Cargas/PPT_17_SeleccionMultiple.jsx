@@ -128,7 +128,7 @@ function PPT_17_SeleccionMultiple() {
                 theme="light"
                 justify={isMobile ? "justify" : "justify"}
               >
-                <strong>{question.question}</strong>
+                {question.question}
               </Paragraph>
               <div>
                 {question.options.map((option, index) => (
