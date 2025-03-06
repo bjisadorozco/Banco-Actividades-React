@@ -30,8 +30,8 @@ import PreguntasSiNo from "./pages/Actividades/Actividades_Morelco_Riesgos_Manos
 import EspaciosConfinadosSeleccionMultiple from "./pages/Actividades/Actividades_Morelco_Riesgos_Manos/EspaciosConfinadosSeleccionMultiple.jsx";
 import SeleccionEspaciosConfinados from "./pages/Actividades/Actividades_Morelco_Riesgos_Manos/SeleccionEspaciosConfinados.jsx";
 import ActividadFalsoVerdadero from "./pages/Actividades/Actividades_Espacios_Confinados/Actividad_Falso_Verdadero.jsx";
-import Drag_And_Drop from "./pages/Actividades/Actividades_Espacios_Confinados/Drag_And_Drop.jsx";
-import Drag_And_DropMobile from "./pages/Actividades/Actividades_Espacios_Confinados/Drag_And_DropMobile.jsx";
+// import Drag_And_Drop from "./pages/Actividades/Actividades_Espacios_Confinados/Drag_And_Drop.jsx";
+// import Drag_And_DropMobile from "./pages/Actividades/Actividades_Espacios_Confinados/Drag_And_DropMobile.jsx";
 import EPSLugaresConfinados from "./pages/Actividades/Actividades_Espacios_Confinados/EPS_Lugares_Confinados.jsx";
 import ActividadMobileEntradaSalida from "./pages/Actividades/Actividades_Espacios_Confinados/Actividad_Mobile_Entrada_Salida.jsx";
 import "./main.css";
@@ -68,11 +68,12 @@ import PPT_21_DragAndDrop from "./pages/Actividades/Actividades_PESV/PPT_21_Drag
 import PPT_21_DragAndDrop_Mobile from "./pages/Actividades/Actividades_PESV/PPT_21_DragAndDrop_Mobile.jsx";
 import PPT_22_Preguntas from "./pages/Actividades/Herramientas de poder/PPT_22_Preguntas.jsx";
 import PPT_09_DragAndDrop from "./pages/Actividades/Actividades_Izajes_De_Cargas/PPT_09_DragAndDrop.jsx";
+import PPT_17_SeleccionMultiple from "./pages/Actividades/Actividades_Izajes_De_Cargas/PPT_17_SeleccionMultiple.jsx";
 import PPT_21_Preguntas from "./pages/Actividades/Actividades_Izajes_De_Cargas/PPT_21_Preguntas.jsx";
+import PPT_27_Lista_desplegable_imagen from "./pages/Actividades/Actividades_Izajes_De_Cargas/PPT_27_Lista_desplegable_imagen.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <PreguntaCasoTF />
-    <PPT_21_Preguntas />
+    <PPT_27_Lista_desplegable_imagen />
   </React.StrictMode>
 );
