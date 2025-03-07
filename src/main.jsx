@@ -45,6 +45,6 @@ import DndActivityMobile from "./pages/Actividades/Actividades_Plan_Estrategido_
 import OrdenarPESVDesktop from "./pages/Actividades/Actividades_Plan_Estrategido_Seguridad_Vial/OrdenarPESVDesktop.jsx";
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <DndActivityMobile />
+    <DndActivityDesktop />
   </React.StrictMode>
 );

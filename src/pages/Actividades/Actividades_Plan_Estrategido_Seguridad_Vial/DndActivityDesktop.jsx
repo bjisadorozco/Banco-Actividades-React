@@ -90,7 +90,6 @@ function DroppableBox({ id, items }) {
 }
 
 export default function DndActivityDesktop() {
-  const [currentIndex, setCurrentIndex] = useState(0);
   const [itemsState, setItemsState] = useState(
     items.reduce(
       (acc, item) => ({ ...acc, [item]: { box: null, correct: null } }),
@@ -123,14 +122,11 @@ export default function DndActivityDesktop() {
         const allInBoxes = Object.values(updatedState).every(
           (data) => data.box !== null
         );
-        setAtLeastOneItemPlaced(
-          Object.values(updatedState).some((data) => data.box !== null)
-        );
-        setAllItemsInBoxes(allInBoxes); // Verificar si al menos un elemento ha sido colocado en una caja
+        setAtLeastOneItemPlaced(placedItemsCount > 0);
+        setAllItemsInBoxes(allInBoxes);
 
         return updatedState;
       });
-      setCurrentIndex((prevIndex) => prevIndex + 1);
     }
   };
 
@@ -185,9 +181,9 @@ export default function DndActivityDesktop() {
       )
     );
     setFeedback(null);
-    setCurrentIndex(0);
-    setAllItemsInBoxes(false); // Verificar si al menos un elemento ha sido colocado en una caja
-    setAtLeastOneItemPlaced(false); // Asegurar que se reinicie correctamente
+    setAllItemsInBoxes(false);
+    setAtLeastOneItemPlaced(false);
+    setRemainingItemsCount(items.length);
   };
 
   const getFeedbackColor = () => {
@@ -218,16 +214,20 @@ export default function DndActivityDesktop() {
           )}
           <div className="w-full flex items-center justify-center">
             <div className="bg-[#0F172A] rounded-lg text-white">
-              {currentIndex < items.length && (
-                <DraggableItem
-                  key={items[currentIndex]}
-                  id={items[currentIndex]}
-                  content={items[currentIndex]}
-                  correct={null}
-                />
-              )}
+              {items
+                .filter((item) => itemsState[item].box === null)
+                .slice(0, 1) // Muestra solo el primer elemento disponible
+                .map((item) => (
+                  <DraggableItem
+                    key={item}
+                    id={item}
+                    content={item}
+                    correct={null}
+                  />
+                ))}
             </div>
           </div>
+
           <div className="grid grid-cols-2 mx-4">
             <div className="flex flex-col items-center justify-center">
               <p className="text-[16px] text-[#009A3D] font-bold">SI</p>
@@ -266,19 +266,11 @@ export default function DndActivityDesktop() {
         </DndContext>
 
         <div className="w-full flex items-center justify-center gap-4">
-          <Button
-            onClick={validateAnswers}
-            disabled={!allItemsInBoxes} // Deshabilitar si no todos los elementos están en las cajas
-            // className={`bg-[#182032] text-white px-4 py-1 rounded-full mr-2 ${!allItemsInBoxes ? "opacity-50 cursor-not-allowed" : ""}`}
-          >
+          <Button onClick={validateAnswers} disabled={!allItemsInBoxes}>
             <FontAwesomeIcon icon={faCheck} className="mr-2" />
             Validar
           </Button>
-          <Button
-            onClick={resetActivity}
-            disabled={!atLeastOneItemPlaced} // Deshabilitar si no todos los elementos están en las cajas
-            // className={`bg-[#182032] text-white px-4 py-1 rounded-full ${atLeastOneItemPlaced ? "opacity-50 cursor-not-allowed" : ""}`}
-          >
+          <Button onClick={resetActivity} disabled={!atLeastOneItemPlaced}>
             <FontAwesomeIcon icon={faRepeat} className="mr-2" />
             Reiniciar
           </Button>
