@@ -6,7 +6,9 @@
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.3s, transform 0.2s;
+  transition:
+    background-color 0.3s,
+    transform 0.2s;
 }
 
 .nav-link:hover {
@@ -14,7 +16,7 @@
 }
 
 .nav-link.active {
-  background-color: #0F172A;
+  background-color: #0f172a;
   color: white;
 }
 
@@ -29,7 +31,7 @@
   .flex-col {
     flex-direction: column;
   }
-  
+
   .nav-link {
     display: flex;
     justify-content: center;
@@ -41,10 +43,10 @@
   }
 }
 
-.quiz-container {
+/* .quiz-container {
   opacity: 0;
   animation: fadeIn 0.5s ease-in-out forwards;
-}
+} */
 
 @keyframes fadeIn {
   from {
@@ -79,7 +81,7 @@
   color: white;
   margin: 0 auto;
   line-height: 1.6;
-  margin-top: 0.50rem;
+  margin-top: 0.5rem;
   display: flex;
   justify-content: center;
 }
@@ -134,11 +136,11 @@
   .quiz-card {
     height: 350px;
   }
-  
+
   .quiz-header {
     padding: 2rem 1rem;
   }
-  
+
   .quiz-title {
     font-size: 1.5rem;
   }

@@ -39,7 +39,8 @@ function DraggableOption({ id, label, isDropped }) {
         ...style,
         width: "160px",
         height: "60px",
-        backgroundColor: "#C0185D",
+        padding: "10px",
+        backgroundColor: "#0F172A",
         color: "white",
         display: "flex",
         justifyContent: "center",
@@ -59,14 +60,13 @@ function DropArea({ id, children, isValidated, isCorrect }) {
   const { isOver, setNodeRef } = useDroppable({
     id,
   });
-
   const style = {
     backgroundColor: isValidated
       ? isCorrect
         ? "#90EE90" // Light green
         : "#FFB6C1" // Light red
       : children
-        ? "#C0185D"
+        ? "#0F172A"
         : isOver
           ? "#e6e6e6"
           : "#f3f4f6",
@@ -79,7 +79,7 @@ function DropArea({ id, children, isValidated, isCorrect }) {
           ? "#90EE90"
           : "#FFB6C1"
         : children
-          ? "#C0185D"
+          ? "#0F172A"
           : "#e2e8f0"
     }`,
     borderRadius: "8px",
@@ -87,7 +87,7 @@ function DropArea({ id, children, isValidated, isCorrect }) {
     justifyContent: "center",
     alignItems: "center",
     marginTop: "1rem",
-    color: isValidated || children ? "white" : "inherit",
+    color: isValidated ? "inherit" : "white",
   };
 
   return (
@@ -106,7 +106,6 @@ export default function DragAndDropSlide9() {
     drop4: null,
   });
   const [correctAnswersCount, setCorrectAnswersCount] = useState(0);
-  const [shuffledOptions, setShuffledOptions] = useState([]);
   const setIsOnDivisor = useStore((state) => state.setIsOnDivisor);
   const [isResetDisabled, setIsResetDisabled] = useState(true);
   const [validationMessage, setValidationMessage] = useState("");
@@ -140,7 +139,6 @@ export default function DragAndDropSlide9() {
 
   useEffect(() => {
     setIsOnDivisor(false);
-    setShuffledOptions(shuffleArray(options)); // Mezcla los ítems al cargar
   }, []);
 
   useEffect(() => {
@@ -163,7 +161,6 @@ export default function DragAndDropSlide9() {
     setCorrectAnswersCount(0);
     setIsResetDisabled(true);
     setValidationMessage("");
-    setShuffledOptions(shuffleArray(options)); // Mezcla los ítems al reiniciar
   };
 
   const handleValidation = () => {
@@ -175,8 +172,8 @@ export default function DragAndDropSlide9() {
 
     if (totalCorrect === 4) {
       setValidationMessage(
-        `¡Muy bien ! ¡Este es un riesgo de la actividad seleccionada! 
-        \nTus respuestas correctas son: ${totalCorrect} de 4 (${percentage}%)`
+        `¡Muy bien! ¡Este es un riesgo de la actividad seleccionada! 
+        \nTus resp1uestas correctas son: ${totalCorrect} de 4 (${percentage}%)`
       );
     } else {
       setValidationMessage(
@@ -210,18 +207,21 @@ export default function DragAndDropSlide9() {
     }
   };
 
-  const areAllItemsDropped = Object.values(items).every((item) => item !== null);
+  const areAllItemsDropped = Object.values(items).every(
+    (item) => item !== null
+  );
 
   return (
-    <div className="flex flex-col overflow-x-hidden mb-36">
+    <div className="container1">
       <DndContext sensors={sensors} onDragEnd={handleDragEnd}>
-        <div className="flex flex-row justify-center gap-4 mb-4">
-          {shuffledOptions.map((option, index) => (
+        <div className="content-options">
+          {options.map((option, index) => (
             <div
               key={option.id}
-              className="p-6 mt-4 border rounded-lg shadow-md flex flex-col items-center relative"
+              className="p-[0.5rem] border rounded-lg shadow-md  items-center relative"
               style={{
-                width: "350px",
+                width: "35%",
+                height: "310px",
                 justifyContent: "space-between",
                 textAlign: "center",
                 backgroundColor: validationMessage
@@ -279,7 +279,7 @@ export default function DragAndDropSlide9() {
                 {option.text}
               </Paragraph>
 
-              <div style={{ width: "100%" }}>
+              <div className="area" style={{ width: "100%" }}>
                 <DropArea
                   id={`drop${index + 1}`}
                   isValidated={!!validationMessage}
@@ -297,7 +297,7 @@ export default function DragAndDropSlide9() {
         </div>
 
         <div
-          className="flex flex-row justify-center gap-4"
+          className="feedback1"
           style={{
             display: options.some(
               (option) => !Object.values(items).includes(option.id)
@@ -307,7 +307,7 @@ export default function DragAndDropSlide9() {
             marginTop: "1rem",
           }}
         >
-          {shuffledOptions.map((option) => (
+          {options.map((option) => (
             <DraggableOption
               key={option.id}
               id={option.id}
@@ -319,7 +319,7 @@ export default function DragAndDropSlide9() {
       </DndContext>
 
       {validationMessage && (
-        <div className="justify-center mt-4">
+        <div className="justify-center" style={{ display: "flex" }}>
           <p
             className={`validation-message ${
               validationMessage.includes("Muy bien") ? "successs" : "errors"
@@ -330,7 +330,7 @@ export default function DragAndDropSlide9() {
         </div>
       )}
 
-      <div className="flex justify-center mt-4 gap-4">
+      <div className="content-button">
         <Button
           onClick={handleValidation}
           icon={faCheck}
