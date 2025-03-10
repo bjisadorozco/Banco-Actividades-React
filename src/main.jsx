@@ -68,12 +68,14 @@ import PPT_21_DragAndDrop from "./pages/Actividades/Actividades_PESV/PPT_21_Drag
 import PPT_21_DragAndDrop_Mobile from "./pages/Actividades/Actividades_PESV/PPT_21_DragAndDrop_Mobile.jsx";
 import PPT_22_Preguntas from "./pages/Actividades/Herramientas de poder/PPT_22_Preguntas.jsx";
 import PPT_09_DragAndDrop from "./pages/Actividades/Actividades_Izajes_De_Cargas/PPT_09_DragAndDrop.jsx";
+import PPT_09_DragAndDrop_Mobile from "./pages/Actividades/Actividades_Izajes_De_Cargas/PPT_09_DragAndDrop_Mobile.jsx";
 import PPT_17_SeleccionMultiple from "./pages/Actividades/Actividades_Izajes_De_Cargas/PPT_17_SeleccionMultiple.jsx";
 import PPT_21_Preguntas from "./pages/Actividades/Actividades_Izajes_De_Cargas/PPT_21_Preguntas.jsx";
 import PPT_27_Lista_desplegable_imagen from "./pages/Actividades/Actividades_Izajes_De_Cargas/PPT_27_Lista_desplegable_imagen.jsx";
+import PPT_11_ListaDesplegable_Audios from "./pages/Actividades/Actividades_Izajes_De_Cargas/PPT_11_ListaDesplegable_Audios.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <PPT_17_SeleccionMultiple />
+    <PPT_09_DragAndDrop_Mobile />
   </React.StrictMode>
 );

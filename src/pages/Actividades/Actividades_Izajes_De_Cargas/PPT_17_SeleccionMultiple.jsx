@@ -18,7 +18,7 @@ function PPT_17_SeleccionMultiple() {
   const [showErrorMessage, setShowErrorMessage] = useState(false);
   const [showFeedback, setShowFeedback] = useState(false);
   const [isCorrect, setIsCorrect] = useState(false);
-  const [remainingOptions, setRemainingOptions] = useState(6);
+  const [remainingOptions, setRemainingOptions] = useState(5);
   const [correctCount, setCorrectCount] = useState(0); // Nuevo estado para contar respuestas correctas
 
   const question = {
@@ -32,10 +32,9 @@ function PPT_17_SeleccionMultiple() {
         text: "Pérdida de estabilidad de la grúa, lo que puede provocar un vuelco total.",
         correct: true,
       },
-      { text: "No trabajar en condiciones adversas", correct: false },
       {
         text: "Lesiones a personas de la operación",
-        correct: true,
+        correct: false,
       },
       {
         text: "Golpe de la carga contra estructuras debido al balanceo descontrolado.",
@@ -66,13 +65,13 @@ function PPT_17_SeleccionMultiple() {
         // Si la opción ya está seleccionada, la deseleccionamos
         if (prev.includes(optionIndex)) {
           const newAnswers = prev.filter((i) => i !== optionIndex);
-          setRemainingOptions(6 - newAnswers.length);
+          setRemainingOptions(5 - newAnswers.length);
           return newAnswers;
         }
         // Si no se ha alcanzado el límite de 3, agregamos la opción
-        else if (prev.length < 6) {
+        else if (prev.length < 5) {
           const newAnswers = [...prev, optionIndex];
-          setRemainingOptions(6 - newAnswers.length);
+          setRemainingOptions(5 - newAnswers.length);
           return newAnswers;
         }
         // Si ya hay 3 seleccionadas, no hacemos nada
@@ -84,7 +83,7 @@ function PPT_17_SeleccionMultiple() {
   };
 
   const handleValidate = () => {
-    if (selectedAnswers.length === 6) {
+    if (selectedAnswers.length === 5) {
       const correctAnswers = question.options
         .map((option, index) => (option.correct ? index : null))
         .filter((index) => index !== null);
@@ -114,7 +113,7 @@ function PPT_17_SeleccionMultiple() {
     setShowErrorMessage(false);
     setShowFeedback(false);
     setIsCorrect(false);
-    setRemainingOptions(6);
+    setRemainingOptions(5);
     setCorrectCount(0); // Reiniciar el contador de respuestas correctas
   };
 
@@ -137,7 +136,7 @@ function PPT_17_SeleccionMultiple() {
                     className={`
                       ${selectedAnswers.includes(index) ? "act" : ""}
                       ${isValidated && selectedAnswers.includes(index) ? (option.correct ? "true" : "false") : ""}
-                      ${selectedAnswers.length >= 6 && !selectedAnswers.includes(index) ? "disabled" : ""}
+                      ${selectedAnswers.length >= 5 && !selectedAnswers.includes(index) ? "disabled" : ""}
                     `}
                     onClick={() => handleAnswerSelect(index)}
                   >
@@ -162,8 +161,8 @@ function PPT_17_SeleccionMultiple() {
                       className="margin-size text-monserrat"
                       style={{ color: "#8f8f8f", fontWeight: "bold" }}
                     >
-                      Tus respuestas correctas son: {correctCount} de 6 (
-                      {Math.round((correctCount / 6) * 100)}%)
+                      Tus respuestas correctas son: {correctCount} de 5 (
+                      {Math.round((correctCount / 5) * 100)}%)
                     </span>
                   </span>
                 )}
@@ -172,11 +171,12 @@ function PPT_17_SeleccionMultiple() {
                   icon={isValidated ? faRepeat : faCheck}
                   roundedFull={true}
                   onClick={isValidated ? handleReset : handleValidate}
-                  disabled={selectedAnswers.length !== 6}
+                  disabled={selectedAnswers.length !== 5}
                   style={{
-                    opacity: selectedAnswers.length === 6 ? 1 : 0.6,
+                    marginTop: "20px",
+                    opacity: selectedAnswers.length === 5 ? 1 : 0.5,
                     backgroundColor:
-                      selectedAnswers.length === 6 ? "#4CAF50" : "#ccc",
+                      selectedAnswers.length === 5 ? "#4CAF50" : "#ccc",
                   }}
                 >
                   {isValidated ? "Reiniciar" : "Validar"}
