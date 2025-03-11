@@ -43,8 +43,10 @@ import Slider15_Lista_desplegable_movil from "./pages/Actividades/Actividades_Es
 import DndActivityDesktop from "./pages/Actividades/Actividades_Plan_Estrategido_Seguridad_Vial/DndActivityDesktop.jsx";
 import DndActivityMobile from "./pages/Actividades/Actividades_Plan_Estrategido_Seguridad_Vial/DndActivityMobile";
 import OrdenarPESVDesktop from "./pages/Actividades/Actividades_Plan_Estrategido_Seguridad_Vial/OrdenarPESVDesktop.jsx";
+import DndActivityEntradas from "./pages/Actividades/Actividades_Espacios_Confinados/DndActivityEntradas.jsx";
+import DndActivyMobile from "./pages/Actividades/Actividades_Espacios_Confinados/DndActivityMobile.jsx";
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <DndActivityDesktop />
+    <DndActivyMobile />
   </React.StrictMode>
 );

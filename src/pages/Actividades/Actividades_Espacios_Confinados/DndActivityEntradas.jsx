@@ -17,28 +17,24 @@ import DndActivityMobile from "./DndActivityMobile";
 import Button from "../../components/Button";
 
 const items = [
-  "Reducción de los costos asociados a los accidentes de tránsito.",
-  "Mejora de la imagen y reputación de la organización.",
-  "Mayor compromiso de los trabajadores con la seguridad vial.",
-  "Disminución del absentismo laboral.",
-  "Aumento de la productividad.",
-  "Aumento de los salarios a los trabajadores.",
-  "Mayor riesgo de los conductores al salir a las vías.",
-  "Mayor desgaste de los vehículos.",
+  "Se debe obtener un permiso de trabajo.",
+  "Realizar una medición de los niveles de oxígeno.",
+  "Todo el personal debe contar con los EPP adecuados.",
+  "Contar con un plan de salida siempre.",
+  "Evacuar en caso de cambios en las condiciones atmosféricas.",
+  "Verificar el estado del espacio confinado después de la operación.",
 ];
 
 const correctAnswers = {
-  Si: [
-    "Reducción de los costos asociados a los accidentes de tránsito.",
-    "Mejora de la imagen y reputación de la organización.",
-    "Mayor compromiso de los trabajadores con la seguridad vial.",
-    "Disminución del absentismo laboral.",
-    "Aumento de la productividad.",
+  Entrada: [
+    "Se debe obtener un permiso de trabajo.",
+    "Realizar una medición de los niveles de oxígeno.",
+    "Todo el personal debe contar con los EPP adecuados.",
+    "Contar con un plan de salida siempre.",
   ],
-  No: [
-    "Aumento de los salarios a los trabajadores.",
-    "Mayor riesgo de los conductores al salir a las vías.",
-    "Mayor desgaste de los vehículos.",
+  Salida: [
+    "Evacuar en caso de cambios en las condiciones atmosféricas.",
+    "Verificar el estado del espacio confinado después de la operación.",
   ],
 };
 
@@ -89,7 +85,7 @@ function DroppableBox({ id, items }) {
   );
 }
 
-export default function DndActivityDesktop() {
+export default function DndActivityEntradas() {
   const [itemsState, setItemsState] = useState(
     items.reduce(
       (acc, item) => ({ ...acc, [item]: { box: null, correct: null } }),
@@ -105,7 +101,7 @@ export default function DndActivityDesktop() {
 
   const handleDragEnd = (event) => {
     const { active, over } = event;
-    if (over && (over.id === "Si" || over.id === "No")) {
+    if (over && (over.id === "Entrada" || over.id === "Salida")) {
       setItemsState((prev) => {
         const updatedState = {
           ...prev,
@@ -230,11 +226,13 @@ export default function DndActivityDesktop() {
 
           <div className="grid grid-cols-2 mx-4">
             <div className="flex flex-col items-center justify-center">
-              <p className="text-[16px] text-[#009A3D] font-bold">SI</p>
+              <p className="text-[16px] text-[#009A3D] font-bold">
+                A la entrada...
+              </p>
               <DroppableBox
-                id="Si"
+                id="Entrada"
                 items={Object.entries(itemsState)
-                  .filter(([_, data]) => data.box === "Si")
+                  .filter(([_, data]) => data.box === "Entrada")
                   .map(([item, data]) => (
                     <DraggableItem
                       key={item}
@@ -247,11 +245,13 @@ export default function DndActivityDesktop() {
             </div>
 
             <div className="flex flex-col items-center justify-center">
-              <p className="text-[16px] text-[#f44336] font-bold">NO</p>
+              <p className="text-[16px] text-[#f44336] font-bold">
+                A la salida...
+              </p>
               <DroppableBox
-                id="No"
+                id="Salida"
                 items={Object.entries(itemsState)
-                  .filter(([_, data]) => data.box === "No")
+                  .filter(([_, data]) => data.box === "Salida")
                   .map(([item, data]) => (
                     <DraggableItem
                       key={item}
