@@ -54,8 +54,17 @@ import OrdenarElementos from "./pages/Actividades/Actividades_PESV/OrdenarElemen
 import PPT14_EscogerOpcionSirena from "./pages/Actividades/Actividades_PESV/PPT14_EscogerOpcionSirena.jsx";
 import SlidePP11_seleccione from "./pages/Actividades/Actividades_PESV/SlidePP11_seleccione.jsx";
 import Sliderppt8_seleccione from "./pages/Actividades/Actividades_Izaje_Cargas/Sliderppt8_seleccione.jsx";
+import Sliderppt13_seleccione_audio from "./pages/Actividades/Actividades_Izaje_Cargas/Sliderppt13_seleccione_audio.jsx";
+import Sliderppt15_dragandrop_audios from "./pages/Actividades/Actividades_Izaje_Cargas/Sliderppt15_dragandrop_audios.jsx";
+import Sliderppt16_seleccione_multiple from "./pages/Actividades/Actividades_Izaje_Cargas/Sliderppt16_seleccione_multiple.jsx";
+import Sliderppt18_seleccione_multiple from "./pages/Actividades/Actividades_Izaje_Cargas/Sliderppt18_seleccione_multiple.jsx";
+import Sliderppt25_preguntasTF from "./pages/Actividades/Actividades_Izaje_Cargas/Sliderppt25_preguntasTF.jsx";
+import Slidermobile_select_audios from "./pages/Actividades/Actividades_Izaje_Cargas/Slidermobile_select_audios.jsx";
+import PicadurasAnimalesPeligrosos from "./pages/Actividades/Actividades_Riesgo_Biologico/PicadurasAnimalesPeligrosos.jsx";
+import Sliderppt15_SeleccionPreguntasAudios from "./pages/Actividades/Actividades_Riesgo_psicosocial/Sliderppt15_SeleccionPreguntasAudios.jsx";
+import DragAndDrop_Sistema_Oxiacetileno from "./pages/Actividades/Actividades_Soldaduras/DragAndDrop_Sistema_Oxiacetileno.jsx";
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <Sliderppt8_seleccione />
+    <DragAndDrop_Sistema_Oxiacetileno />
   </React.StrictMode>
 );

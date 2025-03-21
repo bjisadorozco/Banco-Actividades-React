@@ -11,11 +11,11 @@ import audio2 from "../../../assets/audio/m2_slide19_alta_direccion.mp3";
 import audio3 from "../../../assets/audio/m2_slide19_responsable_pesv.mp3";
 import audio4 from "../../../assets/audio/m2_slide19_usted.mp3";
 import { faRefresh } from "@fortawesome/free-solid-svg-icons";
-import "./styles/Sliderppt19_SeleccionPreguntasAudios.css";
+import "./styles/Sliderppt15_SeleccionPreguntasAudios.css";
 import imgVerdadero from "../../../assets/img/checkAct.png";
 import imgFalso from "../../../assets/img/xmarkAct.png";
 
-function Sliderppt19_SeleccionPreguntasAudios() {
+function Sliderppt15_SeleccionPreguntasAudios() {
   const setIsOnDivisor = useStore((state) => state.setIsOnDivisor);
   const [selections, setSelections] = useState({
     drop1: "",
@@ -24,12 +24,6 @@ function Sliderppt19_SeleccionPreguntasAudios() {
     drop4: "",
   });
   const [isVerified, setIsVerified] = useState({
-    drop1: false,
-    drop2: false,
-    drop3: false,
-    drop4: false,
-  });
-  const [showAudio, setShowAudio] = useState({
     drop1: false,
     drop2: false,
     drop3: false,
@@ -65,14 +59,6 @@ function Sliderppt19_SeleccionPreguntasAudios() {
       // Verificar si la selección es correcta
       const isCorrect = value === correctItems[dropId];
       setIsVerified((prev) => ({ ...prev, [dropId]: isCorrect }));
-      setShowAudio((prev) => ({ ...prev, [dropId]: isCorrect }));
-
-      // Si es correcto, reproducir el nuevo audio
-      if (isCorrect) {
-        if (audioRefs.current[dropId]) {
-          audioRefs.current[dropId].play();
-        }
-      }
 
       // Habilitar el botón de reinicio si se ha hecho al menos una selección
       setIsResetEnabled(true);
@@ -105,12 +91,6 @@ function Sliderppt19_SeleccionPreguntasAudios() {
       drop3: false,
       drop4: false,
     });
-    setShowAudio({
-      drop1: false,
-      drop2: false,
-      drop3: false,
-      drop4: false,
-    });
     setIsResetEnabled(false);
     setCorrectCount(0);
     setShowValidationMessage(false);
@@ -129,29 +109,21 @@ function Sliderppt19_SeleccionPreguntasAudios() {
       image: img1,
       audio: audio1,
       dropId: "drop1",
-      audioPosition: "top",
-      selectPosition: "bottom",
     },
     {
       image: img2,
       audio: audio2,
       dropId: "drop2",
-      audioPosition: "bottom",
-      selectPosition: "top",
     },
     {
       image: img4,
       audio: audio3,
       dropId: "drop3",
-      audioPosition: "top",
-      selectPosition: "bottom",
     },
     {
       image: img3,
       audio: audio4,
       dropId: "drop4",
-      audioPosition: "bottom",
-      selectPosition: "top",
     },
   ];
 
@@ -170,97 +142,57 @@ function Sliderppt19_SeleccionPreguntasAudios() {
   };
 
   return (
-    <div className="quiz-container-ppt19">
-      <div className="cards-container-ppt19">
+    <div className="quiz-container-ppt15">
+      <div className="cards-container-ppt15">
         {risks.map((risk, index) => (
           <div
-            className={`card-container-ppt19 ${selections[risk.dropId] ? (isVerified[risk.dropId] ? "correct" : "incorrect") : ""}`}
+            className={`card-container-ppt15 ${selections[risk.dropId] ? (isVerified[risk.dropId] ? "correct" : "incorrect") : ""}`}
             key={index}
           >
-            <div className="image-select-container-ppt19">
-              <div className="top-content-ppt19">
-                {risk.audioPosition === "top" && showAudio[risk.dropId] && (
-                  <div className="audio-container-ppt19">
-                    <audio ref={(el) => (audioRefs.current[risk.dropId] = el)} controls autoPlay>
-                      <source src={risk.audio} type="audio/mpeg" />
-                      Tu navegador no soporta el elemento de audio.
-                    </audio>
-                  </div>
-                )}
-
-                {risk.selectPosition === "top" && (
-                  <div className="select-container-ppt19">
-                    <select
-                      value={selections[risk.dropId]}
-                      onChange={(e) => handleChange(risk.dropId, e.target.value)}
-                      disabled={isVerified[risk.dropId]}
-                    >
-                      <option value="">Seleccione...</option>
-                      {options
-                        .filter(
-                          (option) =>
-                            !Object.values(selections).includes(option.value) ||
-                            selections[risk.dropId] === option.value
-                        )
-                        .map((option) => (
-                          <option key={option.value} value={option.value}>
-                            {option.label}
-                          </option>
-                        ))}
-                    </select>
-                  </div>
-                )}
-              </div>
-
-              <div className="image-validation-container-ppt19">
+            <div className="image-audio-select-container-ppt15">
+              <div className="image-container-ppt15">
                 <img
                   src={risk.image || "/placeholder.svg"}
                   alt={`Imagen ${index + 1}`}
-                  className="circular-image-ppt19"
+                  className="circular-image-ppt15"
                 />
                 {selections[risk.dropId] && (
-                  <div className="validation-icon-container-ppt19">
+                  <div className="validation-icon-container-ppt15">
                     <img
                       src={isVerified[risk.dropId] ? imgVerdadero : imgFalso}
                       alt="Validation Icon"
-                      className="validation-icon-ppt19"
+                      className="validation-icon-ppt15"
                     />
                   </div>
                 )}
               </div>
 
-              <div className="bottom-content-ppt19">
-                {risk.selectPosition === "bottom" && (
-                  <div className="select-container-ppt19">
-                    <select
-                      value={selections[risk.dropId]}
-                      onChange={(e) => handleChange(risk.dropId, e.target.value)}
-                      disabled={isVerified[risk.dropId]}
-                    >
-                      <option value="">Seleccione...</option>
-                      {options
-                        .filter(
-                          (option) =>
-                            !Object.values(selections).includes(option.value) ||
-                            selections[risk.dropId] === option.value
-                        )
-                        .map((option) => (
-                          <option key={option.value} value={option.value}>
-                            {option.label}
-                          </option>
-                        ))}
-                    </select>
-                  </div>
-                )}
+              <div className="audio-container-ppt15">
+                <audio ref={(el) => (audioRefs.current[risk.dropId] = el)} controls>
+                  <source src={risk.audio} type="audio/mpeg" />
+                  Tu navegador no soporta el elemento de audio.
+                </audio>
+              </div>
 
-                {risk.audioPosition === "bottom" && showAudio[risk.dropId] && (
-                  <div className="audio-container-ppt19">
-                    <audio ref={(el) => (audioRefs.current[risk.dropId] = el)} controls autoPlay>
-                      <source src={risk.audio} type="audio/mpeg" />
-                      Tu navegador no soporta el elemento de audio.
-                    </audio>
-                  </div>
-                )}
+              <div className="select-container-ppt15">
+                <select
+                  value={selections[risk.dropId]}
+                  onChange={(e) => handleChange(risk.dropId, e.target.value)}
+                  disabled={isVerified[risk.dropId]}
+                >
+                  <option value="">Seleccione...</option>
+                  {options
+                    .filter(
+                      (option) =>
+                        !Object.values(selections).includes(option.value) ||
+                        selections[risk.dropId] === option.value
+                    )
+                    .map((option) => (
+                      <option key={option.value} value={option.value}>
+                        {option.label}
+                      </option>
+                    ))}
+                </select>
               </div>
             </div>
           </div>
@@ -268,8 +200,8 @@ function Sliderppt19_SeleccionPreguntasAudios() {
       </div>
 
       {showValidationMessage && (
-        <div className="text-center-ppt19 mt-1">
-          <p theme="ligth" bold="true" className="bold-text-ppt19">
+        <div className="text-center-ppt15 mt-1">
+          <p theme="ligth" bold="true" className="bold-text-ppt15">
             Tus respuestas correctas son: {correctCount} de {Object.keys(correctItems).length} (
             {Math.round((correctCount / Object.keys(correctItems).length) * 100)}%).
           </p>
@@ -277,23 +209,23 @@ function Sliderppt19_SeleccionPreguntasAudios() {
       )}
 
       {showValidationMessage && (
-        <div className="feedback-container-ppt19 mt-1 p-0 rounded-lg text-center">
+        <div className="feedback-container-ppt15 mt-1 p-0 rounded-lg text-center">
           {correctCount === Object.keys(correctItems).length ? (
             <Paragraph>
-              <span className="text-green-personalizado-ppt19 font-bold">Respuesta correcta:</span>{" "}
-              <span className="texto-gray-ppt19">¡Muy bien! Conoces a nuestro equipo de PESV.​</span>
+              <span className="text-green-personalizado-ppt15 font-bold">Respuesta correcta:</span>{" "}
+              <span className="texto-gray-ppt15">¡Muy bien! Conoces a nuestro equipo de PESV.​</span>
             </Paragraph>
           ) : correctCount === Object.keys(correctItems).length - 2 ? (
             <Paragraph>
-              <span className="text-orange-personalizado-ppt19 font-bold">Piénsalo bien:</span>{" "}
-              <span className="texto-gray-ppt19">
+              <span className="text-orange-personalizado-ppt15 font-bold">Piénsalo bien:</span>{" "}
+              <span className="texto-gray-ppt15">
                 Algunas preguntas NO las has relacionado correctamente.
               </span>
             </Paragraph>
           ) : (
             <Paragraph>
-              <span className="text-red-personalizado-ppt19 font-bold">Respuesta Incorrecta:</span>{" "}
-              <span className="texto-gray-ppt19">
+              <span className="text-red-personalizado-ppt15 font-bold">Respuesta Incorrecta:</span>{" "}
+              <span className="texto-gray-ppt15">
                 ¡Piénsalo bien! Mira nuevamente el vídeo e inténtalo de nuevo.
               </span>
             </Paragraph>
@@ -301,7 +233,7 @@ function Sliderppt19_SeleccionPreguntasAudios() {
         </div>
       )}
 
-      <div className="reset-button-container-ppt19">
+      <div className="reset-button-container-ppt15">
         <Button
           bold={false}
           icon={faRefresh}
@@ -317,4 +249,4 @@ function Sliderppt19_SeleccionPreguntasAudios() {
   );
 }
 
-export default Sliderppt19_SeleccionPreguntasAudios;
+export default Sliderppt15_SeleccionPreguntasAudios;

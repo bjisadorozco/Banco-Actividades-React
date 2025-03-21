@@ -30,8 +30,8 @@ function PreguntasSiNo() {
     {
       question: "¿Este espacio está diseñado para la ocupación continua de una persona?",
       options: [
-        { text: "Si", correct: true },
-        { text: "No", correct: false },
+        { text: "Si", correct: false },
+        { text: "No", correct: true },
       ],
       image: mano1,
     },
@@ -152,7 +152,10 @@ function PreguntasSiNo() {
                           />
                         </>
                       ) : (
-                        <img src={xmarkIcon || "/placeholder.svg"} alt="Incorrecto" className="error-icon" />
+                        <div className="error-section">
+      <img src={xmarkIcon || "/placeholder.svg"} alt="Incorrecto" className="error-icon" />
+      <p className="error-text">No seleccionaste bien la pregunta, no puedes ver la imagen.</p>
+    </div>
                       ))}
                   </div>
                 ))}

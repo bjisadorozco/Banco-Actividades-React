@@ -1,26 +1,26 @@
-import React, { useState, useEffect, useRef } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faRepeat, faUndo } from "@fortawesome/free-solid-svg-icons";
-import imgTrue from "../../../assets/img/checkAct.png";
-import imgFalse from "../../../assets/img/xmarkAct.png";
-import DragAndDropMobile from "./Drag_And_DropMobile";
-import audioCasco from "/src/assets/audio/casco_de_proteccion.mp3";
-import audioBotas from "/src/assets/audio/botas_con_punta_de_acero.mp3";
-import audioArnes from "/src/assets/audio/arnes_de_cuerpo_completo.mp3";
-import audioOverol from "/src/assets/audio/overoles_resistente_a_quimicos.mp3";
-import audioProtector from "/src/assets/audio/tapones_o_protectore_auditivos.mp3";
-import audioGafas from "/src/assets/audio/gafas_de_seguridad.mp3";
-import audioGuantes from "/src/assets/audio/guantes_resistentes_a_quimicos.mp3";
-import audioRespirador from "/src/assets/audio/respiradores_purificadores_de_aire.mp3";
-import casco from "/src/assets/img/casco_sldM2.webp";
-import botas from "/src/assets/img/botas_sldM2.webp";
-import arnes from "/src/assets/img/arnes_sldM2.webp";
-import overol from "/src/assets/img/overoles_resistentes_quimicos_sldM2.webp";
-import protector from "/src/assets/img/protectores_auditivos_sldM2.webp";
-import gafas from "/src/assets/img/gafas_seguridad_sldM2.webp";
-import guantes from "/src/assets/img/guantes_sldM2.webp";
-import respirador from "/src/assets/img/respiradores_sldM2.webp";
-import trabajador from "/src/assets/img/avatar_elementos_epp.webp";
+"use client"
+
+import { useState, useEffect, useRef } from "react"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faRepeat, faUndo } from "@fortawesome/free-solid-svg-icons"
+import imgTrue from "../../../assets/img/checkAct.png"
+import imgFalse from "../../../assets/img/xmarkAct.png"
+import DragAndDropMobile from "./Drag_And_DropMobile"
+import audioBotas from "/src/assets/audio/botas_con_punta_de_acero.mp3"
+import audioArnes from "/src/assets/audio/arnes_de_cuerpo_completo.mp3"
+import audioOverol from "/src/assets/audio/overoles_resistente_a_quimicos.mp3"
+import audioProtector from "/src/assets/audio/tapones_o_protectore_auditivos.mp3"
+import audioGafas from "/src/assets/audio/gafas_de_seguridad.mp3"
+import audioGuantes from "/src/assets/audio/guantes_resistentes_a_quimicos.mp3"
+import audioRespirador from "/src/assets/audio/respiradores_purificadores_de_aire.mp3"
+import botas from "/src/assets/img/botas_sldM2.webp"
+import arnes from "/src/assets/img/arnes_sldM2.webp"
+import overol from "/src/assets/img/overoles_resistentes_quimicos_sldM2.webp"
+import protector from "/src/assets/img/protectores_auditivos_sldM2.webp"
+import gafas from "/src/assets/img/gafas_seguridad_sldM2.webp"
+import guantes from "/src/assets/img/guantes_sldM2.webp"
+import respirador from "/src/assets/img/respiradores_sldM2.webp"
+import trabajador from "/src/assets/img/sistema_oxiacetileno_ppt17.webp"
 
 const items = [
   {
@@ -79,162 +79,141 @@ const items = [
     image: respirador,
     correctBoxId: "rightColumn",
   },
-];
+]
 
-const leftColumnItems = ["A", "B", "C", "D"];
-const rightColumnItems = ["E", "F", "G", "H"];
+const leftColumnItems = ["A", "B", "C", "D"]
+const rightColumnItems = ["E", "F", "G", "H"]
 
 const DragAndDrop = () => {
-  const [droppedItems, setDroppedItems] = useState({});
-  const [feedbackMessage, setFeedbackMessage] = useState("");
-  const [audioSrc, setAudioSrc] = useState("");
-  const [isResetDisabled, setIsResetDisabled] = useState(true);
-  const [history, setHistory] = useState([]);
-  const audioRef = useRef(null);
+  const [droppedItems, setDroppedItems] = useState({})
+  const [feedbackMessage, setFeedbackMessage] = useState("")
+  const [audioSrc, setAudioSrc] = useState("")
+  const [isResetDisabled, setIsResetDisabled] = useState(true)
+  const [history, setHistory] = useState([])
+  const audioRef = useRef(null)
 
-  // Usamos useEffect para escuchar los cambios de audioSrc y reproducir el audio automáticamente
   useEffect(() => {
     if (audioSrc && audioRef.current) {
-      // Asegurarse de que el audio se pause, se reinicie y luego se reproduzca
-      audioRef.current.pause();
-      audioRef.current.currentTime = 0;
-      audioRef.current.load();
-      audioRef.current.play();
+      audioRef.current.pause()
+      audioRef.current.currentTime = 0
+      audioRef.current.load()
+      audioRef.current.play()
     }
-  }, [audioSrc]);
+  }, [audioSrc])
 
   const handleDragStart = (e, item) => {
-    e.dataTransfer.setData("text/plain", item.id);
-  };
+    e.dataTransfer.setData("text/plain", item.id)
+  }
 
   const handleDrop = (e, targetId) => {
-    e.preventDefault();
+    e.preventDefault()
 
-    const itemId = e.dataTransfer.getData("text/plain");
-    const draggedItem = items.find((item) => item.id === itemId);
+    const itemId = e.dataTransfer.getData("text/plain")
+    const draggedItem = items.find((item) => item.id === itemId)
 
     if (!draggedItem) {
-      console.error("Item no encontrado:", itemId);
-      return;
+      console.error("Item no encontrado:", itemId)
+      return
     }
 
-    // Guardamos el estado anterior antes de actualizar
-    const previousDroppedItems = { ...droppedItems };
-    const previousHistory = [...history];
+    const previousDroppedItems = { ...droppedItems }
+    const previousHistory = [...history]
 
-    // Verificar si el item ya está en alguna caja
-    const existingItem = Object.values(droppedItems).find(
-      (droppedItem) => droppedItem.id === draggedItem.id
-    );
+    const existingItem = Object.values(droppedItems).find((droppedItem) => droppedItem.id === draggedItem.id)
 
     if (existingItem) {
-      // Eliminarlo de su caja anterior
-      const updatedDroppedItems = { ...droppedItems };
-      delete updatedDroppedItems[existingItem.correctBoxId];
+      const updatedDroppedItems = { ...droppedItems }
+      delete updatedDroppedItems[existingItem.correctBoxId]
 
-      // Actualizar el estado con el item en su nueva caja
       setDroppedItems({
         ...updatedDroppedItems,
         [targetId]: draggedItem,
-      });
+      })
     } else {
-      // Si no está en ninguna caja, colocarlo en la caja correspondiente
-      const isCorrect = isItemCorrect(draggedItem.id, targetId);
+      const isCorrect = isItemCorrect(draggedItem.id, targetId)
 
       if (!droppedItems[targetId]) {
         setDroppedItems((prevDroppedItems) => ({
           ...prevDroppedItems,
           [targetId]: draggedItem,
-        }));
+        }))
 
         if (isCorrect) {
           setFeedbackMessage(
             <>
-              <span className="text-[#4CAF50] font-bold">
-                Relación correcta:{" "}
-              </span>
+              <span className="text-[#4CAF50] font-bold">Relación correcta: </span>
               <span className="text-[#808693]">
-                ¡Muy bien! Identificaste este ítem correctamente. Ahora escucha
-                el siguiente audio:
+                ¡Muy bien! Identificaste este ítem correctamente. Ahora escucha el siguiente audio:
               </span>
-            </>
-          );
-          // Guardamos el historial de la acción realizada
-          setAudioSrc(draggedItem.audio);
+            </>,
+          )
+          setAudioSrc(draggedItem.audio)
           previousHistory.push({
             action: "add",
             item: draggedItem,
             to: targetId,
-          });
+          })
         } else {
           setFeedbackMessage(
             <>
-              <span className="text-[#FF7043] font-bold">
-                Relación incorrecta:{" "}
-              </span>
+              <span className="text-[#FF7043] font-bold">Relación incorrecta: </span>
               <span className="text-[#808693]">
-                ¡Piénsalo bien! El ítem no corresponde a este elemento de
-                protección personal, vuelve a intentarlo.
+                ¡Piénsalo bien! El ítem no corresponde a este elemento de protección personal, vuelve a intentarlo.
               </span>
-            </>
-          );
-          setAudioSrc(""); // Borra el audio si es incorrecto
+            </>,
+          )
+          setAudioSrc("") // Borra el audio si es incorrecto
           previousHistory.push({
             action: "incorrect",
             item: draggedItem,
             to: targetId,
-          });
+          })
         }
       }
-      // Actualizamos el historial
-      setHistory(previousHistory);
+      setHistory(previousHistory)
     }
-  };
+  }
+
   const handleUndo = () => {
-    if (history.length === 0) return;
+    if (history.length === 0) return
 
-    // Recuperamos la última acción y deshacemos la acción
-    const lastAction = history[history.length - 1];
-    const newDroppedItems = { ...droppedItems };
+    const lastAction = history[history.length - 1]
+    const newDroppedItems = { ...droppedItems }
 
-    // Deshacer la acción según el tipo de acción guardada
     if (lastAction.action === "add" || lastAction.action === "incorrect") {
-      // Si fue una acción de agregar o incorrecta, eliminamos el item de la caja
-      delete newDroppedItems[lastAction.to];
+      delete newDroppedItems[lastAction.to]
     }
 
-    // Restablecer el historial
-    setDroppedItems(newDroppedItems);
-    setHistory(history.slice(0, -1)); // Eliminar la última acción del historial
-  };
+    setDroppedItems(newDroppedItems)
+    setHistory(history.slice(0, -1)) // Eliminar la última acción del historial
+  }
 
   const handleReset = () => {
-    setDroppedItems({});
-    setFeedbackMessage("");
-    setAudioSrc("");
-  };
+    setDroppedItems({})
+    setFeedbackMessage("")
+    setAudioSrc("")
+  }
 
   const isItemCorrect = (itemId, targetId) => {
     return (
-      (leftColumnItems.includes(targetId) &&
-        leftColumnItems.includes(itemId)) ||
+      (leftColumnItems.includes(targetId) && leftColumnItems.includes(itemId)) ||
       (rightColumnItems.includes(targetId) && rightColumnItems.includes(itemId))
-    );
-  };
+    )
+  }
 
   const allItemsCorrect = () => {
     return Object.values(droppedItems).every((item) => {
-      return isItemCorrect(item.id, item.correctBoxId);
-    });
-  };
+      return isItemCorrect(item.id, item.correctBoxId)
+    })
+  }
 
   useEffect(() => {
     if (Object.keys(droppedItems).length === items.length) {
-      setIsResetDisabled(false);
+      setIsResetDisabled(false)
     } else {
-      setIsResetDisabled(true);
+      setIsResetDisabled(true)
     }
-  }, [droppedItems]);
+  }, [droppedItems])
 
   return (
     <div className="md:w-full flex bg-white flex-col justify-center md:static relative mb-0">
@@ -246,8 +225,8 @@ const DragAndDrop = () => {
               {/* Columna izquierda */}
               <div className="flex flex-col items-center mr-4">
                 {leftColumnItems.map((itemId) => {
-                  const item = items.find((i) => i.id === itemId);
-                  const isCorrect = isItemCorrect(item.id, itemId);
+                  const item = items.find((i) => i.id === itemId)
+                  const isCorrect = isItemCorrect(item.id, itemId)
                   return (
                     <div
                       key={item.id}
@@ -262,36 +241,25 @@ const DragAndDrop = () => {
                       onDrop={(e) => handleDrop(e, item.id)}
                       onDragOver={(e) => e.preventDefault()}
                     >
-                      {droppedItems[item.id] &&
-                        isItemCorrect(droppedItems[item.id].id, itemId) && (
-                          <span
-                            className={`w-[150px] bg-[#4CAF50] text-white text-[14px] leading-4 absolute z-30 text-center px-2 py-1 rounded-full ${
-                              leftColumnItems.includes(item.id)
-                                ? "right-[calc(100%+10px)]"
-                                : "left-[calc(100%+10px)]"
-                            } top-2`}
-                          >
-                            {droppedItems[item.id].name}
-                          </span>
-                        )}
+                      {droppedItems[item.id] && isItemCorrect(droppedItems[item.id].id, itemId) && (
+                        <span
+                          className={`w-[150px] bg-[#4CAF50] text-white text-[14px] leading-4 absolute z-30 text-center px-2 py-1 rounded-full ${
+                            leftColumnItems.includes(item.id) ? "right-[calc(100%+10px)]" : "left-[calc(100%+10px)]"
+                          } top-2`}
+                        >
+                          {droppedItems[item.id].name}
+                        </span>
+                      )}
                       {droppedItems[item.id] && (
                         <img
-                          src={
-                            isItemCorrect(droppedItems[item.id].id, itemId)
-                              ? imgTrue
-                              : imgFalse
-                          }
-                          alt={
-                            isItemCorrect(droppedItems[item.id].id, itemId)
-                              ? "Correcto"
-                              : "Incorrecto"
-                          }
+                          src={isItemCorrect(droppedItems[item.id].id, itemId) ? imgTrue : imgFalse}
+                          alt={isItemCorrect(droppedItems[item.id].id, itemId) ? "Correcto" : "Incorrecto"}
                           className="w-8 h-8 left-8 top-2 p-1"
                         />
                       )}
                       {droppedItems[item.id] ? (
                         <img
-                          src={droppedItems[item.id].image}
+                          src={droppedItems[item.id].image || "/placeholder.svg"}
                           alt={droppedItems[item.id].name}
                           className="w-full h-full relative z-20 object-cover bottom-6 rounded m-0"
                         />
@@ -301,24 +269,26 @@ const DragAndDrop = () => {
                         </span>
                       )}
                     </div>
-                  );
+                  )
                 })}
               </div>
 
-              {/* Imagen central */}
+              {/* Imagen central con efecto de lupa */}
               <div className="flex items-center justify-center mx-4">
-                <img
-                  src={trabajador}
-                  alt="Trabajador con equipo de protección"
-                  className="w-[120px] mb-0"
-                />
+                <div className="image-zoom-container">
+                  <img
+                    src={trabajador || "/placeholder.svg"}
+                    alt="Trabajador con equipo de protección"
+                    className="w-[120px] mb-0 image-zoom"
+                  />
+                </div>
               </div>
 
               {/* Columna derecha */}
               <div className="flex flex-col items-center ml-4">
                 {rightColumnItems.map((itemId) => {
-                  const item = items.find((i) => i.id === itemId);
-                  const isCorrect = isItemCorrect(item.id, itemId);
+                  const item = items.find((i) => i.id === itemId)
+                  const isCorrect = isItemCorrect(item.id, itemId)
                   return (
                     <div
                       key={item.id}
@@ -335,30 +305,21 @@ const DragAndDrop = () => {
                     >
                       {droppedItems[item.id] && (
                         <>
-                          {droppedItems[item.id] &&
-                            isItemCorrect(droppedItems[item.id].id, itemId) && (
-                              <span className="w-[150px] bg-[#4CAF50] text-white text-[14px] leading-4 absolute z-10 object-cover top-2 left-16 text-center px-2 py-1 rounded-full">
-                                {droppedItems[item.id].name}
-                              </span>
-                            )}
+                          {droppedItems[item.id] && isItemCorrect(droppedItems[item.id].id, itemId) && (
+                            <span className="w-[150px] bg-[#4CAF50] text-white text-[14px] leading-4 absolute z-10 object-cover top-2 left-16 text-center px-2 py-1 rounded-full">
+                              {droppedItems[item.id].name}
+                            </span>
+                          )}
                           <img
-                            src={
-                              isItemCorrect(droppedItems[item.id].id, itemId)
-                                ? imgTrue
-                                : imgFalse
-                            }
-                            alt={
-                              isItemCorrect(droppedItems[item.id].id, itemId)
-                                ? "Correcto"
-                                : "Incorrecto"
-                            }
+                            src={isItemCorrect(droppedItems[item.id].id, itemId) ? imgTrue : imgFalse}
+                            alt={isItemCorrect(droppedItems[item.id].id, itemId) ? "Correcto" : "Incorrecto"}
                             className="w-8 h-8 left-8 top-2 p-1"
                           />
                         </>
                       )}
                       {droppedItems[item.id] ? (
                         <img
-                          src={droppedItems[item.id].image}
+                          src={droppedItems[item.id].image || "/placeholder.svg"}
                           alt={droppedItems[item.id].name}
                           className="w-full h-full relative z-20 object-cover bottom-6 rounded m-0"
                         />
@@ -368,78 +329,68 @@ const DragAndDrop = () => {
                         </span>
                       )}
                     </div>
-                  );
+                  )
                 })}
+              </div>
+
+              {/* Contenedor de los botones y elementos arrastrables */}
+              <div className="flex flex-col items-center justify-center">
+                <div className="flex flex-col space-y-2 ml-4">
+                  <button
+                    className={`bg-[#6E3CD2] flex items-center justify-center text-white rounded-full h-8 px-8 py-2 text-[16px]`}
+                    onClick={handleUndo}
+                    disabled={history.length === 0}
+                  >
+                    <FontAwesomeIcon icon={faUndo} /> Deshacer
+                  </button>
+                  <button
+                    className={`bg-[#6E3CD2] flex items-center justify-center text-white rounded-full h-8 px-8 py-2 text-[16px]`}
+                    onClick={handleReset}
+                  >
+                    <FontAwesomeIcon icon={faRepeat} /> Reiniciar
+                  </button>
+                </div>
+
+                <div className="grid grid-cols-2 gap-2 relative left-28">
+                  {items.map(
+                    (item) =>
+                      !Object.values(droppedItems).some((droppedItem) => droppedItem.id === item.id) && (
+                        <img
+                          key={item.id}
+                          src={item.image || "/placeholder.svg"}
+                          alt={item.name}
+                          draggable
+                          onDragStart={(e) => handleDragStart(e, item)}
+                          className="w-16 h-16 mb-0 cursor-pointer border-2 border-[#6E3CD2] rounded"
+                        />
+                      ),
+                  )}
+                </div>
               </div>
             </div>
 
-            {/* Objetos arrastrables */}
-            <div className="grid grid-cols-2 gap-2 relative left-28  ">
-              {items.map(
-                (item) =>
-                  !Object.values(droppedItems).some(
-                    (droppedItem) => droppedItem.id === item.id
-                  ) && (
-                    <img
-                      key={item.id}
-                      src={item.image}
-                      alt={item.name}
-                      draggable
-                      onDragStart={(e) => handleDragStart(e, item)}
-                      className="w-16 h-16 mb-0 cursor-pointer border-2 border-[#6E3CD2] rounded"
-                    />
-                  )
-              )}
+            {/* Retroalimentación y Audio */}
+            <div className="my-4">
+              <div className="shadow-lg bg-[#FCFCFC]  p-2 rounded-lg text-[16px] text-center items-center justify-center flex flex-col">
+                {feedbackMessage && (
+                  <>
+                    <p className={audioSrc ? "font-sembild text-[#4CAF50]" : "font-sembild text-[#FF7043]"}>
+                      {feedbackMessage}
+                    </p>
+                    {audioSrc && (
+                      <audio ref={audioRef} controls className="border border-gray-300 rounded-md shadow-sm">
+                        <source src={audioSrc} type="audio/mp3" />
+                        Tu navegador no soporta la etiqueta de audio.
+                      </audio>
+                    )}
+                  </>
+                )}
+              </div>
             </div>
-          </div>
-
-          {/* Retroalimentación y Audio */}
-          <div className="my-4">
-            <div className="shadow-lg bg-[#FCFCFC]  p-2 rounded-lg text-[16px] text-center items-center justify-center flex flex-col">
-              {feedbackMessage && (
-                <>
-                  <p
-                    className={
-                      audioSrc
-                        ? "font-sembild text-[#4CAF50]"
-                        : "font-sembild text-[#FF7043]"
-                    }
-                  >
-                    {feedbackMessage}
-                  </p>
-                  {audioSrc && (
-                    <audio
-                      ref={audioRef}
-                      controls
-                      className="border border-gray-300 rounded-md shadow-sm"
-                    >
-                      <source src={audioSrc} type="audio/mp3" />
-                      Tu navegador no soporta la etiqueta de audio.
-                    </audio>
-                  )}
-                </>
-              )}
-            </div>
-          </div>
-
-          {/* Botón de reinicio */}
-          <div className="w-full flex justify-center py-2">
-            <button
-              className={`bg-[#6E3CD2] flex items-center justify-center text-white rounded-full h-8 px-8 py-2 text-[16px] mx-2`}
-              onClick={handleUndo}
-              disabled={history.length === 0}
-            >
-              <FontAwesomeIcon icon={faUndo} /> Deshacer
-            </button>
-            <button
-              className={`bg-[#6E3CD2] flex items-center justify-center text-white rounded-full h-8 px-8 py-2 text-[16px] mx-2`}
-              onClick={handleReset}
-            >
-              <FontAwesomeIcon icon={faRepeat} /> Reiniciar
-            </button>
           </div>
         </div>
       </div>
+      <div className="md:hidden">
         <DragAndDropMobile
           items={items}
           droppedItems={droppedItems}
@@ -451,8 +402,9 @@ const DragAndDrop = () => {
           setAudioSrc={setAudioSrc}
           handleReset={handleReset}
         />
+      </div>
     </div>
-  );
-};
+  )
+}
 
-export default DragAndDrop;
+export default DragAndDrop

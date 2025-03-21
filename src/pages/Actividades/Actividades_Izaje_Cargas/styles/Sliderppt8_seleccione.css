@@ -4,6 +4,7 @@
     flex-direction: column;
     align-items: center;
     gap: 0.1rem;
+    margin-top: 20px; /* Añadido margen superior */
   }
   
   /* Fila de imágenes */
@@ -13,13 +14,26 @@
     gap: 1rem;
   }
   
-  /* Ajuste para dispositivos móviles */
   @media (max-width: 768px) {
     .image-row-ppt8-AICS {
-      flex-direction: column; /* Cambia a columna en móviles */
-      align-items: center;
+        display: flex;
+        flex-wrap: wrap; /* Permite que los elementos se envuelvan */
+        justify-content: center;
+        gap: 1rem;
     }
-  }
+
+    .image-container-ppt8-AICS {
+        flex: 1 1 45%; /* Ajusta el tamaño para que quepan 2 en una fila */
+        max-width: 45%; /* Asegura que no excedan el ancho */
+    }
+
+    /* Asegura que la tercera imagen ocupe el 100% del ancho y se centre */
+    .image-container-ppt8-AICS:nth-child(3) {
+        flex: 1 1 100%;
+        max-width: 100%;
+        text-align: center; /* Centra la imagen */
+    }
+}
   
   .image-container-ppt8-AICS {
     display: flex;
@@ -39,8 +53,8 @@
   .draggable-ppt8-AICS {
     width: 200px;
     height: 200px;
-    border: 2px solid #6e3cd2;
-    padding: 0;
+    border: 2px solid #0f172a;
+    padding: 18px;
     box-sizing: border-box;
     object-fit: contain;
     display: block;
@@ -77,9 +91,7 @@
   
   /* Ajuste para el audio en móviles */
   @media (max-width: 768px) {
-    .audio-container-ppt8-AICS {
-      order: 1; /* Mueve el audio debajo de la tercera imagen */
-    }
+    
   }
   
   /* Mensaje de error */

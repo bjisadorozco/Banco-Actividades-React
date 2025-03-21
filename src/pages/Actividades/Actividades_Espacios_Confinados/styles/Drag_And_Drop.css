@@ -1,0 +1,110 @@
+/* Efecto de lupa circular */
+.image-zoom-container {
+    overflow: hidden;
+    border-radius: 50%; /* Hace que el contenedor sea circular */
+    width: 120px; /* Ajusta el tamaño del contenedor */
+    height: 120px; /* Ajusta el tamaño del contenedor */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .image-zoom {
+    transition: transform 0.3s ease;
+    cursor: pointer;
+  }
+  
+  .image-zoom:hover {
+    transform: scale(1.2); /* Ajusta el nivel de zoom */
+  }
+  
+  /* Estilos para los elementos arrastrables */
+  .drag-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px; /* Espacio entre los elementos arrastrables */
+    margin-left: 20px; /* Margen a la izquierda para separar de las columnas */
+  }
+  
+  .drag-item {
+    width: 64px; /* Mismo tamaño que los cuadros de drop */
+    height: 64px; /* Mismo tamaño que los cuadros de drop */
+    cursor: pointer;
+    border: 2px solid #6E3CD2;
+    border-radius: 8px;
+    object-fit: cover; /* Asegura que la imagen se ajuste correctamente */
+  }
+  
+  /* Estilos para los cuadros de drop */
+  .drop-box {
+    width: 64px;
+    height: 64px;
+    border: 2px dashed #9C99A1;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #ebebeb;
+    transition: background-color 0.3s ease;
+  }
+  
+  .drop-box:hover {
+    background-color: #D3C4F1;
+  }
+  
+  .drop-box.correct {
+    background-color: #4CAF50;
+    border-style: solid;
+  }
+  
+  .drop-box.incorrect {
+    background-color: #FF7043;
+    border-style: solid;
+  }
+  
+  /* Estilos para los botones */
+  .button-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Espacio entre los botones */
+    margin-left: 20px; /* Margen a la izquierda para separar de los elementos arrastrables */
+  }
+  
+  .button-container button {
+    background-color: #6E3CD2;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    padding: 8px 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+  
+  .button-container button:disabled {
+    background-color: #9C99A1;
+    cursor: not-allowed;
+  }
+  
+  /* Estilos para la retroalimentación */
+  .feedback-container {
+    margin-top: 20px;
+    text-align: center;
+  }
+  
+  .feedback-correct {
+    color: #4CAF50;
+    font-weight: bold;
+  }
+  
+  .feedback-incorrect {
+    color: #FF7043;
+    font-weight: bold;
+  }
+  
+  .audio-player {
+    margin-top: 10px;
+  }
