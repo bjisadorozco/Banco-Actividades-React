@@ -4,7 +4,9 @@ import { useState, useEffect } from "react"
 import { DndContext, useSensor, useSensors, MouseSensor, TouchSensor } from "@dnd-kit/core"
 import { useDroppable, useDraggable } from "@dnd-kit/core"
 import { faRepeat } from "@fortawesome/free-solid-svg-icons"
-import sistema_oxiacetileno from "/src/assets/img/sistema_oxiacetileno_ppt17.webp"
+import sistema_oxiacetileno from "/src/assets/img/corrección_sistema_oxiacetileno.webp"
+import imgVerdadero from "../../../assets/img/checkAct.png"
+import imgFalso from "../../../assets/img/xmarkAct.png"
 import "./styles/DragAndDrop_Sistema_Oxiacetileno.css"
 import Button from "../../components/Button"
 
@@ -27,13 +29,19 @@ function DraggableItem({ id, children, isHidden }) {
   )
 }
 
-function DroppableArea({ id, children }) {
-  const { isOver, setNodeRef } = useDroppable({
+function DroppableArea({ id, children, isOver, isCorrect }) {
+  const { setNodeRef } = useDroppable({
     id: id,
   })
 
+  let className = `drop-boxppt17 ${isOver ? "dropbox-overppt17" : ""}`
+
+  if (isCorrect !== null && isCorrect !== undefined) {
+    className += isCorrect ? " correct" : " incorrect"
+  }
+
   return (
-    <div ref={setNodeRef} className={`drop-boxppt17 ${isOver ? "dropbox-overppt17" : ""}`}>
+    <div ref={setNodeRef} className={className} style={{ color: isCorrect !== undefined ? "white" : "#8f8f8f" }}>
       {children}
     </div>
   )
@@ -48,9 +56,13 @@ const DragAndDrop_Sistema_Oxiacetileno = () => {
 
   const [history, setHistory] = useState([])
   const [feedbackMessage, setFeedbackMessage] = useState("")
+  const [scoreMessage, setScoreMessage] = useState("")
+  const [feedbackStyle, setFeedbackStyle] = useState("")
   const [isResetDisabled, setIsResetDisabled] = useState(true)
   const [hiddenItems, setHiddenItems] = useState([])
   const [allItemsPlaced, setAllItemsPlaced] = useState(false)
+  const [isOver, setIsOver] = useState(null)
+  const [score, setScore] = useState({ correct: 0, total: 0 })
 
   const texts = [
     {
@@ -81,7 +93,11 @@ const DragAndDrop_Sistema_Oxiacetileno = () => {
 
       if (droppedTexts[dropId]) {
         setFeedbackMessage("¡Ya hay un texto en este lugar! Arrastra a otro lugar.")
-        setTimeout(() => setFeedbackMessage(""), 2000)
+        setFeedbackStyle("neutral")
+        setTimeout(() => {
+          setFeedbackMessage("")
+          setFeedbackStyle("")
+        }, 2000)
         return
       }
 
@@ -94,9 +110,24 @@ const DragAndDrop_Sistema_Oxiacetileno = () => {
 
       setHiddenItems((prevHiddenItems) => [...prevHiddenItems, draggedElementId])
 
+      // Actualizar el puntaje
+      const newCorrect = isCorrect ? score.correct + 1 : score.correct
+      const newTotal = score.total + 1
+      setScore({ correct: newCorrect, total: newTotal })
+
+      // Establecer mensajes
       setFeedbackMessage(
-        isCorrect ? "¡Correcto! Has colocado el texto correctamente." : "¡Incorrecto! Intenta nuevamente.",
+        isCorrect ? "¡Correcto! Has colocado el texto correctamente." : "¡Incorrecto! Intenta nuevamente."
       )
+      setFeedbackStyle(isCorrect ? "correct" : "incorrect")
+
+      // Solo mostrar el porcentaje cuando se hayan colocado todos los elementos
+      if (newTotal === 3) {
+        const percentage = Math.round((newCorrect / newTotal) * 100)
+        setScoreMessage(`Tus respuestas correctas son: ${newCorrect} de ${newTotal} (${percentage}%)`)
+      } else {
+        setScoreMessage("")
+      }
 
       setHistory((prevHistory) => [
         ...prevHistory,
@@ -104,9 +135,16 @@ const DragAndDrop_Sistema_Oxiacetileno = () => {
           action: "add",
           text: texts[draggedElementId.split("-")[1]].title,
           to: dropId,
+          isCorrect: isCorrect,
         },
       ])
     }
+    setIsOver(null)
+  }
+
+  const handleDragOver = (event) => {
+    const { over } = event
+    setIsOver(over ? over.id : null)
   }
 
   const handleUndo = () => {
@@ -120,10 +158,27 @@ const DragAndDrop_Sistema_Oxiacetileno = () => {
       setHiddenItems((prevHiddenItems) =>
         prevHiddenItems.filter((item) => item !== `text-${texts.findIndex((t) => t.title === lastAction.text)}`),
       )
+      
+      // Revertir el puntaje
+      if (lastAction.isCorrect) {
+        setScore(prev => ({...prev, correct: prev.correct - 1}))
+      }
+      setScore(prev => ({...prev, total: prev.total - 1}))
     }
 
     setDroppedTexts(newDroppedTexts)
     setHistory(history.slice(0, -1))
+    
+    // Actualizar mensajes de puntaje
+    if (score.total > 1 && score.total === 3) {
+      const percentage = Math.round((score.correct / score.total) * 100)
+      setScoreMessage(`Tus respuestas correctas son: ${score.correct} de ${score.total} (${percentage}%)`)
+    } else {
+      setScoreMessage("")
+    }
+    
+    setFeedbackMessage("")
+    setFeedbackStyle("")
   }
 
   const handleReset = () => {
@@ -133,9 +188,12 @@ const DragAndDrop_Sistema_Oxiacetileno = () => {
       box3: "",
     })
     setFeedbackMessage("")
+    setScoreMessage("")
+    setFeedbackStyle("")
     setHistory([])
     setHiddenItems([])
     setAllItemsPlaced(false)
+    setScore({ correct: 0, total: 0 })
   }
 
   useEffect(() => {
@@ -144,8 +202,13 @@ const DragAndDrop_Sistema_Oxiacetileno = () => {
     setIsResetDisabled(!allPlaced)
   }, [droppedTexts])
 
+  const getIsCorrect = (boxId) => {
+    if (droppedTexts[boxId] === "") return undefined
+    return droppedTexts[boxId] === correctItems[boxId]
+  }
+
   return (
-    <DndContext sensors={sensors} onDragEnd={handleDragEnd}>
+    <DndContext sensors={sensors} onDragEnd={handleDragEnd} onDragOver={handleDragOver}>
       <div className="drag-and-drop-containerppt17">
         <div className={`main-contentppt17 ${allItemsPlaced ? "completed-stateppt17" : ""}`}>
           <div className={`image-containerppt17 ${allItemsPlaced ? "centered-imageppt17" : ""}`}>
@@ -154,48 +217,51 @@ const DragAndDrop_Sistema_Oxiacetileno = () => {
               alt="Sistema Oxiacetileno"
               className="sistema-oxiacetileno-imageppt17"
             />
-            <div className="drop-boxppt17" style={{ top: "12%", left: "68%" }}>
-              <DroppableArea id="box1">
-                {droppedTexts.box1 && (
+            <div className="drop-boxppt17" style={{ top: "12%", left: "71%" }}>
+              <DroppableArea id="box1" isOver={isOver === "box1"} isCorrect={getIsCorrect("box1")}>
+                {droppedTexts.box1 ? (
                   <div className="dropped-text-containerppt17">
-                    <span
-                      className={`textppt17 ${
-                        droppedTexts.box1 === correctItems.box1 ? "text-greenppt17" : "text-redppt17"
-                      }`}
-                    >
-                      {droppedTexts.box1}
-                    </span>
+                    <img
+                      src={droppedTexts.box1 === correctItems.box1 ? imgVerdadero : imgFalso}
+                      alt={droppedTexts.box1 === correctItems.box1 ? "Correcto" : "Incorrecto"}
+                      className="feedback-iconppt17"
+                    />
+                    <span className="textppt17">{droppedTexts.box1}</span>
                   </div>
+                ) : (
+                  <span className="drop-textppt17">Arrastre aquí</span>
                 )}
               </DroppableArea>
             </div>
-            <div className="drop-boxppt17" style={{ top: "45%", left: "0%" }}>
-              <DroppableArea id="box2">
-                {droppedTexts.box2 && (
+            <div className="drop-boxppt17" style={{ top: "46%", left: "1%" }}>
+              <DroppableArea id="box2" isOver={isOver === "box2"} isCorrect={getIsCorrect("box2")}>
+                {droppedTexts.box2 ? (
                   <div className="dropped-text-containerppt17">
-                    <span
-                      className={`textppt17 ${
-                        droppedTexts.box2 === correctItems.box2 ? "text-greenppt17" : "text-redppt17"
-                      }`}
-                    >
-                      {droppedTexts.box2}
-                    </span>
+                    <img
+                      src={droppedTexts.box2 === correctItems.box2 ? imgVerdadero : imgFalso}
+                      alt={droppedTexts.box2 === correctItems.box2 ? "Correcto" : "Incorrecto"}
+                      className="feedback-iconppt17"
+                    />
+                    <span className="textppt17">{droppedTexts.box2}</span>
                   </div>
+                ) : (
+                  <span className="drop-textppt17">Arrastre aquí</span>
                 )}
               </DroppableArea>
             </div>
-            <div className="drop-boxppt17" style={{ top: "75%", left: "0%" }}>
-              <DroppableArea id="box3">
-                {droppedTexts.box3 && (
+            <div className="drop-boxppt17" style={{ top: "76%", left: "8%" }}>
+              <DroppableArea id="box3" isOver={isOver === "box3"} isCorrect={getIsCorrect("box3")}>
+                {droppedTexts.box3 ? (
                   <div className="dropped-text-containerppt17">
-                    <span
-                      className={`textppt17 ${
-                        droppedTexts.box3 === correctItems.box3 ? "text-greenppt17" : "text-redppt17"
-                      }`}
-                    >
-                      {droppedTexts.box3}
-                    </span>
+                    <img
+                      src={droppedTexts.box3 === correctItems.box3 ? imgVerdadero : imgFalso}
+                      alt={droppedTexts.box3 === correctItems.box3 ? "Correcto" : "Incorrecto"}
+                      className="feedback-iconppt17"
+                    />
+                    <span className="textppt17">{droppedTexts.box3}</span>
                   </div>
+                ) : (
+                  <span className="drop-textppt17">Arrastre aquí</span>
                 )}
               </DroppableArea>
             </div>
@@ -217,11 +283,16 @@ const DragAndDrop_Sistema_Oxiacetileno = () => {
             </div>
           )}
         </div>
-        {feedbackMessage && (
-          <div className="feedback-messageppt17">
-            <p>{feedbackMessage}</p>
-          </div>
-        )}
+        <div className="feedback-containerppt17">
+          {feedbackMessage && (
+            <div className={`feedback-messageppt17 ${feedbackStyle}`}>
+              <p>{feedbackMessage}</p>
+            </div>
+          )}
+          {allItemsPlaced && scoreMessage && (
+            <p className="score-messageppt17">{scoreMessage}</p>
+          )}
+        </div>
         <div className="buttons-containerppt17">
           <Button
             className="reset-buttonppt17"
@@ -240,4 +311,3 @@ const DragAndDrop_Sistema_Oxiacetileno = () => {
 }
 
 export default DragAndDrop_Sistema_Oxiacetileno
-

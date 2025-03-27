@@ -1,0 +1,207 @@
+.seleccione-epp-soldadura-containerppt24 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    font-family: "Montserrat", sans-serif;
+  }
+  
+  .main-contentppt24 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 1200px;
+    width: 100%;
+    min-height: 400px;
+    gap: 20px;
+  }
+  
+  .image-containerppt24 {
+    position: relative;
+    width: 50%;
+    max-width: 600px;
+    min-height: 400px;
+  }
+  
+  .sistema-oxiacetileno-imageppt24 {
+    width: 100%;
+    height: auto;
+    max-height: 400px;
+    object-fit: contain;
+  }
+  
+  .select-containerppt24 {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .select-boxppt24 {
+    width: 200px;
+    padding: 5px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: white;
+    color: #333;
+    font-family: "Montserrat", sans-serif;
+  }
+  
+  .select-boxppt24:focus {
+    outline: none;
+    border-color: #0f172a;
+  }
+  
+  .feedback-iconppt24 {
+    width: 20px;
+    height: 20px;
+    margin-left: 10px;
+  }
+  
+  .buttons-containerppt24 {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 10px;
+    width: 100%;
+    max-width: 1200px;
+  }
+  
+  .reset-buttonppt24 {
+    padding: 10px 20px;
+    background-color: #0f172a;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: "Montserrat", sans-serif;
+  }
+  
+  .reset-buttonppt24:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+  
+  /* Nuevos estilos para los mensajes de feedback */
+  .feedback-containerppt24 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+    width: 100%;
+  }
+  
+  .feedback-messageppt24 {
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-family: "Montserrat", sans-serif;
+    font-weight: bold;
+    margin-bottom: 5px;
+    text-align: center;
+    display: inline-block;
+  }
+  
+  .feedback-messageppt24.correct {
+    background-color: #4caf50;
+    color: white;
+  }
+  
+  .feedback-messageppt24.incorrect {
+    background-color: #f44336;
+    color: white;
+  }
+  
+  .score-messageppt24 {
+    color: #8f8f8f;
+    font-family: "Montserrat", sans-serif;
+    font-weight: bold;
+    margin-top: 5px;
+    font-size: 16px;
+  }
+  
+  .completed-stateppt24 {
+    justify-content: center;
+  }
+  
+  .arrow {
+    position: absolute;
+    border-left: 2px dashed #0f172a;
+    height: 100px;
+    transform-origin: top left;
+  }
+  
+  .arrow::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: -5px;
+    width: 10px;
+    height: 10px;
+    border-right: 2px solid #0f172a;
+    border-bottom: 2px solid #0f172a;
+    transform: rotate(45deg);
+  }
+  
+  .arrow-1 {
+    top: 11%;
+    left: 50%;
+    transform: rotate(-79deg);
+  }
+  
+  .arrow-2 {
+    top: 4%;
+    left: 51%;
+    transform: rotate(68deg);
+  }
+  
+  .arrow-3 {
+    top: 69%;
+    left: 46%;
+    transform: rotate(85deg);
+  }
+  
+  .arrow-4 {
+    top: 39%;
+    left: 53%;
+    transform: rotate(-77deg);
+  }
+  
+  .arrow-5 {
+    top: 88%;
+    left: 57%;
+    transform: rotate(-96deg);
+  }
+  
+  .arrow-6 {
+    top: 3%;
+    left: 50%;
+    transform: rotate(-85deg);
+    height: 40px;
+  }
+  
+  .arrow-7 {
+    top: 24%;
+    left: 41%;
+    transform: rotate(90deg);
+    height: 40px;
+  }
+  
+  .arrow-8 {
+    top: 35%;
+    left: 48%;
+    transform: rotate(-90deg);
+  }
+  
+  .arrow-9 {
+    top: 44%;
+    left: 61%;
+    transform: rotate(-47deg);
+    height: 40px;
+  }
+  
+  .arrow-10 {
+    top: 74%;
+    left: 54%;
+    transform: rotate(-96deg);
+    height: 50px;
+  }
