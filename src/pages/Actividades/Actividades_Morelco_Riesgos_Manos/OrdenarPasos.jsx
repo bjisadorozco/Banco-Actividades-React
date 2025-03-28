@@ -110,8 +110,9 @@ const OrdenarPasos = () => {
         <div className="resultado-contenedor">
           <p className="text-md mt-4 font-bold text-center">
             {correctCount} de {pasosCorrectos.length} respuestas correctas {porcentaje}%
+
           </p>
-          <p className={`resultado ${resultado}`}>
+          <p className={`resultadoOP ${resultado}`}>
             {resultado === "correcto"
               ? "¡Excelente trabajo! Has ordenado todo correctamente."
               : porcentaje > 50
@@ -121,7 +122,7 @@ const OrdenarPasos = () => {
         </div>
       )}
 
-      <div className="botones-container">
+      <div className="botones-containerOP">
         <Button
           bold={false}
           icon={faCheck}

@@ -122,7 +122,6 @@ function PreguntasSeleccionHerramientas() {
         setShowErrorMessage(true);
         return;
       }
-
       let isCorrect;
       if (questions[currentQuestion].multipleCorrect) {
         const correctOptions = questions[currentQuestion].options

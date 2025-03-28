@@ -110,7 +110,6 @@ function PreguntasRiesgosMecanicos() {
         setShowErrorMessage(true);
         return;
       }
-
       let isCorrect;
       if (questions[currentQuestion].multipleCorrect) {
         const correctOptions = questions[currentQuestion].options
@@ -224,7 +223,6 @@ function PreguntasRiesgosMecanicos() {
               </div>
             </div>
           )}
-
           {showQuestions && !showResults && showFeedback && (
             <div className="feedback-container ctItem py-2 flex items-center justify-center">
               <Paragraph theme="" justify={isMobile ? "justify" : "justify"}>

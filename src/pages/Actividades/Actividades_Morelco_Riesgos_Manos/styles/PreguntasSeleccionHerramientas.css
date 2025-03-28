@@ -33,7 +33,7 @@
     height: auto;
   }
   
-  .feedback-container {
+  .feedback-containerPSH {
     background: #fcfcfc;
     padding: 15px;
     border-radius: 10px;
@@ -110,11 +110,11 @@
     cursor: not-allowed;
   }
   
-  .resultado-container {
-    background: white;
+  .resultado-containerPSH {
+    background: #fcfcfc;
     padding: 20px;
     border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
     text-align: center;
     margin-top: 20px;
     width: 100%;
@@ -122,8 +122,20 @@
     font-family: 'Montserrat', sans-serif;
   }
   
-  .resultado-container p {
+  .resultado-containerPSH p {
     margin-bottom: 16px;
+  }
+
+  .text-centrar {
+    text-align: center;
+    color: #8f8f8f;
+    font-family: 'Montserrat', sans-serif;
+  }
+
+  .text-color{
+    color: #8f8f8f !important;
+    font-family: 'Montserrat', sans-serif;
+
   }
   
   .results-list {
@@ -169,10 +181,10 @@
     }
   }
   
-  .text-success {
+  .text-successPSH {
     color: #4CAF50;
   }
   
-  .text-error {
+  .text-errorPSH {
     color: #F44336;
   }

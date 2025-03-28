@@ -14,18 +14,19 @@ const Button = ({
 
   // Estilo deshabilitado
   const disabledStyle = disabled
-    ? {
-        backgroundColor: "#182032", // Color más claro
-        cursor: "not-allowed",
-        boxShadow: "none",
-      }
+
+      backgroundColor: "#102044", // Color más claro
+      cursor: "not-allowed",
+      boxShadow: "none",
+    }
     : {};
 
   return (
     <button
       onClick={!disabled ? onClick : undefined} // Deshabilitar evento si está deshabilitado
       disabled={disabled} // Propiedad HTML nativa
-      className={`text-white px-4 py-1  text-p-size shadow-sm hover:shadow-md shadow-main-color/50 hover:shadow-main-color/40 transition-shadow duration-300 ${boldClass} ${roundedFullClass}`}
+
+      className={`bg-button-figma text-white px-4 py-2 text-p-size shadow-sm hover:shadow-md shadow-button-figma/50 hover:shadow-button-figma/40 transition-shadow duration-300 ${boldClass} ${roundedFullClass}`}
       style={{
         backgroundColor: "#182032",
         fontFamily: "Montserrat, sans-serif",

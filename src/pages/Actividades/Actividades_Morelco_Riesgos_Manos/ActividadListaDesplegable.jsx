@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck, faRepeat } from "@fortawesome/free-solid-svg-icons";
@@ -10,9 +11,11 @@ import incorrectIcon from "../../../assets/img/xmarkAct.png";
 import "./styles/ActividadListaDesplegable.css";
 
 function ActividadListaDesplegable() {
-  const [errorMessage, setErrorMessage] = useState("");
-  const [isVerified, setIsVerified] = useState(false);
-  const [correctCount, setCorrectCount] = useState(0);
+  const [errorMessage, setErrorMessage] = useState("")
+  const [isVerified, setIsVerified] = useState(false)
+  const [correctCount, setCorrectCount] = useState(0)
+  const [percentage, setPercentage] = useState(0)
+  const [isResetActive, setIsResetActive] = useState(false)
   const [items, setItems] = useState([
     {
       image: metodo5Porque,
@@ -37,80 +40,89 @@ function ActividadListaDesplegable() {
       selectedAnswer: "",
       isCorrect: false,
     },
-  ]);
+  ])
 
   const [availableOptions] = useState([
     { value: "3", label: "Método Espina de pescado​" },
     { value: "1", label: "Método de los 5 porqués​" },
     { value: "2", label: "Método Árbol de fallas" },
-  ]);
+  ])
+
+  useEffect(() => {
+    const anySelected = items.some((item) => item.selectedAnswer !== "")
+    setIsResetActive(anySelected)
+  }, [items])
+
+  useEffect(() => {
+    // Evitar el scroll temporal al recargar la página
+    document.body.style.overflow = "hidden"
+    setTimeout(() => {
+      document.body.style.overflow = "auto"
+    }, 100)
+  }, [])
 
   const handleSelect = (index, value) => {
-    const updatedItems = [...items];
-    updatedItems[index].selectedAnswer = value;
-    setItems(updatedItems);
-  };
+    const updatedItems = [...items]
+    updatedItems[index].selectedAnswer = value
+    setItems(updatedItems)
+  }
 
   const handleValidate = () => {
     if (items.some((item) => item.selectedAnswer === "")) {
-      setErrorMessage("Debe seleccionar todas las opciones antes de validar.");
-      return;
+      setErrorMessage("Debe seleccionar todas las opciones antes de validar.")
+      return
     }
 
-    let correct = 0;
+    let correct = 0
     const updatedItems = items.map((item) => {
-      const isCorrect = item.selectedAnswer === item.correctAnswer;
-      if (isCorrect) correct++;
-      return { ...item, isCorrect };
-    });
+      const isCorrect = item.selectedAnswer === item.correctAnswer
+      if (isCorrect) correct++
+      return { ...item, isCorrect }
+    })
 
-    setItems(updatedItems);
-    setCorrectCount(correct);
-    setIsVerified(true);
-    setErrorMessage("");
-  };
+    setItems(updatedItems)
+    setCorrectCount(correct)
+    setPercentage(Math.round((correct / items.length) * 100))
+    setIsVerified(true)
+    setErrorMessage("")
+  }
 
   const handleReset = () => {
-    setItems(
-      items.map((item) => ({ ...item, selectedAnswer: "", isCorrect: false }))
-    );
-    setErrorMessage("");
-    setIsVerified(false);
-    setCorrectCount(0);
-  };
+    setItems(items.map((item) => ({ ...item, selectedAnswer: "", isCorrect: false })))
+    setErrorMessage("")
+    setIsVerified(false)
+    setCorrectCount(0)
+    setPercentage(0)
+    setIsResetActive(false)
+  }
 
   const allSelected = items.every((item) => item.selectedAnswer !== "");
   return (
-    <div className="quiz-container">
+    <div className="quiz-containerALD">
       <div className="items-grid">
         {items.map((item, index) => (
           <div
             key={index}
             className={`item-box ${
-              isVerified ? (item.isCorrect ? "correct" : "incorrect") : ""
-            }`}
+              item.selectedAnswer !== "" && !isVerified ? "selected" : ""
+            } ${isVerified ? (item.isCorrect ? "correct" : "incorrect") : ""}`}
           >
-            <div className="image-container">
-              <img
-                src={item.image}
-                alt={`Item ${index + 1}`}
-                className="item-image"
-              />
+            <div className="image-containerALD">
+              <img src={item.image || "/placeholder.svg"} alt={`Item ${index + 1}`} className="item-image" />
               {isVerified && (
                 <img
                   src={item.isCorrect ? correctIcon : incorrectIcon}
-                  alt={item.isCorrect ? "Correcto" : "Incorrecto"}
-                  className="feedback-icon"
+                  className="feedback-iconALD"
                 />
               )}
             </div>
 
-            <p className={`item-description ${isVerified ? "text-white" : ""}`}>
-              {item.description}
-            </p>
+            <p className={`item-description ${isVerified ? "text-white" : ""}`}>{item.description}</p>
 
             <select
-              className="item-select"
+              className={`item-select ${
+                item.selectedAnswer !== "" && !isVerified ? "selected" : ""
+              }`}
               value={item.selectedAnswer}
               onChange={(e) => handleSelect(index, e.target.value)}
               disabled={isVerified}
@@ -133,11 +145,7 @@ function ActividadListaDesplegable() {
                 ))}
             </select>
 
-            {isVerified && (
-              <p className="feedback-text">
-                {item.isCorrect ? "¡Correcto!" : "¡Incorrecto!"}
-              </p>
-            )}
+            {isVerified && <p className="feedback-text">{item.isCorrect ? "¡Correcto!" : "¡Incorrecto!"}</p>}
           </div>
         ))}
       </div>
@@ -155,12 +163,7 @@ function ActividadListaDesplegable() {
           </p>
         )}
         <div className="button-container">
-          <Button
-            bold={false}
-            icon={faCheck}
-            roundedFull={true}
-            onClick={handleValidate}
-          >
+          <Button bold={false} icon={faCheck} roundedFull={true} onClick={handleValidate}>
             {"Validar"}
           </Button>
           <Button
@@ -175,7 +178,8 @@ function ActividadListaDesplegable() {
         </div>
       </div>
     </div>
-  );
+  )
 }
 
 export default ActividadListaDesplegable;
+

@@ -44,7 +44,6 @@ const questions = [
   },
 ];
 
-// Asume que questions será proporcionado como prop
 function PreguntasVorF() {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [score, setScore] = useState(0);
@@ -162,6 +161,7 @@ function PreguntasVorF() {
                         <FontAwesomeIcon icon={faCheck} className="mr-2" />{" "}
                         Verdadero
                       </button>
+
                       <button
                         className="w-[40%] flex justify-center items-center group bg-main-color rounded-full px-4 py-1 shadow-main-color text-white"
                         onClick={() => handleAnswer(false)}

@@ -1,0 +1,62 @@
+/* QuestionsTrueFalse.css */
+:root {
+    --main-color: #6366F1;
+    --secondary-colorVF: #4F46E5;
+    --black: #333333;
+  }
+  
+  .text-secondary-colorVF {
+    color: var(--secondary-colorVF);
+  }
+  
+  .bg-main-color {
+    background-color: var(--main-color);
+  }
+  
+  .shadow-main-color {
+    box-shadow: 0 4px 6px rgba(99, 102, 241, 0.25);
+  }
+  
+  .texto-gray {
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+  
+  .check button:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+    transition: all 0.2s ease;
+  }
+  
+  .check button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+  }
+  
+  .flex-button {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  
+  /* .feedback-container {
+    border-left: 4px solid var(--main-color);
+  } */
+  
+  .reset-container button:hover {
+    background-color: var(--secondary-colorVF);
+    transform: translateY(-2px);
+    transition: all 0.2s ease;
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 640px) {
+    .flex-button {
+      flex-direction: column;
+    }
+    
+    .check button {
+      width: 100%;
+      margin: 5px 0;
+    }
+  }

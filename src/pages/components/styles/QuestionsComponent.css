@@ -1,0 +1,16 @@
+.result-styles{
+    border-radius: 10px;
+    padding-top: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+}
+
+.bg-counter{
+    background-color: transparent !important;
+}
+
+.custom-margin {  
+    margin: -10px auto !important;  
+    margin-bottom: 0 !important; /* O el valor que necesites para el margen inferior */  
+}

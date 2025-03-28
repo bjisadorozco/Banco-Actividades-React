@@ -1,0 +1,264 @@
+.quiz-container-picaduras {
+    width: 100%;
+    min-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-top: 0rem;
+  }
+  
+  .cards-container-picaduras {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+  }
+  
+  .image-select-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+  }
+  
+  .top-content,
+  .bottom-content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 30px;
+  }
+  
+  .top-content {
+    justify-content: flex-end;
+    /* padding-bottom: 10px; */
+    padding: 0;
+  }
+  
+  .image-validation-container {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 0.1rem 0;
+    /* margin: 10px 0; */
+  }
+  
+  .circular-image {
+    border-radius: 50%;
+    width: 90px;
+    height: 90px;
+    object-fit: cover;
+    border: 3px solid #e5e7eb;
+  }
+  
+  .custom-select-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 180px;
+  }
+  
+  .custom-select {
+    width: 100%;
+    min-width: 180px;
+    padding: 0.2rem;
+    border: 2px solid #0f1721;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    font-size: 0.9rem;
+    color: #333;
+    white-space: normal;
+    height: auto;
+    resize: none;
+    overflow: hidden;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .custom-select:focus {
+    border-color: #007bff;
+    box-shadow: 0 2px 8px rgba(0, 123, 255, 0.25);
+    outline: none;
+  }
+  
+  .custom-select-wrapper::after {
+    content: "▼" !important;
+    transform: translateY(-50%) !important;
+    position: absolute;
+    top: 60%; /* Ajusta esta posición para alinear mejor con el select */
+    right: 10px;
+    pointer-events: none;
+    font-size: 0.8rem;
+    color: #0f1721;
+    transition: transform 0.2s ease; /* Agregamos transición para suavizar cambios */
+}
+
+/* Opcional: Rotar la flecha cuando el select está abierto */
+.custom-select:focus ~ .custom-select-wrapper::after {
+    transform: translateY(-50%) rotate(180deg); /* Gira 180 grados cuando está abierto */
+}
+  
+  .validation-icon-container {
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    pointer-events: none;
+  }
+  
+  .validation-icon-picaduras {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+    opacity: 0.9;
+  }
+  
+  .audio-container audio {
+    height: 40px;
+    width: 180px;
+  }
+  
+  .audio-container {
+    border-radius: 36%;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+  
+  /* .reset-button-container {
+    margin-top: 1.5rem;
+  } */
+  
+  .reset-button-container button.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  
+  .feedback-container-picaduras {
+    margin: 0 auto;
+    text-align: center;
+    width: 100%;
+    /* max-width: 600px; */
+  }
+  
+  .feedback-container-picaduras p {
+    font-weight: bold;
+    color: #8f8f8f;
+    text-align: center;
+    font-size: 1rem;
+    font-weight: 500;
+  }
+  
+  .text-green-personalizado {
+    color: #4caf50;
+  }
+  
+  .text-red-personalizado {
+    color: #f44336;
+  }
+  
+  .text-orange-personalizado {
+    color: #ff9800;
+  }
+  
+  .texto-gray {
+    color: #8f8f8f;
+  }
+  
+  .bold-text {
+    font-weight: bold;
+    color: #8f8f8f;
+    font-family: Montserrat, sans-serif;
+  }
+  
+  
+  /* Estilos para dispositivos móviles */
+  @media (max-width: 640px) {
+    .cards-container-picaduras {
+      grid-template-columns: 1fr;
+    }
+  
+    .image-select-container {
+      display: grid;
+      grid-template-rows: auto auto auto;
+      gap: 0.5rem;
+      padding: 1rem 0;
+    }
+  
+    /* El audio siempre arriba */
+    .top-content {
+      order: 1;
+      margin-bottom: 0.5rem;
+    }
+  
+    /* La imagen en el medio */
+    .image-validation-container {
+      order: 2;
+      margin: 0.5rem 0;
+    }
+  
+    /* El select siempre abajo */
+    .bottom-content {
+      order: 3;
+      margin-top: 0.5rem;
+    }
+  
+    /* Ajustar el contenedor de validación */
+    .validation-icon-container {
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
+  
+    /* Hacer más compacto */
+    .circular-image {
+      width: 100px;
+      height: 100px;
+    }
+  
+    /* Ajustar el ancho de selects y audios */
+    .custom-select-wrapper,
+    .audio-container audio {
+      max-width: 200px;
+    }
+  }
+  
+  /* Estilos para selects con validación */
+.select-correct {
+    background-color: #4CAF50 !important; /* Verde para respuestas correctas */
+    color: white !important;
+}
+
+.select-incorrect {
+    background-color: #F44336 !important; /* Rojo para respuestas incorrectas */
+    color: white !important;
+}
+
+/* Asegúrate de que estos estilos no afecten al placeholder */
+.custom-select option {
+    background-color: white;
+    color: black;
+}
+
+.audio-container audio{
+  height: 30px !important;
+}
+
+.divider {
+  width: 100%;
+  border: 0;
+  height: 3px;
+  background-color: #0f1721; /* Color de la línea */
+  /* margin: 20px 0;  */
+  grid-column: 1 / -1; /* Asegura que la línea ocupe todas las columnas */
+}

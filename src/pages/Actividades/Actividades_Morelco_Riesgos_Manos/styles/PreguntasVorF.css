@@ -6,13 +6,26 @@
   --main-color: #7c3aed;
 }
 
+.texto-gray {
+  color: #8f8f8f !important;
+}
+
+.flex {
+  display: flex;
+  width: 100%;
+  margin: 5px auto !important;
+  padding: 1px;
+}
+
 .shadow-main-color {
   box-shadow: 0 4px 6px -1px rgba(124, 58, 237, 0.1),
     0 2px 4px -1px rgba(124, 58, 237, 0.06);
 }
 
-.text-secondary-color {
-  color: #7c3aed;
+.text-secondary-colorVF {
+  color: #8F8F8F;
+  font-weight: bold;
+  font-size: 16px !important;
 }
 
 button {
@@ -52,6 +65,10 @@ button:disabled {
 .itemQ.incorrect {
   background-color: #F44336;
   animation: shake 0.5s cubic-bezier(0.36, 0.07, 0.19, 0.97);
+}
+
+.flex-button {
+  gap: 1rem;
 }
 
 @keyframes fadeIn {

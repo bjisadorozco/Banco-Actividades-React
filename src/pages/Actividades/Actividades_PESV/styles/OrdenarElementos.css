@@ -1,0 +1,94 @@
+.sort-steps-container {
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 1.25rem;
+  background: #fcfcfc;
+  border-radius: 0.5rem;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.steps-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+}
+
+.tarjeta-paso {
+  position: relative;
+  background: #0f172a;
+  color: #ffffff;
+  padding: 0.875rem;
+  border-radius: 0.375rem;
+  cursor: grab;
+  transition: all 0.3s ease;
+  user-select: none;
+  touch-action: none;
+}
+
+.tarjeta-paso.dragging {
+  opacity: 0.8;
+  transform: scale(1.02);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+  z-index: 1000;
+}
+
+.tarjeta-paso.correct {
+  background: #4CAF50;
+}
+
+.tarjeta-paso.incorrect {
+  background: #F44336;
+}
+
+.step-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.625rem;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.feedback-icon {
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
+.resultado-container {
+  margin-top: 1.25rem;
+  text-align: center;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.score-text {
+  margin-bottom: 0.625rem;
+}
+
+.feedback-text {
+  font-weight: 600;
+}
+
+.text-correct-feedback {
+  color: #4CAF50;
+}
+
+.text-incorrect-feedback {
+  color: #F44336;
+}
+
+.buttons-container {
+  display: flex;
+  justify-content: center;
+  gap: 0.75rem;
+  /* margin-top: 1.25rem; */
+}
+
+@media (max-width: 640px) {
+  .sort-steps-container {
+    padding: 1rem;
+  }
+  
+  .tarjeta-paso {
+    padding: 0.75rem;
+  }
+}

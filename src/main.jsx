@@ -29,6 +29,11 @@ import Drag_And_Drop from "./pages/Actividades/Actividades_Espacios_Confinados/D
 import Drag_And_DropMobile from "./pages/Actividades/Actividades_Espacios_Confinados/Drag_And_DropMobile.jsx";
 import EPSLugaresConfinados from "./pages/Actividades/Actividades_Espacios_Confinados/EPS_Lugares_Confinados.jsx";
 import ActividadMobileEntradaSalida from "./pages/Actividades/Actividades_Espacios_Confinados/Actividad_Mobile_Entrada_Salida.jsx";
+import Drag_And_Drop from "./pages/Actividades/Actividades_Espacios_confinados/Drag_And_Drop.jsx";
+import OrdenarPasosPalmaManosMobile from "./pages/Actividades/Actividades_Morelco_Riesgos_Manos/OrdenarPasosPalmaManosMobile.jsx";
+import PreguntasSiNo from "./pages/Actividades/Actividades_Morelco_Riesgos_Manos/PreguntasSiNo.jsx";
+import EspaciosConfinadosSeleccionMultiple from "./pages/Actividades/Actividades_Morelco_Riesgos_Manos/EspaciosConfinadosSeleccionMultiple.jsx";
+import SeleccionEspaciosConfinados from "./pages/Actividades/Actividades_Morelco_Riesgos_Manos/SeleccionEspaciosConfinados.jsx";
 import "./main.css";
 import Slider13_Lista_desplegable from "./pages/Actividades/Actividades_Espacios_Confinados/Slider13_Lista_desplegable_movil.jsx";
 import DragAndDropAudios from "./pages/Actividades/Actividades_Trabajo_seguro_alturas/DragAndDropAudios.jsx";
@@ -40,13 +45,21 @@ import Slider14_Lista_desplegable_movil from "./pages/Actividades/Actividades_Es
 import Slider12_drag_and_drop_audios from "./pages/Actividades/Actividades_Espacios_Confinados/Slider12_drag_and_drop_audios.jsx";
 import Slider15_Lista_desplegable from "./pages/Actividades/Actividades_Espacios_Confinados/Slider15_Lista_desplegable.jsx";
 import Slider15_Lista_desplegable_movil from "./pages/Actividades/Actividades_Espacios_Confinados/Slider15_Lista_desplegable_movil.jsx";
-import DndActivityDesktop from "./pages/Actividades/Actividades_Plan_Estrategido_Seguridad_Vial/DndActivityDesktop.jsx";
-import DndActivityMobile from "./pages/Actividades/Actividades_Plan_Estrategido_Seguridad_Vial/DndActivityMobile";
-import OrdenarPESVDesktop from "./pages/Actividades/Actividades_Plan_Estrategido_Seguridad_Vial/OrdenarPESVDesktop.jsx";
-import DndActivityEntradas from "./pages/Actividades/Actividades_Espacios_Confinados/DndActivityEntradas.jsx";
-import DndActivyMobile from "./pages/Actividades/Actividades_Espacios_Confinados/DndActivityMobile.jsx";
+import PreguntasRiesgosTermicosV2 from "./pages/Actividades/Actividades_Morelco_Riesgos_Manos/PreguntasRiesgosTermicosV2.jsx";
+import Sliderppt24_SeleccionMultiple from "./pages/Actividades/Actividades_Uso_Seguro_Andamios/Sliderppt24_SeleccionMultiple.jsx";
+import Sliderppt9_DragAndDrop from "./pages/Actividades/Actividades_Uso_Seguro_Andamios/Sliderppt9_DragAndDrop.jsx";
+import Sliderppt15_SeleccionMultipleCheckbox from "./pages/Actividades/Actividades_Uso_Seguro_Andamios/Sliderppt15_SeleccionMultipleCheckbox.jsx";
+import Sliderppt16_SeleccionPreguntasParte1 from "./pages/Actividades/Actividades_Uso_Seguro_Andamios/Sliderppt16_SeleccionPreguntasParte1.jsx";
+import Sliderppt17_SeleccionPreguntasParte2 from "./pages/Actividades/Actividades_Uso_Seguro_Andamios/Sliderppt17_SeleccionPreguntasParte2.jsx";
+import Sliderppt18_SeleccionPreguntas from "./pages/Actividades/Actividades_PESV/Sliderppt18_SeleccionPreguntas.jsx";
+import Sliderppt19_SeleccionPreguntasAudios from "./pages/Actividades/Actividades_PESV/Sliderppt19_SeleccionPreguntasAudios.jsx";
+import PreguntaCasoTF from "./pages/Actividades/Actividades_Riesgo_Biologico/PreguntaCasoTF.jsx";
+import PicadurasAnimalesPeligrosos from "./pages/Actividades/Actividades_Riesgo_Biologico/PicadurasAnimalesPeligrosos.jsx";
+import IdentificarRiesgosBiologicos from "./pages/Actividades/Actividades_Riesgo_Biologico/IdentificarRiesgosBiologicos.jsx";
+import OrdenarMedidasCorrectivas from "./pages/Actividades/Actividades_Riesgo_Biologico/OrdenarMedidasCorrectivas.jsx";
+import DnD_Conceptos_Clave from "./pages/Actividades/Actividades_Tecnitanques_Soldadura/DnD_Conceptos_Clave.jsx";
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <DndActivyMobile />
+    <DnD_Conceptos_Clave />
   </React.StrictMode>
 );

@@ -58,7 +58,7 @@ const OrdenarPasosPalmaManos = () => {
 
   return (
     <div className="ordenar-pasos-wrapper">
-      <div className="ordenar-pasos-containerOPM">
+      <div className="ordenar-pasos-containerOPM mt-14">
         <div className="contenedor-pasos">
           {pasos.map((paso, index) => (
             <div
