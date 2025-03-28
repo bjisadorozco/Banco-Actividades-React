@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import imgTrue from "../../../assets/img/checkAct.png";
 import imgFalse from "../../../assets/img/xmarkAct.png";
 import imgPeligro from "../../../assets/img/avatar-hombre-morado-blanco.webp";
-
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faRepeat } from "@fortawesome/free-solid-svg-icons";
 {
   /* Componente de retroalimentación, muestra si la respuesta es correcta o incorrecta */
 }
@@ -180,7 +181,8 @@ function Actividad_Mobile_entada_salida() {
                   onClick={resetQuiz}
                   className="group bg-main-color rounded-full px-4 py-2 shadow-main-color text-white mx-auto my-3"
                 >
-                  Reiniciar
+                  <FontAwesomeIcon icon={faRepeat} className="mr-2" />
+                                      Reiniciar
                 </button>
               </div>
             </div>

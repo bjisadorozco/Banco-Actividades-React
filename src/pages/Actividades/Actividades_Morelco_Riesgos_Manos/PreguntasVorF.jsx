@@ -79,29 +79,26 @@ function PreguntasVorF() {
     setShowScore(false);
     setAnswerSelected(null);
   };
-
-  // Calcular el porcentaje de respuestas correctas
   const percentage = Math.round((score / questions.length) * 100);
-
   return (
     <div className="container">
-      <div className="w-full flex justify-center items-center p-2">
+      <div className="w-full flex justify-center items-center">
         <div
           className="max-w-md w-full bg-gray-100 border-2 border-gray-300 rounded-lg overflow-hidden"
           style={{ margin: "0 auto", minWidth: "35vw" }}
         >
           {showScore ? (
-            <div className="text-center p-6">
-              <p className="my-2 text-secondary-colorVF font-bold">
-                Respuestas correctas
+            <div className="text-center">
+             <p className="my-2 text-red-600 font-semibold">
+                Respuestas correctas <br />
+                <span className="text-gray-500">{score} de {questions.length} (
+                {percentage}%)</span>
               </p>
-              <p className="text-lg text-secondary-colorVF">
-                Tus respuestas correctas son: {score} de {questions.length} ({percentage}%)
-              </p>
-              <div className="reset-container">
+             
+              <div className="w-full reset-container my-4">
                 <button
                   onClick={resetQuiz}
-                  className="flex justify-center items-center group bg-main-color rounded-full px-4 py-2 shadow-main-color text-white mx-auto my-3"
+                  className="w-[50%] flex justify-center items-center group bg-main-color rounded-full px-4 py-2 shadow-main-color text-white"
                 >
                   <FontAwesomeIcon icon={faRepeat} className="mr-2" /> Reiniciar
                 </button>
@@ -113,34 +110,32 @@ function PreguntasVorF() {
                 <span className="inc">{currentQuestion + 1}</span>/
                 <span className="tol">{questions.length}</span>
               </div>
-              <div className="itemQ view p-4">
-                <div className="mb-3" style={{ minHeight: "50px" }}>
-                  <p className="text-gray-800 texto-gray">
+              <div className="itemQ view px-6 py-0 flex flex-col items-center justify-center text-justify">
+                <div className="mb-3" >
+                  <p className="text-gray-800">
                     {questions[currentQuestion].text}
                   </p>
                 </div>
-                <div className="relative flex justify-center mb-4">
-                  <div className="w-32 h-32 relative">
                     <img
-                      src={imgPeligro}
-                      alt="Pregunta"
-                      className="w-full h-full object-contain"
+                      src={
+                        answerSelected === null
+                          ? imgPeligro
+                          : answerSelected
+                            ? imgTrue
+                            : imgFalse
+                      }
+                      alt={
+                        answerSelected === null
+                          ? "Pregunta"
+                          : answerSelected
+                            ? "Correcto"
+                            : "Incorrecto"
+                      }
+                      className=" w-[100px] mb-0 "
                     />
-                    {answerSelected !== null && (
-                      <div className="absolute inset-0 flex items-center justify-center">
-                        <img
-                          src={answerSelected ? imgTrue : imgFalse}
-                          alt={answerSelected ? "Correct" : "Incorrect"}
-                          className="w-full h-full object-contain"
-                          style={{ marginBottom: "0px" }}
-                        />
-                      </div>
-                    )}
-                  </div>
-                </div>
                 <div className="text-center mt-4">
                   <p
-                    className={`text-lg font-bold ${
+                    className={`text-lg font-regular ${
                       answerSelected === null
                         ? "opacity-0"
                         : answerSelected
@@ -152,22 +147,14 @@ function PreguntasVorF() {
                       ? " "
                       : answerSelected
                         ? "Correcto ¡Bien hecho!"
-                        : "¡Incorrecto!  No te preocupes, puedes mejorar."
-                    }
+                        : "¡Incorrecto!  No te preocupes, puedes mejorar."}
                   </p>
                 </div>
-                <hr
-                  className="mb-4"
-                  style={{
-                    width: "100%",
-                    border: "1px solid var(--black)",
-                  }}
-                />
-                <div className="check flex justify-center space-x-4">
+               
                   {!showFeedback && (
-                    <div className="check flex flex-button justify-center space-x-4">
+                    <div className="w-full check flex justify-center">
                       <button
-                        className="flex justify-center items-center group bg-main-color rounded-full px-4 py-2 shadow-main-color text-white"
+                        className="w-[40%] flex justify-center items-center group bg-main-color rounded-full px-4 py-1 shadow-main-color text-white"
                         onClick={() => handleAnswer(true)}
                         disabled={answerSelected !== null}
                       >
@@ -176,7 +163,7 @@ function PreguntasVorF() {
                       </button>
 
                       <button
-                        className="flex justify-center items-center group bg-main-color rounded-full px-4 py-2 shadow-main-color text-white m-0"
+                        className="w-[40%] flex justify-center items-center group bg-main-color rounded-full px-4 py-1 shadow-main-color text-white"
                         onClick={() => handleAnswer(false)}
                         disabled={answerSelected !== null}
                       >
@@ -186,13 +173,13 @@ function PreguntasVorF() {
                     </div>
                   )}
                   {showFeedback && (
-                    <div className="flex justify-center mt-4">
+                    <div className="w-full flex justify-center">
                       <Button
                         bold={true}
                         icon={faArrowRight}
                         roundedFull={true}
                         onClick={handleNext}
-                        className="bg-main-color"
+                        className="px-4 bg-main-color"
                       >
                         {currentQuestion === questions.length - 1
                           ? "Finalizar"
@@ -200,7 +187,6 @@ function PreguntasVorF() {
                       </Button>
                     </div>
                   )}
-                </div>
               </div>
             </>
           )}
