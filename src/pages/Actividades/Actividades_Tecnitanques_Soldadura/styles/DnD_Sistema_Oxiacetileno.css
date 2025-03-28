@@ -1,0 +1,54 @@
+/* Contenedor principal */
+.oxiacetileno-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.instruction-header {
+  text-align: center;
+  margin-bottom: 20px;
+  background-color: #f0e68c;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.instruction-header h3 {
+  font-family: "Montserrat", sans-serif;
+  font-size: 18px;
+  font-weight: bold;
+  color: #0f172a;
+  margin: 0;
+}
+
+.activity-container {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+/* Contenedor de imagen y drops */
+.image-with-drops-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 500px;
+}
+
+.image-container {
+  width: 60%;
+  display: flex;
+  justify-content: center;
+  z-index: 1;
+}
+
+.oxiacetileno-image {
+  max-width: 100%;
+  height: auto;
+  border: 2px solid #0f172a;
+  border-radius: 8px;
+}
