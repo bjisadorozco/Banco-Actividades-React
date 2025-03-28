@@ -1,25 +1,26 @@
-
 .drag-and-drop-containerppt17 {
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 100%;
   font-family: "Montserrat", sans-serif;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 .main-contentppt17 {
   display: flex;
   justify-content: center;
-  align-items: center;
-  max-width: 1200px;
+  align-items: flex-start;
   width: 100%;
-  min-height: 400px;
-  gap: 20px;
+  max-width: 1000px;
+  margin: 0 auto;
+  gap: 40px;
 }
 
-.image-containerppt17 {
+.image-wrapperppt17 {
   position: relative;
-  width: 50%;
+  width: 100%;
   max-width: 600px;
   min-height: 400px;
 }
@@ -29,6 +30,15 @@
   height: auto;
   max-height: 400px;
   object-fit: contain;
+  display: block;
+}
+
+.drop-box-containerppt17 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
 }
 
 .drop-boxppt17 {
@@ -40,15 +50,29 @@
   align-items: center;
   justify-content: center;
   transition: background-color 0.3s ease;
-  background-color: rgba(255, 255, 255, 0.8); /* Fondo inicial */
+  background-color: rgba(255, 255, 255, 0.8);
 }
 
-/* Fondo durante el hover */
+/* Posiciones específicas para cada drop box */
+.drop-boxppt17:nth-child(1) {
+  top: 12%;
+  left: 71%;
+}
+
+.drop-boxppt17:nth-child(2) {
+  top: 46%;
+  left: 1%;
+}
+
+.drop-boxppt17:nth-child(3) {
+  top: 76%;
+  left: 8%;
+}
+
 .dropbox-overppt17 {
   background-color: #ebebeb;
 }
 
-/* Fondo cuando se suelta un elemento */
 .correct {
   background-color: #4caf50;
 }
@@ -58,41 +82,40 @@
 }
 
 .dropped-text-containerppt17 {
+  position: relative;
   width: 100%;
   height: 100%;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
+  padding: 5px;
+  box-sizing: border-box;
 }
 
 .feedback-iconppt17 {
+  position: absolute;
+  top: 5px;
+  left: 5px;
   width: 20px;
   height: 20px;
-  margin-bottom: 5px; /* Espacio entre el ícono y el texto */
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
 }
 
 .texts-containerppt17 {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  width: 20%;
+  width: 200px;
+  gap: 20px;
   margin-top: 60px;
-  gap: 3rem;
 }
 
 .draggable-textppt17 {
   border: 1px solid #ccc;
   background-color: #0f172a;
   cursor: grab;
-  font-size: 14px; /* Tamaño de texto reducido */
+  font-size: 14px;
   text-align: center;
-  margin-bottom: 10px;
   width: 150px;
   height: 85px;
   box-sizing: border-box;
@@ -105,10 +128,10 @@
 
 .buttons-containerppt17 {
   display: flex;
-  justify-content: space-around;
-  margin-top: 10px;
+  justify-content: center;
+  margin-top: 3px;
   width: 100%;
-  max-width: 1200px;
+  max-width: 1000px;
 }
 
 .reset-buttonppt17 {
@@ -126,38 +149,6 @@
   cursor: not-allowed;
 }
 
-.feedback-messageppt17 {
-  text-align: center;
-  font-family: "Montserrat", sans-serif;
-  color: #8f8f8f;
-  font-weight: bold;
-}
-
-.textppt17 {
-  font-size: 14px; /* Tamaño de texto reducido */
-  font-weight: bold;
-  color: white;
-  font-family: "Montserrat", sans-serif;
-}
-
-.drop-textppt17 {
-  font-size: 14px; /* Tamaño de texto reducido */
-  color: #8f8f8f;
-  font-family: "Montserrat", sans-serif;
-}
-
-.completed-stateppt17 {
-  justify-content: center;
-}
-
-.centered-imageppt17 {
-  width: 100%;
-  max-width: 600px;
-  margin: 0 auto;
-}
-
-/* Agrega esto al final de tu archivo CSS */
-
 .feedback-containerppt17 {
   display: flex;
   flex-direction: column;
@@ -166,14 +157,13 @@
 }
 
 .feedback-messageppt17 {
-  padding: 10px 20px;
+  padding: 5px 20px;
   border-radius: 5px;
   font-family: "Montserrat", sans-serif;
   font-weight: bold;
   margin-bottom: 5px;
   text-align: center;
-  display: inline-block;
-  max-width: fit-content;
+  max-width: 100%;
 }
 
 .feedback-messageppt17.correct {
@@ -195,26 +185,55 @@
   color: #8f8f8f;
   font-family: "Montserrat", sans-serif;
   font-weight: bold;
-  margin-top: 5px;
+  margin-top: 0;
   font-size: 14px;
+  text-align: center;
 }
 
-/* Estilos para los íconos en las esquinas */
-.dropped-text-containerppt17 {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
+.textppt17 {
+  font-size: 12px;
+  font-weight: bold;
+  color: white;
+  font-family: "Montserrat", sans-serif;
+  word-break: break-word;
+}
+
+.drop-textppt17 {
+  font-size: 14px;
+  color: #8f8f8f;
+  font-family: "Montserrat", sans-serif;
+}
+
+.completed-stateppt17 {
   justify-content: center;
 }
 
-.feedback-iconppt17 {
-  position: absolute;
-  top: 5px;
-  left: 5px;
-  width: 20px;
-  height: 20px;
+@media (max-width: 768px) {
+  .main-contentppt17 {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .image-wrapperppt17 {
+    max-width: 100%;
+  }
+  
+  .texts-containerppt17 {
+    width: 100%;
+    align-items: center;
+    margin-top: 20px;
+  }
+  
+  .draggable-textppt17 {
+    width: 200px;
+  }
+  
+  .drop-boxppt17 {
+    width: 120px;
+    height: 70px;
+  }
+  
+  .textppt17, .drop-textppt17 {
+    font-size: 12px;
+  }
 }
-
-/* Mantén el resto de tus estilos existentes */

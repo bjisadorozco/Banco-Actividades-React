@@ -211,13 +211,13 @@ const DragAndDrop_Sistema_Oxiacetileno = () => {
     <DndContext sensors={sensors} onDragEnd={handleDragEnd} onDragOver={handleDragOver}>
       <div className="drag-and-drop-containerppt17">
         <div className={`main-contentppt17 ${allItemsPlaced ? "completed-stateppt17" : ""}`}>
-          <div className={`image-containerppt17 ${allItemsPlaced ? "centered-imageppt17" : ""}`}>
+          <div className="image-wrapperppt17">
             <img
               src={sistema_oxiacetileno || "/placeholder.svg"}
               alt="Sistema Oxiacetileno"
               className="sistema-oxiacetileno-imageppt17"
             />
-            <div className="drop-boxppt17" style={{ top: "12%", left: "71%" }}>
+            <div className="drop-box-containerppt17">
               <DroppableArea id="box1" isOver={isOver === "box1"} isCorrect={getIsCorrect("box1")}>
                 {droppedTexts.box1 ? (
                   <div className="dropped-text-containerppt17">
@@ -232,8 +232,6 @@ const DragAndDrop_Sistema_Oxiacetileno = () => {
                   <span className="drop-textppt17">Arrastre aquí</span>
                 )}
               </DroppableArea>
-            </div>
-            <div className="drop-boxppt17" style={{ top: "46%", left: "1%" }}>
               <DroppableArea id="box2" isOver={isOver === "box2"} isCorrect={getIsCorrect("box2")}>
                 {droppedTexts.box2 ? (
                   <div className="dropped-text-containerppt17">
@@ -248,8 +246,6 @@ const DragAndDrop_Sistema_Oxiacetileno = () => {
                   <span className="drop-textppt17">Arrastre aquí</span>
                 )}
               </DroppableArea>
-            </div>
-            <div className="drop-boxppt17" style={{ top: "76%", left: "8%" }}>
               <DroppableArea id="box3" isOver={isOver === "box3"} isCorrect={getIsCorrect("box3")}>
                 {droppedTexts.box3 ? (
                   <div className="dropped-text-containerppt17">

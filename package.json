@@ -30,6 +30,7 @@
     "react-dom": "^17.0.0 || ^18.0.0",
     "react-draggable": "^4.4.6",
     "react-emerald-cumplimiento-ambiental": "file:",
+    "react-magnifier": "^3.0.1",
     "react-responsive": "^10.0.0",
     "react-router-dom": "^6.24.1",
     "swiper": "^11.1.12",

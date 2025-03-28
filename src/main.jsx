@@ -67,6 +67,6 @@ import Seleccione_EPP_Soldadura from "./pages/Actividades/Actividades_Soldaduras
 import Seleccione_EPP_SoldaduraMobile from "./pages/Actividades/Actividades_Soldaduras/Seleccione_EPP_SoldaduraMobile.jsx";
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <Seleccione_EPP_Soldadura />
+    <DragAndDrop_Sistema_Oxiacetileno />
   </React.StrictMode>
 );
