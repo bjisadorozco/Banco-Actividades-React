@@ -298,6 +298,31 @@ const MatchingSelectActivity = () => {
                         </h3>
                     </div>
                 )}
+                {/* Resultados y Feedback - Versión idéntica a DnD */}
+                {isActivityCompleted && (
+                    <div className="feedback-container-picaduras mt-1 p-0 rounded-lg text-center">
+                        {correctCount === 4 ? (
+                            <p className="text-md">
+                                <span className="text-green-personalizado font-bold">Respuesta correcta:</span>{" "}
+                                <span className="texto-gray">¡Muy bien! Has identificado correctamente todos los elementos.</span>
+                            </p>
+                        ) : correctCount > 0 ? (
+                            <p className="text-md">
+                                <span className="text-orange-personalizado font-bold">Piénsalo bien:</span>{" "}
+                                <span className="texto-gray">
+                                    Algunas opciones NO las has relacionado correctamente.
+                                </span>
+                            </p>
+                        ) : (
+                            <p className="text-md">
+                                <span className="text-red-personalizado font-bold">Respuesta Incorrecta:</span>{" "}
+                                <span className="texto-gray">
+                                    ¡Piénsalo bien! Revisa la relación entre los elementos y sus descripciones.
+                                </span>
+                            </p>
+                        )}
+                    </div>
+                )}
 
                 {/* Botón de validación/reinicio */}
                 <div className="flex-container-select">

@@ -53,8 +53,9 @@ import PicadurasAnimalesPeligrosos from "./pages/Actividades/Actividades_Riesgo_
 import IdentificarRiesgosBiologicos from "./pages/Actividades/Actividades_Riesgo_Biologico/IdentificarRiesgosBiologicos.jsx";
 import OrdenarMedidasCorrectivas from "./pages/Actividades/Actividades_Riesgo_Biologico/OrdenarMedidasCorrectivas.jsx";
 import DnD_Conceptos_Clave from "./pages/Actividades/Actividades_Tecnitanques_Soldadura/DnD_Conceptos_Clave.jsx";
+import Conceptos_Clave_Selects from "./pages/Actividades/Actividades_Tecnitanques_Soldadura/Conceptos_Clave_Selects.jsx";
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <DnD_Conceptos_Clave />
+    <Conceptos_Clave_Selects />
   </React.StrictMode>
 );

@@ -35,7 +35,7 @@
   }
   
   .card-image-select {
-    width: 100%;
+    width: 320px;
     height: 150px;
     object-fit: cover;
   }
@@ -103,8 +103,8 @@
   /* Ícono de status */
   .status-icon-select {
     position: absolute;
-    left: 50%;
-    top: 50%;
+    left: 8%;
+    top: 17%;
     transform: translate(-50%, -50%);
     width: 40px;
     height: 40px;
@@ -180,3 +180,29 @@
       min-height: 100px;
     }
   }
+
+  /* Mantén los mismos estilos que en la versión DnD */
+.feedback-container-picaduras {
+  margin: 15px auto;
+  max-width: 90%;
+}
+
+.text-green-personalizado {
+  color: #28a745; /* Verde */
+}
+
+.text-orange-personalizado {
+  color: #fd7e14; /* Naranja */
+}
+
+.text-red-personalizado {
+  color: #dc3545; /* Rojo */
+}
+
+.texto-gray {
+  color: #6c757d;
+}
+
+.font-bold {
+  font-weight: 700;
+}
