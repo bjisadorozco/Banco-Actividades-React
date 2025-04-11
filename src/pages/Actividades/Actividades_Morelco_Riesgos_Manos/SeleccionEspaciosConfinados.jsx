@@ -46,7 +46,6 @@ function SeleccionEspaciosConfinados() {
 
   useEffect(() => {
     setIsOnDivisor(false);
-    // Initialize available options
     const initialOptions = options.slice(1);
     setAvailableOptions({
       drop1: initialOptions,
@@ -61,8 +60,6 @@ function SeleccionEspaciosConfinados() {
   const handleChange = (dropId, value) => {
     setSelections((prev) => {
       const newSelections = { ...prev, [dropId]: value };
-
-      // Update available options for all dropdowns
       const selectedValues = Object.values(newSelections).filter((v) => v !== "");
       const newAvailableOptions = {};
       Object.keys(availableOptions).forEach((key) => {
@@ -71,10 +68,7 @@ function SeleccionEspaciosConfinados() {
           .filter((option) => !selectedValues.includes(option.value) || option.value === newSelections[key]);
       });
       setAvailableOptions(newAvailableOptions);
-
-      // Enable validate button if at least one option is selected
       setIsValidateEnabled(Object.values(newSelections).some((value) => value !== ""));
-
       return newSelections;
     });
     setSelectedCards((prev) => [...new Set([...prev, dropId])]);
@@ -113,7 +107,6 @@ function SeleccionEspaciosConfinados() {
     setIsValidateEnabled(false);
     setSelectedCard(null);
     setSelectedCards([]);
-    // Reset available options
     const initialOptions = options.slice(1);
     setAvailableOptions({
       drop1: initialOptions,
@@ -206,31 +199,37 @@ function SeleccionEspaciosConfinados() {
   };
 
   return (
-    <div className="quiz-container-SEC mb-36 md:mb-0 overflow-auto">
-      <div className="cards-container-SEC grid grid-cols-1 md:grid-cols-3 gap-size">
+    <div className="quiz-container-ESC mb-36 md:mb-0 overflow-auto">
+      <div className="cards-container-ESC grid grid-cols-1 md:grid-cols-3 gap-size">
         {risks.map((risk, index) => (
-          <div className="quiz-card-SEC" key={index}>
-            <div className={`card-front-SEC ${getCardBackgroundColor(risk.dropId)}`}>
-              <div className="card-image-SEC bg-gradient-to-b">
+          <div className="quiz-card-ESC" key={index}>
+            <div className={`card-front-ESC ${getCardBackgroundColor(risk.dropId)}`}>
+              <div className="card-image-ESC bg-gradient-to-b">
                 <img
                   src={risk.image || "/placeholder.svg"}
                   alt={risk.title}
-                  className="w-full h-full object-contain"
-                  style={{ borderTopLeftRadius: "1rem", borderTopRightRadius: "1rem" }}
+                  className="w-auto h-auto"
+                  style={{
+                    maxWidth: "100%",
+                    maxHeight: "100%",
+                    objectFit: "contain",
+                    borderTopLeftRadius: "1rem",
+                    borderTopRightRadius: "1rem"
+                  }}
                 />
 
                 {isVerified && (
-                  <div className="validation-icon-containerSEC">
+                  <div className="validation-icon-containerESC">
                     <img
                       src={selections[risk.dropId] === correctItems[risk.dropId] ? imgVerdadero : imgFalso}
                       alt="Validation Icon"
-                      className="validation-iconSEC"
+                      className="validation-iconESC"
                     />
                   </div>
                 )}
               </div>
 
-              <div className="card-content-SEC">
+              <div className="card-content-ESC">
                 <p
                   style={{
                     fontFamily: "'Montserrat', sans-serif",
@@ -274,28 +273,28 @@ function SeleccionEspaciosConfinados() {
       </div>
 
       {showValidationMessage && (
-        <div className="feedback-container-SEC mt-1 p-0 rounded-lg text-center font-bold">
+        <div className="feedback-container-ESC mt-1 p-0 rounded-lg text-center font-bold">
           <Paragraph>Debes seleccionar todos los elementos antes de validar.</Paragraph>
         </div>
       )}
 
-{isVerified && (
-  <div className="feedback-container-SEC mt-1 p-0 rounded-lg text-center">
-    {correctCount === Object.keys(correctItems).length ? (
-      <Paragraph>
-        <span className="text-green-personalizado font-bold">Respuesta correcta:</span> <span className="texto-gray">¡Muy bien! Todas las respuestas son correctas.</span>
-      </Paragraph>
-    ) : correctCount === Object.keys(correctItems).length - 2 ? (
-      <Paragraph>
-        <span className="text-orange-personalizado font-bold">Piénsalo bien:</span> <span className="texto-gray">Algunas preguntas NO las has relacionado correctamente.</span>
-      </Paragraph>
-    ) : (
-      <Paragraph>
-        <span className="text-red-personalizado font-bold">Respuesta Incorrecta:</span> <span className="texto-gray">¡Piénsalo bien! ¡Revisa muy bien la pregunta y vuelve a intentarlo!​</span>
-      </Paragraph>
-    )}
-  </div>
-)}
+      {isVerified && (
+        <div className="feedback-container-ESC mt-1 p-0 rounded-lg text-center">
+          {correctCount === Object.keys(correctItems).length ? (
+            <Paragraph>
+              <span className="text-green-personalizado font-bold">Respuesta correcta:</span> <span className="texto-gray">¡Muy bien! Todas las respuestas son correctas.</span>
+            </Paragraph>
+          ) : correctCount === Object.keys(correctItems).length - 2 ? (
+            <Paragraph>
+              <span className="text-orange-personalizado font-bold">Piénsalo bien:</span> <span className="texto-gray">Algunas preguntas NO las has relacionado correctamente.</span>
+            </Paragraph>
+          ) : (
+            <Paragraph>
+              <span className="text-red-personalizado font-bold">Respuesta Incorrecta:</span> <span className="texto-gray">¡Piénsalo bien! ¡Revisa muy bien la pregunta y vuelve a intentarlo!​</span>
+            </Paragraph>
+          )}
+        </div>
+      )}
 
       {isVerified && (
         <div className="text-center mt-1">
@@ -322,7 +321,7 @@ function SeleccionEspaciosConfinados() {
           icon={faRefresh}
           roundedFull={true}
           onClick={handleReset}
-          disabled={!isVerified} // Solo habilitado después de validar
+          disabled={!isVerified}
         >
           Reiniciar
         </Button>

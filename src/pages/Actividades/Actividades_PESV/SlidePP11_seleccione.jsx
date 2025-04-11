@@ -18,11 +18,11 @@ function SlidePPT11_seleccione() {
   const setIsOnDivisor = useStore((state) => state.setIsOnDivisor)
   const [selections, setSelections] = useState({})
   const [correctCount, setCorrectCount] = useState(0)
-  const [incorrectCount, setIncorrectCount] = useState(0) // Nuevo estado para contar incorrectas
+  const [incorrectCount, setIncorrectCount] = useState(0)
   const [showPercentage, setShowPercentage] = useState(false)
   const [hasIncorrect, setHasIncorrect] = useState(false)
   const [feedback, setFeedback] = useState("")
-  const [feedbackType, setFeedbackType] = useState("") // Nuevo estado para el tipo de retroalimentación
+  const [feedbackType, setFeedbackType] = useState("")
   const [quizCompleted, setQuizCompleted] = useState(false)
 
   const risks = [
@@ -91,17 +91,13 @@ function SlidePPT11_seleccione() {
       if (newCorrectCount === 3) {
         setQuizCompleted(true)
 
-        // Determinar el tipo de retroalimentación basado en el número de incorrectas
         if (newIncorrectCount === 0) {
-          // Todas correctas, sin incorrectas
           setFeedback("Correcto: ¡Bien hecho! Has seleccionado las empresas que deben aplicar el PESV.")
           setFeedbackType("correct")
         } else if (newIncorrectCount >= 3) {
-          // 3 o más incorrectas
           setFeedback("Incorrecto: Inténtalo de nuevo. Revisa qué empresas están obligadas a implementarlo.")
           setFeedbackType("incorrect")
         } else {
-          // 1 o 2 incorrectas
           setFeedback("Inténtalo de nuevo, algunas de tus respuestas son correctas, pero otras no.")
           setFeedbackType("partial")
         }
@@ -140,7 +136,7 @@ function SlidePPT11_seleccione() {
                 <p
                   style={{
                     fontFamily: "'Montserrat', sans-serif",
-                    fontSize: "14px",
+                    fontSize: "12px",
                     color: selections[risk.dropId] !== undefined ? "white" : "#8F8F8F",
                   }}
                 >
@@ -209,4 +205,3 @@ function SlidePPT11_seleccione() {
 }
 
 export default SlidePPT11_seleccione
-

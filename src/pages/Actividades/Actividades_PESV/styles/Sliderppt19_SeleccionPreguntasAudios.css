@@ -1,6 +1,5 @@
 .quiz-container-ppt19 {
   width: 100%;
-  /* min-height: 80vh; */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -11,7 +10,7 @@
 .cards-container-ppt19 {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 1.5rem; /* Reducir el espacio entre cards */
+  gap: 1.5rem;
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 1rem;
@@ -26,16 +25,16 @@
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  width: 220px; /* Tamaño más compacto */
-  transition: background-color 0.3s ease; /* Transición suave para el cambio de color */
+  width: 220px;
+  transition: background-color 0.3s ease;
 }
 
 .card-container-ppt19.correct {
-  background-color: #4caf50; /* Verde claro para correcto */
+  background-color: #4caf50;
 }
 
 .card-container-ppt19.incorrect {
-  background-color: #f44336; /* Rojo claro para incorrecto */
+  background-color: #f44336;
 }
 
 .image-select-container-ppt19 {
@@ -52,28 +51,38 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  min-height: 52px;
 }
 
 .top-content-ppt19 {
   justify-content: flex-end;
-  padding-bottom: 10px; /* Reducir el espacio */
+  padding-bottom: 10px;
+  min-height: 52px;
+}
+
+.bottom-content-ppt19 {
+  min-height: 52px;
+  transition: margin-top 0.3s ease;
+}
+
+.bottom-content-ppt19.has-selection {
+  margin-top: 15px;
 }
 
 .image-validation-container-ppt19 {
   position: relative;
-  width: 150px; /* Reducir el tamaño */
-  height: 150px; /* Reducir el tamaño */
+  width: 150px;
+  height: 150px;
   display: flex;
+  flex-direction: column;
   justify-content: center;
-  align-items: center; /* Centrar la imagen vertical y horizontalmente */
-  margin-top: 10px;
+  align-items: center;
+  margin: 10px 0;
 }
 
 .circular-image-ppt19 {
   border-radius: 50%;
-  width: 150px !important; /* Reducir el tamaño */
-  height: 150px !important; /* Reducir el tamaño */
+  width: 150px !important;
+  height: 150px !important;
   object-fit: cover;
   border: 3px solid #e5e7eb;
 }
@@ -86,7 +95,7 @@
 
 .select-container-ppt19 select {
   width: 100%;
-  padding: 0.5rem 2rem 0.5rem 0.5rem; /* Añadido padding a la derecha para la flecha */
+  padding: 0.5rem 2rem 0.5rem 0.5rem;
   border: 2px solid #0f1721;
   border-radius: 8px;
   background-color: #f9f9f9;
@@ -106,24 +115,44 @@
   pointer-events: none;
   font-size: 0.8rem;
   color: #0f1721;
-  z-index: 1; /* Asegúrate de que esté por encima del select */
+  z-index: 1;
 }
 
 .validation-icon-container-ppt19 {
   position: absolute;
-  top: 30%;
-  left: 55%;
-  transform: translateX(-50%);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   z-index: 10;
   pointer-events: none;
   text-align: center;
 }
 
 .validation-icon-ppt19 {
-  width: 60px; /* Reducir el tamaño */
-  height: 40px; /* Reducir el tamaño */
+  width: 60px;
+  height: 40px;
   object-fit: contain;
   opacity: 0.9;
+}
+
+.feedback-text-ppt19 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 16px;
+  font-weight: bold;
+  margin-top: 5px;
+  text-align: center;
+  width: 100%;
+  position: absolute;
+  bottom: -25px;
+  left: 0;
+}
+
+.feedback-text-ppt19.correct-text {
+  color: white;
+}
+
+.feedback-text-ppt19.incorrect-text {
+  color: white;
 }
 
 .audio-container-ppt19 audio {
@@ -149,80 +178,116 @@
   cursor: not-allowed;
 }
 
-@media (max-width: 640px) {
+/* ... (todo el CSS para web permanece igual) */
+
+/* Versión Mobile */
+@media (max-width: 768px) {
   .cards-container-ppt19 {
     grid-template-columns: 1fr;
-    gap: 1rem;
-    padding: 0 1rem;
+    gap: 2rem;
+    padding: 0 1.5rem;
   }
 
   .card-container-ppt19 {
-    width: 100%; /* Ocupar todo el ancho en móviles */
-    padding: 1.5rem; /* Más padding para mejor espaciado */
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 2rem;
   }
 
   .image-select-container-ppt19 {
-    display: grid;
-    grid-template-rows: auto auto auto;
-    gap: 1rem;
-    padding: 1rem 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
   }
 
-  /* Forzar todos los audios arriba */
+  /* Todos los audios van arriba */
   .audio-container-ppt19 {
-    order: -1 !important;
+    order: 1;
+    width: 100%;
+    margin-bottom: 1rem;
   }
 
-  /* Forzar todos los selects abajo */
-  .select-container-ppt19 {
-    order: 3 !important;
-  }
-
-  /* Ajustar el contenedor de imagen al medio */
+  /* Imagen en el medio */
   .image-validation-container-ppt19 {
     order: 2;
-    margin: 1rem 0;
+    width: 220px;
+    height: 220px;
+    margin: 1rem auto;
   }
 
-  /* Reorganizar el contenido superior e inferior */
+  /* Todos los selects van abajo */
+  .select-container-ppt19 {
+    order: 3;
+    width: 100%;
+    max-width: 100%;
+    margin-top: 1rem;
+  }
+
+  .circular-image-ppt19 {
+    width: 220px !important;
+    height: 220px !important;
+  }
+
+  .validation-icon-ppt19 {
+    width: 80px;
+    height: 60px;
+  }
+
+  .select-container-ppt19 select {
+    padding: 1rem;
+    font-size: 1.1rem;
+  }
+
+  .audio-container-ppt19 audio {
+    width: 100%;
+    height: 50px;
+  }
+
+  .feedback-text-ppt19 {
+    font-size: 1.2rem;
+    bottom: -30px;
+  }
+
+  /* Eliminamos las posiciones específicas de cada card */
   .top-content-ppt19,
   .bottom-content-ppt19 {
-    display: contents;
+    display: contents; /* Esto permite reordenar con flex */
   }
 
-  /* Asegurar que los íconos de validación se mantengan sobre la imagen */
-  .validation-icon-container-ppt19 {
-    top: 50%;
-    transform: translate(-50%, -50%);
+  /* Aseguramos que el contenido inferior tenga margen */
+  .bottom-content-ppt19.has-selection {
+    margin-top: 1.5rem;
   }
 
-  /* Ajustar el espacio entre elementos */
-  .audio-container-ppt19,
-  .select-container-ppt19 {
-    margin: 0.5rem 0;
+  .reset-button-container-ppt19 {
+    margin-top: 1.5rem;
   }
+}
 
-  /* Agrandar la imagen en móviles */
+/* Ajustes para pantallas muy pequeñas */
+@media (max-width: 480px) {
+  .card-container-ppt19 {
+    padding: 1.5rem;
+  }
+  
   .image-validation-container-ppt19 {
     width: 200px;
     height: 200px;
   }
-
+  
   .circular-image-ppt19 {
     width: 200px !important;
     height: 200px !important;
   }
-
-  /* Agrandar los select en móviles */
-  .select-container-ppt19 select {
-    font-size: 1rem;
-    padding: 0.75rem 2.5rem 0.75rem 0.75rem;
-  }
-
-  /* Agrandar el audio en móviles */
-  .audio-container-ppt19 audio {
-    width: 100%;
+  
+  .validation-icon-ppt19 {
+    width: 70px;
     height: 50px;
+  }
+  
+  .feedback-text-ppt19 {
+    font-size: 1.1rem;
   }
 }
 
@@ -259,4 +324,28 @@
   font-weight: bold;
   color: #8f8f8f;
   font-family: Montserrat, sans-serif;
+}
+
+/* Agrega estas nuevas clases al final de tu archivo CSS */
+
+.select-container-ppt19 select.correct-select {
+  background-color: #e8f5e9; /* Verde muy claro */
+  border-color: #4caf50; /* Verde */
+}
+
+.select-container-ppt19 select.incorrect-select {
+  background-color: #ffebee; /* Rojo muy claro */
+  border-color: #f44336; /* Rojo */
+}
+
+/* Para asegurar que el texto sea legible en ambos casos */
+.select-container-ppt19 select.correct-select,
+.select-container-ppt19 select.incorrect-select {
+  color: #333;
+}
+
+/* Asegurar que el ícono del dropdown siga siendo visible */
+.select-container-ppt19 select.correct-select + .select-container-ppt19::after,
+.select-container-ppt19 select.incorrect-select + .select-container-ppt19::after {
+  color: #0f1721;
 }

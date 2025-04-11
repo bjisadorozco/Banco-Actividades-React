@@ -20,9 +20,9 @@
 
 .quiz-card-PP11 {
   perspective: 1500px;
-  height: 200px; /* Reduced from 300px */
+  height: 170px; /* Reducido de 180px */
   cursor: pointer;
-  min-width: 220px;
+  min-width: 190px; /* Reducido de 200px */
 }
 
 .card-front-PP11 {
@@ -47,7 +47,7 @@
   justify-content: center;
   align-items: center;
   transition: background-color 0.3s ease;
-  height: 94px;
+  height: 75px; /* Reducido de 80px */
   overflow-y: auto;
 }
 
@@ -56,6 +56,7 @@
   text-align: justify;
   margin: 0;
   line-height: 1.4;
+  font-size: 14px;
 }
 
 .card-image-PP11 {
@@ -69,7 +70,7 @@
   justify-content: center;
   align-items: center;
   position: relative;
-  height: 100px; /* Reduced from 140px */
+  height: 85px; /* Reducido de 90px */
 }
 
 .card-image-PP11 img {
@@ -176,6 +177,7 @@
   text-align: center;
   font-weight: bold;
   font-family: Montserrat, sans-serif;
+  font-size: 14px;
 }
 
 .bg-correct-feedback {
@@ -186,7 +188,6 @@
   background-color: #f44336;
 }
 
-/* Nueva clase para la retroalimentación parcial en color naranja */
 .bg-partial-feedback {
   background-color: #ff9800;
 }
@@ -197,7 +198,14 @@
   }
 
   .quiz-card-PP11 {
-    height: 240px; /* Reduced from 300px */
+    height: 190px; /* Reducido de 200px */
+  }
+  
+  .card-content-PP11 {
+    height: 85px;
+  }
+  
+  .card-image-PP11 {
+    height: 95px;
   }
 }
-

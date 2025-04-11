@@ -63,10 +63,11 @@ import Slidermobile_select_audios from "./pages/Actividades/Actividades_Izaje_Ca
 import PicadurasAnimalesPeligrosos from "./pages/Actividades/Actividades_Riesgo_Biologico/PicadurasAnimalesPeligrosos.jsx";
 import Sliderppt15_SeleccionPreguntasAudios from "./pages/Actividades/Actividades_Riesgo_psicosocial/Sliderppt15_SeleccionPreguntasAudios.jsx";
 import DragAndDrop_Sistema_Oxiacetileno from "./pages/Actividades/Actividades_Soldaduras/DragAndDrop_Sistema_Oxiacetileno.jsx";
+import DragAndDrop_Sistema_OxiacetilenoMobile from "./pages/Actividades/Actividades_Soldaduras/DragAndDrop_Sistema_OxiacetilenoMobile.jsx";
 import Seleccione_EPP_Soldadura from "./pages/Actividades/Actividades_Soldaduras/Seleccione_EPP_Soldadura.jsx";
 import Seleccione_EPP_SoldaduraMobile from "./pages/Actividades/Actividades_Soldaduras/Seleccione_EPP_SoldaduraMobile.jsx";
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <DragAndDrop_Sistema_Oxiacetileno />
+    <PreguntasFactorHumanoTF />
   </React.StrictMode>
 );

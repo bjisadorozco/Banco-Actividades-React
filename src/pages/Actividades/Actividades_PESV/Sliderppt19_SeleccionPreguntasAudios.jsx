@@ -51,7 +51,6 @@ function Sliderppt19_SeleccionPreguntasAudios() {
   }, [setIsOnDivisor]);
 
   const handleChange = (dropId, value) => {
-    // Detener todos los audios anteriores antes de procesar la nueva selección
     Object.values(audioRefs.current).forEach((audio) => {
       if (audio && !audio.paused) {
         audio.pause();
@@ -62,28 +61,23 @@ function Sliderppt19_SeleccionPreguntasAudios() {
     setSelections((prev) => {
       const newSelections = { ...prev, [dropId]: value };
 
-      // Verificar si la selección es correcta
       const isCorrect = value === correctItems[dropId];
       setIsVerified((prev) => ({ ...prev, [dropId]: isCorrect }));
       setShowAudio((prev) => ({ ...prev, [dropId]: isCorrect }));
 
-      // Si es correcto, reproducir el nuevo audio
       if (isCorrect) {
         if (audioRefs.current[dropId]) {
           audioRefs.current[dropId].play();
         }
       }
 
-      // Habilitar el botón de reinicio si se ha hecho al menos una selección
       setIsResetEnabled(true);
 
-      // Contar respuestas correctas
       const correctAnswers = Object.keys(newSelections).filter(
         (key) => newSelections[key] === correctItems[key]
       ).length;
       setCorrectCount(correctAnswers);
 
-      // Mostrar feedback si todas las preguntas han sido respondidas
       if (Object.values(newSelections).every((val) => val !== "")) {
         setShowValidationMessage(true);
       }
@@ -115,7 +109,6 @@ function Sliderppt19_SeleccionPreguntasAudios() {
     setCorrectCount(0);
     setShowValidationMessage(false);
 
-    // Detener todos los audios
     Object.values(audioRefs.current).forEach((audio) => {
       if (audio) {
         audio.pause();
@@ -189,11 +182,19 @@ function Sliderppt19_SeleccionPreguntasAudios() {
                 )}
 
                 {risk.selectPosition === "top" && (
+                  // En la parte del select, modifica la clase condicional para incluir el estado incorrecto
                   <div className="select-container-ppt19">
                     <select
                       value={selections[risk.dropId]}
                       onChange={(e) => handleChange(risk.dropId, e.target.value)}
                       disabled={isVerified[risk.dropId]}
+                      className={
+                        selections[risk.dropId] 
+                          ? isVerified[risk.dropId] 
+                            ? "correct-select" 
+                            : "incorrect-select"
+                          : ""
+                      }
                     >
                       <option value="">Seleccione...</option>
                       {options
@@ -219,17 +220,22 @@ function Sliderppt19_SeleccionPreguntasAudios() {
                   className="circular-image-ppt19"
                 />
                 {selections[risk.dropId] && (
-                  <div className="validation-icon-container-ppt19">
-                    <img
-                      src={isVerified[risk.dropId] ? imgVerdadero : imgFalso}
-                      alt="Validation Icon"
-                      className="validation-icon-ppt19"
-                    />
-                  </div>
+                  <>
+                    <div className="validation-icon-container-ppt19">
+                      <img
+                        src={isVerified[risk.dropId] ? imgVerdadero : imgFalso}
+                        alt="Validation Icon"
+                        className="validation-icon-ppt19"
+                      />
+                    </div>
+                    <div className={`feedback-text-ppt19 ${isVerified[risk.dropId] ? "correct-text" : "incorrect-text"}`}>
+                      {isVerified[risk.dropId] ? "¡Correcto!" : "¡Incorrecto!"}
+                    </div>
+                  </>
                 )}
               </div>
 
-              <div className="bottom-content-ppt19">
+              <div className={`bottom-content-ppt19 ${selections[risk.dropId] ? "has-selection" : ""}`}>
                 {risk.selectPosition === "bottom" && (
                   <div className="select-container-ppt19">
                     <select
