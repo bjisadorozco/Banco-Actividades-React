@@ -5,12 +5,12 @@ import Paragraph from "../../components/Paragraph";
 // import Instruction from "../../components/Instruction";
 import { useMediaQuery } from "react-responsive";
 // import imgIngenieroHerramientas from '../../assets/img/ingenieroMorelcoHerramientas.webp';
-import martillo from '../../../assets/img/trabajos_techos.webp';
-import cintaMetrica from '../../../assets/img/trabajos_paredes_fachadas.webp';
-import destornillador from '../../../assets/img/trabajos_montajes_estructura.webp';
-import taladro from '../../../assets/img/trabajos_andamios.webp';
-import sierraElectrica from '../../../assets/img/instalacion_pisos.webp';
-import mezcladoraCemento from '../../../assets/img/instalacion_electrica.webp';
+import trabajoTechos from '../../../assets/img/trabajos_techos.webp';
+import trabajosFachados from '../../../assets/img/trabajos_paredes_fachadas.webp';
+import trabajosMontajes from '../../../assets/img/trabajos_montajes_estructura.webp';
+import trabajosAndamios from '../../../assets/img/trabajos_andamios.webp';
+import instalacionPisos from '../../../assets/img/instalacion_pisos.webp';
+import instalacionElectrica from '../../../assets/img/instalacion_electrica.webp';
 import '../../Actividades/Actividades_Trabajo_seguro_alturas/styles/SeleccionImagenesAlturas.css';
 import imgVerdadero from '../../../assets/img/checkAct.png';
 import imgFalso from '../../../assets/img/xmarkAct.png';
@@ -25,16 +25,17 @@ function SeleccionImagenesAlturas() {
   const [results, setResults] = useState({});
   const [explanation, setExplanation] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [validationMessage, setValidationMessage] = useState('');
   const isMobile = useMediaQuery({ maxWidth: 640 });
-  const correctImages = [martillo, cintaMetrica, destornillador,taladro];
+  const correctImages = [trabajoTechos, trabajosFachados, trabajosMontajes,trabajosAndamios];
 
   const explanationsMap = {
-    [martillo]: 'Tabajos de montajes de estructuras:   Bien!  Estos normalmente se hacen a más de 2 mts de altura.',
-    [cintaMetrica]: 'Trabajos en techos y cubiertas:   Bien!  Estos siempre se hacen a más de 2 mts de altura',
-    [destornillador]: 'Trabajos en paredes y fachadas:   Bien !  Estos normalmente se hacen a más de 2 mts de altura',
-    [taladro]: 'Trabajos en andamios:   Bien !  Estos normalmente permiten acceder a alturas superiores a 2 mts',
-    [sierraElectrica]: 'Instalación electrica de piso:   Piénsalo bien!  Este tipo de tareas normalmente NO se hacen a más de 2 metros de altura.',
-    [mezcladoraCemento]: 'Instalación de pisos:   Piénsalo bien!  Este tipo de tareas normalmente NO se hacen a más de 2 metros de altura.',
+    [trabajoTechos]: 'Trabajos en techos y cubiertas:   Bien!  Estos normalmente se hacen a más de 2 mts de altura.',
+    [trabajosFachados]: 'Trabajos en paredes y fachadas:   Bien!  Estos siempre se hacen a más de 2 mts de altura',
+    [trabajosMontajes]: 'Tabajos de montajes de estructuras:   Bien!  Estos normalmente se hacen a más de 2 mts de altura',
+    [trabajosAndamios]: 'Trabajos en andamios:   Bien!  Estos normalmente permiten acceder a alturas superiores a 2 mts',
+    [instalacionPisos]: 'Instalación de pisos:  Este tipo de tareas normalmente NO se hacen a más de 2 metros de altura.',
+    [instalacionElectrica]: 'Instalación electrica de piso: Este tipo de tareas normalmente NO se hacen a más de 2 metros de altura.',
   };
 
   const actSelectImg = (image) => {
@@ -56,13 +57,36 @@ function SeleccionImagenesAlturas() {
       ...prevResults,
       [image]: isSelected ? undefined : isCorrect
     }));
+
+    updateValidationMessage(newSelectedImages);
   };
+
+	const updateValidationMessage = (selected) => {
+			if (selected.length === 0) {
+        setValidationMessage('');
+        return;
+      }
+
+      const totalCorrect = selected.filter(img => correctImages.includes(img)).length;
+      const percentage = Math.round((totalCorrect / 4) * 100);
+
+      if (totalCorrect === 4) {
+        setValidationMessage(
+          `Tus respuestas correctas son: ${totalCorrect} de 4 (${percentage}%)`
+        );
+      } else {
+        setValidationMessage(
+          `Tus respuestas correctas son: ${totalCorrect} de 4 (${percentage}%)`
+        );
+      }
+    };
 
   const resetActivity = () => {
     setResults({});
     setSelectedImages([]);
     setExplanation(null);
     setIsModalOpen(false);
+    setValidationMessage('');
   };
 
   const handleCloseModal = () => {
@@ -72,24 +96,17 @@ function SeleccionImagenesAlturas() {
   return (
     <>
       <div className="flex flex-col justify-center">
-       
-
-        {/* Columna derecha */}
-        <div className="flex flex-col md:flex-row ">
-            <div className="md:flex-2  md:w-full w-full px-2 flex justify-center items-center pb-2">
-                <div className="w-full flex flex-col justify-center items-center">
 
             {/* Image Container */}
-            <div className="col-lg-9 col-md-12">
               <div className="actSelectImg text-center">
                 <div className="items-container grid-container">
-                  {[martillo, cintaMetrica, destornillador, taladro, sierraElectrica, mezcladoraCemento].map((imgSrc, index) => (
+                  {[trabajoTechos, trabajosFachados, trabajosMontajes, trabajosAndamios, instalacionPisos, instalacionElectrica].map((imgSrc, index) => (
                     <div
                       key={index}
                       className={`itemAct ${selectedImages.includes(imgSrc) ? 'selected' : ''} ${correctImages.includes(imgSrc) ? 'check' : 'xmark'}`}
                       onClick={() => actSelectImg(imgSrc)}
                     >
-                      <img src={imgSrc} alt={`Imagen ${index}`} />
+                      <img src={imgSrc} alt={`Imagen ${index}`} style={{ marginBottom: '0' }}/>
                       {selectedImages.includes(imgSrc) && (
                         <img
                           className="resAct"
@@ -104,15 +121,27 @@ function SeleccionImagenesAlturas() {
                 {explanation && (
                   <Paragraph>
                   <div
-                    style={{ fontSize: '16px', textAlign: 'center', marginBottom: '10px' }}
+                    style={{ fontSize: '16px', textAlign: 'center', marginTop: '10px' }}
                     className={`p-2 md:w-[100%] w-[100%] text-white ${explanation.isCorrect ? 'bg-[#4CAF50]' : 'bg-[#F44336]'} rounded`}
                   >
                     {explanationsMap[explanation.image]}
                   </div>
                   </Paragraph>
                 )}
+							 {/* Mensaje de validación en tiempo real */}
+                        {validationMessage && (
+                          <Paragraph>
+                            <div
+                              style={{ fontWeight: 'bold', textAlign: 'center', color: 'grey' }}
+                              className="p-2 w-[100%] rounded"
+                            >
+                              {validationMessage}
+                            </div>
+                          </Paragraph>
+                        )}
+
                 {/* Botón de reinicio centrado en la parte inferior */}
-                <div className="flex justify-center items-center">
+                <div className="flex justify-center items-center" style={{ marginTop: '0' }}>
                   <Button
                     onClick={resetActivity}
                     roundedFull={true}
@@ -124,10 +153,6 @@ function SeleccionImagenesAlturas() {
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-      </div>
-</div>
 
       {/* Modal de resultados */}
       <ModalDialog

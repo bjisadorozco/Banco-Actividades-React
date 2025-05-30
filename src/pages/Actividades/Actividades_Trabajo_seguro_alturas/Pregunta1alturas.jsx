@@ -102,7 +102,7 @@ function Pregunta1alturas() {
                 Debes seleccionar una opción para continuar.
               </h3>
             )}
-            <div className="flex gap-4">
+            <div className="flex gap-[0.5rem]">
               <Button
                 bold={false}
                 icon={faCheck}

@@ -1,4 +1,4 @@
-.activity-container {
+.activity-container1 {
   display: flex;
   flex-direction: column;
   width: 100vw;
@@ -10,14 +10,14 @@
   gap: 0.7rem !important;
 }
 
-.drop-zones {
+.drop-zones1 {
   display: flex;
   justify-content: center;
   gap: 16px;
   flex-direction: row;
 }
 
-.drop-zone {
+.drop-zone1 {
   position: relative;
   border: 1px solid #ccc;
   border-radius: 8px;
@@ -32,19 +32,19 @@
   background-color: white;
 }
 
-.drop-zone.correct {
+.drop-zone.correct1 {
   background-color: #4caf50;
   min-height: 370px;
   justify-content: space-between;
 }
 
-.drop-zone.incorrect {
+.drop-zone.incorrect1 {
   background-color: #f44336;
   min-height: 370px;
   justify-content: space-between;
 }
 
-.verification-image {
+.verification-image1 {
   position: absolute;
   top: 23%;
   left: 50%;
@@ -54,7 +54,7 @@
   height: 64px;
 }
 
-.option-text {
+.option-text1 {
   margin: 10px;
   box-sizing: content-box;
   margin: 10px;
@@ -64,7 +64,7 @@
   text-align: justify;
 }
 
-.drop-area {
+.drop-area1 {
   width: 100%;
   height: 50px;
   border: 2px dashed gray;
@@ -75,27 +75,27 @@
   font-weight: bold;
 }
 
-.drop-area-wrapper {
+.drop-area-wrapper1 {
   width: 100%;
 }
 
-.drop-area.drop-over {
+.drop-area.drop-over1 {
   background-color: #e6e6e6;
 }
 
-.drop-area.drop-correct {
+.drop-area.drop-correct1 {
   background-color: #90ee90;
   border-color: #90ee90;
   color: #0f172a;
 }
 
-.drop-area.drop-incorrect {
+.drop-area.drop-incorrect1 {
   background-color: #ffb6c1;
   border-color: #ffb6c1;
   color: #0f172a;
 }
 
-.draggable-option {
+.draggable-option1 {
   width: 190px;
   height: 50px;
   background-color: #c0185d;
@@ -110,13 +110,13 @@
   margin-left: 10px;
 }
 
-.remaining-options {
+.remaining-options1 {
   display: flex;
   justify-content: center;
   gap: 16px;
 }
 
-.validation-message {
+.validation-message1 {
   margin-top: 8px;
   text-align: center;
   width: 100%;
@@ -125,24 +125,24 @@
   border-radius: 4px;
 }
 
-.validation-message.success {
+.validation-message.success1 {
   background-color: #4caf50;
   color: white;
 }
 
-.validation-message.error {
+.validation-message.error1 {
   background-color: #f44336;
   color: white;
 }
 
-.validation-summary {
+.validation-summary1 {
   text-align: center;
   font-size: 16px;
   color: #717171;
   font-weight: bold;
 }
 
-.action-buttons {
+.action-buttons1 {
   display: flex;
   justify-content: center;
 }
