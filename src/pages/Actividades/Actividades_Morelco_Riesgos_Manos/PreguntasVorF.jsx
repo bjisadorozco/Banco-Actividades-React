@@ -119,97 +119,85 @@ function PreguntasVorF() {
                     {questions[currentQuestion].text}
                   </p>
                 </div>
-                    <img
-                      src={
-                        answerSelected === null
-                          ? imgPeligro
-                          : answerSelected
-                            ? imgTrue
-                            : imgFalse
-                      }
-                      alt={
-                        answerSelected === null
-                          ? "Pregunta"
-                          : answerSelected
-                            ? "Correcto"
-                            : "Incorrecto"
-                      }
-                      className=" w-[100px] mb-0 "
-                    />
-                    {answerSelected !== null && (
-                      <div className="absolute inset-0 flex items-center justify-center">
-                        <img
-                          src={answerSelected ? imgTrue : imgFalse}
-                          alt={answerSelected ? "Correct" : "Incorrect"}
-                          className="w-full h-full object-contain"
-                          style={{ marginBottom: "0px" }}
-                        />
-                      </div>
-                    )}
-                  </div>
+                <div className="relative flex justify-center">
+                  <img
+                    src={
+                      answerSelected === null
+                        ? imgPeligro
+                        : answerSelected
+                          ? imgTrue
+                          : imgFalse
+                    }
+                    alt={
+                      answerSelected === null
+                        ? "Pregunta"
+                        : answerSelected
+                          ? "Correcto"
+                          : "Incorrecto"
+                    }
+                    className="w-[100px] mb-0"
+                  />
                 </div>
-                
-                {answerSelected !== null && (
-                  <>
-                    <div className="text-center mt-4">
-                      <p
-                        className={`text-lg font-bold ${
-                          answerSelected ? "text-green-600" : "text-red-600"
+              </div>
+
+              {answerSelected !== null && (
+                <>
+                  <div className="text-center mt-4">
+                    <p
+                      className={`text-lg font-bold ${answerSelected ? "text-green-600" : "text-red-600"
                         }`}
-                      >
-                        {answerSelected
-                          ? "Correcto ¡Bien hecho!"
-                          : "¡Incorrecto! No te preocupes, puedes mejorar."}
+                    >
+                      {answerSelected
+                        ? "Correcto ¡Bien hecho!"
+                        : "¡Incorrecto! No te preocupes, puedes mejorar."}
+                    </p>
+                    <div className="rounded-lg">
+                      <p className="texto-gray">
+                        {questions[currentQuestion].feedback}
                       </p>
-                      <div className=" rounded-lg">
-                        <p className="texto-gray">
-                          {questions[currentQuestion].feedback}
-                        </p>
-                      </div>
                     </div>
-                    <hr className="mt-2 border-gray-300" />
-                  </>
+                  </div>
+                  <hr className="mt-2 border-gray-300" />
+                </>
+              )}
+
+              <div className="check flex justify-center space-x-4">
+                {!showFeedback ? (
+                  <div className="check flex flex-button justify-center space-x-4">
+                    <Button
+                      roundedFull={true}
+                      bold={true}
+                      icon={faCheck}
+                      onClick={() => handleAnswer(true)}
+                      disabled={answerSelected !== null}
+                      className="bg-main-color"
+                    >
+                      Verdadero
+                    </Button>
+                    <Button
+                      roundedFull={true}
+                      bold={true}
+                      icon={faTimes}
+                      onClick={() => handleAnswer(false)}
+                      disabled={answerSelected !== null}
+                      className="bg-main-color"
+                    >
+                      Falso
+                    </Button>
+                  </div>
+                ) : (
+                  <div className="flex justify-center mt-4">
+                    <Button
+                      roundedFull={true}
+                      bold={true}
+                      icon={faArrowRight}
+                      onClick={handleNext}
+                      className="bg-main-color"
+                    >
+                      Siguiente
+                    </Button>
+                  </div>
                 )}
-                
-                <div className="check flex justify-center space-x-4">
-                  {!showFeedback ? (
-                    <div className="check flex flex-button justify-center space-x-4">
-                      <Button
-                        roundedFull={true}
-                        bold={true}
-                        icon={faCheck}
-                        onClick={() => handleAnswer(true)}
-                        disabled={answerSelected !== null}
-                        className="bg-main-color"
-                      >
-                        Verdadero
-                      </Button>
-                      <Button
-                        roundedFull={true}
-                        bold={true}
-                        icon={faTimes}
-                        onClick={() => handleAnswer(false)}
-                        disabled={answerSelected !== null}
-                        className="bg-main-color"
-                      >
-                        Falso
-                      </Button>
-                    </div>
-                  ) : (
-                    <div className="flex justify-center mt-4">
-                      <Button
-                        bold={true}
-                        icon={faArrowRight}
-                        roundedFull={true}
-                        onClick={handleNext}
-                        className="px-4 bg-main-color"
-                      >
-                        {currentQuestion === questions.length - 1
-                          ? "Finalizar"
-                          : "Siguiente"}
-                      </Button>
-                    </div>
-                  )}
               </div>
             </>
           )}

@@ -34,11 +34,6 @@ import OrdenarPasosPalmaManosMobile from "./pages/Actividades/Actividades_Morelc
 import PreguntasSiNo from "./pages/Actividades/Actividades_Morelco_Riesgos_Manos/PreguntasSiNo.jsx";
 import EspaciosConfinadosSeleccionMultiple from "./pages/Actividades/Actividades_Morelco_Riesgos_Manos/EspaciosConfinadosSeleccionMultiple.jsx";
 import SeleccionEspaciosConfinados from "./pages/Actividades/Actividades_Morelco_Riesgos_Manos/SeleccionEspaciosConfinados.jsx";
-import ActividadFalsoVerdadero from "./pages/Actividades/Actividades_Espacios_Confinados/Actividad_Falso_Verdadero.jsx";
-// import Drag_And_Drop from "./pages/Actividades/Actividades_Espacios_Confinados/Drag_And_Drop.jsx";
-// import Drag_And_DropMobile from "./pages/Actividades/Actividades_Espacios_Confinados/Drag_And_DropMobile.jsx";
-import EPSLugaresConfinados from "./pages/Actividades/Actividades_Espacios_Confinados/EPS_Lugares_Confinados.jsx";
-import ActividadMobileEntradaSalida from "./pages/Actividades/Actividades_Espacios_Confinados/Actividad_Mobile_Entrada_Salida.jsx";
 import "./main.css";
 import Slider13_Lista_desplegable from "./pages/Actividades/Actividades_Espacios_Confinados/Slider13_Lista_desplegable.jsx";
 import Slider13_Lista_desplegable_movil from "./pages/Actividades/Actividades_Espacios_Confinados/Slider13_Lista_desplegable_movil.jsx";
@@ -51,7 +46,6 @@ import Slider14_Lista_desplegable_movil from "./pages/Actividades/Actividades_Es
 import Slider12_drag_and_drop_audios from "./pages/Actividades/Actividades_Espacios_Confinados/Slider12_drag_and_drop_audios.jsx";
 import Slider15_Lista_desplegable from "./pages/Actividades/Actividades_Espacios_Confinados/Slider15_Lista_desplegable.jsx";
 import Slider15_Lista_desplegable_movil from "./pages/Actividades/Actividades_Espacios_Confinados/Slider15_Lista_desplegable_movil.jsx";
-import Actividad_Falso_Verdadero from "./pages/Actividades/Actividades_Espacios_Confinados/Actividad_Falso_Verdadero.jsx";
 import PreguntasRiesgosTermicosV2 from "./pages/Actividades/Actividades_Morelco_Riesgos_Manos/PreguntasRiesgosTermicosV2.jsx";
 import Sliderppt24_SeleccionMultiple from "./pages/Actividades/Actividades_Uso_Seguro_Andamios/Sliderppt24_SeleccionMultiple.jsx";
 import Sliderppt9_DragAndDrop from "./pages/Actividades/Actividades_Uso_Seguro_Andamios/Sliderppt9_DragAndDrop.jsx";

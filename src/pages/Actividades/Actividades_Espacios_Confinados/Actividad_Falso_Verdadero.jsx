@@ -107,15 +107,14 @@ function Actividad_Falso_Verdadero() {
           {showScore ? (
             <div className="text-center p-6 font-monserrat">
               <div className="flex justify-center mb-4">
-                <img 
-                  src={imgDefaultAvatar} 
-                  alt="Avatar" 
+                <img
+                  src={imgDefaultAvatar}
+                  alt="Avatar"
                   className="w-24 h-24 object-contain"
                 />
               </div>
               <p className="my-2 text-gray-500 font-semibold">
-                Respuestas correctas son: {score} de {questions.length} (
-                {percentage}%)
+                Respuestas correctas son: {score} de {questions.length} ({percentage}%)
               </p>
               <div className="w-full flex flex-col items-center justify-center">
                 <Button
@@ -129,26 +128,19 @@ function Actividad_Falso_Verdadero() {
                 </Button>
               </div>
             </div>
-          </div>
-        ) : (
-          <>
-            <div className="bg-gray-800 text-white text-center py-2 text-[16px] font-monserrat">
-              <span className="inc">{currentQuestion + 1}</span>/
-              <span className="tol">{questions.length}</span>
-            </div>
-            <div className=" view px-3 pt-2 pb-0 w-full flex items-center justify-center flex-col">
-              <div className="min-h-[50px]">
-                <p className="text-gray-800 text-justify font-monserrat ">
-                  {questions[currentQuestion].text}
-                </p>
+          ) : (
+            <>
+              <div className="bg-gray-800 text-white text-center py-2 text-[16px] font-monserrat">
+                <span className="inc">{currentQuestion + 1}</span>/
+                <span className="tol">{questions.length}</span>
               </div>
-              <div className="view p-2">
-                <div className="mb-2 min-h-[50px]">
+              <div className="view px-3 pt-2 pb-0 w-full flex items-center justify-center flex-col">
+                <div className="min-h-[50px]">
                   <p className="text-gray-800 text-justify font-monserrat">
                     {questions[currentQuestion].text}
                   </p>
                 </div>
-                
+
                 <div className="relative flex justify-center my-4">
                   <div className="w-32 h-32 relative">
                     <img
@@ -156,7 +148,7 @@ function Actividad_Falso_Verdadero() {
                       alt="Avatar"
                       className="w-full h-full object-contain"
                     />
-                    
+
                     {answerSelected !== null && (
                       <div className="absolute inset-0 flex items-center justify-center">
                         <img
@@ -169,16 +161,15 @@ function Actividad_Falso_Verdadero() {
                     )}
                   </div>
                 </div>
-                
+
                 <div className="text-justify mt-2">
                   <p
-                    className={`text-[16px] font-regular leading-tight ${
-                      answerSelected === null
-                        ? "opacity-0"
-                        : answerSelected
-                          ? "opacity-100"
-                          : "opacity-100"
-                    }`}
+                    className={`text-[16px] font-regular leading-tight ${answerSelected === null
+                      ? "opacity-0"
+                      : answerSelected
+                        ? "opacity-100"
+                        : "opacity-100"
+                      }`}
                   >
                     {answerSelected === null
                       ? " "
@@ -194,7 +185,6 @@ function Actividad_Falso_Verdadero() {
                       <Button
                         className="true-button"
                         bold={true}
-                        
                         icon={faCheck}
                         roundedFull={true}
                         onClick={() => handleAnswer(true)}
@@ -215,7 +205,7 @@ function Actividad_Falso_Verdadero() {
                     </div>
                   )}
                   {showFeedback && (
-                    <div className="flex items-center justify-center mt-4">
+                    <div className="flex justify-center mt-4">
                       <Button
                         className="next-button"
                         bold={true}
@@ -223,17 +213,15 @@ function Actividad_Falso_Verdadero() {
                         roundedFull={true}
                         onClick={handleNext}
                       >
-                        {currentQuestion === questions.length - 1
-                          ? "Finalizar"
-                          : "Siguiente"}
+                        Siguiente
                       </Button>
                     </div>
                   )}
                 </div>
               </div>
-            </div>
-          </>
-        )}
+            </>
+          )}
+        </div>
       </div>
     </div>
   );
