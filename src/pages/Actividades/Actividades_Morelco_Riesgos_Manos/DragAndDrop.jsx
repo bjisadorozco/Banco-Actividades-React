@@ -49,6 +49,8 @@ function DragAndDrop() {
     dropZone2: "",
   });
 
+
+  
   useEffect(() => {
     const checkIfMobile = () => {
       setIsMobile(window.innerWidth <= 768);
@@ -211,7 +213,7 @@ function DragAndDrop() {
             </div>
           </div>
           {!isMobile && (
-            <div className="drag-items">
+            <div className="drag-items h-auto">
               {availableItems.map((item) => (
                 <DraggableItem key={item} id={item}>
                   {item}
@@ -222,7 +224,7 @@ function DragAndDrop() {
         </div>
       </DndContext>
       {validationMessage && (
-        <div className="feedback-container">
+        <div className="">
           <p className={`validation-message ${validationMessage.includes("¡Muy bien!") ? "success" : "error"}`}>
             {validationMessage}
           </p>

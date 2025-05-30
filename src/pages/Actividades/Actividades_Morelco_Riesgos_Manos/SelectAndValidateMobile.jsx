@@ -92,9 +92,20 @@ const SelectAndValidateMobile = () => {
   }
 
   const getFilteredOptions = (currentSelectId) => {
-    const selectedValues = Object.values(selectedOptions).filter(Boolean)
-    return options.filter((option) => !selectedValues.includes(option) || selectedOptions[currentSelectId] === option)
-  }
+    const selectedValues = Object.values(selectedOptions).filter(Boolean);
+    return options.filter(
+      (option) =>
+        !selectedValues.includes(option) ||
+        selectedOptions[currentSelectId] === option
+    );
+  };
+  const totalDrops = Object.keys(validationStatus).length;
+  const correctAnswers = Object.values(validationStatus).filter(
+    (status) => status === "correcto"
+  ).length;
+  const percentage =
+    totalDrops > 0 ? Math.round((correctAnswers / totalDrops) * 100) : 0;
+    const allSelected = Object.values(selectedOptions).every(value => value !== "");
 
   return (
     <div className="mobile-container">
@@ -111,10 +122,18 @@ const SelectAndValidateMobile = () => {
         >
           <img src={mano1 || "/placeholder.svg"} alt="Mano 1" className="select-image-mobile" />
           {validationStatus.select1 === "correcto" && (
-            <img src={checkIcon || "/placeholder.svg"} className="status-icon-mobile" alt="Correcto" />
+            <img
+              src={checkIcon}
+              className="status-icon-mobile"
+              alt="Correcto"
+            />
           )}
           {validationStatus.select1 === "incorrecto" && (
-            <img src={xmarkIcon || "/placeholder.svg"} className="status-icon-mobile" alt="Incorrecto" />
+            <img
+              src={xmarkIcon}
+              className="status-icon-mobile"
+              alt="Incorrecto"
+            />
           )}
           <select
             value={selectedOptions.select1}
@@ -142,10 +161,18 @@ const SelectAndValidateMobile = () => {
         >
           <img src={mano2 || "/placeholder.svg"} alt="Mano 2" className="select-image-mobile" />
           {validationStatus.select2 === "correcto" && (
-            <img src={checkIcon || "/placeholder.svg"} className="status-icon-mobile" alt="Correcto" />
+            <img
+              src={checkIcon}
+              className="status-icon-mobile"
+              alt="Correcto"
+            />
           )}
           {validationStatus.select2 === "incorrecto" && (
-            <img src={xmarkIcon || "/placeholder.svg"} className="status-icon-mobile" alt="Incorrecto" />
+            <img
+              src={xmarkIcon}
+              className="status-icon-mobile"
+              alt="Incorrecto"
+            />
           )}
           <select
             value={selectedOptions.select2}
@@ -173,10 +200,18 @@ const SelectAndValidateMobile = () => {
         >
           <img src={mano3 || "/placeholder.svg"} alt="Mano 3" className="select-image-mobile" />
           {validationStatus.select3 === "correcto" && (
-            <img src={checkIcon || "/placeholder.svg"} className="status-icon-mobile" alt="Correcto" />
+            <img
+              src={checkIcon}
+              className="status-icon-mobile"
+              alt="Correcto"
+            />
           )}
           {validationStatus.select3 === "incorrecto" && (
-            <img src={xmarkIcon || "/placeholder.svg"} className="status-icon-mobile" alt="Incorrecto" />
+            <img
+              src={xmarkIcon}
+              className="status-icon-mobile"
+              alt="Incorrecto"
+            />
           )}
           <select
             value={selectedOptions.select3}
@@ -192,10 +227,18 @@ const SelectAndValidateMobile = () => {
           </select>
         </div>
       </div>
-      {errorMessage && <div className="error-message-mobile">{errorMessage}</div>}
-      {successMessage && <div className="success-message-mobile">{successMessage}</div>}
+      <p className="text-gray-500 font-semibold text-center my-0">
+        Respuestas correctas: {correctAnswers} de {totalDrops} ({percentage}%)
+      </p>
+      {errorMessage && (
+        <div className="error-message-mobile  mt-0">{errorMessage}</div>
+      )}
+      {successMessage && (
+        <div className="success-message-mobile  mt-0">{successMessage}</div>
+      )}
+      {/* Mostrar el audio si se ha seleccionado una respuesta correcta */}
       {audioSource && (
-        <div className="audio-container-mobile">
+        <div className="audio-container-mobile my-0">
           <audio controls autoPlay key={audioSource}>
             <source src={audioSource} type="audio/mp3" />
             Tu navegador no soporta el elemento de audio.
@@ -203,15 +246,14 @@ const SelectAndValidateMobile = () => {
         </div>
       )}
 
-      {/* New section to display correct count and percentage */}
-      {isActivityCompleted && (
-        <div className="results-container-mobile text-center mt-4 mb-4">
-          <h3 className="text-md font-bold text-paragraph-light-color text-monserrat">Tus respuestas correctas son: {correctCount} de 3 ({percentage}%)</h3>
-        </div>
-      )}
-
       <div className="flex-container-mobile">
-        <Button bold={false} icon={faRepeat} roundedFull={true} onClick={handleReset}>
+        <Button
+          bold={false}
+          icon={faRepeat}
+          roundedFull={true}
+          onClick={handleReset}
+          disabled={!allSelected} 
+        >
           Reiniciar
         </Button>
       </div>

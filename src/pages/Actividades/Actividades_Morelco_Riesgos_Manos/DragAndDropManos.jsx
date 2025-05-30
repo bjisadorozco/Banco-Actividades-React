@@ -213,11 +213,23 @@ const DragAndDropManos = () => {
     setIsActivityCompleted(false)
   }
 
+  const calculateResults = () => {
+    const totalDrops = Object.keys(validationStatus).length;
+    const correctAnswers = Object.values(validationStatus).filter(status => status === "correcto").length;
+    const percentage = Math.round((correctAnswers / totalDrops) * 100);
+    return { correctAnswers, percentage };
+  };
+  
+  const allDropped = Object.values(droppedItems).every(item => item !== null);
+  const { correctAnswers, percentage } = calculateResults();
+
   return (
     <div className="col-lg-6 col-md-12">
       <DndContext sensors={sensors} onDragEnd={handleDragEnd}>
         <div className="activity-container-sld5">
+          
           <div className="image-group-sld5">
+
             {draggedItems.img1 && (
               <DraggableItem id="img1-sld5">
                 <img src={mano1 || "/placeholder.svg"} className="draggable-sld5" id="img1-sld5" alt="Físicas" />
@@ -334,7 +346,7 @@ const DragAndDropManos = () => {
           </div>
         </div>
       </DndContext>
-      <div className="audio-container-sld5">
+      <div className="audio-container-sld5 my-1">
         {droppedItems.drop1 && audioElement === "audioFisicas" && (
           <div className="audio-player-sld5">
             <audio data-audio="audioFisicas" controls autoPlay>
@@ -360,24 +372,19 @@ const DragAndDropManos = () => {
           </div>
         )}
       </div>
+              {/* Resto del código de la actividad */}
+          <p className="text-gray-500 font-semibold text-center my-0">Respuestas correctas: {correctAnswers} de {Object.keys(validationStatus).length} ({percentage}%)</p>
+      {errorMessage && <div className="error-message-sld5 ">{errorMessage}</div>}
+      {successMessage && ( <div className="success-message-sld5 mt-0"> <p>{successMessage}</p> </div>)}
 
-      {errorMessage && <div className="error-message-sld5">{errorMessage}</div>}
-      {successMessage && (
-        <div className="success-message-sld5">
-          {" "}
-          <p>{successMessage}</p>{" "}
-        </div>
-      )}
-
-      {/* Nuevo contenedor para mostrar el conteo de respuestas correctas y el porcentaje */}
-      {isActivityCompleted && (
-        <div className="results-containerDAD text-center mt-4 mb-4">
-          <h3 className="text-md font-bold text-paragraph-light-color text-monserrat">Tus respuestas correctas son: {correctCount} de 3 ({percentage}%)</h3>
-        </div>
-      )}
-
-      <div className="flex-container">
-        <Button bold={false} icon={faRepeat} roundedFull={true} onClick={handleReset}>
+      <div className="flex-container mt-0">
+        <Button
+          bold={false}
+          icon={faRepeat}
+          roundedFull={true}
+          onClick={handleReset}
+          disabled={!allDropped} 
+        >
           Reiniciar
         </Button>
       </div>

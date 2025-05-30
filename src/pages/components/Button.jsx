@@ -4,10 +4,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 const Button = ({
   children,
   bold = false,
-  icon = faHatWizard,
-  roundedFull = false,
+  icon,
+  roundedFull = true,
   onClick,
-  disabled = false, // Nueva propiedad
+  disabled = false,
 }) => {
   const boldClass = bold ? "font-bold" : "";
   const roundedFullClass = roundedFull ? "rounded-full" : "rounded-lg";
@@ -30,10 +30,10 @@ const Button = ({
       style={{
         backgroundColor: "#102044", //color azul tti
         fontFamily: "Montserrat, sans-serif",
-        ...disabledStyle, // Aplicar estilos condicionalmente
+        ...disabledStyle,
       }}
     >
-      <FontAwesomeIcon icon={icon} className="mr-2" />
+      {icon && <FontAwesomeIcon icon={icon} className="mr-2" />}
       {children}
     </button>
   );
