@@ -32,6 +32,7 @@ function Slider14_Lista_desplegable() {
   const [percentage, setPercentage] = useState(0); // Nuevo estado para el porcentaje
   const [errorMessage, setErrorMessage] = useState(""); //Porcentaje de respuestas correctas
   const [isValid, setIsValid] = useState(false); //Estado para habilitar el estado de validación
+  const [hasSelection, setHasSelection] = useState(false);
 
   // Configuración inicial del estado global
   useEffect(() => {
@@ -49,6 +50,9 @@ function Slider14_Lista_desplegable() {
     const newDropdowns = [...dropdowns];
     newDropdowns[index] = value;
     setDropdowns(newDropdowns);
+
+    // Verifica si al menos un dropdown tiene una opción seleccionada
+    setHasSelection(newDropdowns.some((val) => val !== "0"));
 
     // Cambia los colores de los botones según las selecciones
     const newButtonColors = [...buttonColors];
@@ -119,6 +123,7 @@ function Slider14_Lista_desplegable() {
     setPercentage(0); // Reinicia el porcentaje
     setErrorMessage("");
     setIsValid(false);
+    setHasSelection(false); // Resetear estado de selección
   };
 
   //   Filtra las opciones disponibles para cada dropdownisValid
@@ -163,7 +168,7 @@ function Slider14_Lista_desplegable() {
                   />
                   : Instrucciones sobre cómo montar los equipos y determinar los puntos de anclaje adecuados.               
                   <br />
-                  c. Conectividad: Orientaciones sobre la conexión segura de los equipos de rescate.
+                  c. Conectividad: Orientaciones sobre la conexión segura de los 
                   <Select
                     className="m-1 border-[#afafaf] border-2  text-[#afafaf] w-64"
                     index={2}
@@ -174,6 +179,7 @@ function Slider14_Lista_desplegable() {
                     options={getAvailableOptions(2)}
                     isValidated={isValidated}
                   />
+                  de rescate.
                   <br />
                   d. Mecanismo de extracción: Pasos para realizar la 
                   <Select
@@ -232,7 +238,7 @@ function Slider14_Lista_desplegable() {
                       icon={faRepeat}
                       roundedFull={true}
                       onClick={resetDropdowns}
-                      // disabled={!isValidated}
+                      disabled={!hasSelection}
                     >
                       Reiniciar
                     </Button>

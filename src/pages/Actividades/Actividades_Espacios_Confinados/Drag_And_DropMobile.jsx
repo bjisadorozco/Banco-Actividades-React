@@ -20,7 +20,6 @@ import guantes from "/src/assets/img/guantes_sldM2.webp";
 import respirador from "/src/assets/img/respiradores_sldM2.webp";
 import { faCheck, faRepeat } from "@fortawesome/free-solid-svg-icons";
 
-
 const SelectAndValidateMobile = () => {
   const [selectedOptions, setSelectedOptions] = useState({
     select1: "",
@@ -47,6 +46,7 @@ const SelectAndValidateMobile = () => {
   const [audioSource, setAudioSource] = useState(null); // Estado para manejar el audio
   const [errorMessage, setErrorMessage] = useState(""); // Estado para manejar el mensaje de error
   const [successMessage, setSuccessMessage] = useState(""); // Estado para el mensaje de éxito
+  const [score, setScore] = useState(0);
 
   const options = [
     "Casco de Protección",
@@ -56,7 +56,7 @@ const SelectAndValidateMobile = () => {
     "Tapones Auditivos",
     "Gafas de Seguridad",
     "Guantes Resistentes a Químicos",
-    "Resporador",
+    "Respirador Purificador de Aire",
   ]; // Opciones iniciales
 
   const handleSelectChange = (e, selectId, correctAnswer, audio) => {
@@ -75,49 +75,71 @@ const SelectAndValidateMobile = () => {
       setAudioSource(audio); // Asignar el audio correspondiente
       setSuccessMessage(
         <>
-        <span className="text-[#4CAF50] font-bold">
-          Relación correcta:{" "}
-        </span>
-        <span className="text-[#808693]">
-          ¡Muy bien! Identificaste este ítem correctamente. Ahora escucha
-          el siguiente audio:
-        </span>
-      </>
+          <span className="text-[#4CAF50] font-bold">Relación correcta: </span>
+          <span className="text-[#808693]">
+            ¡Muy bien! Identificaste este ítem correctamente. Ahora escucha el
+            siguiente audio:
+          </span>
+        </>
       );
       setErrorMessage("");
+      setScore((prevScore) => prevScore + 1);
     } else {
       setValidationStatus((prevState) => ({
         ...prevState,
         [selectId]: "incorrecto",
       }));
       setAudioSource(null); // No asignar audio en caso de respuesta incorrecta
-      setErrorMessage(<>
-        <span className="text-[#FF7043] font-bold">
-          Relación incorrecta:{" "}
-        </span>
-        <span className="text-[#808693]">
-          ¡Piénsalo bien! El ítem no corresponde a este elemento de
-          protección personal, vuelve a intentarlo.
-        </span>
-      </>);
+      setErrorMessage(
+        <>
+          <span className="text-[#FF7043] font-bold">
+            Relación incorrecta:{" "}
+          </span>
+          <span className="text-[#808693]">
+            ¡Piénsalo bien! El ítem no corresponde a este elemento de protección
+            personal, vuelve a intentarlo.
+          </span>
+        </>
+      );
       setSuccessMessage("");
     }
   };
+
+  const countCorrectAnswers = () => {
+    const correctAnswers = Object.values(validationStatus).filter(
+      (status) => status === "correcto"
+    ).length;
+    return correctAnswers;
+  };
+  const totalAnswers = 8;
+  const correctAnswers = countCorrectAnswers();
+  const percentage = Math.floor((correctAnswers / totalAnswers) * 100);
 
   const handleReset = () => {
     setSelectedOptions({
       select1: "",
       select2: "",
       select3: "",
+      select4: "",
+      select5: "",
+      select6: "",
+      select7: "",
+      select8: "",
     });
     setValidationStatus({
       select1: null,
       select2: null,
       select3: null,
+      select4: null,
+      select5: null,
+      select6: null,
+      select7: null,
+      select8: null,
     });
     setAudioSource(null); // Resetear el audio
     setErrorMessage("");
     setSuccessMessage("");
+    setScore(0);
   };
 
   // Generar opciones disponibles dinámicamente
@@ -129,10 +151,12 @@ const SelectAndValidateMobile = () => {
         selectedOptions[currentSelectId] === option
     );
   };
-
+  const allSelected = Object.values(selectedOptions).every(
+    (value) => value !== ""
+  );
   return (
-    <div className="w-full flex flex-col items-center justify-center relative my-2">
-      <div className="w-full flex flex-col items-center justify-center mx-2">
+    <div className="w-full flex flex-col items-center justify-center h-full">
+      <div className="w-full flex flex-col items-center justify-center py-0 ">
         {/* Cuadro 1 */}
         <div className="bg-[#E5E7EB] rounded-lg flex flex-col items-center justify-center">
           <div
@@ -146,18 +170,24 @@ const SelectAndValidateMobile = () => {
           >
             <img src={casco} alt="Casco" className="select-image-mobile" />
             {validationStatus.select1 === "correcto" && (
-              <img
-                src={checkIcon}
-                className="status-icon-mobile"
-                alt="Correcto"
-              />
+              <div className="text-white font-bold text-center">
+                ¡Correcto!
+                <img
+                  src={checkIcon}
+                  className="status-icon-mobile"
+                  alt="Correcto"
+                />
+              </div>
             )}
             {validationStatus.select1 === "incorrecto" && (
-              <img
-                src={xmarkIcon}
-                className="status-icon-mobile"
-                alt="Incorrecto"
-              />
+              <div className="text-white font-bold text-center">
+                ¡Incorrecto!
+                <img
+                  src={xmarkIcon}
+                  className="status-icon-mobile"
+                  alt="Incorrecto"
+                />
+              </div>
             )}
             <select
               value={selectedOptions.select1}
@@ -169,7 +199,7 @@ const SelectAndValidateMobile = () => {
                   audioCasco
                 )
               }
-              className="select-box-mobile rounded-xl w-[80%] text-[#9C99A1] border-none"
+              className="select-box-mobile rounded-lg w-[80%] text-gray-500 border-2"
             >
               <option value="">Selecciona...</option>
               {getFilteredOptions("select1").map((option) => (
@@ -193,19 +223,15 @@ const SelectAndValidateMobile = () => {
             }`}
           >
             <img src={botas} alt="Botas" className="select-image-mobile" />
-            {validationStatus.select2 === "correcto" && (
-              <img
-                src={checkIcon}
-                className="status-icon-mobile"
-                alt="Correcto"
-              />
-            )}
             {validationStatus.select2 === "incorrecto" && (
-              <img
-                src={xmarkIcon}
-                className="status-icon-mobile"
-                alt="Incorrecto"
-              />
+              <div className="text-white font-bold text-center">
+                ¡Incorrecto!
+                <img
+                  src={xmarkIcon}
+                  className="status-icon-mobile"
+                  alt="Incorrecto"
+                />
+              </div>
             )}
             <select
               value={selectedOptions.select2}
@@ -236,19 +262,25 @@ const SelectAndValidateMobile = () => {
             }`}
           >
             <img src={arnes} alt="Arnes" className="select-image-mobile mt-2" />
-            {validationStatus.select3 === "correcto" && (
-              <img
-                src={checkIcon}
-                className="status-icon-mobile"
-                alt="Correcto"
-              />
+            {validationStatus.select4 === "correcto" && (
+              <div className="text-white font-bold text-center">
+                ¡Correcto!
+                <img
+                  src={checkIcon}
+                  className="status-icon-mobile"
+                  alt="Correcto"
+                />
+              </div>
             )}
             {validationStatus.select3 === "incorrecto" && (
-              <img
-                src={xmarkIcon}
-                className="status-icon-mobile"
-                alt="Incorrecto"
-              />
+              <div className="text-white font-bold text-center">
+                ¡Incorrecto!
+                <img
+                  src={xmarkIcon}
+                  className="status-icon-mobile"
+                  alt="Incorrecto"
+                />
+              </div>
             )}
             <select
               value={selectedOptions.select3}
@@ -289,21 +321,27 @@ const SelectAndValidateMobile = () => {
               className="select-image-mobile mt-2"
             />
             {validationStatus.select4 === "correcto" && (
-              <img
-                src={checkIcon}
-                className="status-icon-mobile"
-                alt="Correcto"
-              />
+              <div className="text-white font-bold text-center">
+                ¡Correcto!
+                <img
+                  src={checkIcon}
+                  className="status-icon-mobile"
+                  alt="Correcto"
+                />
+              </div>
             )}
             {validationStatus.select4 === "incorrecto" && (
-              <img
-                src={xmarkIcon}
-                className="status-icon-mobile"
-                alt="Incorrecto"
-              />
+              <div className="text-white font-bold text-center">
+                ¡Incorrecto!
+                <img
+                  src={xmarkIcon}
+                  className="status-icon-mobile"
+                  alt="Incorrecto"
+                />
+              </div>
             )}
             <select
-              value={selectedOptions.select3}
+              value={selectedOptions.select4}
               onChange={(e) =>
                 handleSelectChange(e, "select4", "Overol", audioOverol)
               }
@@ -336,21 +374,27 @@ const SelectAndValidateMobile = () => {
               className="select-image-mobile"
             />
             {validationStatus.select5 === "correcto" && (
-              <img
-                src={checkIcon}
-                className="status-icon-mobile"
-                alt="Correcto"
-              />
+              <div className="text-white font-bold text-center">
+                ¡Correcto!
+                <img
+                  src={checkIcon}
+                  className="status-icon-mobile"
+                  alt="Correcto"
+                />
+              </div>
             )}
             {validationStatus.select5 === "incorrecto" && (
-              <img
-                src={xmarkIcon}
-                className="status-icon-mobile"
-                alt="Incorrecto"
-              />
+              <div className="text-white font-bold text-center">
+                ¡Incorrecto!
+                <img
+                  src={xmarkIcon}
+                  className="status-icon-mobile"
+                  alt="Incorrecto"
+                />
+              </div>
             )}
             <select
-              value={selectedOptions.select3}
+              value={selectedOptions.select5}
               onChange={(e) =>
                 handleSelectChange(
                   e,
@@ -384,21 +428,27 @@ const SelectAndValidateMobile = () => {
           >
             <img src={gafas} alt="Gafas" className="select-image-mobile" />
             {validationStatus.select6 === "correcto" && (
-              <img
-                src={checkIcon}
-                className="status-icon-mobile"
-                alt="Correcto"
-              />
+              <div className="text-white font-bold text-center">
+                ¡Correcto!
+                <img
+                  src={checkIcon}
+                  className="status-icon-mobile"
+                  alt="Correcto"
+                />
+              </div>
             )}
             {validationStatus.select6 === "incorrecto" && (
-              <img
-                src={xmarkIcon}
-                className="status-icon-mobile"
-                alt="Incorrecto"
-              />
+              <div className="text-white font-bold text-center">
+                ¡Incorrecto!
+                <img
+                  src={xmarkIcon}
+                  className="status-icon-mobile"
+                  alt="Incorrecto"
+                />
+              </div>
             )}
             <select
-              value={selectedOptions.select3}
+              value={selectedOptions.select6}
               onChange={(e) =>
                 handleSelectChange(
                   e,
@@ -436,21 +486,27 @@ const SelectAndValidateMobile = () => {
               className="select-image-mobile mt-2"
             />
             {validationStatus.select7 === "correcto" && (
-              <img
-                src={checkIcon}
-                className="status-icon-mobile"
-                alt="Correcto"
-              />
+              <div className="text-white font-bold text-center">
+                ¡Correcto!
+                <img
+                  src={checkIcon}
+                  className="status-icon-mobile"
+                  alt="Correcto"
+                />
+              </div>
             )}
             {validationStatus.select7 === "incorrecto" && (
-              <img
-                src={xmarkIcon}
-                className="status-icon-mobile"
-                alt="Incorrecto"
-              />
+              <div className="text-white font-bold text-center">
+                ¡Incorrecto!
+                <img
+                  src={xmarkIcon}
+                  className="status-icon-mobile"
+                  alt="Incorrecto"
+                />
+              </div>
             )}
             <select
-              value={selectedOptions.select3}
+              value={selectedOptions.select7}
               onChange={(e) =>
                 handleSelectChange(
                   e,
@@ -483,26 +539,29 @@ const SelectAndValidateMobile = () => {
             }`}
           >
             <img
-              src={respirador}
-              alt="Respirador"
-              className="select-image-mobile mt-2"
-            />
+              src={respirador} alt="Respirador" className="select-image-mobile mt-2" />
             {validationStatus.select8 === "correcto" && (
-              <img
-                src={checkIcon}
-                className="status-icon-mobile"
-                alt="Correcto"
-              />
+              <div className="text-white font-bold text-center">
+                ¡Correcto!
+                <img
+                  src={checkIcon}
+                  className="status-icon-mobile"
+                  alt="Correcto"
+                />
+              </div>
             )}
             {validationStatus.select8 === "incorrecto" && (
-              <img
-                src={xmarkIcon}
-                className="status-icon-mobile"
-                alt="Incorrecto"
-              />
+              <div className="text-white font-bold text-center">
+                ¡Incorrecto!
+                <img
+                  src={xmarkIcon}
+                  className="status-icon-mobile"
+                  alt="Incorrecto"
+                />
+              </div>
             )}
             <select
-              value={selectedOptions.select3}
+              value={selectedOptions.select8}
               onChange={(e) =>
                 handleSelectChange(
                   e,
@@ -523,6 +582,10 @@ const SelectAndValidateMobile = () => {
           </div>
         </div>
       </div>
+      {/* Mostrar cantidad de respuestas correctas y porcentaje */}
+      <p className="font-bold text-gray-400">
+        Respuestas correctas {correctAnswers} de {totalAnswers} ({percentage}%)
+      </p>
       {errorMessage && (
         <div className="error-message-mobile">{errorMessage}</div>
       )}
@@ -541,10 +604,16 @@ const SelectAndValidateMobile = () => {
 
       <div className="flex-container-mobile flex-col justify-center items-center">
         <button
-          className={`w-[80%] py-2 bg-[#6E3CD2] text-white rounded-lg text-[20px]`}
           onClick={handleReset}
+          disabled={!allSelected}
+          className={`w-[80%] bg-[#976af0] text-white font-bold py-2 px-4 rounded-lg text-[16px] mt-4 ${
+            !allSelected
+              ? "opacity-50 cursor-not-allowed"
+              : "hover:bg-[#6E3CD2]"
+          }`}
         >
-          <FontAwesomeIcon icon={faRepeat} /> Reiniciar
+          <FontAwesomeIcon icon={faRepeat} className="mr-2" />
+          Reiniciar
         </button>
       </div>
     </div>

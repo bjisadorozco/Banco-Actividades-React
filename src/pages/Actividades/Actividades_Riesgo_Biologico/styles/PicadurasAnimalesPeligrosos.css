@@ -90,15 +90,21 @@
   }
   
   .custom-select-wrapper::after {
-    content: "▼";
+    content: "▼" !important;
+    transform: translateY(-50%) !important;
     position: absolute;
-    top: 50%;
+    top: 60%; /* Ajusta esta posición para alinear mejor con el select */
     right: 10px;
-    transform: translateY(-50%);
     pointer-events: none;
     font-size: 0.8rem;
     color: #0f1721;
-  }
+    transition: transform 0.2s ease; /* Agregamos transición para suavizar cambios */
+}
+
+/* Opcional: Rotar la flecha cuando el select está abierto */
+.custom-select:focus ~ .custom-select-wrapper::after {
+    transform: translateY(-50%) rotate(180deg); /* Gira 180 grados cuando está abierto */
+}
   
   .validation-icon-container {
     position: absolute;

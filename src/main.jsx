@@ -4,8 +4,8 @@ import App from "./App.jsx";
 import PreguntasProteccion3 from "./pages/Actividades/Actividades_Morelco_Riesgos_Manos/PreguntasProteccion3.jsx";
 import PreguntasRiesgosMecanicos from "./pages/Actividades/Actividades_Morelco_Riesgos_Manos/PreguntasRiesgosMecanicos.jsx";
 import PreguntasRiesgosTermicos from "./pages/Actividades/Actividades_Morelco_Riesgos_Manos/PreguntasRiesgosTermicos.jsx";
-import DragAndDropManos from "./pages/Actividades/Actividades_Morelco_Riesgos_Manos/DragAndDropManos.jsx";
-import SelectAndValidateMobile from "./pages/Actividades/Actividades_Morelco_Riesgos_Manos/SelectAndValidateMobile.jsx";
+// import DragAndDropManos from "./pages/Actividades/Actividades_Morelco_Riesgos_Manos/DragAndDropManos.jsx";
+// import SelectAndValidateMobile from "./pages/Actividades/Actividades_Morelco_Riesgos_Manos/SelectAndValidateMobile.jsx";
 import PreguntasSeleccionHerramientas from "./pages/Actividades/Actividades_Morelco_Riesgos_Manos/PreguntasSeleccionHerramientas.jsx";
 import OrdenarPasos from "./pages/Actividades/Actividades_Morelco_Riesgos_Manos/OrdenarPasos.jsx";
 import OrdenarPasosPalmaManos from "./pages/Actividades/Actividades_Morelco_Riesgos_Manos/OrdenarPasosPalmaManos.jsx";
@@ -24,13 +24,24 @@ import ActividadListaDesplegable from "./pages/Actividades/Actividades_Morelco_R
 import PreguntasAlturas1 from "./pages/Actividades/Actividades_Trabajo_seguro_alturas/PreguntasAlturas1.jsx";
 import DragAndDropAlturas2 from "./pages/Actividades/Actividades_Trabajo_seguro_alturas/DragAndDropAlturas2.jsx";
 import DragAndDropAlturas2Movil from "./pages/Actividades/Actividades_Trabajo_seguro_alturas/DragAndDropAlturas2Movil.jsx";
-import Drag_And_Drop from "./pages/Actividades/Actividades_Espacios_confinados/Drag_And_Drop.jsx";
+import ActividadFalsoVerdadero from "./pages/Actividades/Actividades_Espacios_Confinados/Actividad_Falso_Verdadero.jsx";
+import Drag_And_Drop from "./pages/Actividades/Actividades_Espacios_Confinados/Drag_And_Drop.jsx";
+// import Drag_And_DropMobile from "./pages/Actividades/Actividades_Espacios_Confinados/Drag_And_DropMobile.jsx";
+import EPSLugaresConfinados from "./pages/Actividades/Actividades_Espacios_Confinados/EPS_Lugares_Confinados.jsx";
+import ActividadMobileEntradaSalida from "./pages/Actividades/Actividades_Espacios_Confinados/Actividad_Mobile_Entrada_Salida.jsx";
+// import Drag_And_Drop from "./pages/Actividades/Actividades_Espacios_confinados/Drag_And_Drop.jsx";
 import OrdenarPasosPalmaManosMobile from "./pages/Actividades/Actividades_Morelco_Riesgos_Manos/OrdenarPasosPalmaManosMobile.jsx";
 import PreguntasSiNo from "./pages/Actividades/Actividades_Morelco_Riesgos_Manos/PreguntasSiNo.jsx";
 import EspaciosConfinadosSeleccionMultiple from "./pages/Actividades/Actividades_Morelco_Riesgos_Manos/EspaciosConfinadosSeleccionMultiple.jsx";
 import SeleccionEspaciosConfinados from "./pages/Actividades/Actividades_Morelco_Riesgos_Manos/SeleccionEspaciosConfinados.jsx";
+import ActividadFalsoVerdadero from "./pages/Actividades/Actividades_Espacios_Confinados/Actividad_Falso_Verdadero.jsx";
+// import Drag_And_Drop from "./pages/Actividades/Actividades_Espacios_Confinados/Drag_And_Drop.jsx";
+// import Drag_And_DropMobile from "./pages/Actividades/Actividades_Espacios_Confinados/Drag_And_DropMobile.jsx";
+import EPSLugaresConfinados from "./pages/Actividades/Actividades_Espacios_Confinados/EPS_Lugares_Confinados.jsx";
+import ActividadMobileEntradaSalida from "./pages/Actividades/Actividades_Espacios_Confinados/Actividad_Mobile_Entrada_Salida.jsx";
 import "./main.css";
-import Slider13_Lista_desplegable from "./pages/Actividades/Actividades_Espacios_Confinados/Slider13_Lista_desplegable_movil.jsx";
+import Slider13_Lista_desplegable from "./pages/Actividades/Actividades_Espacios_Confinados/Slider13_Lista_desplegable.jsx";
+import Slider13_Lista_desplegable_movil from "./pages/Actividades/Actividades_Espacios_Confinados/Slider13_Lista_desplegable_movil.jsx";
 import DragAndDropAudios from "./pages/Actividades/Actividades_Trabajo_seguro_alturas/DragAndDropAudios.jsx";
 import DragAndDropAudiosMovil from "./pages/Actividades/Actividades_Espacios_Confinados/DragAndDropAudiosMovil.jsx";
 import Palabra_CorrectaMovil from "./pages/Actividades/Actividades_Espacios_Confinados/Slider13_Lista_desplegable_movil.jsx";
@@ -74,8 +85,30 @@ import PreguntasSeleccioneSiNo from "./pages/Actividades/Actividades_Riesgo_psic
 import Slider10SeleccioneMultiple from "./pages/Actividades/Actividades_Riesgo_psicosocial/Slider10SeleccioneMultiple.jsx";
 import Slider11SeleccioneMultipleV2 from "./pages/Actividades/Actividades_Riesgo_psicosocial/Slider11SeleccioneMultipleV2.jsx";
 import DragAndDropArisM from "./pages/Actividades/Actividades_Aris_Mining/DragAndDropArisM.jsx";
+import IdentificarRiesgosBiologicos from "./pages/Actividades/Actividades_Riesgo_Biologico/IdentificarRiesgosBiologicos.jsx";
+import OrdenarMedidasCorrectivas from "./pages/Actividades/Actividades_Riesgo_Biologico/OrdenarMedidasCorrectivas.jsx";
+import DragAndDropSlide9 from "./pages/Actividades/Actividades_Trabajo_seguro_alturas/DragnAndDropSlide9.jsx";
+import DragAndDropSlide9Movil from "./pages/Actividades/Actividades_Trabajo_seguro_alturas/DragAndDropSlide9Movil.jsx";
+import PPT8_List_Desplegable from "./pages/Actividades/Actividades_PESV/PPT8_List_Desplegable.jsx";
+import PPT_10_Preguntas from "./pages/Actividades/Herramientas de poder/PPT_10_Preguntas.jsx";
+import PPT_11_List_Desplegable from "./pages/Actividades/Herramientas de poder/PPT_11_Lista_Desplegable.jsx";
+import PPT_19_Preguntas from "./pages/Actividades/Herramientas de poder/PPT_19_Preguntas.jsx";
+import PPT_21_DragAndDrop from "./pages/Actividades/Actividades_PESV/PPT_21_DragAndDrop.jsx";
+import PPT_21_DragAndDrop_Mobile from "./pages/Actividades/Actividades_PESV/PPT_21_DragAndDrop_Mobile.jsx";
+import PPT_22_Preguntas from "./pages/Actividades/Herramientas de poder/PPT_22_Preguntas.jsx";
+import PPT_09_DragAndDrop from "./pages/Actividades/Actividades_Izajes_De_Cargas/PPT_09_DragAndDrop.jsx";
+import PPT_09_DragAndDrop_Mobile from "./pages/Actividades/Actividades_Izajes_De_Cargas/PPT_09_DragAndDrop_Mobile.jsx";
+import PPT_17_SeleccionMultiple from "./pages/Actividades/Actividades_Izajes_De_Cargas/PPT_17_SeleccionMultiple.jsx";
+import PPT_21_Preguntas from "./pages/Actividades/Actividades_Izajes_De_Cargas/PPT_21_Preguntas.jsx";
+import PPT_27_Lista_desplegable_imagen from "./pages/Actividades/Actividades_Izajes_De_Cargas/PPT_27_Lista_desplegable_imagen.jsx";
+import PPT_11_ListaDesplegable_Audios from "./pages/Actividades/Actividades_Izajes_De_Cargas/PPT_11_ListaDesplegable_Audios.jsx";
+import DnD_Conceptos_Clave from "./pages/Actividades/Actividades_Tecnitanques_Soldadura/DnD_Conceptos_Clave.jsx";
+import Conceptos_Clave_Selects from "./pages/Actividades/Actividades_Tecnitanques_Soldadura/Conceptos_Clave_Selects.jsx";
+import IdentificaRolSoldadura from "./pages/Actividades/Actividades_Tecnitanques_Soldadura/IdentificaRolSoldadura.jsx";
+import ActividadApoyoSocial from "./pages/Actividades/Actividades_Riesgo_Psicosocial/ActividadApoyoSocial.jsx"
+
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <PreguntasFactorHumano />
+    <DragAndDropAlturas2 />
   </React.StrictMode>
 );

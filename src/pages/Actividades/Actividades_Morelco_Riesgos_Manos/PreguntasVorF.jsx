@@ -79,10 +79,7 @@ function PreguntasVorF() {
     setShowScore(false);
     setAnswerSelected(null);
   };
-
-  // Calcular el porcentaje de respuestas correctas
   const percentage = Math.round((score / questions.length) * 100);
-
   return (
     <div className="container">
       <div className="w-full flex justify-center items-center">
@@ -122,12 +119,22 @@ function PreguntasVorF() {
                     {questions[currentQuestion].text}
                   </p>
                 </div>
-                <div className="relative flex justify-center mb-4">
-                  <div className="w-32 h-32 relative">
                     <img
-                      src={imgPeligro}
-                      alt="Pregunta"
-                      className="w-full h-full object-contain"
+                      src={
+                        answerSelected === null
+                          ? imgPeligro
+                          : answerSelected
+                            ? imgTrue
+                            : imgFalse
+                      }
+                      alt={
+                        answerSelected === null
+                          ? "Pregunta"
+                          : answerSelected
+                            ? "Correcto"
+                            : "Incorrecto"
+                      }
+                      className=" w-[100px] mb-0 "
                     />
                     {answerSelected !== null && (
                       <div className="absolute inset-0 flex items-center justify-center">
@@ -177,7 +184,6 @@ function PreguntasVorF() {
                       >
                         Verdadero
                       </Button>
-
                       <Button
                         roundedFull={true}
                         bold={true}
@@ -196,7 +202,7 @@ function PreguntasVorF() {
                         icon={faArrowRight}
                         roundedFull={true}
                         onClick={handleNext}
-                        className="bg-main-color"
+                        className="px-4 bg-main-color"
                       >
                         {currentQuestion === questions.length - 1
                           ? "Finalizar"
@@ -204,7 +210,6 @@ function PreguntasVorF() {
                       </Button>
                     </div>
                   )}
-                </div>
               </div>
             </>
           )}
