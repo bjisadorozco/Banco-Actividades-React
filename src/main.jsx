@@ -83,12 +83,12 @@ import OrdenarMedidasCorrectivas from "./pages/actividades/actividades_riesgo_bi
 import DragAndDropSlide9 from "./pages/actividades/actividades_trabajo_seguro_alturas/DragnAndDropSlide9.jsx";
 import DragAndDropSlide9Movil from "./pages/actividades/actividades_trabajo_seguro_alturas/DragAndDropSlide9Movil.jsx";
 import PPT8_List_Desplegable from "./pages/actividades/actividades_pesv/PPT8_List_Desplegable.jsx";
-import PPT_10_Preguntas from "./pages/actividades/herramientas_de_poder/PPT_10_Preguntas.jsx";
-import PPT_11_List_Desplegable from "./pages/actividades/herramientas_de_poder/PPT_11_Lista_Desplegable.jsx";
-import PPT_19_Preguntas from "./pages/actividades/herramientas_de_poder/PPT_19_Preguntas.jsx";
+import PPT_10_Preguntas from "./pages/actividades/herramientas_de _poder/PPT_10_Preguntas.jsx";
+import PPT_11_List_Desplegable from "./pages/actividades/herramientas_de _poder/PPT_11_Lista_Desplegable.jsx";
+import PPT_19_Preguntas from "./pages/actividades/herramientas_de _poder/PPT_19_Preguntas.jsx";
 import PPT_21_DragAndDrop from "./pages/actividades/actividades_pesv/PPT_21_DragAndDrop.jsx";
 import PPT_21_DragAndDrop_Mobile from "./pages/actividades/actividades_pesv/PPT_21_DragAndDrop_Mobile.jsx";
-import PPT_22_Preguntas from "./pages/actividades/herramientas_de_poder/PPT_22_Preguntas.jsx";
+import PPT_22_Preguntas from "./pages/actividades/herramientas_de _poder/PPT_22_Preguntas.jsx";
 import PPT_09_DragAndDrop from "./pages/actividades/actividades_izajes_de_cargas/PPT_09_DragAndDrop.jsx";
 import PPT_09_DragAndDrop_Mobile from "./pages/actividades/actividades_izajes_de_cargas/PPT_09_DragAndDrop_Mobile.jsx";
 import PPT_17_SeleccionMultiple from "./pages/actividades/actividades_izajes_de_cargas/PPT_17_SeleccionMultiple.jsx";
@@ -101,6 +101,6 @@ import ActividadApoyoSocial from "./pages/actividades/actividades_riesgo_psicoso
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <DragAndDropAlturas2 />
+    <DnD_Conceptos_Clave />
   </React.StrictMode>
 );
