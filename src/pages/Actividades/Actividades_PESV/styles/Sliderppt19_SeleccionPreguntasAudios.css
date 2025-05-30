@@ -1,6 +1,5 @@
-.quiz-container-SPA {
+.quiz-container-ppt19 {
   width: 100%;
-  min-height: 80vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -8,16 +7,37 @@
   padding-top: 0rem;
 }
 
-.cards-container-SPA {
+.cards-container-ppt19 {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 2rem;
+  gap: 1.5rem;
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 1rem;
 }
 
-.image-select-container {
+.card-container-ppt19 {
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  width: 220px;
+  transition: background-color 0.3s ease;
+}
+
+.card-container-ppt19.correct {
+  background-color: #4caf50;
+}
+
+.card-container-ppt19.incorrect {
+  background-color: #f44336;
+}
+
+.image-select-container-ppt19 {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -25,69 +45,68 @@
   height: 100%;
 }
 
-.top-content,
-.bottom-content {
+.top-content-ppt19,
+.bottom-content-ppt19 {
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  min-height: 90px;
 }
 
-.top-content {
+.top-content-ppt19 {
   justify-content: flex-end;
   padding-bottom: 10px;
+  min-height: 52px;
 }
 
-.image-validation-container {
+.bottom-content-ppt19 {
+  min-height: 52px;
+  transition: margin-top 0.3s ease;
+}
+
+.bottom-content-ppt19.has-selection {
+  margin-top: 15px;
+}
+
+.image-validation-container-ppt19 {
   position: relative;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  padding: 0.1rem 0;
-  margin-top: 10px;
-}
-
-.circular-image {
-  border-radius: 50%;
   width: 150px;
   height: 150px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 10px 0;
+}
+
+.circular-image-ppt19 {
+  border-radius: 50%;
+  width: 150px !important;
+  height: 150px !important;
   object-fit: cover;
   border: 3px solid #e5e7eb;
 }
 
-.custom-select-wrapper {
-  position: relative;
+.select-container-ppt19 {
   width: 100%;
   max-width: 200px;
+  position: relative;
 }
 
-.custom-select {
+.select-container-ppt19 select {
   width: 100%;
-  padding: 0.5rem;
+  padding: 0.5rem 2rem 0.5rem 0.5rem;
   border: 2px solid #0f1721;
   border-radius: 8px;
   background-color: #f9f9f9;
   font-size: 0.9rem;
   color: #333;
-  white-space: normal;
-  height: auto;
-  resize: none;
-  overflow: hidden;
   appearance: none;
   -webkit-appearance: none;
   -moz-appearance: none;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-.custom-select:focus {
-  border-color: #007bff;
-  box-shadow: 0 2px 8px rgba(0, 123, 255, 0.25);
-  outline: none;
-}
-
-.custom-select-wrapper::after {
+.select-container-ppt19::after {
   content: "▼";
   position: absolute;
   top: 50%;
@@ -96,34 +115,52 @@
   pointer-events: none;
   font-size: 0.8rem;
   color: #0f1721;
+  z-index: 1;
 }
 
-.bottom-content .custom-select-wrapper::after {
-  content: "▲";
-}
-
-.validation-icon-container {
+.validation-icon-container-ppt19 {
   position: absolute;
-  top: 30%;
+  top: 50%;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translate(-50%, -50%);
   z-index: 10;
   pointer-events: none;
+  text-align: center;
 }
 
-.validation-iconSPA {
-  width: 50px;
-  height: 50px;
+.validation-icon-ppt19 {
+  width: 60px;
+  height: 40px;
   object-fit: contain;
   opacity: 0.9;
 }
 
-.audio-container audio {
+.feedback-text-ppt19 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 16px;
+  font-weight: bold;
+  margin-top: 5px;
+  text-align: center;
+  width: 100%;
+  position: absolute;
+  bottom: -25px;
+  left: 0;
+}
+
+.feedback-text-ppt19.correct-text {
+  color: white;
+}
+
+.feedback-text-ppt19.incorrect-text {
+  color: white;
+}
+
+.audio-container-ppt19 audio {
   height: 40px;
   width: 200px;
 }
 
-.audio-container {
+.audio-container-ppt19 {
   border-radius: 36%;
   margin: 0;
   padding: 0;
@@ -132,27 +169,134 @@
   justify-content: center;
 }
 
-.reset-button-container {
+.reset-button-container-ppt19 {
   margin-top: 0.5rem;
 }
 
-.reset-button-container button.disabled {
+.reset-button-container-ppt19 button.disabled {
   opacity: 0.5;
   cursor: not-allowed;
 }
 
-@media (max-width: 640px) {
-  .cards-container-SPA {
+/* ... (todo el CSS para web permanece igual) */
+
+/* Versión Mobile */
+@media (max-width: 768px) {
+  .cards-container-ppt19 {
     grid-template-columns: 1fr;
+    gap: 2rem;
+    padding: 0 1.5rem;
+  }
+
+  .card-container-ppt19 {
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+
+  .image-select-container-ppt19 {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  /* Todos los audios van arriba */
+  .audio-container-ppt19 {
+    order: 1;
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+
+  /* Imagen en el medio */
+  .image-validation-container-ppt19 {
+    order: 2;
+    width: 220px;
+    height: 220px;
+    margin: 1rem auto;
+  }
+
+  /* Todos los selects van abajo */
+  .select-container-ppt19 {
+    order: 3;
+    width: 100%;
+    max-width: 100%;
+    margin-top: 1rem;
+  }
+
+  .circular-image-ppt19 {
+    width: 220px !important;
+    height: 220px !important;
+  }
+
+  .validation-icon-ppt19 {
+    width: 80px;
+    height: 60px;
+  }
+
+  .select-container-ppt19 select {
+    padding: 1rem;
+    font-size: 1.1rem;
+  }
+
+  .audio-container-ppt19 audio {
+    width: 100%;
+    height: 50px;
+  }
+
+  .feedback-text-ppt19 {
+    font-size: 1.2rem;
+    bottom: -30px;
+  }
+
+  /* Eliminamos las posiciones específicas de cada card */
+  .top-content-ppt19,
+  .bottom-content-ppt19 {
+    display: contents; /* Esto permite reordenar con flex */
+  }
+
+  /* Aseguramos que el contenido inferior tenga margen */
+  .bottom-content-ppt19.has-selection {
+    margin-top: 1.5rem;
+  }
+
+  .reset-button-container-ppt19 {
+    margin-top: 1.5rem;
   }
 }
 
-.feedback-container-SEC {
+/* Ajustes para pantallas muy pequeñas */
+@media (max-width: 480px) {
+  .card-container-ppt19 {
+    padding: 1.5rem;
+  }
+  
+  .image-validation-container-ppt19 {
+    width: 200px;
+    height: 200px;
+  }
+  
+  .circular-image-ppt19 {
+    width: 200px !important;
+    height: 200px !important;
+  }
+  
+  .validation-icon-ppt19 {
+    width: 70px;
+    height: 50px;
+  }
+  
+  .feedback-text-ppt19 {
+    font-size: 1.1rem;
+  }
+}
+
+.feedback-container-ppt19 {
   margin: 0 auto;
   text-align: center;
 }
 
-.feedback-container-SEC p {
+.feedback-container-ppt19 p {
   font-weight: bold;
   color: #8f8f8f;
   text-align: center;
@@ -160,78 +304,48 @@
   font-weight: 500;
 }
 
-.text-green-personalizado {
+.text-green-personalizado-ppt19 {
   color: #4caf50;
 }
 
-.text-red-personalizado {
+.text-red-personalizado-ppt19 {
   color: #f44336;
 }
 
-.text-orange-personalizado {
+.text-orange-personalizado-ppt19 {
   color: #ff9800;
 }
 
-.texto-gray {
+.texto-gray-ppt19 {
   color: #8f8f8f;
 }
 
-.bold-text {
+.bold-text-ppt19 {
   font-weight: bold;
   color: #8f8f8f;
   font-family: Montserrat, sans-serif;
 }
 
-/* Nuevos estilos para mobile */
-@media (max-width: 640px) {
-  .cards-container-SPA {
-    grid-template-columns: 1fr;
-  }
+/* Agrega estas nuevas clases al final de tu archivo CSS */
 
-  .image-select-container {
-    display: grid;
-    grid-template-rows: auto auto auto;
-    gap: 1rem;
-    padding: 1rem 0;
-  }
-
-  /* Forzar todos los audios arriba */
-  .audio-container {
-    order: -1 !important;
-  }
-
-  /* Forzar todos los selects abajo */
-  .custom-select-wrapper {
-    order: 3 !important;
-  }
-
-  /* Ajustar el contenedor de imagen al medio */
-  .image-validation-container {
-    order: 2;
-    margin: 1rem 0;
-  }
-
-  /* Reorganizar el contenido superior e inferior */
-  .top-content,
-  .bottom-content {
-    display: contents;
-  }
-
-  /* Asegurar que los íconos de validación se mantengan sobre la imagen */
-  .validation-icon-container {
-    top: 50%;
-    transform: translate(-50%, -50%);
-  }
-
-  /* Ajustar el espacio entre elementos */
-  .audio-container,
-  .custom-select-wrapper {
-    margin: 0.5rem 0;
-  }
-
-  /* Mantener la flecha del select consistente */
-  .custom-select-wrapper::after {
-    content: "▼" !important;
-  }
+.select-container-ppt19 select.correct-select {
+  background-color: #e8f5e9; /* Verde muy claro */
+  border-color: #4caf50; /* Verde */
 }
 
+.select-container-ppt19 select.incorrect-select {
+  background-color: #ffebee; /* Rojo muy claro */
+  border-color: #f44336; /* Rojo */
+}
+
+/* Para asegurar que el texto sea legible en ambos casos */
+.select-container-ppt19 select.correct-select,
+.select-container-ppt19 select.incorrect-select {
+  color: #333;
+}
+
+/* Asegurar que el ícono del dropdown siga siendo visible */
+.select-container-ppt19 select.correct-select + .select-container-ppt19::after,
+.select-container-ppt19 select.incorrect-select + .select-container-ppt19::after {
+  color: #0f1721;
+}

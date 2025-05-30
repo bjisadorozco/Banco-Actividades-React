@@ -1,0 +1,91 @@
+/* Estilos generales */
+.SML10 {
+    box-sizing: border-box;
+  }
+  
+  /* Contenedor principal */
+  .SML10-content {
+    background: #fcfcfc;
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 0.5rem;
+    max-width: 736px;
+    width: 100%;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Opciones de respuesta */
+  .SML10-content > div p {
+    font-family: 'Montserrat', sans-serif;
+    background: #ebebeb;
+    color: #8f8f8f;
+    padding: 10px 15px;
+    border-radius: 5px;
+    margin: 8px 0;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    position: relative;
+  }
+  
+  .SML10-content > div p.act_SML10 {
+    background: #353846;
+    color: white;
+  }
+  
+  .SML10-content > div p.true_SML10 {
+    background: #4caf50;
+    color: white;
+  }
+  
+  .SML10-content > div p.false_SML10 {
+    background: #f44336;
+    color: white;
+  }
+  
+  .SML10-content > div p.disabled_SML10 {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+  
+  /* Feedback */
+  .feedback_SML10 {
+    background: #fcfcfc;
+    padding: 14px;
+    border-radius: 10px;
+    margin-top: 1rem;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 736px;
+  }
+  
+  /* Textos */
+  .text-monserrat_SML10 {
+    font-family: 'Montserrat', sans-serif;
+  }
+  
+  .margin-size_SML10 {
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+  
+  /* Responsive */
+  @media (max-width: 768px) {
+    .SML10-content > div p {
+      padding: 12px 16px;
+      font-size: 14px;
+    }
+
+    .text-center_SM {
+      text-align: center;
+      display: block;
+      width: 100%;
+    }
+    
+    .SML10-content, 
+    .feedback_SML10 {
+      padding: 15px;
+      margin-left: 10px;
+      margin-right: 10px;
+    }
+  }

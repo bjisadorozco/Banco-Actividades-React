@@ -1,0 +1,163 @@
+/* Contenedor principal */
+.activity-container-ppt8-AICS {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.1rem;
+    margin-top: 20px; /* Añadido margen superior */
+  }
+  
+  /* Fila de imágenes */
+  .image-row-ppt8-AICS {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+  }
+  
+  @media (max-width: 768px) {
+    .image-row-ppt8-AICS {
+        display: flex;
+        flex-wrap: wrap; /* Permite que los elementos se envuelvan */
+        justify-content: center;
+        gap: 1rem;
+    }
+
+    .image-container-ppt8-AICS {
+        flex: 1 1 45%; /* Ajusta el tamaño para que quepan 2 en una fila */
+        max-width: 45%; /* Asegura que no excedan el ancho */
+    }
+
+    /* Asegura que la tercera imagen ocupe el 100% del ancho y se centre */
+    .image-container-ppt8-AICS:nth-child(3) {
+        flex: 1 1 100%;
+        max-width: 100%;
+        text-align: center; /* Centra la imagen */
+    }
+}
+  
+  .image-container-ppt8-AICS {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+    position: relative; /* Para posicionar el ícono de estado */
+  }
+  
+  .image-container-ppt8-AICS:hover {
+    transform: scale(1.05);
+  }
+  
+  /* Estilos para las imágenes */
+  .draggable-ppt8-AICS {
+    width: 200px;
+    height: 200px;
+    border: 2px solid #0f172a;
+    padding: 18px;
+    box-sizing: border-box;
+    object-fit: contain;
+    display: block;
+  }
+  
+  /* Estilos para correcto e incorrecto */
+  .correct-AICS {
+    border: 4px solid #4caf50; /* Verde para correcto */
+  }
+  
+  .incorrect-AICS {
+    border: 4px solid #f44336; /* Rojo para incorrecto */
+  }
+  
+  /* Estilos para los íconos de estado */
+  .status-icon-ppt8-AICS {
+    position: absolute;
+    top: 33%; /* Ajuste para el check */
+    left: 50%; /* Centrado horizontalmente */
+    transform: translateX(-50%); /* Ajuste fino para centrar */
+    width: 60px;
+    height: 60px;
+  }
+  
+  .incorrect-AICS .status-icon-ppt8-AICS {
+    top: 44%; /* Ajuste para el xmark */
+  }
+  
+  /* Contenedor del audio */
+  .audio-container-ppt8-AICS {
+    margin-top: 0.1rem;
+    margin-bottom: 0.1rem; /* Espacio entre el audio y el botón de reiniciar */
+  }
+  
+  /* Ajuste para el audio en móviles */
+  @media (max-width: 768px) {
+    
+  }
+  
+  /* Mensaje de error */
+  .error-message-ppt8-AICS {
+    color: #f44336; /* Rojo para el texto de error */
+    font-size: 16px;
+    text-align: center;
+    margin-top: 10px;
+  }
+  
+  .error-label {
+    color: #f44336; /* Rojo para "Respuesta incorrecta:" */
+    font-weight: bold;
+    font-family: "Montserrat", sans-serif;
+  }
+  
+  .error-text {
+    color: #888; /* Gris para el resto del mensaje de error */
+    font-family: "Montserrat", sans-serif;
+  }
+
+  /* Mensaje de éxito */
+.success-message-ppt8-AICS {
+    color: #4caf50; /* Verde para el texto de éxito */
+    font-size: 16px;
+    text-align: center;
+    margin-top: 10px;
+  }
+  
+  .success-label {
+    color: #4caf50; /* Verde para "Selección Correcta:" */
+    font-weight: bold;
+    font-family: "Montserrat", sans-serif;
+  }
+  
+  .success-text {
+    color: #888; /* Gris para el resto del mensaje de éxito */
+    font-family: "Montserrat", sans-serif;
+  }
+  
+  /* Porcentaje de acierto */
+  .results-container-AICS {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  }
+  
+  .text-monserrat-AICS {
+    font-family: "Montserrat", sans-serif;
+  }
+  
+  /* Botón de reinicio */
+  .flex-container-AICS {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 0.8rem;
+  }
+  
+  .reset-button {
+    opacity: 1;
+    transition: opacity 0.3s ease;
+  }
+  
+  .reset-button.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }

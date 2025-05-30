@@ -1,0 +1,145 @@
+/* Estilos generales */
+.PSYN {
+  box-sizing: border-box;
+}
+
+/* Contenedor de preguntas */
+.preguntas_SN_PSYN .ctItem-SN_PSYN > div p {
+  background: #ebebeb;
+  color: #8f8f8f;
+  padding: 10px;
+  padding-left: 15px;
+  padding-right: 10px;
+  border-radius: 5px;
+  margin: 8px 0;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.preguntas_SN_PSYN .ctItem-SN_PSYN > div p.act_PSYN {
+  background: #353846;
+  color: white;
+}
+
+.preguntas_SN_PSYN .ctItem-SN_PSYN > div p.true_PSYN {
+  background: #4caf50;
+  color: white;
+}
+
+.preguntas_SN_PSYN .ctItem-SN_PSYN > div p.false_PSYN {
+  background: #f44336;
+  color: white;
+}
+
+/* Contenedor de resultados */
+.results-container_PSYN,
+.preguntas_SN_PSYN .ctItem-SN_PSYN {
+  background: white;
+  padding: 5px 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  max-width: 679px;
+  width: 100%;
+}
+
+/* Textos */
+.text-zise_PSYN {
+  font-size: 16px;
+}
+
+.font-text_PSYN {
+  font-family: 'Montserrat', sans-serif;
+}
+
+.texto-gray_PSYN {
+  color: #8f8f8f;
+}
+
+.text-monserrat_PSYN {
+  font-family: 'Montserrat', sans-serif;
+}
+
+.text-size_PSYN {
+  font-size: 16px;
+}
+
+/* Detalles de puntuación */
+.score-details_PSYN {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.correct-score_PSYN {
+  color: #4caf50;
+}
+
+.incorrect-score_PSYN {
+  color: #f44336;
+}
+
+.score-summary_PSYN {
+  font-size: 16px;
+}
+
+/* Feedback styles */
+.feedback-container_PSYN {
+  background: #fcfcfc;
+  padding: 15px;
+  border-radius: 10px;
+  margin-top: 1rem;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  max-width: 679px;
+}
+
+.correct-feedback_PSYN {
+  color: #4caf50;
+}
+
+.incorrect-feedback_PSYN {
+  color: #f44336;
+}
+
+/* Contador de preguntas */
+.counter-container_PSYN {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 10px;
+}
+
+.counta_PSYN {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 16px;
+  font-weight: bold;
+  color: #353846;
+  padding: 5px 0;
+}
+
+.counta_PSYN .inc_PSYN {
+  color: #4caf50;
+}
+
+.counta_PSYN .tol_PSYN {
+  color: #8f8f8f;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .preguntas_SN_PSYN .ctItem-SN_PSYN,
+  .results-container_PSYN {
+    max-width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+    padding: 15px;
+  }
+  
+  .text-zise_PSYN {
+    font-size: 16px;
+  }
+  
+  .text-size_PSYN {
+    font-size: 16px;
+  }
+}

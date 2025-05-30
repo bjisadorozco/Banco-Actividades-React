@@ -1,0 +1,211 @@
+.quiz-container-PP11 {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.cards-container-PP11 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 0 0.1rem;
+}
+
+.gap-size {
+  gap: 0.5rem;
+}
+
+.quiz-card-PP11 {
+  perspective: 1500px;
+  height: 170px; /* Reducido de 180px */
+  cursor: pointer;
+  min-width: 190px; /* Reducido de 200px */
+}
+
+.card-front-PP11 {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 1rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  background-color: white;
+  border: 1px solid #e5e7eb;
+  display: flex;
+  flex-direction: column;
+  transition: background-color 0.3s ease;
+}
+
+.card-content-PP11 {
+  padding: 0.5rem;
+  background-color: #0f172a;
+  border-radius: 10px 10px 0 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background-color 0.3s ease;
+  height: 75px; /* Reducido de 80px */
+  overflow-y: auto;
+}
+
+.card-content-PP11 p {
+  color: white !important;
+  text-align: justify;
+  margin: 0;
+  line-height: 1.4;
+  font-size: 14px;
+}
+
+.card-image-PP11 {
+  flex-grow: 1;
+  background-position: center;
+  background-size: contain;
+  border-bottom-left-radius: 1rem;
+  border-bottom-right-radius: 1rem;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  height: 85px; /* Reducido de 90px */
+}
+
+.card-image-PP11 img {
+  max-width: 80%;
+  max-height: 90%;
+  object-fit: contain;
+}
+
+.validation-icon-container-centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+  pointer-events: none;
+}
+
+.validation-icon-centered {
+  width: 50px;
+  height: 50px;
+  object-fit: contain;
+  opacity: 0.9;
+}
+
+.bg-green-personalizado {
+  background-color: #4caf50;
+}
+
+.bg-green-personalizado .card-content-PP11 {
+  background-color: #4caf50;
+}
+
+.bg-red-personalizado {
+  background-color: #f44336;
+}
+
+.bg-red-personalizado .card-content-PP11 {
+  background-color: #f44336;
+}
+
+.text-green-personalizado {
+  color: #4caf50;
+}
+
+.text-red-personalizado {
+  color: #f44336;
+}
+
+.text-orange-personalizado {
+  color: #ff9800;
+}
+
+.feedback-container-PP11 {
+  margin: 0 auto;
+  text-align: center;
+}
+
+.feedback-container-PP11 p {
+  font-weight: bold;
+  color: #8f8f8f;
+  text-align: center;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.bold-text {
+  font-weight: bold;
+  color: #8f8f8f;
+  font-family: Montserrat, sans-serif;
+}
+
+.action-button {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 9999px;
+  background-color: #c0185d;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.action-button.disabled {
+  background-color: #d3a4c2;
+  cursor: not-allowed;
+}
+
+.action-button:hover {
+  background-color: #6e3cd2;
+}
+
+.action-button:disabled {
+  background-color: #d3a4c2;
+  cursor: not-allowed;
+}
+
+.disabled {
+  opacity: 0.5;
+  cursor: not-allowed !important;
+}
+
+.feedback-message {
+  width: 80%;
+  text-align: center;
+  font-weight: bold;
+  font-family: Montserrat, sans-serif;
+  font-size: 14px;
+}
+
+.bg-correct-feedback {
+  background-color: #4caf50;
+}
+
+.bg-incorrect-feedback {
+  background-color: #f44336;
+}
+
+.bg-partial-feedback {
+  background-color: #ff9800;
+}
+
+@media (max-width: 640px) {
+  .cards-container-PP11 {
+    grid-template-columns: 1fr;
+  }
+
+  .quiz-card-PP11 {
+    height: 190px; /* Reducido de 200px */
+  }
+  
+  .card-content-PP11 {
+    height: 85px;
+  }
+  
+  .card-image-PP11 {
+    height: 95px;
+  }
+}

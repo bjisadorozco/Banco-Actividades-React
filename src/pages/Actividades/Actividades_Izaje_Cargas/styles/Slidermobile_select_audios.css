@@ -1,0 +1,160 @@
+/* Contenedor principal */
+.activity-container-select-audios {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 1rem;
+  }
+  
+  /* Estilos para cada tarjeta */
+  .card-select-audios {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 1rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease;
+  }
+  
+  /* Estilos para tarjeta correcta */
+  .card-correct {
+    background-color: #4caf50; /* Verde claro */
+    border-color: #4caf50; /* Verde */
+  }
+  
+  /* Estilos para tarjeta incorrecta */
+  .card-incorrect {
+    background-color: #f44336; /* Rojo claro */
+    border-color: #f44336; /* Rojo */
+  }
+  
+  /* Reproductor de audio */
+  .audio-player-select-audios {
+    margin-bottom: 1rem;
+  }
+  
+  .audio-player-select-audios audio {
+    width: 100%;
+  }
+  
+  /* Select */
+  .select-audios {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-family: "Montserrat", sans-serif;
+    font-size: 14px;
+    margin-bottom: 1rem;
+    transition: background-color 0.3s ease;
+  }
+  
+  /* Estilos para select correcto */
+  .select-correctSA {
+    background-color: #79be7b; /* Verde más claro */
+    border-color: #c8e6c9; /* Verde */
+    color: white;
+  }
+  
+  /* Estilos para select incorrecto */
+  .select-incorrectSA {
+    background-color: #de707b; /* Rojo más claro */
+    border-color: #f44336; /* Rojo */
+    color: white;
+  }
+  
+  /* Contenedor de imagen y estado */
+  .image-status-container {
+    position: relative;
+    width: 100%;
+    height: 200px; /* Ajusta la altura según sea necesario */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  
+  .selected-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .status-icon-select-audios {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 60px;
+    height: 60px;
+    z-index: 10;
+  }
+  
+  /* Mensajes de error y éxito */
+  .error-message-select-audios {
+    color: #f44336;
+    font-size: 16px;
+    text-align: center;
+    margin-top: 10px;
+  }
+  
+  .success-message-select-audios {
+    color: #4caf50;
+    font-size: 16px;
+    text-align: center;
+    margin-top: 10px;
+  }
+  
+  .percentage-message-select-audios {
+    text-align: center;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+    color: #8f8f8f;
+    margin: 20px 0;
+    font-weight: bold;
+  }
+  
+  /* Botón de reinicio */
+  .flex-container {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 0.8rem;
+  }
+  
+  .btn {
+    width: 150px;
+    height: 50px;
+    background-color: #7c3aed;
+    color: white;
+    font-size: 1rem;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: bold;
+  }
+  
+  .btn:hover {
+    background: #6d28d9 !important;
+  }
+  
+  .btn i {
+    margin-right: 8px;
+  }
+  
+  .text-green-personalizado {
+    font-family: 'Montserrat', sans-serif;
+    color: #4caf50;
+  }
+  
+  .text-red-personalizado {
+    font-family: 'Montserrat', sans-serif;
+    color: #f44336;
+  }
+  
+  .texto-gray {
+    font-family: 'Montserrat', sans-serif;
+    color: #8f8f8f;
+  }

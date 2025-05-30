@@ -12,7 +12,7 @@ export default {
       },
       // Here we can configure the colors of the project. We can use this in the className of each component.
       colors: {
-        "main-color": "#6E3CD2",
+        "main-colory": "#6E3CD2",
         "secondary-color": "#C0185D",
         "black-color": "#000000",
         "background-color": "#F5F5F5",

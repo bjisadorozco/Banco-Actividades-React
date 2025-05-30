@@ -21,13 +21,13 @@ import gafas from "/src/assets/img/gafas_seguridad_sldM2.webp";
 import guantes from "/src/assets/img/guantes_sldM2.webp";
 import respirador from "/src/assets/img/respiradores_sldM2.webp";
 import trabajador from "/src/assets/img/avatar_elementos_epp.webp";
-// import Magnifier from "react-magnifier";
+import Magnifier from "react-magnifier";
 const items = [
   {
     id: "A",
     name: "Casco de Protección",
-    audio: "/src/assets/audio/EPP/casco_de_proteccion.mp3",
-    image: "/src/assets/img/Elementos_EPP/casco_sldM2.webp",
+    audio: audioCasco,
+    image: casco,
     correctBoxId: "leftColumn",
   },
   {

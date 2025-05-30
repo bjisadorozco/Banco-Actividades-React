@@ -9,7 +9,7 @@ import {
 import Button from "../../components/Button";
 import imgTrue from "../../../assets/img/checkAct.png";
 import imgFalse from "../../../assets/img/xmarkAct.png";
-import imgPeligro from "../../../assets/img/avatar-hombre-morado-blanco.webp";
+import imgPeligro from "../../../assets/img/avatar_hombre_mirando_lista_fondo_blanco.webp";
 import "./styles/PreguntasVorF.css";
 
 const questions = [
@@ -23,7 +23,7 @@ const questions = [
     text: `El método de análisis de accidentes que se centra en indagar en las causas raíz de un incidente haciendo repetidamente (5 veces) la pregunta "¿Por qué?" hasta llegar a la causa raíz, se llama método de los 5 porqués `,
     correct: true,
     feedback:
-      "Siempre se debe envolver el hielo en un paño para evitar quemaduras en la piel.",
+      "Correcto. El método de los 5 porqués es una técnica efectiva para llegar a la causa raíz de un problema.",
   },
   {
     text: "Si una lesión por aplastamiento parece leve, no es necesario buscar atención médica ni seguir un plan de evaluación continua.​",
@@ -34,7 +34,7 @@ const questions = [
   {
     text: "La rehabilitación y reincorporación laboral son una etapa importante del proceso de gestión de accidentes por lesiones en las manos.​",
     correct: true,
-    feedback: "",
+    feedback: "Correcto. La rehabilitación es clave para una recuperación completa y segura.",
   },
   {
     text: "El reporte del accidente y la investigación de sus causas deben realizarse solo si la lesión es grave.​​",
@@ -88,20 +88,23 @@ function PreguntasVorF() {
           style={{ margin: "0 auto", minWidth: "35vw" }}
         >
           {showScore ? (
-            <div className="text-center">
-             <p className="my-2 text-red-600 font-semibold">
-                Respuestas correctas <br />
-                <span className="text-gray-500">{score} de {questions.length} (
-                {percentage}%)</span>
+            <div className="text-center p-6">
+              <p className="my-2 texto-gray font-bold">
+                Respuestas correctas
               </p>
-             
-              <div className="w-full reset-container my-4">
-                <button
+              <p className="text-lg texto-gray font-bold">
+                Tus respuestas correctas son: {score} de {questions.length} ({percentage}%)
+              </p>
+              <div className="reset-container">
+                <Button
                   onClick={resetQuiz}
-                  className="w-[50%] flex justify-center items-center group bg-main-color rounded-full px-4 py-2 shadow-main-color text-white"
+                  roundedFull={true}
+                  bold={true}
+                  icon={faRepeat}
+                  className="bg-main-color mx-auto my-3"
                 >
-                  <FontAwesomeIcon icon={faRepeat} className="mr-2" /> Reiniciar
-                </button>
+                  Reiniciar
+                </Button>
               </div>
             </div>
           ) : (
@@ -110,9 +113,9 @@ function PreguntasVorF() {
                 <span className="inc">{currentQuestion + 1}</span>/
                 <span className="tol">{questions.length}</span>
               </div>
-              <div className="itemQ view px-6 py-0 flex flex-col items-center justify-center text-justify">
-                <div className="mb-3" >
-                  <p className="text-gray-800">
+              <div className="itemQ view p-1">
+                <div className="mb-3" style={{ minHeight: "50px" }}>
+                  <p className="text-gray-800 texto-gray">
                     {questions[currentQuestion].text}
                   </p>
                 </div>
@@ -133,47 +136,67 @@ function PreguntasVorF() {
                       }
                       className=" w-[100px] mb-0 "
                     />
-                <div className="text-center mt-4">
-                  <p
-                    className={`text-lg font-regular ${
-                      answerSelected === null
-                        ? "opacity-0"
-                        : answerSelected
-                          ? "text-green-600 opacity-100"
-                          : "text-red-600 opacity-100"
-                    }`}
-                  >
-                    {answerSelected === null
-                      ? " "
-                      : answerSelected
-                        ? "Correcto ¡Bien hecho!"
-                        : "¡Incorrecto!  No te preocupes, puedes mejorar."}
-                  </p>
+                    {answerSelected !== null && (
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <img
+                          src={answerSelected ? imgTrue : imgFalse}
+                          alt={answerSelected ? "Correct" : "Incorrect"}
+                          className="w-full h-full object-contain"
+                          style={{ marginBottom: "0px" }}
+                        />
+                      </div>
+                    )}
+                  </div>
                 </div>
-               
-                  {!showFeedback && (
-                    <div className="w-full check flex justify-center">
-                      <button
-                        className="w-[40%] flex justify-center items-center group bg-main-color rounded-full px-4 py-1 shadow-main-color text-white"
+                
+                {answerSelected !== null && (
+                  <>
+                    <div className="text-center mt-4">
+                      <p
+                        className={`text-lg font-bold ${
+                          answerSelected ? "text-green-600" : "text-red-600"
+                        }`}
+                      >
+                        {answerSelected
+                          ? "Correcto ¡Bien hecho!"
+                          : "¡Incorrecto! No te preocupes, puedes mejorar."}
+                      </p>
+                      <div className=" rounded-lg">
+                        <p className="texto-gray">
+                          {questions[currentQuestion].feedback}
+                        </p>
+                      </div>
+                    </div>
+                    <hr className="mt-2 border-gray-300" />
+                  </>
+                )}
+                
+                <div className="check flex justify-center space-x-4">
+                  {!showFeedback ? (
+                    <div className="check flex flex-button justify-center space-x-4">
+                      <Button
+                        roundedFull={true}
+                        bold={true}
+                        icon={faCheck}
                         onClick={() => handleAnswer(true)}
                         disabled={answerSelected !== null}
+                        className="bg-main-color"
                       >
-                        <FontAwesomeIcon icon={faCheck} className="mr-2" />{" "}
                         Verdadero
-                      </button>
-
-                      <button
-                        className="w-[40%] flex justify-center items-center group bg-main-color rounded-full px-4 py-1 shadow-main-color text-white"
+                      </Button>
+                      <Button
+                        roundedFull={true}
+                        bold={true}
+                        icon={faTimes}
                         onClick={() => handleAnswer(false)}
                         disabled={answerSelected !== null}
+                        className="bg-main-color"
                       >
-                        <FontAwesomeIcon icon={faTimes} className="mr-2" />{" "}
                         Falso
-                      </button>
+                      </Button>
                     </div>
-                  )}
-                  {showFeedback && (
-                    <div className="w-full flex justify-center">
+                  ) : (
+                    <div className="flex justify-center mt-4">
                       <Button
                         bold={true}
                         icon={faArrowRight}

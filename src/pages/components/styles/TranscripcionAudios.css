@@ -1,0 +1,75 @@
+/* CSS TRANSCRIPCION */
+#transcripcion-global {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.85);
+    color: white;
+    padding: 15px 25px;
+    border-radius: 8px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+    z-index: 10000;
+    display: none;
+    max-width: 80%;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Media query para dispositivos móviles */
+@media (max-width: 768px) {
+    #transcripcion-global {
+        width: 90%;
+        max-width: 95%;
+        padding: 20px;
+        font-size: 16px;
+        bottom: 10px;
+        left: 5%;
+        transform: translateX(0);
+        margin: 0 auto;
+    }
+}
+
+/* Asegurar que el cuerpo tenga espacio para la transcripción */
+body {
+    margin-bottom: 100px;
+}
+
+/* Estilo para el icono de transcripción */
+.transcription-toggle {
+    transition: all 0.3s ease;
+    padding: 8px;
+    border-radius: 50%;
+}
+
+.transcription-toggle:hover {
+    background-color: #f0f0f0;
+    transform: translateY(-50%) scale(1.1);
+}
+
+/* Ajuste de posición para el contenedor de audio */
+.audio-center {
+    position: relative;
+    padding-right: 40px !important;
+}
+
+.audio-estilos {
+    position: absolute;
+    top: 50%;
+    margin-left: 1%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    font-size: 1.2rem;
+    color: #666;
+}
+
+.audio-estilos.active {
+    color: #2a7fba;
+}
+
+.audios-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}

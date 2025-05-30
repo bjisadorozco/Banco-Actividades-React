@@ -1,0 +1,318 @@
+.quiz-container-izajes {
+    width: 100%;
+    min-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start; /* Cambiado de center a flex-start */
+    padding-top: 0; /* Eliminado el padding superior */
+}
+
+.card-image-SEC {
+    height: 120px;
+    background-position: center;
+    background-size: contain;
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card-image-SEC img {
+    width: 92%;
+    max-width: 250px;
+    height: 100%;
+    -o-object-fit: cover;
+    object-fit: cover;
+    max-height: 96% !important;
+}
+
+.quiz-card-SEC {
+    perspective: 1500px;
+    height: 183px;
+    cursor: pointer;
+    min-width: 250px;
+}
+
+/* Contenedor de las tarjetas */
+.cards-container-izajes {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+/* Estilo de cada tarjeta */
+.quiz-card-izajes {
+    border: 1px solid #e5e7eb;
+    border-radius: 1rem;
+    padding: 1rem;
+    background-color: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.quiz-card-izajes:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Contenedor de la imagen */
+.image-validation-container {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 0.1rem 0;
+}
+
+/* Imagen */
+.square-image {
+    width: 110px;
+    height: 110px;
+    object-fit: cover;
+    border: 3px solid #e5e7eb;
+    border-radius: 8px;
+}
+
+/* Contenedor del select */
+.custom-select-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 180px;
+}
+
+/* Contenedor del select */
+.custom-select-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 180px;
+}
+
+.custom-selectPPT13 {
+    width: 100%;
+    min-width: 180px;
+    padding: 0.3rem;
+    border: 2px solid #0f1721;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    font-size: 0.9rem;
+    color: #333;
+    white-space: normal;
+    height: auto;
+    resize: none;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Elimina el pseudo-elemento ::after */
+.custom-select-wrapper::after {
+    display: none;
+}
+
+/* Estilos para selects con validación */
+.select-correctppt13 {
+    background-color: #72b575 !important;
+    color: white !important;
+}
+
+.select-incorrectppt13 {
+    background-color: #e15c53 !important;
+    color: white !important;
+}
+
+/* Icono de validación */
+.validation-icon-container {
+    position: absolute;
+    top: 20% !important;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    pointer-events: none;
+}
+
+.validation-icon-izajes {
+    width: 40px !important;
+    height: 40px !important;
+    object-fit: contain;
+    opacity: 0.9;
+}
+
+/* Contenedor del audio global */
+.audio-global-containerPPT13 {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin: 1rem 0;
+}
+
+.audio-global-containerPPT13 audio {
+    width: 200px;
+    height: 40px;
+}
+
+/* Botón de reinicio */
+.reset-button-container button.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Mensaje de retroalimentación */
+.feedback-container-izajes {
+    margin: 0 auto;
+    text-align: center;
+    width: 100%;
+}
+
+.feedback-container-izajes p {
+    font-weight: bold;
+    color: #8f8f8f;
+    text-align: center;
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+/* Colores personalizados */
+.text-green-personalizado {
+    color: #4caf50;
+}
+
+.text-red-personalizado {
+    color: #f44336;
+}
+
+.text-orange-personalizado {
+    color: #ff9800;
+}
+
+.texto-gray {
+    color: #8f8f8f;
+}
+
+.bold-text {
+    font-weight: bold;
+    color: #8f8f8f;
+    font-family: Montserrat, sans-serif;
+}
+
+.card-image-SEC img {
+    max-width: 100%;
+    max-height: 88%;
+    -o-object-fit: contain;
+    object-fit: cover;
+}
+
+/* Estilos para dispositivos móviles */
+@media (max-width: 640px) {
+    .quiz-container-izajes {
+        padding-top: 1rem;
+        min-height: auto;
+    }
+
+    .cards-container-izajes {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        padding: 0 1rem;
+        width: 100%;
+    }
+
+    .quiz-card-SEC {
+        width: 100%;
+        max-width: 450px;
+        height: auto; /* Altura automática */
+        min-height: 250px; /* Aumentar la altura */
+        margin: 0 auto;
+        padding: 1.5rem;
+        border-radius: 1.5rem;
+        background-color: white;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1.5rem;
+    }
+
+    .card-image-SEC {
+        width: 100%;
+        height: auto; /* Altura automática */
+        padding: 1rem; /* Añade espacio alrededor de la imagen */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .card-image-SEC img {
+        width: 100%; /* Ocupa todo el ancho disponible */
+        max-width: 300px; /* Ajusta el ancho máximo */
+        height: auto; /* Mantiene la proporción */
+        object-fit: cover; /* Cubre el espacio sin distorsionarse */
+    }
+
+    .validation-icon-container {
+        top: 50% !important;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    .validation-icon-izajes {
+        width: 40px !important; /* Tamaño del ícono de validación */
+        height: 40px !important;
+    }
+
+    .mt-1 {
+        margin-top: 1.25rem;
+    }
+
+    .custom-selectPPT13 {
+        width: 100%;
+        max-width: 300px;
+        padding: 0.7rem;
+        font-size: 1.1rem;
+        border: 2px solid #0f1721;
+        border-radius: 12px;
+        background-color: #f9f9f9;
+        color: #333;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .audio-global-containerPPT13 {
+        width: 100%;
+        max-width: 300px;
+        display: flex;
+        justify-content: center;
+        margin: 0 auto;
+    }
+
+    .audio-global-containerPPT13 audio {
+        width: 100%;
+        height: 75px;
+    }
+
+    .feedback-container-izajes {
+        width: 90%;
+        margin: 1.5rem auto;
+    }
+
+    .feedback-container-izajes p {
+        font-size: 1.2rem;
+    }
+
+    .reset-button-container {
+        margin-top: 1.5rem;
+    }
+
+    .reset-button-container button {
+        width: 100%;
+        max-width: 300px;
+        padding: 1rem;
+        font-size: 1.1rem;
+    }
+}

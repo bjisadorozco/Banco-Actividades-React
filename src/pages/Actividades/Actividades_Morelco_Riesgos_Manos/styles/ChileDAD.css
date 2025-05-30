@@ -1,0 +1,288 @@
+/* Contenedor principal */
+.quiz-container-chileDAD {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+  }
+  
+  /* Contenedor de tarjetas - Versión Web */
+  .cards-container-chileDAD {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+  
+  /* Estilo de cada tarjeta - Versión Web */
+  .card-container-chileDAD {
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 300px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .card-container-chileDAD.correct {
+    background-color: #4caf50;
+  }
+  
+  .card-container-chileDAD.incorrect {
+    background-color: #f44336;
+  }
+  
+  /* Contenedor imagen-select */
+  .image-select-container-chileDAD {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+    gap: 1rem;
+  }
+  
+  /* Contenedor de imagen y validación */
+  .image-validation-container-chileDAD {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  /* Imagen circular - Versión Web */
+  .circular-image-chileDAD {
+    border-radius: 50%;
+    width: 150px !important;
+    height: 150px !important;
+    object-fit: cover;
+    border: 3px solid #e5e7eb;
+  }
+  
+  /* Select - Versión Web */
+  .select-container-chileDAD {
+    width: 100%;
+    max-width: 200px;
+    position: relative;
+    margin-top: 10%;
+  }
+  
+  .select-container-chileDAD select {
+    width: 100%;
+    padding: 0.5rem 2rem 0.5rem 0.5rem;
+    border: 2px solid #0f1721;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    font-size: 0.9rem;
+    color: #333;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+  }
+  
+  .select-container-chileDAD::after {
+    content: "▼";
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    pointer-events: none;
+    font-size: 0.8rem;
+    color: #0f1721;
+    z-index: 1;
+  }
+  
+  /* Select correcto/incorrecto */
+  .select-container-chileDAD select.correct-select {
+    background-color: #e8f5e9;
+    border-color: #4caf50;
+  }
+  
+  .select-container-chileDAD select.incorrect-select {
+    background-color: #ffebee;
+    border-color: #f44336;
+  }
+  
+  /* Ícono de validación */
+  .validation-icon-container-chileDAD {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    pointer-events: none;
+    text-align: center;
+  }
+  
+  .validation-icon-chileDAD {
+    width: 60px;
+    height: 40px;
+    object-fit: contain;
+    opacity: 0.9;
+  }
+  
+  /* Texto de feedback */
+  .feedback-text-chileDAD {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+    font-weight: bold;
+    margin-top: 5px;
+    text-align: center;
+    width: 100%;
+    position: absolute;
+    bottom: -25px;
+    left: 0;
+  }
+  
+  .feedback-text-chileDAD.correct-text {
+    color: white;
+  }
+  
+  .feedback-text-chileDAD.incorrect-text {
+    color: white;
+  }
+  
+  /* Contenedor del reproductor de audio global */
+  .audio-global-container {
+    width: 100%;
+    max-width: 600px;
+    display: flex;
+    justify-content: center;
+  }
+  
+  /* Estilos para la transcripción */
+  #transcripcion-global {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.85);
+    color: white;
+    padding: 15px 25px;
+    border-radius: 8px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+    z-index: 10000;
+    display: none;
+    max-width: 80%;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  }
+  
+  /* Media query para dispositivos móviles */
+  @media (max-width: 768px) {
+    #transcripcion-global {
+        width: 90%;
+        max-width: 95%;
+        padding: 20px;
+        font-size: 16px;
+        bottom: 10px;
+        left: 5%;
+        transform: translateX(0);
+        margin: 0 auto;
+    }
+  
+    .cards-container-chileDAD {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      width: 100%;
+      padding: 0;
+    }
+  
+    .card-container-chileDAD {
+      width: 100%;
+      max-width: 100%;
+      padding: 1.5rem;
+      margin: 0 auto;
+    }
+  
+    .image-validation-container-chileDAD {
+      width: 100%;
+      max-width: 300px;
+      height: auto;
+    }
+  
+    .circular-image-chileDAD {
+      width: 250px !important;
+      height: 250px !important;
+    }
+  
+    .validation-icon-chileDAD {
+      width: 80px;
+      height: 60px;
+    }
+  
+    .select-container-chileDAD {
+      width: 100%;
+      max-width: 300px;
+    }
+  
+    .select-container-chileDAD select {
+      padding: 1rem;
+      font-size: 1.1rem;
+    }
+  
+    .audio-global-container {
+      width: 100%;
+      padding: 0 15px;
+    }
+  
+    .feedback-text-chileDAD {
+      font-size: 1.2rem;
+      bottom: -30px;
+    }
+  
+    .feedback-message-chileDAD {
+      max-width: 100%;
+      padding: 15px;
+      font-size: 1.1rem;
+      margin: 15px 0;
+    }
+
+    audio {
+        height: 40px;
+        margin: 8px 0;
+        width: 70vw;
+    }
+  }
+  
+  /* Resultados */
+  .results-container-chileDAD {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  }
+  
+  /* Mensajes de feedback */
+  .feedback-message-chileDAD {
+    width: 100%;
+    text-align: center;
+    border-radius: 5px;
+    font-weight: bold;
+    font-family: 'Montserrat', sans-serif;
+  }
+  
+  .feedback-message-chileDAD.success-message {
+    color: #2e7d32;
+  }
+  
+  .feedback-message-chileDAD.error-message {
+    color: #c62828;
+  }
+  
+  /* Botón de reinicio */
+  .reset-button-container-chileDAD {
+    margin-top: 0.5rem;
+  }

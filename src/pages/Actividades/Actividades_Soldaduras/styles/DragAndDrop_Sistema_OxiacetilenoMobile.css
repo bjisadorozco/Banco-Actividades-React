@@ -1,0 +1,172 @@
+/* DragAndDrop_Sistema_OxiacetilenoMobile.css */
+.drag-and-drop-containermobile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 100%;
+    font-family: "Montserrat", sans-serif;
+    padding: 0;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.main-contentmobile {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 0 10px;
+}
+
+.image-container-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.image-wrappermobile {
+    position: relative;
+    width: 100%;
+    padding-bottom: 60%; /* Mantener relación de aspecto */
+    overflow: hidden;
+}
+
+.sistema-oxiacetileno-imagemobile {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+}
+
+.feedback-icons-containermobile {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.feedback-iconmobile {
+    position: absolute;
+    width: 25px; /* Más grande que antes */
+    height: 25px; /* Más grande que antes */
+}
+
+.box1-icon {
+    top: 12%;
+    left: 72%;
+}
+
+.box2-icon {
+    top: 48%;
+    left: 20%;
+}
+
+.box3-icon {
+    top: 79%;
+    left: 27%;
+}
+
+.step-container {
+    width: 100%;
+    max-width: 300px;
+    margin: 20px auto;
+    padding: 0 10px;
+}
+
+.step-title {
+    color: #0f172a;
+    font-size: clamp(14px, 4vw, 18px);
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.step-select {
+    width: 100%;
+    padding: 10px;
+    border: 2px solid #0f172a;
+    border-radius: 5px;
+    background-color: white;
+    font-size: clamp(12px, 3.5vw, 16px);
+    color: #0f172a;
+    font-family: "Montserrat", sans-serif;
+}
+
+.buttons-containermobile {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+    width: 100%;
+    padding: 0 10px;
+}
+
+.reset-buttonmobile {
+    padding: 10px 20px;
+    background-color: #6e3cd2;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: "Montserrat", sans-serif;
+    font-size: clamp(12px, 4vw, 16px);
+}
+
+.reset-buttonmobile:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+.feedback-containermobile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin-top: 15px;
+    padding: 0 10px;
+}
+
+.feedback-messagemobile {
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-family: "Montserrat", sans-serif;
+    font-weight: bold;
+    margin-bottom: 5px;
+    text-align: center;
+    width: 100%;
+    max-width: 300px;
+    font-size: clamp(12px, 4vw, 16px);
+}
+
+.feedback-messagemobile.correct {
+    background-color: #4caf50;
+    color: white;
+}
+
+.feedback-messagemobile.incorrect {
+    background-color: #f44336;
+    color: white;
+}
+
+.score-messagemobile {
+    color: #8f8f8f;
+    font-family: "Montserrat", sans-serif;
+    font-weight: bold;
+    margin-top: 0;
+    font-size: clamp(12px, 4vw, 16px);
+    text-align: center;
+    margin-top: 0.5rem;
+    width: 100%;
+    max-width: 300px;
+}
+
+.completed-statemobile {
+    justify-content: center;
+}

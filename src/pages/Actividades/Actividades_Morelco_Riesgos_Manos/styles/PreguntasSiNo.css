@@ -199,3 +199,21 @@
   width: 100%; 
   margin: 0 auto; 
 }
+
+.error-section {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.error-text {
+  color: #f44336 !important;
+  font-size: 14px;
+  text-align: center;
+  margin-top: 100px;
+  font-family: 'Montserrat', sans-serif;
+}

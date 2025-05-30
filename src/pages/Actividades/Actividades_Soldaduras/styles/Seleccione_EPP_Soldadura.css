@@ -1,0 +1,211 @@
+.seleccione-epp-soldadura-containerppt24 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  font-family: "Montserrat", sans-serif;
+}
+
+.main-contentppt24 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 1200px;
+  width: 100%;
+  gap: 20px;
+}
+
+.image-containerppt24 {
+  position: relative;
+  width: 50%;
+  max-width: 500px; /* Reducido de 600px */
+  min-height: 300px; /* Reducido de 400px */
+}
+
+.sistema-oxiacetileno-imageppt24 {
+  width: 100%;
+  height: auto;
+  max-height: 300px; /* Reducido de 400px */
+  object-fit: contain;
+}
+
+.select-containerppt24 {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.select-boxppt24 {
+  width: 180px; /* Reducido de 200px */
+  padding: 5px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: white;
+  color: #333;
+  font-family: "Montserrat", sans-serif;
+}
+
+.select-boxppt24:focus {
+  outline: none;
+  border-color: #0f172a;
+}
+
+.feedback-iconppt24 {
+  width: 18px; /* Reducido de 20px */
+  height: 18px; /* Reducido de 20px */
+  margin-left: 8px; /* Reducido de 10px */
+}
+
+.buttons-containerppt24 {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 0; /* Cambiado de 10px a 0 */
+  width: 100%;
+  max-width: 1200px;
+  padding-top: 10px; /* Añadido para compensar */
+}
+
+.reset-buttonppt24 {
+  padding: 10px 20px;
+  background-color: #0f172a;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-family: "Montserrat", sans-serif;
+}
+
+.reset-buttonppt24:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.feedback-containerppt24 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 10px; /* Reducido de 20px */
+  width: 100%;
+}
+
+.feedback-messageppt24 {
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-family: "Montserrat", sans-serif;
+  font-weight: bold;
+  margin-bottom: 5px;
+  text-align: center;
+  display: inline-block;
+}
+
+.feedback-messageppt24.correct {
+  background-color: #4caf50;
+  color: white;
+}
+
+.feedback-messageppt24.incorrect {
+  background-color: #f44336;
+  color: white;
+}
+
+.score-messageppt24 {
+  color: #8f8f8f;
+  font-family: "Montserrat", sans-serif;
+  font-weight: bold;
+  margin-top: 5px;
+  font-size: 16px;
+}
+
+.completed-stateppt24 {
+  justify-content: center;
+}
+
+.arrow {
+  position: absolute;
+  border-left: 2px dashed #0f172a;
+  height: 90px; /* Reducido de 100px */
+  transform-origin: top left;
+}
+
+.arrow::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: -5px;
+  width: 10px;
+  height: 10px;
+  border-right: 2px solid #0f172a;
+  border-bottom: 2px solid #0f172a;
+  transform: rotate(45deg);
+}
+
+.arrow-1 {
+  top: 11%;
+  left: 50%;
+  transform: rotate(-79deg);
+  height: 80px;
+}
+
+.arrow-2 {
+  top: 4%;
+  left: 51%;
+  transform: rotate(74deg);
+}
+
+.arrow-3 {
+  top: 72%;
+  left: 45%;
+  transform: rotate(87deg);
+  height: 55px;
+}
+
+.arrow-4 {
+  top: 53%;
+  left: 50%;
+  transform: rotate(106deg);
+  height: 70px;
+}
+
+.arrow-5 {
+  top: 93%;
+  left: 57%;
+  transform: rotate(-100deg);
+  height: 76px;
+}
+
+.arrow-6 {
+  top: 3%;
+  left: 50%;
+  transform: rotate(-85deg);
+  height: 35px; /* Reducido de 40px */
+}
+
+.arrow-7 {
+  top: 24%;
+  left: 41%;
+  transform: rotate(90deg);
+  height: 30px; /* Reducido de 40px */
+}
+
+.arrow-8 {
+  top: 35%;
+  left: 48%;
+  transform: rotate(-90deg);
+  height: 80px;
+}
+
+.arrow-9 {
+  top: 44%;
+  left: 61%;
+  transform: rotate(-47deg);
+  height: 35px; /* Reducido de 40px */
+}
+
+.arrow-10 {
+  top: 79%;
+  left: 53%;
+  transform: rotate(-96deg);
+  height: 45px; /* Reducido de 50px */
+}

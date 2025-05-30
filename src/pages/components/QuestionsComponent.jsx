@@ -17,7 +17,8 @@ const QuestionsComponent = ({ questions, onComplete }) => {
     const [isValidated, setIsValidated] = useState(false)
     const [showErrorMessage, setShowErrorMessage] = useState(false)
     const [showFeedback, setShowFeedback] = useState(false)
-    const [remainingSelections, setRemainingSelections] = useState(0) // Nuevo estado para el contador
+    const [remainingSelections, setRemainingSelections] = useState(0)
+    const [correctCount, setCorrectCount] = useState(0)
 
     const baseTextStyle = {
         fontFamily: "Montserrat, sans-serif"
@@ -29,7 +30,6 @@ const QuestionsComponent = ({ questions, onComplete }) => {
     }, [questions])
 
     useEffect(() => {
-        // Actualizar el contador de selecciones restantes
         const currentQuestionData = questions[currentQuestion]
         const requiredSelections = currentQuestionData.requiredSelections || currentQuestionData.correctCount
         const selectedCount = selectedAnswers[currentQuestion]?.length || 0
@@ -68,22 +68,31 @@ const QuestionsComponent = ({ questions, onComplete }) => {
         const requiredSelections = currentQuestionData.requiredSelections || currentQuestionData.correctCount
 
         if (selectedAnswers[currentQuestion]?.length === requiredSelections) {
-            let isCorrect
-            if (currentQuestionData.multipleCorrect) {
-                const correctOptions = currentQuestionData.options
-                    .map((option, index) => (option.correct ? index : null))
-                    .filter((index) => index !== null)
-                isCorrect =
-                    selectedAnswers[currentQuestion].length === currentQuestionData.correctCount &&
-                    selectedAnswers[currentQuestion].every((answer) => correctOptions.includes(answer))
-            } else {
-                isCorrect = currentQuestionData.options[selectedAnswers[currentQuestion][0]].correct
-            }
+            let correctSelected = 0
+            const correctOptions = currentQuestionData.options
+                .map((option, index) => (option.correct ? index : null))
+                .filter((index) => index !== null)
+
+            // Contar cuántas respuestas correctas fueron seleccionadas
+            correctSelected = selectedAnswers[currentQuestion].filter((answer) => 
+                correctOptions.includes(answer)
+            ).length
+            
+            setCorrectCount(correctSelected)
+            
+            // La pregunta es correcta solo si se seleccionaron TODAS las respuestas correctas necesarias
+            const isFullyCorrect = correctSelected === currentQuestionData.correctCount
+            
             setQuestionResults((prev) => {
                 const newResults = [...prev]
-                newResults[currentQuestion] = isCorrect ? 1 : 0
+                newResults[currentQuestion] = {
+                    isCorrect: isFullyCorrect,
+                    correctSelected: correctSelected,
+                    totalCorrect: currentQuestionData.correctCount
+                }
                 return newResults
             })
+            
             setIsValidated(true)
             setShowErrorMessage(false)
             setShowFeedback(true)
@@ -97,9 +106,10 @@ const QuestionsComponent = ({ questions, onComplete }) => {
             setCurrentQuestion((prev) => prev + 1)
             setIsValidated(false)
             setShowFeedback(false)
+            setCorrectCount(0)
         } else {
             const finalResults = {
-                correct: questionResults.filter((result) => result === 1).length,
+                correct: questionResults.filter((result) => result.isCorrect).length,
                 total: questions.length,
             }
             setResults(finalResults)
@@ -118,6 +128,7 @@ const QuestionsComponent = ({ questions, onComplete }) => {
         setQuestionResults(new Array(questions.length).fill(null))
         setShowErrorMessage(false)
         setShowFeedback(false)
+        setCorrectCount(0)
     }
 
     return (
@@ -152,12 +163,18 @@ const QuestionsComponent = ({ questions, onComplete }) => {
                                     ))}
                                 </div>
                                 <div className="flex flex-col items-center">
-                                    {/* Mostrar el contador solo si se ha seleccionado al menos una opción y no se han seleccionado todas */}
-                                    {/* {selectedAnswers[currentQuestion]?.length > 0 && remainingSelections > 0 && (
-                                        <p className="text-button-figma bg-counter  mb-2" style={baseTextStyle}>
-                                            Te faltan <span className="font-bold">{remainingSelections}</span> opciones por seleccionar.
+                                    {!isValidated && selectedAnswers[currentQuestion]?.length > 0 && (
+                                        <p className="mb-4" style={{ backgroundColor: "#fcfcfc", ...baseTextStyle }}>
+                                            Te faltan <strong>{remainingSelections}</strong> opciones por seleccionar.
                                         </p>
-                                    )} */}
+                                    )}
+                                    {isValidated && questions[currentQuestion].multipleCorrect && (
+                                        <span theme="light" justify={isMobile ? "justify" : "justify"}>
+                                            <span className="margin-size text-monserrat" style={{ color: "#8f8f8f", fontWeight: "bold", ...baseTextStyle }}>
+                                                Respuestas correctas: {correctCount}/{questions[currentQuestion].correctCount}
+                                            </span>
+                                        </span>
+                                    )}
                                     <Button
                                         bold={false}
                                         icon={isValidated ? faArrowRight : faCheck}
@@ -177,13 +194,13 @@ const QuestionsComponent = ({ questions, onComplete }) => {
                             <Paragraph theme="light" justify={isMobile ? "justify" : "center"} style={baseTextStyle}>
                                 <strong
                                     style={{
-                                        color: questionResults[currentQuestion] === 1 ? "#4CAF50" : "#F44336",
+                                        color: questionResults[currentQuestion]?.isCorrect ? "#4CAF50" : "#F44336",
                                         ...baseTextStyle
                                     }}
                                 >
-                                    {questionResults[currentQuestion] === 1 ? "Correcto: " : "Incorrecto: "}
+                                    {questionResults[currentQuestion]?.isCorrect ? "Correcto: " : "Incorrecto: "}
                                 </strong>
-                                {questionResults[currentQuestion] === 1
+                                {questionResults[currentQuestion]?.isCorrect
                                     ? questions[currentQuestion].correctFeedback
                                     : questions[currentQuestion].incorrectFeedback}
                             </Paragraph>
@@ -201,15 +218,15 @@ const QuestionsComponent = ({ questions, onComplete }) => {
                                     <div key={index} className="text-center">
                                         <p className="text-response-figma" style={baseTextStyle}>
                                             El resultado de la pregunta {index + 1} es{" "}
-                                            <span className={result === 1 ? "text-correct-feedback" : "text-incorrect-feedback"}>
-                                                {result === 1 ? "1/1" : "1/2"} respuestas correctas
+                                            <span className={result.isCorrect ? "text-correct-feedback" : "text-incorrect-feedback"}>
+                                                {result.correctSelected}/{result.totalCorrect} respuestas correctas
                                             </span>
                                         </p>
                                     </div>
                                 ))}
 
                                 <p className="text-center text-response-figma font-semibold mt-4" style={baseTextStyle}>
-                                    Tus respuestas correctas son {results.correct} de {results.total} (
+                                    Preguntas completamente correctas: {results.correct} de {results.total} (
                                     {Math.round((results.correct / results.total) * 100)}%)
                                 </p>
                             </div>

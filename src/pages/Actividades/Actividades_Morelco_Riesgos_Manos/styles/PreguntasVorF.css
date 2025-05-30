@@ -47,24 +47,13 @@ button:disabled {
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.check button:hover {
+.check button:hover:not(:disabled) {
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(124, 58, 237, 0.25);
 }
 
 .check button:active {
   transform: translateY(0);
-}
-
-/* Animaciones para respuestas correctas e incorrectas */
-.itemQ.correct {
-  background-color: #4CAF50;
-  animation: scaleIn 0.3s ease-out;
-}
-
-.itemQ.incorrect {
-  background-color: #F44336;
-  animation: shake 0.5s cubic-bezier(0.36, 0.07, 0.19, 0.97);
 }
 
 .flex-button {
@@ -100,29 +89,13 @@ button:disabled {
   40%, 60% { transform: translateX(4px); }
 }
 
-@keyframes popIn {
-  from {
-    transform: translate(-50%, -50%) scale(0);
-    opacity: 0;
-  }
-  to {
-    transform: translate(-50%, -50%) scale(1);
-    opacity: 1;
-  }
-}
-
 @media (max-width: 632px) {
   .check {
     flex-direction: column;
     gap: 1rem;
-  }
-
-  button {
-    margin-left: 0 !important;
   }
   
   .check button {
     width: 100%;
   }
 }
-

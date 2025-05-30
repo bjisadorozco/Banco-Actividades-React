@@ -1,0 +1,196 @@
+/* Contenedor principal */
+.activity-container-ppt15 {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  gap: 2rem;
+}
+
+/* Grupo de imágenes */
+.image-group-ppt15 {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  min-width: 90px; /* Mantiene el espacio incluso cuando las imágenes desaparecen */
+}
+
+.draggable-ppt15 {
+  width: 198px;
+  height: 115px;
+  cursor: grab;
+  border: 2px solid #0f172a;
+  padding: 0;
+  box-sizing: border-box;
+  object-fit: cover;
+  display: block;
+  margin-bottom: 0%;
+}
+
+/* Grupo de dropboxes */
+.drop-group-ppt15 {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Nuevo contenedor para drop y audio */
+.drop-audio-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.drop-container {
+  position: relative;
+  z-index: 1; /* Asegura que el área de drop esté por debajo de los elementos arrastrados */
+}
+
+.dropbox-ppt15 {
+  width: 198px;
+  height: 115px;
+  background-color: #f9f9f9;
+  display: flex;
+  justify-content: center;
+  border: 2px dashed #aaa;
+  position: relative;
+  align-items: center;
+}
+
+.dropbox-over {
+  background-color: #ebebeb;
+  border-color: #ebebeb;
+}
+
+.dropbox-ppt15 img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: fill;
+  margin-bottom: 0px;
+}
+
+.drop-text {
+  font-family: "Montserrat", sans-serif;
+  font-size: 16px;
+  font-style: italic;
+  color: #888;
+  text-align: center;
+}
+
+.drop-text-over {
+  color: #9880ca;
+}
+
+.audio-player-ppt15 {
+  width: 250px; /* Audio player más ancho */
+}
+
+.audio-player-ppt15 audio {
+  width: 100%;
+}
+
+.status-icon-ppt15 {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+}
+
+.correct .dropbox-ppt15 {
+  background-color: #4caf50;
+}
+
+.incorrect .dropbox-ppt15 {
+  background-color: #f44336;
+}
+
+.text-monserrat {
+  font-family: "Montserrat", sans-serif;
+}
+
+.results-containerAICDAD {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.error-message-ppt15 {
+  color: #f44336;
+  font-size: 16px;
+  text-align: center;
+  margin-top: 10px;
+}
+
+.success-message-ppt15 {
+  color: #45a049;
+  font-size: 16px;
+  text-align: center;
+  margin-top: 10px;
+}
+.percentage-message-ppt15 {
+  text-align: center; /* Centra el texto */
+  font-family: 'Montserrat', sans-serif; /* Usa la fuente Montserrat */
+  font-size: 16px; /* Tamaño de la fuente */
+  color: #8f8f8f; /* Color del texto */
+  margin: 20px 0; /* Margen superior e inferior para separarlo de otros elementos */
+  font-weight: bold;
+}
+.flex-container {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 0.8rem;
+}
+
+.btn {
+  width: 150px;
+  height: 50px;
+  background-color: #7c3aed;
+  color: white;
+  font-size: 1rem;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.btn:hover {
+  background: #6d28d9 !important;
+}
+
+.btn i {
+  margin-right: 8px;
+}
+
+.text-green-personalizado {
+  font-family: 'Montserrat', sans-serif;
+  color: #4caf50;
+}
+
+.text-red-personalizado {
+  font-family: 'Montserrat', sans-serif;
+  color: #f44336;
+}
+
+.texto-gray {
+  font-family: 'Montserrat', sans-serif;
+  color: #8f8f8f;
+}
+
+.error-message-ppt15 {
+  color: #f44336;
+  font-size: 16px;
+  text-align: center;
+  margin-top: 10px;
+}
+
+.success-message-ppt15 {
+  color: #4caf50;
+  font-size: 16px;
+  text-align: center;
+  margin-top: 10px;
+}

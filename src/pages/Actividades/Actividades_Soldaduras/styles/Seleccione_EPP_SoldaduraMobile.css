@@ -1,0 +1,137 @@
+.seleccione-epp-soldadura-mobile-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    font-family: "Montserrat", sans-serif;
+    padding: 15px;
+    box-sizing: border-box;
+  }
+  
+  .main-content-mobile {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 15px;
+    margin-bottom: 20px;
+  }
+  
+  .card-mobile {
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: all 0.3s ease;
+    position: relative;
+  }
+  
+  .image-container-mobile {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 15px;
+    position: relative;
+  }
+  
+  .epp-image-mobile {
+    width: 120px;
+    height: 120px;
+    object-fit: contain;
+  }
+  
+  .feedback-icon-mobile {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 40px;
+    height: 40px;
+    z-index: 2;
+  }
+  
+  .select-container-mobile {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .select-box-mobile {
+    width: 100%;
+    max-width: 280px;
+    padding: 10px;
+    font-size: 14px;
+    border-radius: 8px;
+    font-family: "Montserrat", sans-serif;
+    transition: all 0.3s ease;
+  }
+  
+  .select-box-mobile:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(15, 23, 42, 0.2);
+  }
+  
+  .buttons-container-mobile {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    width: 100%;
+  }
+  
+  .reset-button-mobile {
+    padding: 12px 24px;
+    background-color: #0f172a;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-family: "Montserrat", sans-serif;
+    font-size: 14px;
+  }
+  
+  .reset-button-mobile:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+  
+  .feedback-container-mobile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 15px;
+    width: 100%;
+  }
+  
+  .feedback-message-mobile {
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-family: "Montserrat", sans-serif;
+    font-weight: bold;
+    margin-bottom: 8px;
+    text-align: center;
+    display: inline-block;
+    max-width: 90%;
+    font-size: 15px;
+  }
+  
+  .feedback-message-mobile.correct {
+    background-color: #4caf50;
+    color: white;
+  }
+  
+  .feedback-message-mobile.incorrect {
+    background-color: #f44336;
+    color: white;
+  }
+  
+  .score-message-mobile {
+    color: #8f8f8f;
+    font-family: "Montserrat", sans-serif;
+    font-weight: bold;
+    margin-top: 5px;
+    font-size: 15px;
+    text-align: center;
+  }
