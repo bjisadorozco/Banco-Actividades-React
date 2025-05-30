@@ -1,6 +1,9 @@
 import React, { useState } from "react";
-import imgTrue from "../../../assets/img/checkAct.png";
-import imgFalse from "../../../assets/img/xmarkAct.png";
+import imgTrue from "../../../assets/img/true.jpg";
+import imgFalse from "../../../assets/img/false.jpg";
+import imgDefaultAvatar from "../../../assets/img/avatar_sonriente.webp";
+import Button from "../../components/Button";
+import { faRepeat, faArrowRight, faCheck, faXmark } from "@fortawesome/free-solid-svg-icons";
 
 const Feedback = ({ isCorrect, message }) => (
   <div className={`text-${isCorrect ? 'green' : 'red'}-600 font-monserrat`}>
@@ -66,6 +69,7 @@ function Actividad_Falso_Verdadero() {
   const [showScore, setShowScore] = useState(false);
   const [showFeedback, setShowFeedback] = useState(false);
   const [answerSelected, setAnswerSelected] = useState(null);
+
   const handleAnswer = (userAnswer) => {
     const isCorrect = userAnswer === questions[currentQuestion].correct;
     setAnswerSelected(isCorrect);
@@ -96,23 +100,34 @@ function Actividad_Falso_Verdadero() {
   };
 
   const percentage = Math.round((score / questions.length) * 100);
+
   return (
-    <div className="container ">
+    <div className="container">
       <div className="w-full flex justify-center items-center my-2">
         <div className="max-w-md w-full bg-gray-100 border-2 border-gray-300 rounded-lg overflow-hidden mx-auto min-w-[35vw]">
           {showScore ? (
             <div className="text-center p-6 font-monserrat">
+              <div className="flex justify-center mb-4">
+                <img 
+                  src={imgDefaultAvatar} 
+                  alt="Avatar" 
+                  className="w-24 h-24 object-contain"
+                />
+              </div>
               <p className="my-2 text-gray-500 font-semibold">
                 Respuestas correctas son: {score} de {questions.length} (
                 {percentage}%)
               </p>
               <div className="w-full flex flex-col items-center justify-center">
-                <button
+                <Button
+                  className="reset-button"
+                  bold={true}
+                  icon={faRepeat}
+                  roundedFull={true}
                   onClick={resetQuiz}
-                  className="group bg-main-color rounded-full px-4 py-2 shadow-main-color text-white my-3"
                 >
                   Reiniciar
-                </button>
+                </Button>
               </div>
             </div>
           ) : (
@@ -121,25 +136,34 @@ function Actividad_Falso_Verdadero() {
                 <span className="inc">{currentQuestion + 1}</span>/
                 <span className="tol">{questions.length}</span>
               </div>
-              <div className=" view p-6">
+              <div className="view p-2">
                 <div className="mb-2 min-h-[50px]">
                   <p className="text-gray-800 text-justify font-monserrat">
                     {questions[currentQuestion].text}
                   </p>
                 </div>
-                <div className="relative flex justify-center">
-                  <div className="w-32">
+                
+                <div className="relative flex justify-center my-4">
+                  <div className="w-32 h-32 relative">
+                    <img
+                      src={imgDefaultAvatar}
+                      alt="Avatar"
+                      className="w-full h-full object-contain"
+                    />
+                    
                     {answerSelected !== null && (
-                      <div className="flex items-center justify-center">
+                      <div className="absolute inset-0 flex items-center justify-center">
                         <img
                           src={answerSelected ? imgTrue : imgFalse}
                           alt={answerSelected ? "Correct" : "Incorrect"}
-                          className="w-full h-full object-contain mb-0"
+                          className="w-full h-full object-contain absolute"
+                          style={{ zIndex: 10 }}
                         />
                       </div>
                     )}
                   </div>
                 </div>
+                
                 <div className="text-justify mt-2">
                   <p
                     className={`text-[16px] font-regular leading-tight ${
@@ -161,32 +185,42 @@ function Actividad_Falso_Verdadero() {
                 <div className="check flex justify-center space-x-4">
                   {!showFeedback && (
                     <div className="check flex justify-center space-x-4">
-                      <button
-                        className="flex justify-center items-center group bg-main-color rounded-full px-4 py-2 shadow-main-color text-white"
+                      <Button
+                        className="true-button"
+                        bold={true}
+                        
+                        icon={faCheck}
+                        roundedFull={true}
                         onClick={() => handleAnswer(true)}
                         disabled={answerSelected !== null}
                       >
                         Verdadero
-                      </button>
-                      <button
-                        className="flex justify-center items-center group bg-main-color rounded-full px-4 py-2 shadow-main-color text-white m-0"
+                      </Button>
+                      <Button
+                        className="false-button"
+                        bold={true}
+                        icon={faXmark}
+                        roundedFull={true}
                         onClick={() => handleAnswer(false)}
                         disabled={answerSelected !== null}
                       >
                         Falso
-                      </button>
+                      </Button>
                     </div>
                   )}
                   {showFeedback && (
-                    <div className="flex items-center justify-center mt-4 text-white ">
-                      <button
+                    <div className="flex items-center justify-center mt-4">
+                      <Button
+                        className="next-button"
+                        bold={true}
+                        icon={faArrowRight}
+                        roundedFull={true}
                         onClick={handleNext}
-                        className="bg-main-color py-2 px-4 rounded-full text-[16px] font-bold"
                       >
                         {currentQuestion === questions.length - 1
                           ? "Finalizar"
                           : "Siguiente"}
-                      </button>
+                      </Button>
                     </div>
                   )}
                 </div>

@@ -98,7 +98,7 @@
 }
 
 .bg-purple-personalizado {
-  background-color: #6e3cd2;
+  background-color: #0f172a;
 }
 
 .feedback-container-ESC {
@@ -149,7 +149,13 @@
 }
 
 .action-button:hover {
-  background-color: #6e3cd2;
+  background-color: #0f172a;
+}
+
+/* Estilos para el select cuando está abierto */
+select:focus option {
+  color: black !important;
+  background: white !important;
 }
 
 @media (max-width: 1024px) {

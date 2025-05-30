@@ -43,6 +43,7 @@ function SeleccionEspaciosConfinados() {
   const [selectedCard, setSelectedCard] = useState(null);
   const [selectedCards, setSelectedCards] = useState([]);
   const [showValidationMessage, setShowValidationMessage] = useState(false);
+  const [openSelect, setOpenSelect] = useState(null);
 
   useEffect(() => {
     setIsOnDivisor(false);
@@ -72,6 +73,7 @@ function SeleccionEspaciosConfinados() {
       return newSelections;
     });
     setSelectedCards((prev) => [...new Set([...prev, dropId])]);
+    setOpenSelect(null);
   };
 
   const handleVerify = () => {
@@ -107,6 +109,7 @@ function SeleccionEspaciosConfinados() {
     setIsValidateEnabled(false);
     setSelectedCard(null);
     setSelectedCards([]);
+    setOpenSelect(null);
     const initialOptions = options.slice(1);
     setAvailableOptions({
       drop1: initialOptions,
@@ -244,6 +247,8 @@ function SeleccionEspaciosConfinados() {
                   <select
                     value={selections[risk.dropId]}
                     onChange={(e) => handleChange(risk.dropId, e.target.value)}
+                    onFocus={() => setOpenSelect(risk.dropId)}
+                    onBlur={() => setOpenSelect(null)}
                     className={`my-2 w-full p-2 border rounded ${selections[risk.dropId] ? "bg-light-purple" : ""}`}
                     disabled={isVerified}
                     style={{
@@ -253,7 +258,7 @@ function SeleccionEspaciosConfinados() {
                           : selections[risk.dropId]
                             ? "var(--light-purple)"
                             : "white",
-                      color: isVerified || selectedCards.includes(risk.dropId) ? "white" : "gray",
+                      color: (isVerified || selectedCards.includes(risk.dropId)) && openSelect !== risk.dropId ? "white" : "black",
                       border:
                         isVerified || selectedCards.includes(risk.dropId) ? "1px solid white" : "1px solid #e5e7eb",
                     }}

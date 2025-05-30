@@ -48,13 +48,11 @@ const Seleccione_EPP_Soldadura = () => {
 
     const isCorrect = value === correctItems[boxId]
     
-    // Actualizar el mensaje de feedback con estilo
     setFeedbackMessage(
       isCorrect ? "¡Correcto! Has seleccionado la opción correcta." : "¡Incorrecto! Intenta nuevamente."
     )
     setFeedbackStyle(isCorrect ? "correct" : "incorrect")
 
-    // Calcular el número de respuestas correctas actual
     const currentCorrectCount = Object.keys(selectedValues).reduce((count, key) => {
       if (key === boxId) {
         return isCorrect ? count + 1 : count
@@ -98,7 +96,6 @@ const Seleccione_EPP_Soldadura = () => {
     }
   }
 
-  // Calcular el porcentaje correctamente
   const percentage = allItemsPlaced ? Math.round((correctCount / 5) * 100) : 0
 
   return (
@@ -110,7 +107,6 @@ const Seleccione_EPP_Soldadura = () => {
             alt="Sistema Oxiacetileno"
             className="sistema-oxiacetileno-imageppt24"
           />
-          {/* Flechas */}
           <div className="arrow arrow-1"></div>
           <div className="arrow arrow-2"></div>
           <div className="arrow arrow-3"></div>
@@ -122,12 +118,11 @@ const Seleccione_EPP_Soldadura = () => {
           <div className="arrow arrow-9"></div>
           <div className="arrow arrow-10"></div>
 
-          {/* Selects */}
           {[1, 2, 3, 4, 5].map((num) => (
             <div
               key={num}
               className="select-containerppt24"
-              style={{ top: `${[12, 10, 69, 41, 81][num - 1]}%`, left: `${[68, -7, -6, 71, 75][num - 1]}%` }}
+              style={{ top: `${[12, 10, 69, 41, 81][num - 1]}%`, left: `${[68, -7, -6, -3, 75][num - 1]}%` }}
             >
               <select
                 value={selectedValues[`box${num}`]}

@@ -41,7 +41,7 @@ const PreguntasFactorEntornoTF = () => {
         },
         {
             text: "Uso del cinturón de seguridad: Todos los conductores, operadores y pasajeros deben usar el cinturón de seguridad.",
-            correct: false,
+            correct: true,
             // feedback: "Esta afirmación corresponde al factor humano, no al factor entorno."
         },
         {

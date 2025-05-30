@@ -40,6 +40,7 @@ import Slider14_Lista_desplegable_movil from "./pages/Actividades/Actividades_Es
 import Slider12_drag_and_drop_audios from "./pages/Actividades/Actividades_Espacios_Confinados/Slider12_drag_and_drop_audios.jsx";
 import Slider15_Lista_desplegable from "./pages/Actividades/Actividades_Espacios_Confinados/Slider15_Lista_desplegable.jsx";
 import Slider15_Lista_desplegable_movil from "./pages/Actividades/Actividades_Espacios_Confinados/Slider15_Lista_desplegable_movil.jsx";
+import Actividad_Falso_Verdadero from "./pages/Actividades/Actividades_Espacios_Confinados/Actividad_Falso_Verdadero.jsx";
 import PreguntasRiesgosTermicosV2 from "./pages/Actividades/Actividades_Morelco_Riesgos_Manos/PreguntasRiesgosTermicosV2.jsx";
 import Sliderppt24_SeleccionMultiple from "./pages/Actividades/Actividades_Uso_Seguro_Andamios/Sliderppt24_SeleccionMultiple.jsx";
 import Sliderppt9_DragAndDrop from "./pages/Actividades/Actividades_Uso_Seguro_Andamios/Sliderppt9_DragAndDrop.jsx";
@@ -50,6 +51,7 @@ import Sliderppt26_PreguntasTF from "./pages/Actividades/Actividades_Uso_Seguro_
 import Sliderppt18_SeleccionPreguntas from "./pages/Actividades/Actividades_PESV/Sliderppt18_SeleccionPreguntas.jsx";
 import Sliderppt19_SeleccionPreguntasAudios from "./pages/Actividades/Actividades_PESV/Sliderppt19_SeleccionPreguntasAudios.jsx";
 import PreguntasFactorHumanoTF from "./pages/Actividades/Actividades_PESV/PreguntasFactorHumanoTF.jsx";
+import PreguntasFactorHumano from "./pages/Actividades/Actividades_PESV/PreguntasFactorHumano.jsx";
 import OrdenarElementos from "./pages/Actividades/Actividades_PESV/OrdenarElementos.jsx";
 import PPT14_EscogerOpcionSirena from "./pages/Actividades/Actividades_PESV/PPT14_EscogerOpcionSirena.jsx";
 import SlidePP11_seleccione from "./pages/Actividades/Actividades_PESV/SlidePP11_seleccione.jsx";
@@ -66,8 +68,14 @@ import DragAndDrop_Sistema_Oxiacetileno from "./pages/Actividades/Actividades_So
 import DragAndDrop_Sistema_OxiacetilenoMobile from "./pages/Actividades/Actividades_Soldaduras/DragAndDrop_Sistema_OxiacetilenoMobile.jsx";
 import Seleccione_EPP_Soldadura from "./pages/Actividades/Actividades_Soldaduras/Seleccione_EPP_Soldadura.jsx";
 import Seleccione_EPP_SoldaduraMobile from "./pages/Actividades/Actividades_Soldaduras/Seleccione_EPP_SoldaduraMobile.jsx";
+import ChileDAD from "./pages/Actividades/Actividades_Morelco_Riesgos_Manos/ChileDAD.jsx";
+import ChileSeleccione from "./pages/Actividades/Actividades_Morelco_Riesgos_Manos/ChileSeleccione.jsx";
+import PreguntasSeleccioneSiNo from "./pages/Actividades/Actividades_Riesgo_psicosocial/PreguntasSeleccioneSiNo.jsx";
+import Slider10SeleccioneMultiple from "./pages/Actividades/Actividades_Riesgo_psicosocial/Slider10SeleccioneMultiple.jsx";
+import Slider11SeleccioneMultipleV2 from "./pages/Actividades/Actividades_Riesgo_psicosocial/Slider11SeleccioneMultipleV2.jsx";
+import DragAndDropArisM from "./pages/Actividades/Actividades_Aris_Mining/DragAndDropArisM.jsx";
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <PreguntasFactorHumanoTF />
+    <PreguntasFactorHumano />
   </React.StrictMode>
 );

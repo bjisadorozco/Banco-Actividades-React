@@ -1,27 +1,48 @@
 import React, { useState, useEffect, useRef } from "react";
-import Audio1 from "../../../assets/audio/Alturas velocidad M3 – Slide 28 Audio.mp3";
-import Audio2 from "../../../assets/audio/Alturas comunicacion M3 – Slide 28 Audio.mp3";
-import Audio3 from "../../../assets/audio/Alturas seguridad M3 – Slide 28 Audio.mp3";
+import Audio1 from "../../../assets/audio/velocidad-m2-slide-21.mp3";
+import Audio2 from "../../../assets/audio/comunicación-m2-slide-21.mp3";
+import Audio3 from "../../../assets/audio/seguridad-m2-slide-21.mp3";
 import { faCheck, faRepeat } from "@fortawesome/free-solid-svg-icons";
 import Button from "../../components/Button";
 import correctIcon from "../../../assets/img/checkAct.png";
 import incorrectIcon from "../../../assets/img/xmarkAct.png";
 import "./styles/PreguntasTiposRiesgo.css";
+import TranscripcionAudios from "../../components/TranscripcionAudios";
 
 const OPTIONS = [
-  { value: "Seguridad", label: "Seguridad" },
-  { value: "Velocidad", label: "Velocidad" },
-  { value: "Comunicación", label: "Comunicación" },
+  { value: "seguridad", label: "seguridad" },
+  { value: "velocidad", label: "velocidad" },
+  { value: "comunicación", label: "comunicación" },
 ];
 
 const CORRECT_ANSWERS = {
-  select1: "Velocidad",
-  select2: "Comunicación",
-  select3: "Seguridad",
+  select1: "velocidad",
+  select2: "comunicación",
+  select3: "seguridad",
+};
+
+const TRANSCRIPCIONES = {
+  audio1: [
+    { start: 0, end: 1, text: "Velocidad:" },
+    { start: 1, end: 3, text: "Aunque la seguridad es primordial," },
+    { start: 3, end: 6, text: " la velocidad es también un factor importante," },
+    { start: 6, end: 9, text: "ya que el tiempo de respuesta puede marcar la diferencia" },
+    { start: 9, end: 12, text: "en la supervivencia de la víctima." }
+  ],
+  audio2: [
+    { start: 0, end: 1, text: "Comunicación: " },
+    { start: 1, end: 4, text: "Una comunicación clara y efectiva" },
+    { start: 4, end: 6, text: "es esencial para coordinar las acciones" },
+    { start: 6, end: 9, text: "de todos los involucrados en el rescate." }
+  ],
+  audio3: [
+    { start: 0, end: 1, text: "Seguridad: " },
+    { start: 1, end: 4, text: "La seguridad es la máxima prioridad en todas" },
+    { start: 4, end: 6, text: "las operaciones de rescate." }
+  ]
 };
 
 export default function PreguntasTiposRiesgo() {
-  const audioRefs = useRef([]);
   const [selections, setSelections] = useState({
     select1: "",
     select2: "",
@@ -32,7 +53,13 @@ export default function PreguntasTiposRiesgo() {
   const [validationStatus, setValidationStatus] = useState({});
   const [showValidateError, setShowValidateError] = useState(false);
   const [percentage, setPercentage] = useState(0);
-  const [correctCount, setCorrectCount] = useState(0); // Added state for correct count
+  const [correctCount, setCorrectCount] = useState(0);
+  const [currentPlayingAudio, setCurrentPlayingAudio] = useState(null);
+
+  // Referencias a los elementos de audio
+  const audioRef1 = useRef(null);
+  const audioRef2 = useRef(null);
+  const audioRef3 = useRef(null);
 
   useEffect(() => {
     const hasAnySelection = Object.values(selections).some(
@@ -42,14 +69,97 @@ export default function PreguntasTiposRiesgo() {
     setShowValidateError(false);
   }, [selections]);
 
-  const handleAudioPlay = (index) => {
-    audioRefs.current.forEach((audio, i) => {
-      if (i !== index && audio) {
-        audio.pause();
-        audio.currentTime = 0;
-      }
-    });
+  // Función para manejar la reproducción de audio
+  const handleAudioPlay = (audioId) => {
+    // Si hay un audio reproduciéndose y es diferente al que se quiere reproducir, lo detenemos
+    if (currentPlayingAudio && currentPlayingAudio !== audioId) {
+      pauseAudio(currentPlayingAudio);
+    }
+
+    // Actualizamos el estado para indicar qué audio está sonando
+    setCurrentPlayingAudio(audioId);
   };
+
+  // Función para pausar un audio específico
+  const pauseAudio = (audioId) => {
+    let audioToStop;
+    
+    switch (audioId) {
+      case "audio1":
+        audioToStop = audioRef1.current;
+        break;
+      case "audio2":
+        audioToStop = audioRef2.current;
+        break;
+      case "audio3":
+        audioToStop = audioRef3.current;
+        break;
+      default:
+        return;
+    }
+
+    if (audioToStop) {
+      audioToStop.pause();
+      audioToStop.currentTime = 0;
+    }
+  };
+
+  // Función para pausar todos los audios
+  const pauseAllAudios = () => {
+    if (audioRef1.current) {
+      audioRef1.current.pause();
+      audioRef1.current.currentTime = 0;
+    }
+    if (audioRef2.current) {
+      audioRef2.current.pause();
+      audioRef2.current.currentTime = 0;
+    }
+    if (audioRef3.current) {
+      audioRef3.current.pause();
+      audioRef3.current.currentTime = 0;
+    }
+    setCurrentPlayingAudio(null);
+  };
+
+  // Escuchar eventos de reproducción de audio
+  useEffect(() => {
+    const handleAudioEnded = () => {
+      setCurrentPlayingAudio(null);
+    };
+
+    // Añadir event listeners para detectar cuando termina un audio
+    const addEndedListeners = () => {
+      if (audioRef1.current) {
+        audioRef1.current.addEventListener('ended', handleAudioEnded);
+      }
+      if (audioRef2.current) {
+        audioRef2.current.addEventListener('ended', handleAudioEnded);
+      }
+      if (audioRef3.current) {
+        audioRef3.current.addEventListener('ended', handleAudioEnded);
+      }
+    };
+
+    // Intentar añadir los listeners inmediatamente
+    addEndedListeners();
+    
+    // Y también después de un breve retraso para asegurar que los refs estén disponibles
+    const timer = setTimeout(addEndedListeners, 500);
+
+    return () => {
+      clearTimeout(timer);
+      // Limpiar event listeners
+      if (audioRef1.current) {
+        audioRef1.current.removeEventListener('ended', handleAudioEnded);
+      }
+      if (audioRef2.current) {
+        audioRef2.current.removeEventListener('ended', handleAudioEnded);
+      }
+      if (audioRef3.current) {
+        audioRef3.current.removeEventListener('ended', handleAudioEnded);
+      }
+    };
+  }, []);
 
   const handleSelectChange = (selectId, value) => {
     setSelections((prev) => ({
@@ -77,13 +187,7 @@ export default function PreguntasTiposRiesgo() {
     setFeedback("");
     setValidationStatus({});
     setShowValidateError(false);
-
-    audioRefs.current.forEach((audio) => {
-      if (audio) {
-        audio.pause();
-        audio.currentTime = 0;
-      }
-    });
+    pauseAllAudios();
   };
 
   const validateAnswers = () => {
@@ -105,13 +209,13 @@ export default function PreguntasTiposRiesgo() {
     setValidationStatus(results);
 
     const correctCount = Object.values(results).filter(Boolean).length;
-    setCorrectCount(correctCount); // Update correctCount state
+    setCorrectCount(correctCount);
     const percentage = Math.round((correctCount / 3) * 100);
     setPercentage(percentage);
     setFeedback(
       correctCount === 3
         ? `¡Correcto! Todas las respuestas son correctas. (${percentage}%)`
-        : `Tienes ${correctCount} de 3 respuestas correctas (${percentage}%). Intenta de nuevo.`
+        : `Tienes ${correctCount} de 3 respuestas correctas. Intenta de nuevo. (${percentage}%)`
     );
   };
 
@@ -135,13 +239,12 @@ export default function PreguntasTiposRiesgo() {
             <div className="preguntas_01">
               <div className={getContainerClassName("select1")}>
                 <div className="audio-container1 mb-0">
-                  <audio
-                    controls
-                    ref={(el) => (audioRefs.current[0] = el)}
-                    onPlay={() => handleAudioPlay(0)}
-                  >
-                    <source src={Audio1} type="audio/mp3" />
-                  </audio>
+                  <TranscripcionAudios
+                    ref={audioRef1}
+                    src={Audio1}
+                    transcripcion={TRANSCRIPCIONES.audio1}
+                    onPlay={() => handleAudioPlay("audio1")}
+                  />
                 </div>
                 <select
                   className={getSelectClassName("select1")}
@@ -167,7 +270,7 @@ export default function PreguntasTiposRiesgo() {
                       className="feedback-icon-TR"
                     />
                     <p className="feedback-text">
-                      <span style={{ color: validationStatus.select1 ? '#4caf50' : '#f44336' }}>
+                      <span style={{ color: validationStatus.select1 ? '#fff' : '#fff' }}>
                         {validationStatus.select1 ? "¡Correcto!" : "¡Incorrecto!"}
                       </span>
                     </p>
@@ -181,13 +284,12 @@ export default function PreguntasTiposRiesgo() {
             <div className="preguntas_01">
               <div className={getContainerClassName("select2")}>
                 <div className="audio-container1 mb-0">
-                  <audio
-                    controls
-                    ref={(el) => (audioRefs.current[1] = el)}
-                    onPlay={() => handleAudioPlay(1)}
-                  >
-                    <source src={Audio2} type="audio/mp3" />
-                  </audio>
+                  <TranscripcionAudios
+                    ref={audioRef2}
+                    src={Audio2}
+                    transcripcion={TRANSCRIPCIONES.audio2}
+                    onPlay={() => handleAudioPlay("audio2")}
+                  />
                 </div>
                 <select
                   className={getSelectClassName("select2")}
@@ -213,7 +315,7 @@ export default function PreguntasTiposRiesgo() {
                       className="feedback-icon-TR"
                     />
                     <p className="feedback-text">
-                      <span style={{ color: validationStatus.select2 ? '#4caf50' : '#f44336' }}>
+                      <span style={{ color: validationStatus.select2 ? '#fff' : '#fff' }}>
                         {validationStatus.select2 ? "¡Correcto!" : "¡Incorrecto!"}
                       </span>
                     </p>
@@ -227,13 +329,12 @@ export default function PreguntasTiposRiesgo() {
             <div className="preguntas_01">
               <div className={getContainerClassName("select3")}>
                 <div className="audio-container1 mb-0">
-                  <audio
-                    controls
-                    ref={(el) => (audioRefs.current[2] = el)}
-                    onPlay={() => handleAudioPlay(2)}
-                  >
-                    <source src={Audio3} type="audio/mp3" />
-                  </audio>
+                  <TranscripcionAudios
+                    ref={audioRef3}
+                    src={Audio3}
+                    transcripcion={TRANSCRIPCIONES.audio3}
+                    onPlay={() => handleAudioPlay("audio3")}
+                  />
                 </div>
                 <select
                   className={getSelectClassName("select3")}
@@ -259,7 +360,7 @@ export default function PreguntasTiposRiesgo() {
                       className="feedback-icon-TR"
                     />
                     <p className="feedback-text">
-                      <span style={{ color: validationStatus.select3 ? '#4caf50' : '#f44336' }}>
+                      <span style={{ color: validationStatus.select3 ? '#fff' : '#fff' }}>
                         {validationStatus.select3 ? "¡Correcto!" : "¡Incorrecto!"}
                       </span>
                     </p>
@@ -331,4 +432,3 @@ export default function PreguntasTiposRiesgo() {
     </div>
   );
 }
-
