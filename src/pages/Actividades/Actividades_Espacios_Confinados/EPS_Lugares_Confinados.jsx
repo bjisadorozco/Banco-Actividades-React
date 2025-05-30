@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRepeat } from "@fortawesome/free-solid-svg-icons";
-import Actividad_Mobile_entada_salida from "../Actividades_Espacios_Confinados/Actividad_Mobile_Entrada_Salida";
+import Actividad_Mobile_entada_salida from "../actividades_espacios_confinados/Actividad_Mobile_Entrada_Salida";
 import hombre from "/src/assets/img/avatar-hombre-morado-blanco.webp";
 import trueImage from "/src/assets/img/checkAct.png";
 import falseImage from "/src/assets/img/false.png";
