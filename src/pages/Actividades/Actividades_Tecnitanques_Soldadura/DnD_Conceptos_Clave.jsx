@@ -5,11 +5,13 @@ import { faRepeat, faCheck } from "@fortawesome/free-solid-svg-icons";
 import Button from "../../components/Button";
 import "../../Actividades/Actividades_Tecnitanques_Soldadura/styles/DnD_Conceptos_clave.css";
 import image1 from "../../../assets/img/areas_diseñadas.webp";
-import image3 from "../../../assets/img/permiso_trabajo.webp";
 import image2 from "../../../assets/img/trabajo_caliente.webp";
+import image3 from "../../../assets/img/permiso_trabajo.webp";
 import image4 from "../../../assets/img/soldadura.webp";
 import checkIcon from "../../../assets/img/checkAct.png";
 import xmarkIcon from "../../../assets/img/xmarkAct.png";
+
+const images = [image1, image2, image3, image4];
 
 function DraggableItem({ id, children }) {
     const { attributes, listeners, setNodeRef, transform } = useDraggable({
@@ -93,7 +95,7 @@ const MatchingActivity = () => {
         drop1: "Área específica y diseñada para estos trabajos en caliente, como un taller de soldadura o una localización exterior especifica",
         drop2: "Trabajo que involucra la presencia de llama abierta generada por equipos de soldadura o corte que pueden transformarse en una fuente de ignición en áreas con riesgos de incendio",
         drop3: "Permiso que aplica para trabajos de trabajo en caliente a menos que se trabaje en un área designada a 'prueba de incendio'",
-        drop4: "Experto encargado de dar conocimiento, capacitación y experiencia para identificar, evaluar y asegurar controles adecuados de los peligros asociados con el trabajo en caliente",
+        drop4: "Es una persona con el conocimiento, capacitación y experiencia para reconocer, evaluar y asegurar controles adecuados de los peligros asociados con el trabajo en caliente.​",
     };
 
     const correctAnswers = {
@@ -122,20 +124,39 @@ const MatchingActivity = () => {
             const dropId = over.id;
             const draggedElementId = active.id;
 
-            if (droppedItems[dropId]) {
-                if (droppedItems[dropId] === draggedElementId) {
-                    return;
-                }
+            // Verificar si el elemento ya está en otro drop
+            const isAlreadyDropped = Object.values(droppedItems).includes(draggedElementId);
+
+            if (isAlreadyDropped) {
+                // Encontrar dónde está actualmente el elemento
+                const currentDropId = Object.keys(droppedItems).find(
+                    key => droppedItems[key] === draggedElementId
+                );
+
+                // Limpiar el drop actual
+                setDroppedItems(prev => ({
+                    ...prev,
+                    [currentDropId]: null
+                }));
             }
 
-            setDroppedItems((prevState) => ({
-                ...prevState,
-                [dropId]: draggedElementId,
+            // Si el drop target ya tiene un elemento, devolverlo a su lugar
+            if (droppedItems[dropId]) {
+                setDraggedItems(prev => ({
+                    ...prev,
+                    [droppedItems[dropId].split("-")[0]]: true
+                }));
+            }
+
+            // Colocar el nuevo elemento
+            setDroppedItems(prev => ({
+                ...prev,
+                [dropId]: draggedElementId
             }));
 
-            setDraggedItems((prevState) => ({
-                ...prevState,
-                [draggedElementId.split("-")[0]]: false,
+            setDraggedItems(prev => ({
+                ...prev,
+                [draggedElementId.split("-")[0]]: false
             }));
         }
     };
@@ -143,7 +164,6 @@ const MatchingActivity = () => {
     const handleValidate = () => {
         setIsValidating(true);
 
-        // Calculamos todo primero
         const newValidationStatus = {};
         let correct = 0;
 
@@ -155,7 +175,6 @@ const MatchingActivity = () => {
             }
         });
 
-        // Actualizamos todo el estado de una sola vez
         setValidationStatus(newValidationStatus);
         setCorrectCount(correct);
         setPercentage(Math.round((correct / 4) * 100));
@@ -199,7 +218,7 @@ const MatchingActivity = () => {
                             <div key={`card-${num}`} className="card-ppt9-USADAD">
                                 <div style={{ position: 'relative' }}>
                                     <img
-                                        src={eval(`image${num}`)}
+                                        src={images[num - 1]}
                                         className="card-image-ppt9-USADAD mb-0"
                                         alt={dropAreaTexts[`drop${num}`]}
                                     />
@@ -290,7 +309,7 @@ const MatchingActivity = () => {
 
             {/* Mensajes de feedback */}
             {isActivityCompleted && (
-                <div className="feedback-container-picaduras mt-1 p-0 rounded-lg text-center">
+                <div className="feedback-container-picaduras p-0 rounded-lg text-center" style={{ margin: 0 }}>
                     {correctCount === 4 ? (
                         <p className="text-md">
                             <span className="text-green-personalizado font-bold">Respuestas correctas:</span>{" "}

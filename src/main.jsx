@@ -4,8 +4,8 @@ import App from "./App.jsx";
 import PreguntasProteccion3 from "./pages/Actividades/Actividades_Morelco_Riesgos_Manos/PreguntasProteccion3.jsx";
 import PreguntasRiesgosMecanicos from "./pages/Actividades/Actividades_Morelco_Riesgos_Manos/PreguntasRiesgosMecanicos.jsx";
 import PreguntasRiesgosTermicos from "./pages/Actividades/Actividades_Morelco_Riesgos_Manos/PreguntasRiesgosTermicos.jsx";
-import DragAndDropManos from "./pages/Actividades/Actividades_Morelco_Riesgos_Manos/DragAndDropManos.jsx";
-import SelectAndValidateMobile from "./pages/Actividades/Actividades_Morelco_Riesgos_Manos/SelectAndValidateMobile.jsx";
+// import DragAndDropManos from "./pages/Actividades/Actividades_Morelco_Riesgos_Manos/DragAndDropManos.jsx";
+// import SelectAndValidateMobile from "./pages/Actividades/Actividades_Morelco_Riesgos_Manos/SelectAndValidateMobile.jsx";
 import PreguntasSeleccionHerramientas from "./pages/Actividades/Actividades_Morelco_Riesgos_Manos/PreguntasSeleccionHerramientas.jsx";
 import OrdenarPasos from "./pages/Actividades/Actividades_Morelco_Riesgos_Manos/OrdenarPasos.jsx";
 import OrdenarPasosPalmaManos from "./pages/Actividades/Actividades_Morelco_Riesgos_Manos/OrdenarPasosPalmaManos.jsx";
@@ -26,10 +26,10 @@ import DragAndDropAlturas2 from "./pages/Actividades/Actividades_Trabajo_seguro_
 import DragAndDropAlturas2Movil from "./pages/Actividades/Actividades_Trabajo_seguro_alturas/DragAndDropAlturas2Movil.jsx";
 import ActividadFalsoVerdadero from "./pages/Actividades/Actividades_Espacios_Confinados/Actividad_Falso_Verdadero.jsx";
 import Drag_And_Drop from "./pages/Actividades/Actividades_Espacios_Confinados/Drag_And_Drop.jsx";
-import Drag_And_DropMobile from "./pages/Actividades/Actividades_Espacios_Confinados/Drag_And_DropMobile.jsx";
+// import Drag_And_DropMobile from "./pages/Actividades/Actividades_Espacios_Confinados/Drag_And_DropMobile.jsx";
 import EPSLugaresConfinados from "./pages/Actividades/Actividades_Espacios_Confinados/EPS_Lugares_Confinados.jsx";
 import ActividadMobileEntradaSalida from "./pages/Actividades/Actividades_Espacios_Confinados/Actividad_Mobile_Entrada_Salida.jsx";
-import Drag_And_Drop from "./pages/Actividades/Actividades_Espacios_confinados/Drag_And_Drop.jsx";
+// import Drag_And_Drop from "./pages/Actividades/Actividades_Espacios_confinados/Drag_And_Drop.jsx";
 import OrdenarPasosPalmaManosMobile from "./pages/Actividades/Actividades_Morelco_Riesgos_Manos/OrdenarPasosPalmaManosMobile.jsx";
 import PreguntasSiNo from "./pages/Actividades/Actividades_Morelco_Riesgos_Manos/PreguntasSiNo.jsx";
 import EspaciosConfinadosSeleccionMultiple from "./pages/Actividades/Actividades_Morelco_Riesgos_Manos/EspaciosConfinadosSeleccionMultiple.jsx";
@@ -59,8 +59,11 @@ import IdentificarRiesgosBiologicos from "./pages/Actividades/Actividades_Riesgo
 import OrdenarMedidasCorrectivas from "./pages/Actividades/Actividades_Riesgo_Biologico/OrdenarMedidasCorrectivas.jsx";
 import DnD_Conceptos_Clave from "./pages/Actividades/Actividades_Tecnitanques_Soldadura/DnD_Conceptos_Clave.jsx";
 import Conceptos_Clave_Selects from "./pages/Actividades/Actividades_Tecnitanques_Soldadura/Conceptos_Clave_Selects.jsx";
+import IdentificaRolSoldadura from "./pages/Actividades/Actividades_Tecnitanques_Soldadura/IdentificaRolSoldadura.jsx";
+import ActividadApoyoSocial from "./pages/Actividades/Actividades_Riesgo_Psicosocial/ActividadApoyoSocial.jsx"
+
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <Conceptos_Clave_Selects />
+    <DragAndDropAlturas2 />
   </React.StrictMode>
 );

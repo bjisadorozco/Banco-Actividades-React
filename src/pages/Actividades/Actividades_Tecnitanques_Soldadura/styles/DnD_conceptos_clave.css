@@ -62,7 +62,7 @@
 }
 
 .dropbox-ppt9-USADAD {
-  width: 270px;
+  width: 250px;
   height: 50px;
   background-color: #9c99a1;
   display: flex;
@@ -79,7 +79,7 @@
   color: white;
   border-radius: 4px;
   cursor: grab !important;
-  width: 270px;
+  width: 250px;
   height: 50px;
   text-align: center;
   display: flex;
@@ -262,7 +262,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 270px;
+  width: 250px;
   border: 1px solid #ddd;
   border-radius: 8px;
   overflow: hidden;
@@ -279,7 +279,7 @@
 
 .card-text-ppt9-USADAD {
   padding: 7px;
-  text-align: center;
+  text-align: justify;
   font-size: 16px;
   background-color: #f9f9f9;
   width: 100%;

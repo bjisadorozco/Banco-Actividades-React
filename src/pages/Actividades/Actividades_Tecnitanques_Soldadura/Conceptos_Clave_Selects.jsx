@@ -31,6 +31,7 @@ const MatchingSelectActivity = () => {
     const [isActivityCompleted, setIsActivityCompleted] = useState(false)
     const [isValidated, setIsValidated] = useState(false)
     const [isResetEnabled, setIsResetEnabled] = useState(false)
+    const [missingSelections, setMissingSelections] = useState(4)
 
     // Custom drop area texts
     const dropAreaTexts = {
@@ -41,7 +42,7 @@ const MatchingSelectActivity = () => {
         drop3:
             "Permiso que aplica para trabajos de trabajo en caliente a menos que se trabaje en un área designada a 'prueba de incendio'",
         drop4:
-            "Experto encargado de dar conocimiento, capacitación y experiencia para identificar, evaluar y asegurar controles adecuados de los peligros asociados con el trabajo en caliente",
+            "Es una persona con el conocimiento, capacitación y experiencia para reconocer, evaluar y asegurar controles adecuados de los peligros asociados con el trabajo en caliente.​",
     }
 
     // Correct answers for each drop area
@@ -54,10 +55,10 @@ const MatchingSelectActivity = () => {
 
     // Option texts
     const optionTexts = {
-        btn1: "Trabajo con Fuego o LLama",
+        btn1: "Trabajo en caliente",
         btn2: "Permiso de Trabajo en Caliente",
-        btn3: "Soldadura",
-        btn4: "Diseñadas o Autorizadas",
+        btn3: "Supervisor de trabajo en caliente",
+        btn4: "Áreas Diseñadas o Autorizadas",
     }
 
     useEffect(() => {
@@ -71,7 +72,9 @@ const MatchingSelectActivity = () => {
     }, [isValidated, selectedItems])
 
     useEffect(() => {
-        setIsResetEnabled(Object.values(selectedItems).some((item) => item !== ""))
+        const selectedCount = Object.values(selectedItems).filter(item => item !== "").length;
+        setMissingSelections(4 - selectedCount);
+        setIsResetEnabled(selectedCount > 0);
     }, [selectedItems])
 
     const handleSelectChange = (dropId, value) => {
@@ -93,6 +96,14 @@ const MatchingSelectActivity = () => {
     }
 
     const handleValidate = () => {
+        // Verificar si todas las opciones están seleccionadas
+        const allSelected = Object.values(selectedItems).every(item => item !== "");
+
+        if (!allSelected) {
+            setErrorMessage(`Debes seleccionar todas las opciones antes de validar. Te faltan ${missingSelections} selecciones.`);
+            return;
+        }
+
         // Validar todas las respuestas
         const newValidationStatus = {}
         let correct = 0
@@ -108,6 +119,7 @@ const MatchingSelectActivity = () => {
         setValidationStatus(newValidationStatus)
         setIsValidated(true)
         setIsActivityCompleted(true)
+        setErrorMessage("")
 
         if (correct === 4) {
             setSuccessMessage("¡Excelente! Has identificado correctamente todos los elementos.")
@@ -135,6 +147,7 @@ const MatchingSelectActivity = () => {
         setPercentage(0)
         setIsActivityCompleted(false)
         setIsValidated(false)
+        setMissingSelections(4)
     }
 
     return (
@@ -290,11 +303,21 @@ const MatchingSelectActivity = () => {
                     </div>
                 </div>
 
+                {/* Mensaje de error cuando faltan selecciones */}
+                {errorMessage && !isValidated && (
+                    <div className="feedback-container-picaduras mt-1 p-0 rounded-lg text-center">
+                        <p className="text-md">
+                            <span className="text-red-personalizado font-bold">Atención:</span>{" "}
+                            <span className="texto-gray">{errorMessage}</span>
+                        </p>
+                    </div>
+                )}
+
                 {/* Resultados */}
                 {isActivityCompleted && (
                     <div className="results-container-select text-center">
                         <h3 className="text-md font-bold text-paragraph-light-color text-monserrat-select">
-                            Has completado {correctCount} de 4 correctamente ({percentage}%)
+                            Tus respuestas correctas son: {correctCount} de 4 ({percentage}%)
                         </h3>
                     </div>
                 )}
