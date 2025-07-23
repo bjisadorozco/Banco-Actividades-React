@@ -4,10 +4,9 @@ import imgFalse from "../../../assets/img/false.jpg";
 import imgDefaultAvatar from "../../../assets/img/avatar_sonriente.webp";
 import Button from "../../components/Button";
 import { faRepeat, faArrowRight, faCheck, faXmark } from "@fortawesome/free-solid-svg-icons";
-
 const Feedback = ({ isCorrect, message }) => (
-  <div className={`text-${isCorrect ? 'green' : 'red'}-600 font-monserrat`}>
-    {isCorrect ? '¡Correcto!' : '¡Piénsalo bien!'}
+  <div className={`text-${isCorrect ? "green" : "red"}-600 font-monserrat`}>
+    {isCorrect ? "¡Correcto!" : "¡Piénsalo bien!"}
     <span className="text-gray-500"> {message}</span>
   </div>
 );
@@ -130,11 +129,18 @@ function Actividad_Falso_Verdadero() {
                 </Button>
               </div>
             </div>
-          ) : (
-            <>
-              <div className="bg-gray-800 text-white text-center py-2 text-[16px] font-monserrat">
-                <span className="inc">{currentQuestion + 1}</span>/
-                <span className="tol">{questions.length}</span>
+          </div>
+        ) : (
+          <>
+            <div className="bg-gray-800 text-white text-center py-2 text-[16px] font-monserrat">
+              <span className="inc">{currentQuestion + 1}</span>/
+              <span className="tol">{questions.length}</span>
+            </div>
+            <div className=" view px-3 pt-2 pb-0 w-full flex items-center justify-center flex-col">
+              <div className="min-h-[50px]">
+                <p className="text-gray-800 text-justify font-monserrat ">
+                  {questions[currentQuestion].text}
+                </p>
               </div>
               <div className="view p-2">
                 <div className="mb-2 min-h-[50px]">
@@ -225,9 +231,9 @@ function Actividad_Falso_Verdadero() {
                   )}
                 </div>
               </div>
-            </>
-          )}
-        </div>
+            </div>
+          </>
+        )}
       </div>
     </div>
   );

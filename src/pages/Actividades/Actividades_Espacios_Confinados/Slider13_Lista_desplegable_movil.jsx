@@ -16,7 +16,7 @@ const initialOptions = [
 ];
 
 // Respuestas para validar las selecciones
-const correctAnswers = ["1", "3", "5", "2", "4"];
+const correctAnswers = ["1", "2", "3", "4", "5"];
 
 // Componente principal que representa la actividad de preguntas relacionadas con riesgos térmicos
 function Slider13_Lista_desplegable_movil() {
@@ -137,7 +137,7 @@ function Slider13_Lista_desplegable_movil() {
     <div className="leading-loose">
       <div className="bg-white text-[#afafaf] border-[#e0e0e0] md:rounded-lg md:shadow-md mb-[1px] md:m-4 p-4 border rounded-md shadow-md">
         <Paragraph theme="light" className="w-full">
-          a. Ubicación y vías de
+          A. Ubicación y vías de
           <Select
             className="m-1 border-[#afafaf] border-2  text-[#afafaf] w-64 "
             index={0}
@@ -153,7 +153,7 @@ function Slider13_Lista_desplegable_movil() {
           Asegurar que existan rutas claras para el acceso de los dispositivos
           de respuesta a emergencias.
           <br />
-          b. Nivel de competencias del
+          B. Nivel de competencias del
           <Select
             className="m-1 border-[#afafaf] border-2  text-[#afafaf] w-64"
             index={1}
@@ -169,7 +169,7 @@ function Slider13_Lista_desplegable_movil() {
           Garantizar que todos los involucrados en la respuesta estén
           adecuadamente entrenados y capacitados.
           <br />
-          c. Operatividad de los dispositivos: Verificar que todos los
+          C. Operatividad de los dispositivos: Verificar que todos los
           <Select
             className="m-1 border-[#afafaf] border-2  text-[#afafaf] w-64"
             index={2}
@@ -180,10 +180,10 @@ function Slider13_Lista_desplegable_movil() {
             options={getAvailableOptions(2)}
             isValidated={isValidated}
           />
-          y elementos para la respuesta a meregencia estén en buen estado y
+          y elementos para la respuesta a emergencia estén en buen estado y
           listo para su uso.
           <br />
-          d. Procedimientso de ingreso y
+          D. Procedimiento de ingreso y
           <Select
             className="m-1 border-[#afafaf] border-2  text-[#afafaf] w-64"
             index={3}
@@ -222,7 +222,10 @@ function Slider13_Lista_desplegable_movil() {
               {errorMessage}
             </p>
           )}
-          <div className="flex justify-around h-full items-center w-full max-w-[400px] my-1">
+          <div
+            className="flex justify-around h-full items-center w-full max-w-[400px] my-1"
+            style={{ padding: "0", gap: "20px", justifyContent: "center" }}
+          >
             <Button
               bold={false}
               icon={faCheck}

@@ -5,12 +5,12 @@ import Paragraph from "../../components/Paragraph";
 // import Instruction from "../../components/Instruction";
 import { useMediaQuery } from "react-responsive";
 // import imgIngenieroHerramientas from '../../assets/img/ingenieroMorelcoHerramientas.webp';
-import martillo from '../../../assets/img/estado_ebriedad_sld7.webp';
-import cintaMetrica from '../../../assets/img/no_mantener_distancia_sld7.webp';
-import destornillador from '../../../assets/img/conducir_distraido_sld7.webp';
-import taladro from '../../../assets/img/respetar_limite_velocidad_sld7.webp';
-import sierraElectrica from '../../../assets/img/vehiculo_buen_estado_sld7.webp';
-import mezcladoraCemento from '../../../assets/img/respetar_señales_sld7.webp';
+import trabajoTechos from '../../../assets/img/trabajos_techos.webp';
+import trabajosFachados from '../../../assets/img/trabajos_paredes_fachadas.webp';
+import trabajosMontajes from '../../../assets/img/trabajos_montajes_estructura.webp';
+import trabajosAndamios from '../../../assets/img/trabajos_andamios.webp';
+import instalacionPisos from '../../../assets/img/instalacion_pisos.webp';
+import instalacionElectrica from '../../../assets/img/instalacion_electrica.webp';
 import '../../Actividades/Actividades_Trabajo_seguro_alturas/styles/SeleccionImagenesAlturas.css';
 import imgVerdadero from '../../../assets/img/checkAct.png';
 import imgFalso from '../../../assets/img/xmarkAct.png';
@@ -25,16 +25,17 @@ function SeleccionImagenesAlturas() {
   const [results, setResults] = useState({});
   const [explanation, setExplanation] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [validationMessage, setValidationMessage] = useState('');
   const isMobile = useMediaQuery({ maxWidth: 640 });
   const correctImages = [martillo, cintaMetrica, destornillador, taladro];
 
   const explanationsMap = {
-    [martillo]: 'Estado de ebriedad: Correcto! Conducir ebrio NUNCA es manejo defensivo. ¡Peligro extremo!',
-    [cintaMetrica]: 'No mantener distancia segura: Correcto! No mantener distancia es un error grave. ¡Sin espacio, no hay reacción!',
-    [destornillador]: 'Conducir distraído: Correcto! Las distracciones al volante invalidan el manejo defensivo.',
-    [taladro]: 'No respetar límites de velocidad: Correcto! Exceder el límite de velocidad es INSEGURO y anti-defensivo.',
-    [sierraElectrica]: 'Vehículo en buen estado: Incorrecto!: Esto SÍ es manejo defensivo. Un vehículo en buen estado previene fallas.',
-    [mezcladoraCemento]: 'Respetar señales de tránsito: Incorrecto!: Esto SÍ es manejo defensivo. Respetar señales salva vidas.',
+    [martillo]: 'Tabajos de montajes de estructuras:   Bien!  Estos normalmente se hacen a más de 2 mts de altura.',
+    [cintaMetrica]: 'Trabajos en techos y cubiertas:   Bien!  Estos siempre se hacen a más de 2 mts de altura',
+    [destornillador]: 'Trabajos en paredes y fachadas:   Bien !  Estos normalmente se hacen a más de 2 mts de altura',
+    [taladro]: 'Trabajos en andamios:   Bien !  Estos normalmente permiten acceder a alturas superiores a 2 mts',
+    [sierraElectrica]: 'Instalación electrica de piso:   Piénsalo bien!  Este tipo de tareas normalmente NO se hacen a más de 2 metros de altura.',
+    [mezcladoraCemento]: 'Instalación de pisos:   Piénsalo bien!  Este tipo de tareas normalmente NO se hacen a más de 2 metros de altura.',
   };
 
   const actSelectImg = (image) => {
@@ -56,6 +57,28 @@ function SeleccionImagenesAlturas() {
       ...prevResults,
       [image]: isSelected ? undefined : isCorrect
     }));
+
+    updateValidationMessage(newSelectedImages);
+  };
+
+  const updateValidationMessage = (selected) => {
+    if (selected.length === 0) {
+      setValidationMessage('');
+      return;
+    }
+
+    const totalCorrect = selected.filter(img => correctImages.includes(img)).length;
+    const percentage = Math.round((totalCorrect / 4) * 100);
+
+    if (totalCorrect === 4) {
+      setValidationMessage(
+        `Tus respuestas correctas son: ${totalCorrect} de 4 (${percentage}%)`
+      );
+    } else {
+      setValidationMessage(
+        `Tus respuestas correctas son: ${totalCorrect} de 4 (${percentage}%)`
+      );
+    }
   };
 
   const resetActivity = () => {
@@ -63,6 +86,7 @@ function SeleccionImagenesAlturas() {
     setSelectedImages([]);
     setExplanation(null);
     setIsModalOpen(false);
+    setValidationMessage('');
   };
 
   const handleCloseModal = () => {

@@ -1,11 +1,10 @@
 import { useState, useEffect, useRef } from "react";
 import Button from "../../components/Button";
 import { faCheck, faRepeat } from "@fortawesome/free-solid-svg-icons";
-import "./styles/Slider12_drag_and_drop_audios.css";
-import TranscripcionAudios from "../../components/TranscripcionAudios";
-import audioSeguridad from "../../../assets/audio/sld13_procedimiento_recaste-Ca.mp3";
-import audioVelocidad from "../../../assets/audio/sld13_procedimiento_evacuacion-CLE.mp3";
-import audioComunicacion from "../../../assets/audio/sld13_plan_para_respuesta_emer.mp3";
+import audio1 from "../../../assets/audio/sld13_procedimiento_recaste.mp3";
+import audio2 from "../../../assets/audio/sld13_procedimiento_evacuacion.mp3";
+import audio3 from "../../../assets/audio/sld13_plan_para_respuesta_emer.mp3";
+import "./styles/Slider12_drag_and_drop_audios.css"
 
 export default function slider12_drag_and_drop_audios_movil() {
   const [correctAnswersMessage, setCorrectAnswersMessage] = useState("");
@@ -16,11 +15,18 @@ export default function slider12_drag_and_drop_audios_movil() {
   });
 
   const [message, setMessage] = useState("");
+  const [currentAudio, setCurrentAudio] = useState(null);
   const [cardStatus, setCardStatus] = useState({
     drop1: "",
     drop2: "",
     drop3: "",
   });
+
+  const audioRefs = {
+    drop1: useRef(null),
+    drop2: useRef(null),
+    drop3: useRef(null),
+  };
 
   const [shuffledOptions, setShuffledOptions] = useState([]);
   const [currentPlayingAudio, setCurrentPlayingAudio] = useState(null);
@@ -31,36 +37,17 @@ export default function slider12_drag_and_drop_audios_movil() {
   const audioRef3 = useRef(null);
 
   const options = [
-    { id: "option1", label: "Procedimiento de rescate" },
     { id: "option2", label: "Procediminento de evacuación" },
     { id: "option3", label: "Plan para respuestas a emergencia" },
+    { id: "option1", label: "Procedimiento de rescate" },
   ];
 
-  const audios = [audioSeguridad, audioVelocidad, audioComunicacion];
 
-  // Definir las transcripciones para cada audio
-  const TRANSCRIPCIONES = {
-    audio1: [
-      { end: 1.9, start: 0, text: "Procedimiento de rescate." },
-      { end: 6.12, start: 1.9, text: "Este es un instrumento específico que detalle el proceso a seguir" },
-      { end: 7.6, start: 6.12, text: "en una situación de rescate." }
-    ],
-    audio2: [
-      { end: 2.32, start: 0, text: "Procedimiento de evacuación." },
-      { end: 6.92, start: 2.32, text: "Este procedimiento debe describir las circunstancias que requieren su activación" },
-      { end: 12, start: 6.92, text: "como cambios atmosféricos, estructurales o la activación de energías potenciales." }
-    ],
-    audio3: [
-      { end: 2.7, start: 0, text: "Plan para respuesta a emergencias." },
-      { end: 5.4, start: 2.7, text: "Este instrumento busca armonizar la estructura" },
-      { end: 7.56, start: 5.4, text: "y los recursos de una organización" },
-      { end: 10.96, start: 7.56, text: "para una respuesta efectiva ante emergencias." },
-      { end: 14.84, start: 10.96, text: "Este debe identificar los escenarios de riesgo potenciales" },
-      { end: 17.72, start: 14.84, text: "asociados a las actividades en espacios confinados" },
-      { end: 19.62, start: 17.72, text: "y asegurar que cada escenario" },
-      { end: 22.8, start: 19.62, text: "cuente con un procedimiento específico para su atención." }
-    ]
-  };
+  const audios = [
+    "audio1.mp3", // Reemplaza con las rutas reales de los audios
+    "audio2.mp3",
+    "audio3.mp3",
+  ];
 
   useEffect(() => {
     shuffleOptions();
@@ -165,6 +152,11 @@ export default function slider12_drag_and_drop_audios_movil() {
     setCorrectAnswersMessage(
       `Tus respuestas correctas son: ${totalCorrect} de 3 (${percentage}%).`
     );
+    // Pausar cualquier audio en reproducción al resetear
+    if (currentAudio) {
+      currentAudio.pause();
+      setCurrentAudio(null);
+    }
   };
 
   const handleReset = () => {
@@ -181,7 +173,6 @@ export default function slider12_drag_and_drop_audios_movil() {
     setMessage("");
     setCorrectAnswersMessage("");
     shuffleOptions();
-    pauseAllAudios();
   };
 
   const getAvailableOptions = (currentDropId) => {
@@ -224,15 +215,11 @@ export default function slider12_drag_and_drop_audios_movil() {
               width: "100%"
             }}
           >
-            {/* Componente de audio con transcripción */}
-            <div style={{ width: "100%", position: "relative" }}>
-              <TranscripcionAudios
-                ref={index === 0 ? audioRef1 : index === 1 ? audioRef2 : audioRef3}
-                src={audio}
-                transcripcion={TRANSCRIPCIONES[audioId]}
-                onPlay={() => handleAudioPlay(audioId)}
-              />
-            </div>
+            {/* Botón de audio */}
+            <audio controls style={{ height: "30px", width: "240px" }}>
+              <source src={audio} type="audio/mp3" />
+              Tu navegador no soporta audio HTML5.
+            </audio>
 
             {/* Selector */}
             <select

@@ -1,0 +1,82 @@
+/* Estilos para la actividad */
+.grid-opciones {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    width: 100%;
+  }
+  
+  .grid-opciones-inferiores {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    width: 75%;
+    margin: 20px auto 0;
+    justify-content: center;
+  }
+  
+  .opcion-item {
+    position: relative;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  
+  .opcion-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .opcion-imagen {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  
+  .resultado-icono {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 50px;
+    height: 50px;
+    pointer-events: none;
+  }
+  
+  .feedback-general,
+  .feedback-especifico,
+  .validacion {
+    font-family: "Montserrat", sans-serif;
+    text-align: center;
+    font-size: 16px;
+  }
+  
+  /* Responsive */
+  @media (max-width: 768px) {
+    .grid-opciones {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+    }
+  
+    .grid-opciones-inferiores {
+      grid-template-columns: repeat(2, 1fr);
+      width: 100%;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .grid-opciones {
+      grid-template-columns: repeat(1, 1fr);
+    }
+  
+    .grid-opciones-inferiores {
+      grid-template-columns: repeat(1, 1fr);
+    }
+  
+    .feedback-general,
+    .feedback-especifico {
+      font-size: 14px;
+    }
+  }
+  

@@ -6,16 +6,6 @@ import { faCheck, faRepeat } from "@fortawesome/free-solid-svg-icons";
 import useStore from "../../../store";
 
 // Opciones iniciales para los dropdowns
-const initialOptions = [
-  { value: "5", label: "segura" },
-  { value: "2", label: "personal" },
-  { value: "4", label: "evacuación" },
-  { value: "3", label: "equipos" },
-  { value: "1", label: "acceso" },
-];
-
-// Respuestas para validar las selecciones
-const correctAnswers = ["1", "3", "5", "2", "4"];
 
 // Componente principal que representa la actividad de preguntas relacionadas con riesgos térmicos
 function Slider13_Lista_desplegable() {
@@ -32,6 +22,19 @@ function Slider13_Lista_desplegable() {
   const [percentage, setPercentage] = useState(0); // Nuevo estado para el porcentaje
   const [errorMessage, setErrorMessage] = useState(""); //Porcentaje de respuestas correctas
   const [isValid, setIsValid] = useState(false); //Estado para habilitar el estado de validación
+  const [hasSelection, setHasSelection] = useState(false);
+
+
+  const initialOptions = [
+    { value: "2", label: "personal" },
+    { value: "1", label: "acceso" },
+    { value: "5", label: "segura" },
+    { value: "4", label: "evacuación" },
+    { value: "3", label: "equipos" },
+  ];
+
+  // Respuestas para validar las selecciones
+  const correctAnswers = ["1", "2", "3", "4", "5"];
 
   // Configuración inicial del estado global
   useEffect(() => {
@@ -49,6 +52,9 @@ function Slider13_Lista_desplegable() {
     const newDropdowns = [...dropdowns];
     newDropdowns[index] = value;
     setDropdowns(newDropdowns);
+
+    // Verifica si al menos un dropdown tiene una opción seleccionada
+    setHasSelection(newDropdowns.some((val) => val !== "0"));
 
     // Cambia los colores de los botones según las selecciones
     const newButtonColors = [...buttonColors];
@@ -120,6 +126,7 @@ function Slider13_Lista_desplegable() {
     setPercentage(0); // Reinicia el porcentaje
     setErrorMessage("");
     setIsValid(false);
+    setHasSelection(false); // Resetear estado de selección
   };
 
   //   Filtra las opciones disponibles para cada dropdownisValid
@@ -140,76 +147,76 @@ function Slider13_Lista_desplegable() {
       <div className="leading-loose">
         <div className="bg-white text-[#afafaf] border-[#e0e0e0] md:rounded-lg md:shadow-md mb-[1px] p-4 border rounded-md shadow-md">
           <Paragraph theme="light" className="w-full">
-            a. Ubicación y vías de
-            <Select
-              className="m-1 border-[#afafaf] border-2  text-[#afafaf] w-64 "
-              index={0}
-              value={dropdowns[0]}
-              onChange={handleDropdownChange}
-              borderColor={borderColors[0]}
-              buttonColor={buttonColors[0]}
-              options={getAvailableOptions(0)}
-              isValidated={isValidated}
-            />
-            expedidas:
-            <br />
-            Asegurar que existan rutas claras para el acceso de los dispositivos
-            de respuesta a emergencias.
-            <br />
-            b. Nivel de competencias del
-            <Select
-              className="m-1 border-[#afafaf] border-2  text-[#afafaf] w-64"
-              index={1}
-              value={dropdowns[1]}
-              onChange={handleDropdownChange}
-              borderColor={borderColors[1]}
-              buttonColor={buttonColors[1]}
-              options={getAvailableOptions(1)}
-              isValidated={isValidated}
-            />
-            :
-            <br />
-            Garantizar que todos los involucrados en la respuesta estén
-            adecuadamente entrenados y capacitados.
-            <br />
-            c. Operatividad de los dispositivos: Verificar que todos los
-            <Select
-              className="m-1 border-[#afafaf] border-2  text-[#afafaf] w-64"
-              index={2}
-              value={dropdowns[2]}
-              onChange={handleDropdownChange}
-              borderColor={borderColors[2]}
-              buttonColor={buttonColors[2]}
-              options={getAvailableOptions(2)}
-              isValidated={isValidated}
-            />
-            y elementos para la respuesta a meregencia estén en buen estado y
-            listo para su uso.
-            <br />
-            d. Procedimientso de ingreso y
-            <Select
-              className="m-1 border-[#afafaf] border-2  text-[#afafaf] w-64"
-              index={3}
-              value={dropdowns[3]}
-              onChange={handleDropdownChange}
-              borderColor={borderColors[3]}
-              buttonColor={buttonColors[3]}
-              options={getAvailableOptions(3)}
-              isValidated={isValidated}
-            />
-            de lesionados: Establecer directices claras sobre cómo acceder a los
-            trabajadores heridos y evacuar de forma
-            <Select
-              className="m-1 border-[#afafaf] border-2  text-[#afafaf] w-64"
-              index={4}
-              value={dropdowns[4]}
-              onChange={handleDropdownChange}
-              borderColor={borderColors[4]}
-              buttonColor={buttonColors[4]}
-              options={getAvailableOptions(4)}
-              isValidated={isValidated}
-            />
-            .
+          A. Ubicación y vías de
+          <Select
+            className="m-1 border-[#afafaf] border-2  text-[#afafaf] w-64 "
+            index={0}
+            value={dropdowns[0]}
+            onChange={handleDropdownChange}
+            borderColor={borderColors[0]}
+            buttonColor={buttonColors[0]}
+            options={getAvailableOptions(0)}
+            isValidated={isValidated}
+          />
+          expedidas:
+          <br />
+          Asegurar que existan rutas claras para el acceso de los dispositivos
+          de respuesta a emergencias.
+          <br />
+          B. Nivel de competencias del
+          <Select
+            className="m-1 border-[#afafaf] border-2  text-[#afafaf] w-64"
+            index={1}
+            value={dropdowns[1]}
+            onChange={handleDropdownChange}
+            borderColor={borderColors[1]}
+            buttonColor={buttonColors[1]}
+            options={getAvailableOptions(1)}
+            isValidated={isValidated}
+          />
+          :
+          <br />
+          Garantizar que todos los involucrados en la respuesta estén
+          adecuadamente entrenados y capacitados.
+          <br />
+          C. Operatividad de los dispositivos: Verificar que todos los
+          <Select
+            className="m-1 border-[#afafaf] border-2  text-[#afafaf] w-64"
+            index={2}
+            value={dropdowns[2]}
+            onChange={handleDropdownChange}
+            borderColor={borderColors[2]}
+            buttonColor={buttonColors[2]}
+            options={getAvailableOptions(2)}
+            isValidated={isValidated}
+          />
+          y elementos para la respuesta a emergencia estén en buen estado y
+          listo para su uso.
+          <br />
+          D. Procedimiento de ingreso y
+          <Select
+            className="m-1 border-[#afafaf] border-2  text-[#afafaf] w-64"
+            index={3}
+            value={dropdowns[3]}
+            onChange={handleDropdownChange}
+            borderColor={borderColors[3]}
+            buttonColor={buttonColors[3]}
+            options={getAvailableOptions(3)}
+            isValidated={isValidated}
+          />
+          de lesionados: Establecer directices claras sobre cómo acceder a los
+          trabajadores heridos y evacuar de forma
+          <Select
+            className="m-1 border-[#afafaf] border-2  text-[#afafaf] w-64"
+            index={4}
+            value={dropdowns[4]}
+            onChange={handleDropdownChange}
+            borderColor={borderColors[4]}
+            buttonColor={buttonColors[4]}
+            options={getAvailableOptions(4)}
+            isValidated={isValidated}
+          />
+          .
           </Paragraph>
           {isValidated && (
             <div
@@ -246,7 +253,7 @@ function Slider13_Lista_desplegable() {
               icon={faRepeat}
               roundedFull={true}
               onClick={resetDropdowns}
-              // disabled={!isValidated}
+              disabled={!hasSelection}
             >
               Reiniciar
             </Button>

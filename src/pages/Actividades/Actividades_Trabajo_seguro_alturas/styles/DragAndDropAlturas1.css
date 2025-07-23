@@ -1,87 +1,98 @@
-.dark-display {
-  height: 100vh;
-}
-.display-mobile {
+/* /* .cards-container-ra {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  max-width: 98%;
+  margin: 0 auto;
+  padding: 0 1rem;
+} */
+
+/* .quiz-card-ra {
+  perspective: 1500px;
+  height: 300px;
+  cursor: pointer;
+  min-width: 290px;
+} 
+
+.card-front-ra {
+  background-color: white;
+  border: 1px solid #e5e7eb;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  border-radius: 1rem;
+  box-shadow:
+    0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.card-image-ra {
+  height: 40%;
+  background-position: center;
+  background-size: cover;
+  border-top-left-radius: 1rem;
+  border-top-right-radius: 1rem;
+}
+
+.card-content-ra {
+  padding: 1rem;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
   align-items: center;
-  padding-left: 24px;
-  padding-right: 24px;
-  height: 100vh;
+  border-radius: 0 0 10px 10px;
 }
 
-/* Media queries for responsive design */
-@media (max-width: 768px) {
-  .display-mobile {
-    height: auto;
-    padding-left: 14px;
-    padding-right: 14px;
-  }
-  .dark-display {
-    padding: 0;
-    margin: 0;
-    height: auto;
-  }
-  .ligth-display {
-    height: auto;
-  }
+select {
+  width: 100%;
+  padding: 0.5rem;
+  margin-top: 0.5rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.25rem;
+  background-color: white;
+  font-size: 0.9rem;
+}
 
-  audio {
-    height: 40px;
-    margin: 8px 0;
-  }
+.validation-icon-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+  pointer-events: none;
+}
 
-  audio::-webkit-media-controls-panel {
-    background-color: rgba(255, 255, 255, 0.9);
-    border-radius: 4px;
-  }
+.validation-icon {
+  width: 50px;
+  height: 50px;
+  object-fit: contain;
+  opacity: 0.9;
+}
 
-  audio::-webkit-media-controls-play-button,
-  audio::-webkit-media-controls-mute-button {
-    background-color: white;
-    border-radius: 50%;
-  }
+/* Responsivo
+@media (max-width: 1400px) {
+  /* .cards-container-ra {
+    grid-template-columns: repeat(4, 1fr);
+    max-width: 95%;
+  } 
+}
 
-  .audio-container {
-    width: 100%;
-    padding: 8px;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 8px;
+@media (max-width: 1024px) {
+  /* .cards-container-ra {
+    grid-template-columns: repeat(2, 1fr);
+    max-width: 90%;
   }
 }
 
-/* Additional styles for better responsiveness */
 @media (max-width: 640px) {
-  .flex-row {
-    flex-direction: row !important;
+  /* .cards-container-ra {
+    grid-template-columns: 1fr;
+    padding-left: 0;
+    padding-right: 0;
+    width: 80%;
   }
 
-  .flex-col {
-    flex-direction: column !important;
+  /* .quiz-card-ra {
+    height: 250px;
   }
-
-  /* Adjust the width of drop areas and draggable options for mobile */
-  .flex-row > div {
-    width: 50%;
-  }
-
-  /* Ensure the drop areas and draggable options take full width in their columns */
-  .flex-col > div {
-    width: 100%;
-  }
-
-  /* Add some spacing between the columns */
-  .flex-row > div:first-child {
-    margin-right: 10px;
-  }
-}
-
-.audio-container {
-  transition:
-    opacity 0.5s ease,
-    transform 0.5s ease;
-}
-
-.h-6 {
-  min-height: 54px; /* 1.5rem = altura del texto */
-}
+} */

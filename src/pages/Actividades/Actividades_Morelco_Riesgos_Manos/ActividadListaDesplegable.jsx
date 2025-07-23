@@ -1,14 +1,14 @@
-"use client"
 
-import { useState, useEffect } from "react"
-import { faCheck, faRepeat } from "@fortawesome/free-solid-svg-icons"
-import Button from "../../components/Button"
-import metodo5Porque from "../../../assets/img/metodo_5_porque_sldM3.webp"
-import metodoArbolFallas from "../../../assets/img/metodo_arbol_fallas_sldM3.webp"
-import metodoEspinaPescado from "../../../assets/img/metodo_espina_pescado_sldm3.webp"
-import correctIcon from "../../../assets/img/checkAct.png"
-import incorrectIcon from "../../../assets/img/xmarkAct.png"
-import "./styles/ActividadListaDesplegable.css"
+import { useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCheck, faRepeat } from "@fortawesome/free-solid-svg-icons";
+import Button from "../../components/Button";
+import metodo5Porque from "../../../assets/img/metodo_5_porque_sldM3.webp";
+import metodoArbolFallas from "../../../assets/img/metodo_arbol_fallas_sldM3.webp";
+import metodoEspinaPescado from "../../../assets/img/metodo_espina_pescado_sldm3.webp";
+import correctIcon from "../../../assets/img/checkAct.png";
+import incorrectIcon from "../../../assets/img/xmarkAct.png";
+import "./styles/ActividadListaDesplegable.css";
 
 function ActividadListaDesplegable() {
   const [errorMessage, setErrorMessage] = useState("")
@@ -96,6 +96,7 @@ function ActividadListaDesplegable() {
     setIsResetActive(false)
   }
 
+  const allSelected = items.every((item) => item.selectedAnswer !== "");
   return (
     <div className="quiz-containerALD">
       <div className="items-grid">
@@ -130,7 +131,13 @@ function ActividadListaDesplegable() {
                 Seleccione...
               </option>
               {availableOptions
-                .filter((option) => !items.some((item, i) => i !== index && item.selectedAnswer === option.value))
+                .filter(
+                  (option) =>
+                    !items.some(
+                      (item, i) =>
+                        i !== index && item.selectedAnswer === option.value
+                    )
+                )
                 .map((option) => (
                   <option key={option.value} value={option.value}>
                     {option.label}
@@ -143,14 +150,17 @@ function ActividadListaDesplegable() {
         ))}
       </div>
 
-      <div className="feedback-containerALD">
-        {errorMessage && <p className="text-secondary-color text-center text-md font-bold mt-2">{errorMessage}</p>}
+      <div className="mt-4">
+        {errorMessage && (
+          <p className="text-secondary-color text-center text-md font-bold">
+            {errorMessage}
+          </p>
+        )}
         {isVerified && (
-          <div className="results-containerALD text-center">
-            <p className={`text-md font-bold text-paragraph-light-color`}>
-            Tus respuestas correctas son: {correctCount} de {items.length} ({percentage}%)
-            </p>
-          </div>
+          <p className="text-md font-bold text-paragraph-light-color">
+            {correctCount} de {items.length} respuestas correctas (
+            {Math.round((correctCount / items.length) * 100)}%)
+          </p>
         )}
         <div className="button-container">
           <Button bold={false} icon={faCheck} roundedFull={true} onClick={handleValidate}>
@@ -161,8 +171,7 @@ function ActividadListaDesplegable() {
             icon={faRepeat}
             roundedFull={true}
             onClick={handleReset}
-            disabled={!isResetActive}
-            className={`${!isResetActive ? "opacity-50 cursor-not-allowed" : ""}`}
+            disabled={!allSelected}
           >
             {"Reiniciar"}
           </Button>
@@ -172,4 +181,5 @@ function ActividadListaDesplegable() {
   )
 }
 
-export default ActividadListaDesplegable
+export default ActividadListaDesplegable;
+

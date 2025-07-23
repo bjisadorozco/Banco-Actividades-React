@@ -38,7 +38,7 @@ function DraggableOption({ id, imgSrc, isDropped }) {
       }}
       {...listeners}
       {...attributes}
-      className="draggable-option cursor-pointer"
+      className="draggable-option1 cursor-pointer"
     >
       <img
         src={imgSrc}
@@ -80,7 +80,7 @@ function DropArea({ id, children, verificationImage }) {
       <div
         ref={setNodeRef}
         style={style}
-        className={`drop-area ${isOver ? "drop-area-active" : ""}`}
+        className={`drop-area1 ${isOver ? "drop-area-active" : ""}`}
       >
         <span style={textStyle}>Arrastre aquí</span>
         {children}
@@ -196,9 +196,7 @@ export default function DragAndDropAlturas1() {
   };
 
   return (
-    <div className="flex flex-col md:flex-row overflow-x-hidden mb-0">
       <div className="flex flex-col md:flex-row w-full">
-        <div className="md:flex-2 bg-white md:w-3/3 w-full px-2 flex justify-center items-center pb-2">
           <div className="md:flex-2 display-mobile ligth-display bg-white md:w-1/2 w-full px-6 md:pr-20 flex flex-col justify-center items-center mb-3">
             <DndContext sensors={sensors} onDragEnd={handleDragEnd}>
               <div className="flex flex-col justify-center gap-4 mb-2">
@@ -259,8 +257,6 @@ export default function DragAndDropAlturas1() {
             </DndContext>
           </div>
         </div>
-      </div>
-    </div>
   );
 }
 

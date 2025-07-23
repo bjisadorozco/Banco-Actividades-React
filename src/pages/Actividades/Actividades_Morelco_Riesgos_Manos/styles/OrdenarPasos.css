@@ -5,7 +5,10 @@
   width: 100%; /* Asegura que ocupe el 100% del ancho disponible */
   max-width: 1000px; /* Mantiene un máximo de 800px */
   margin: 0 auto;
-  padding: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
   background: #fcfcfc;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
@@ -31,7 +34,8 @@
   position: relative;
   background: #0f172a;
   color: #ffffff;
-  padding: 14px; /* Aumento el padding para que el contenido no se vea apretado */
+  padding: 10px;
+  margin-top: 5px;
   border-radius: 5px;
   cursor: grab;
   transition: background 0.3s ease;
@@ -62,7 +66,7 @@
   display: flex;
   justify-content: center;
   gap: 12px; /* Aumento el espacio entre los botones */
-  margin-top: 20px;
+  margin-top: 10px !important;
 }
 
 /* Botón de validar */
@@ -103,10 +107,12 @@
 
 .resultadoOP.correcto {
   color: #4caf50;
+  margin: 0px !important;
 }
 
 .resultadoOP.incorrecto {
   color: #f44336;
+  margin: 0px !important;
 }
 
 .feedback-container {
