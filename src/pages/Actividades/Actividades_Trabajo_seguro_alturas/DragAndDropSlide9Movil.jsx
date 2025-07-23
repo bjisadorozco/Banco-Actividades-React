@@ -135,8 +135,8 @@ export default function SelectActivity() {
               <div
                 style={{
                   position: "absolute",
-                  top: "29%",
-                  left: "90%",
+                  top: "30%",
+                  left: "50%",
                   transform: "translate(-50%, -50%)",
                   zIndex: 10,
                 }}

@@ -32,7 +32,7 @@ function DraggableOption({ id, label, isDropped }) {
       style={style}
       {...listeners}
       {...attributes}
-      className="draggable-option"
+      className="draggable-option1"
     >
       {label}
     </div>
@@ -45,14 +45,14 @@ function DropArea({ id, children, verificationImage }) {
   return (
     <div
       ref={setNodeRef}
-      className={`drop-area ${
+      className={`drop-area1 ${
         isOver
-          ? "drop-over"
+          ? "drop-over1"
           : children
             ? verificationImage === "correct"
-              ? "drop-correct"
-              : "drop-incorrect"
-            : "drop-over"
+              ? "drop-correct1"
+              : "drop-incorrect1"
+            : "drop-over1"
       }`}
     >
       {children}
@@ -177,7 +177,7 @@ export default function DragAndDropAlturas2() {
 
       setVerificationImages((prev) => ({
         ...prev,
-        [over.id]: isCorrect ? "correct" : "incorrect",
+        [over.id]: isCorrect ? "correct1" : "incorrect1",
       }));
 
       setValidationMessages((prevMessages) => ({
@@ -186,7 +186,7 @@ export default function DragAndDropAlturas2() {
           text: isCorrect
             ? "¡Correcto!​"
             : "¡Incorrecto!",
-          class: isCorrect ? "success" : "error",
+          class: isCorrect ? "success1" : "error1",
         },
       }));
     }
@@ -201,25 +201,25 @@ export default function DragAndDropAlturas2() {
   );
 
   return (
-    <div className="activity-container">
+    <div className="activity-container1">
       <DndContext sensors={sensors} onDragEnd={handleDragEnd}>
-        <div className="drop-zones">
+        <div className="drop-zones1">
           {options.map((option, index) => (
             <div
               key={option.id}
-              className={`drop-zone ${
+              className={`drop-zone1 ${
                 verificationImages[`drop${index + 1}`] || ""
               }`}
             >
               {verificationImages[`drop${index + 1}`] && (
                 <img
                   src={
-                    verificationImages[`drop${index + 1}`] === "correct"
+                    verificationImages[`drop${index + 1}`] === "correct1"
                       ? check
                       : uncheck
                   }
                   alt={verificationImages[`drop${index + 1}`]}
-                  className="verification-image"
+                  className="verification-image1"
                 />
               )}
               <Paragraph
@@ -227,13 +227,13 @@ export default function DragAndDropAlturas2() {
                   verificationImages[`drop${index + 1}`] ? undefined : "light"
                 }
               >
-                <ul className="option-text">
+                <ul className="option-text1">
                   {option.text.map((item, i) => (
                     <li key={i}>{item}</li>
                   ))}
                 </ul>
               </Paragraph>
-              <div className="drop-area-wrapper">
+              <div className="drop-area1-wrapper1">
                 <DropArea
                   id={`drop${index + 1}`}
                   verificationImage={verificationImages[`drop${index + 1}`]}
@@ -244,7 +244,7 @@ export default function DragAndDropAlturas2() {
                 </DropArea>
                 {validationMessages[`drop${index + 1}`]?.text && (
                   <p
-                    className={`validation-message ${
+                    className={`validation-message1 ${
                       validationMessages[`drop${index + 1}`]?.class
                     }`}
                   >
@@ -257,7 +257,7 @@ export default function DragAndDropAlturas2() {
         </div>
 
         {remainingOptions.length > 0 && (
-          <div className="remaining-options">
+          <div className="remaining-options1">
             {remainingOptions.map((option) => (
               <DraggableOption
                 key={option.id}
@@ -270,12 +270,12 @@ export default function DragAndDropAlturas2() {
         )}
 
         {validationMessage && (
-          <div className="validation-summary">
+          <div className="validation-summary1">
             <p>{validationMessage}</p>
           </div>
         )}
 
-        <div className="action-buttons">
+        <div className="action-buttons1">
           <Button onClick={handleReset} icon={faRepeat} roundedFull={true}>
             Reiniciar
           </Button>

@@ -1,11 +1,11 @@
 import "./styles/slider12_drag_and_drop_audios.css";
-import { useState, useRef } from "react";
+import { useState, useRef, useRef } from "react";
 import { DndContext, useSensor, useSensors, MouseSensor } from "@dnd-kit/core";
 import { useDraggable, useDroppable } from "@dnd-kit/core";
 import Button from "../../components/Button";
-import audioSeguridad from "../../../assets/audio/sld13_procedimiento_recaste-Ca.mp3";
-import audioVelocidad from "../../../assets/audio/sld13_procedimiento_evacuacion-CLE.mp3";
-import audioComunicacion from "../../../assets/audio/sld13_plan_para_respuesta_emer.mp3";
+import audio1 from "../../../assets/audio/sld13_procedimiento_recaste.mp3";
+import audio2 from "../../../assets/audio/sld13_procedimiento_evacuacion.mp3";
+import audio3 from "../../../assets/audio/sld13_plan_para_respuesta_emer.mp3";
 import uncheck from "../../../assets/img/xmarkAct.png";
 import check from "../../../assets/img/checkAct.png";
 import { faRepeat } from "@fortawesome/free-solid-svg-icons";
@@ -104,10 +104,17 @@ export default function slider12_drag_and_drop_audios() {
   const [isResetEnabled, setIsResetEnabled] = useState(false);
   const [isValidateEnabled, setIsValidateEnabled] = useState(false);
   const [correctAnswersMessage, setCorrectAnswersMessage] = useState("");
+  const [currentAudio, setCurrentAudio] = useState(null);
 
   const sensors = useSensors(
     useSensor(MouseSensor, { activationConstraint: { distance: 10 } })
   );
+
+  const audioRefs = {
+    drop1: useRef(null),
+    drop2: useRef(null),
+    drop3: useRef(null),
+  };
 
   const options = [
     { id: "option2", label: "Procediminento de evacuación" },
@@ -115,7 +122,7 @@ export default function slider12_drag_and_drop_audios() {
     { id: "option1", label: "Procedimiento de rescate" },
   ];
 
-  const audios = [audioSeguridad, audioVelocidad, audioComunicacion];
+  const audios = [audio1, audio2, audio3];
 
   const verificationImages = {
     drop1:
@@ -268,7 +275,19 @@ export default function slider12_drag_and_drop_audios() {
     setCorrectAnswersMessage("");
     setIsResetEnabled(false);
     setIsValidateEnabled(false);
-    pauseAllAudios();
+    // Pausar cualquier audio en reproducción al resetear
+    if (currentAudio) {
+      currentAudio.pause();
+      setCurrentAudio(null);
+    }
+  };
+
+  const handlePlayAudio = (dropId) => {
+    if (currentAudio && currentAudio !== audioRefs[dropId].current) {
+      currentAudio.pause(); // Pausar el audio en reproducción
+    }
+
+    setCurrentAudio(audioRefs[dropId].current);
   };
 
   return (
@@ -301,12 +320,15 @@ export default function slider12_drag_and_drop_audios() {
                   : ""
                 }`}
             >
-              <TranscripcionAudios
-                ref={index === 0 ? audioRef1 : index === 1 ? audioRef2 : audioRef3}
-                src={audios[index]}
-                transcripcion={TRANSCRIPCIONES[`audio${index + 1}`]}
-                onPlay={() => handleAudioPlay(`audio${index + 1}`)}
-              />
+              <audio
+                ref={audioRefs[`drop${index + 1}`]}
+                controls
+                className="audio-control"
+                onPlay={() => handlePlayAudio(`drop${index + 1}`)}
+              >
+                <source src={audios[index]} type="audio/mp3" />
+                Tu navegador no soporta audio HTML5.
+              </audio>
             </div>
           </div>
         ))}

@@ -32,7 +32,7 @@ export default function Slider1_Lista_desplegable() {
   const [percentage, setPercentage] = useState(0); // Nuevo estado para el porcentaje
   const [errorMessage, setErrorMessage] = useState(""); //Porcentaje de respuestas correctas
   const [isValid, setIsValid] = useState(false); //Estado para habilitar el estado de validación
-
+  const [hasSelection, setHasSelection] = useState(false);
   // Configuración inicial del estado global
   useEffect(() => {
     setIsOnDivisor(false);
@@ -49,6 +49,9 @@ export default function Slider1_Lista_desplegable() {
     const newDropdowns = [...dropdowns];
     newDropdowns[index] = value;
     setDropdowns(newDropdowns);
+
+    // Verifica si al menos un dropdown tiene una opcion seleccionada
+    setHasSelection(newDropdowns.some((val) => val !== "0"));
 
     // Cambia los colores de los botones según las selecciones
     const newButtonColors = [...buttonColors];
@@ -120,6 +123,7 @@ export default function Slider1_Lista_desplegable() {
     setPercentage(0); // Reinicia el porcentaje
     setErrorMessage("");
     setIsValid(false);
+    setHasSelection(false);
   };
 
   //   Filtra las opciones disponibles para cada dropdownisValid
@@ -138,7 +142,7 @@ export default function Slider1_Lista_desplegable() {
       style={{ padding: "0" }}
     >
       <div className="leading-loose">
-        <div className="bg-white text-[#afafaf] border-[#e0e0e0] md:rounded-lg md:shadow-md mb-[1px] p-4 border rounded-md shadow-md">
+        <div className="bg-white relative md:top-10 top-0 text-[#afafaf] border-[#e0e0e0] md:rounded-lg md:shadow-md mb-[1px] p-4 border rounded-md shadow-md">
           <Paragraph theme="light" className="w-full text-justify">
             a. Debemos definir las Líneas de actuación: Pasos para verificar el
             estado del espacio
@@ -234,7 +238,7 @@ export default function Slider1_Lista_desplegable() {
                 icon={faRepeat}
                 roundedFull={true}
                 onClick={resetDropdowns}
-                // disabled={!isValidated}
+                disabled={!hasSelection}
               >
                 Reiniciar
               </Button>

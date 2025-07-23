@@ -175,3 +175,8 @@
 .text-error {
   color: #f44336;
 }
+
+.flex {
+	align-items: center !important;
+	justify-content: center !important;
+}
