@@ -74,8 +74,15 @@ import PreguntasSeleccioneSiNo from "./pages/Actividades/Actividades_Riesgo_psic
 import Slider10SeleccioneMultiple from "./pages/Actividades/Actividades_Riesgo_psicosocial/Slider10SeleccioneMultiple.jsx";
 import Slider11SeleccioneMultipleV2 from "./pages/Actividades/Actividades_Riesgo_psicosocial/Slider11SeleccioneMultipleV2.jsx";
 import DragAndDropArisM from "./pages/Actividades/Actividades_Aris_Mining/DragAndDropArisM.jsx";
+import Dragandrop_Señales_Transito from "./pages/Actividades/Actividades_Manejo_Defensivo/Dragandrop_Señales_Transito.jsx";
+import SeleccioneAccidenteTrafico from "./pages/Actividades/Actividades_Manejo_Defensivo/SeleccioneAccidenteTrafico.jsx";
+import Dragandrop_Señales_Trans_Ordenar from "./pages/Actividades/Actividades_Manejo_Defensivo/Dragandrop_Señales_Trans_Ordenar.jsx";
+import Dragandrop_ordenar_Gibec from "./pages/Actividades/Actividades_GIBEC/Dragandrop_ordenar_Gibec.jsx";
+import Dragandrop_ordenar_nom035 from "./pages/Actividades/Actividades_Prevencion_Psicosocial/Dragandrop_ordenar_nom035.jsx";
+import Seleccione_Video_Caso from "./pages/Actividades/Actividades_Prevencion_Psicosocial/Seleccione_Video_Caso.jsx";
+import Seleccione_Video_Caso_V2 from "./pages/Actividades/Actividades_Prevencion_Psicosocial/Seleccione_Video_Caso_V2.jsx";
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <PreguntasFactorHumano />
+    <EspaciosConfinadosSeleccionMultiple />
   </React.StrictMode>
 );

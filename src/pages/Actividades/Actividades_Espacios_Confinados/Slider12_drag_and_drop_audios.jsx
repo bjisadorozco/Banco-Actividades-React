@@ -1,15 +1,40 @@
 import "./styles/slider12_drag_and_drop_audios.css";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { DndContext, useSensor, useSensors, MouseSensor } from "@dnd-kit/core";
 import { useDraggable, useDroppable } from "@dnd-kit/core";
 import Button from "../../components/Button";
-import audioSeguridad from "../../../assets/audio/Alturas seguridad M3 – Slide 28 Audio.mp3";
-import audioVelocidad from "../../../assets/audio/Alturas velocidad M3 – Slide 28 Audio.mp3";
-import audioComunicacion from "../../../assets/audio/Alturas comunicacion M3 – Slide 28 Audio.mp3";
+import audioSeguridad from "../../../assets/audio/sld13_procedimiento_recaste-Ca.mp3";
+import audioVelocidad from "../../../assets/audio/sld13_procedimiento_evacuacion-CLE.mp3";
+import audioComunicacion from "../../../assets/audio/sld13_plan_para_respuesta_emer.mp3";
 import uncheck from "../../../assets/img/xmarkAct.png";
 import check from "../../../assets/img/checkAct.png";
 import { faRepeat } from "@fortawesome/free-solid-svg-icons";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
+import TranscripcionAudios from "../../components/TranscripcionAudios";
+
+// Definir las transcripciones para cada audio
+const TRANSCRIPCIONES = {
+  audio1: [
+    { end: 1.9, start: 0, text: "Procedimiento de rescate." },
+    { end: 6.12, start: 1.9, text: "Este es un instrumento específico que detalle el proceso a seguir" },
+    { end: 7.6, start: 6.12, text: "en una situación de rescate." }
+  ],
+  audio2: [
+    { end: 2.32, start: 0, text: "Procedimiento de evacuación." },
+    { end: 6.92, start: 2.32, text: "Este procedimiento debe describir las circunstancias que requieren su activación" },
+    { end: 12, start: 6.92, text: "como cambios atmosféricos, estructurales o la activación de energías potenciales." }
+  ],
+  audio3: [
+    { end: 2.7, start: 0, text: "Plan para respuesta a emergencias." },
+    { end: 5.4, start: 2.7, text: "Este instrumento busca armonizar la estructura" },
+    { end: 7.56, start: 5.4, text: "y los recursos de una organización" },
+    { end: 10.96, start: 7.56, text: "para una respuesta efectiva ante emergencias." },
+    { end: 14.84, start: 10.96, text: "Este debe identificar los escenarios de riesgo potenciales" },
+    { end: 17.72, start: 14.84, text: "asociados a las actividades en espacios confinados" },
+    { end: 19.62, start: 17.72, text: "y asegurar que cada escenario" },
+    { end: 22.8, start: 19.62, text: "cuente con un procedimiento específico para su atención." }
+  ]
+};
 
 function DraggableOption({ id, label, isDropped }) {
   const { attributes, listeners, setNodeRef, transform } = useDraggable({
@@ -18,8 +43,8 @@ function DraggableOption({ id, label, isDropped }) {
 
   const style = transform
     ? {
-        transform: `translate3d(${transform.x}px, ${transform.y}px, 0)`,
-      }
+      transform: `translate3d(${transform.x}px, ${transform.y}px, 0)`,
+    }
     : undefined;
 
   if (isDropped) {
@@ -73,6 +98,7 @@ export default function slider12_drag_and_drop_audios() {
   });
 
   const [message, setMessage] = useState("");
+  const [currentPlayingAudio, setCurrentPlayingAudio] = useState(null);
 
   // Estado para habilitar/deshabilitar botones
   const [isResetEnabled, setIsResetEnabled] = useState(false);
@@ -84,9 +110,9 @@ export default function slider12_drag_and_drop_audios() {
   );
 
   const options = [
-    { id: "option1", label: "Procedimiento de rescate" },
     { id: "option2", label: "Procediminento de evacuación" },
     { id: "option3", label: "Plan para respuestas a emergencia" },
+    { id: "option1", label: "Procedimiento de rescate" },
   ];
 
   const audios = [audioSeguridad, audioVelocidad, audioComunicacion];
@@ -110,6 +136,62 @@ export default function slider12_drag_and_drop_audios() {
           ? "correct"
           : "incorrect"
         : null,
+  };
+
+  // Referencias a los elementos de audio
+  const audioRef1 = useRef(null);
+  const audioRef2 = useRef(null);
+  const audioRef3 = useRef(null);
+
+  const handleAudioPlay = (audioId) => {
+    // Si hay un audio reproduciéndose y es diferente al que se quiere reproducir, lo detenemos
+    if (currentPlayingAudio && currentPlayingAudio !== audioId) {
+      pauseAudio(currentPlayingAudio);
+    }
+
+    // Actualizamos el estado para indicar qué audio está sonando
+    setCurrentPlayingAudio(audioId);
+  };
+
+  // Función para pausar un audio específico
+  const pauseAudio = (audioId) => {
+    let audioToStop;
+
+    switch (audioId) {
+      case "audio1":
+        audioToStop = audioRef1.current;
+        break;
+      case "audio2":
+        audioToStop = audioRef2.current;
+        break;
+      case "audio3":
+        audioToStop = audioRef3.current;
+        break;
+      default:
+        return;
+    }
+
+    if (audioToStop) {
+      audioToStop.pause();
+      audioToStop.currentTime = 0;
+    }
+  };
+
+  // Función para pausar todos los audios
+  const pauseAllAudios = () => {
+    if (audioRef1.current) {
+      audioRef1.current.pause();
+      audioRef1.current.currentTime = 0;
+    }
+    if (audioRef2.current) {
+      audioRef2.current.pause();
+      audioRef2.current.currentTime = 0;
+    }
+    if (audioRef3.current) {
+      audioRef3.current.pause();
+      audioRef3.current.currentTime = 0;
+    }
+    setCurrentPlayingAudio(null);
   };
 
   const handleDragEnd = (event) => {
@@ -186,6 +268,7 @@ export default function slider12_drag_and_drop_audios() {
     setCorrectAnswersMessage("");
     setIsResetEnabled(false);
     setIsValidateEnabled(false);
+    pauseAllAudios();
   };
 
   return (
@@ -210,20 +293,20 @@ export default function slider12_drag_and_drop_audios() {
               </DropArea>
             </div>
             <div
-              className={`audio-card ${
-                validation[`drop${index + 1}`] === true
-                  ? "drop-area-correct"
-                  : ""
-              } ${
-                validation[`drop${index + 1}`] === false
+              className={`audio-card ${validation[`drop${index + 1}`] === true
+                ? "drop-area-correct"
+                : ""
+                } ${validation[`drop${index + 1}`] === false
                   ? "drop-area-incorrect"
                   : ""
-              }`}
+                }`}
             >
-              <audio controls className="audio-control">
-                <source src={audios[index]} type="audio/mp3" />
-                Tu navegador no soporta audio HTML5.
-              </audio>
+              <TranscripcionAudios
+                ref={index === 0 ? audioRef1 : index === 1 ? audioRef2 : audioRef3}
+                src={audios[index]}
+                transcripcion={TRANSCRIPCIONES[`audio${index + 1}`]}
+                onPlay={() => handleAudioPlay(`audio${index + 1}`)}
+              />
             </div>
           </div>
         ))}

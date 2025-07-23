@@ -12,7 +12,7 @@
   align-items: center;
   justify-content: space-between;
   gap: 16px;
-  width: 100%;
+  width: 90%;
 }
 
 .drag-and-drop-items {
@@ -84,8 +84,8 @@
 }
 
 .audio-card {
-  width: 270px;
-  height: 60px;
+  width: 311px;
+  height: 68px;
   background-color: #f3f4f6;
   border-radius: 8px;
   display: flex;
@@ -140,7 +140,6 @@
   color: #0f172a;
 }
 
-
 .correct-answers-message {
   color: #6e6e6e;
   font-weight: bold;
@@ -160,4 +159,49 @@
   display: flex;
   justify-content: center;
   gap: 16px;
+}
+
+/* Ajustes para el componente de transcripción */
+.audio-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.transcription-toggle {
+  transition: all 0.3s ease;
+  padding: 8px;
+  border-radius: 50%;
+}
+
+.transcription-toggle:hover {
+  background-color: #f0f0f0;
+  transform: translateY(-50%) scale(1.1);
+}
+
+/* Asegurar que el cuerpo tenga espacio para la transcripción */
+body {
+  margin-bottom: 100px;
+}
+
+@media (max-width: 768px) {
+  .drag-and-drop-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .drag-and-drop-items {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .audio-card {
+    width: 100%;
+    margin-top: 10px;
+  }
+
+  .drop-area {
+    position: relative;
+    left: auto;
+  }
 }

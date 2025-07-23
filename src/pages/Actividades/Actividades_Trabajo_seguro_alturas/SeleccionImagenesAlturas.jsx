@@ -5,12 +5,12 @@ import Paragraph from "../../components/Paragraph";
 // import Instruction from "../../components/Instruction";
 import { useMediaQuery } from "react-responsive";
 // import imgIngenieroHerramientas from '../../assets/img/ingenieroMorelcoHerramientas.webp';
-import martillo from '../../../assets/img/trabajos_techos.webp';
-import cintaMetrica from '../../../assets/img/trabajos_paredes_fachadas.webp';
-import destornillador from '../../../assets/img/trabajos_montajes_estructura.webp';
-import taladro from '../../../assets/img/trabajos_andamios.webp';
-import sierraElectrica from '../../../assets/img/instalacion_pisos.webp';
-import mezcladoraCemento from '../../../assets/img/instalacion_electrica.webp';
+import martillo from '../../../assets/img/estado_ebriedad_sld7.webp';
+import cintaMetrica from '../../../assets/img/no_mantener_distancia_sld7.webp';
+import destornillador from '../../../assets/img/conducir_distraido_sld7.webp';
+import taladro from '../../../assets/img/respetar_limite_velocidad_sld7.webp';
+import sierraElectrica from '../../../assets/img/vehiculo_buen_estado_sld7.webp';
+import mezcladoraCemento from '../../../assets/img/respetar_señales_sld7.webp';
 import '../../Actividades/Actividades_Trabajo_seguro_alturas/styles/SeleccionImagenesAlturas.css';
 import imgVerdadero from '../../../assets/img/checkAct.png';
 import imgFalso from '../../../assets/img/xmarkAct.png';
@@ -26,15 +26,15 @@ function SeleccionImagenesAlturas() {
   const [explanation, setExplanation] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const isMobile = useMediaQuery({ maxWidth: 640 });
-  const correctImages = [martillo, cintaMetrica, destornillador,taladro];
+  const correctImages = [martillo, cintaMetrica, destornillador, taladro];
 
   const explanationsMap = {
-    [martillo]: 'Tabajos de montajes de estructuras:   Bien!  Estos normalmente se hacen a más de 2 mts de altura.',
-    [cintaMetrica]: 'Trabajos en techos y cubiertas:   Bien!  Estos siempre se hacen a más de 2 mts de altura',
-    [destornillador]: 'Trabajos en paredes y fachadas:   Bien !  Estos normalmente se hacen a más de 2 mts de altura',
-    [taladro]: 'Trabajos en andamios:   Bien !  Estos normalmente permiten acceder a alturas superiores a 2 mts',
-    [sierraElectrica]: 'Instalación electrica de piso:   Piénsalo bien!  Este tipo de tareas normalmente NO se hacen a más de 2 metros de altura.',
-    [mezcladoraCemento]: 'Instalación de pisos:   Piénsalo bien!  Este tipo de tareas normalmente NO se hacen a más de 2 metros de altura.',
+    [martillo]: 'Estado de ebriedad: Correcto! Conducir ebrio NUNCA es manejo defensivo. ¡Peligro extremo!',
+    [cintaMetrica]: 'No mantener distancia segura: Correcto! No mantener distancia es un error grave. ¡Sin espacio, no hay reacción!',
+    [destornillador]: 'Conducir distraído: Correcto! Las distracciones al volante invalidan el manejo defensivo.',
+    [taladro]: 'No respetar límites de velocidad: Correcto! Exceder el límite de velocidad es INSEGURO y anti-defensivo.',
+    [sierraElectrica]: 'Vehículo en buen estado: Incorrecto!: Esto SÍ es manejo defensivo. Un vehículo en buen estado previene fallas.',
+    [mezcladoraCemento]: 'Respetar señales de tránsito: Incorrecto!: Esto SÍ es manejo defensivo. Respetar señales salva vidas.',
   };
 
   const actSelectImg = (image) => {
@@ -72,62 +72,62 @@ function SeleccionImagenesAlturas() {
   return (
     <>
       <div className="flex flex-col justify-center">
-       
+
 
         {/* Columna derecha */}
         <div className="flex flex-col md:flex-row ">
-            <div className="md:flex-2  md:w-full w-full px-2 flex justify-center items-center pb-2">
-                <div className="w-full flex flex-col justify-center items-center">
+          <div className="md:flex-2  md:w-full w-full px-2 flex justify-center items-center pb-2">
+            <div className="w-full flex flex-col justify-center items-center">
 
-            {/* Image Container */}
-            <div className="col-lg-9 col-md-12">
-              <div className="actSelectImg text-center">
-                <div className="items-container grid-container">
-                  {[martillo, cintaMetrica, destornillador, taladro, sierraElectrica, mezcladoraCemento].map((imgSrc, index) => (
-                    <div
-                      key={index}
-                      className={`itemAct ${selectedImages.includes(imgSrc) ? 'selected' : ''} ${correctImages.includes(imgSrc) ? 'check' : 'xmark'}`}
-                      onClick={() => actSelectImg(imgSrc)}
-                    >
-                      <img src={imgSrc} alt={`Imagen ${index}`} />
-                      {selectedImages.includes(imgSrc) && (
-                        <img
-                          className="resAct"
-                          src={results[imgSrc] === true ? imgVerdadero : results[imgSrc] === false ? imgFalso : ''}
-                          alt={results[imgSrc] === true ? 'Correcto' : 'Incorrecto'}
-                        />
-                      )}
-                    </div>
-                  ))}
-                </div>
-                {/* Explicación de la imagen seleccionada, movido encima del botón de reiniciar */}
-                {explanation && (
-                  <Paragraph>
-                  <div
-                    style={{ fontSize: '16px', textAlign: 'center', marginBottom: '10px' }}
-                    className={`p-2 md:w-[100%] w-[100%] text-white ${explanation.isCorrect ? 'bg-[#4CAF50]' : 'bg-[#F44336]'} rounded`}
-                  >
-                    {explanationsMap[explanation.image]}
+              {/* Image Container */}
+              <div className="col-lg-9 col-md-12">
+                <div className="actSelectImg text-center">
+                  <div className="items-container grid-container">
+                    {[martillo, cintaMetrica, destornillador, taladro, sierraElectrica, mezcladoraCemento].map((imgSrc, index) => (
+                      <div
+                        key={index}
+                        className={`itemAct ${selectedImages.includes(imgSrc) ? 'selected' : ''} ${correctImages.includes(imgSrc) ? 'check' : 'xmark'}`}
+                        onClick={() => actSelectImg(imgSrc)}
+                      >
+                        <img src={imgSrc} alt={`Imagen ${index}`} />
+                        {selectedImages.includes(imgSrc) && (
+                          <img
+                            className="resAct"
+                            src={results[imgSrc] === true ? imgVerdadero : results[imgSrc] === false ? imgFalso : ''}
+                            alt={results[imgSrc] === true ? 'Correcto' : 'Incorrecto'}
+                          />
+                        )}
+                      </div>
+                    ))}
                   </div>
-                  </Paragraph>
-                )}
-                {/* Botón de reinicio centrado en la parte inferior */}
-                <div className="flex justify-center items-center">
-                  <Button
-                    onClick={resetActivity}
-                    roundedFull={true}
-                    icon={faRepeat}
-                 
-                  >
-                    Reiniciar
-                  </Button>
+                  {/* Explicación de la imagen seleccionada, movido encima del botón de reiniciar */}
+                  {explanation && (
+                    <Paragraph>
+                      <div
+                        style={{ fontSize: '16px', textAlign: 'center', marginBottom: '10px' }}
+                        className={`p-2 md:w-[100%] w-[100%] text-white ${explanation.isCorrect ? 'bg-[#4CAF50]' : 'bg-[#F44336]'} rounded`}
+                      >
+                        {explanationsMap[explanation.image]}
+                      </div>
+                    </Paragraph>
+                  )}
+                  {/* Botón de reinicio centrado en la parte inferior */}
+                  <div className="flex justify-center items-center">
+                    <Button
+                      onClick={resetActivity}
+                      roundedFull={true}
+                      icon={faRepeat}
+
+                    >
+                      Reiniciar
+                    </Button>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-</div>
 
       {/* Modal de resultados */}
       <ModalDialog

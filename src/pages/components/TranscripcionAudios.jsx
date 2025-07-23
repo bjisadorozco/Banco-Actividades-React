@@ -4,6 +4,9 @@ import { forwardRef, useEffect, useRef, useState } from "react"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faClosedCaptioning } from "@fortawesome/free-solid-svg-icons"
 
+// Variable global para controlar el audio activo
+let activeTranscriptionAudio = null
+
 const TranscripcionAudios = forwardRef(({ src, transcripcion = [], className = "", onPlay }, ref) => {
   const audioRef = useRef(null)
   const [isTranscriptionActive, setIsTranscriptionActive] = useState(false)
@@ -65,8 +68,6 @@ const TranscripcionAudios = forwardRef(({ src, transcripcion = [], className = "
       if (transcriptionGlobalRef.current) {
         transcriptionGlobalRef.current.style.display = "none"
       }
-      // Desactivar los subtítulos cuando el audio se detiene
-      setIsTranscriptionActive(false)
     }
 
     audio.addEventListener("play", handlePlay)
@@ -99,6 +100,21 @@ const TranscripcionAudios = forwardRef(({ src, transcripcion = [], className = "
 
   const toggleTranscription = () => {
     const newState = !isTranscriptionActive
+
+    // Desactivar el audio anterior si existe
+    if (activeTranscriptionAudio && activeTranscriptionAudio !== audioRef.current) {
+      activeTranscriptionAudio._transcriptionSetter(false)
+      transcriptionGlobalRef.current.style.display = "none"
+    }
+
+    // Actualizar el audio activo
+    if (newState) {
+      activeTranscriptionAudio = audioRef.current
+      activeTranscriptionAudio._transcriptionSetter = setIsTranscriptionActive
+    } else {
+      activeTranscriptionAudio = null
+    }
+
     setIsTranscriptionActive(newState)
 
     if (transcriptionGlobalRef.current) {
@@ -123,7 +139,7 @@ const TranscripcionAudios = forwardRef(({ src, transcripcion = [], className = "
         style={{
           color: isTranscriptionActive ? "#2a7fba" : "#666",
           position: "absolute",
-          right: "-30px",
+          right: "0",
           top: "50%",
           transform: "translateY(-50%)",
           cursor: "pointer",
